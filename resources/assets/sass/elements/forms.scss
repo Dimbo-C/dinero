@@ -1,0 +1,58 @@
+.form-wizard {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .btn-group {
+    .btn {
+      color: #fff;
+      background: $brand-warning;
+      border-color: $brand-warning;
+      cursor: default;
+      opacity: 1;
+      transition: all .3s;
+      
+      &:hover {
+        z-index: inherit;
+      }
+    }
+    
+    .btn:not(:last-child) {
+      &:after,
+      &:before {
+        position: absolute;
+        content: '';
+        right: -37px;
+        top: -1px;
+        border: 18px solid transparent;
+        border-left-color: $brand-warning;
+        z-index: 100;
+        transition: all .3s;
+      }
+  
+      &:before {
+        right: -41px;
+        top: -3px;
+        border-width: 20px;
+        border-left-color: #fff;
+      }
+    }
+    
+    .btn.active {
+      color: #fff;
+      background: #4E5154;
+      border-color: #4E5154;
+  
+      &:after {
+        border-left-color: #4E5154;
+      }
+      
+      & + .btn {
+        color: $text-color;
+        background: $gray-lighter;
+        border-color: $gray-lighter;
+      }
+    }
+  }
+}

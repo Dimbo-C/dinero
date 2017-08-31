@@ -1,0 +1,13 @@
+.breadcrumb {
+  margin-bottom: 0;
+  
+  a {
+    color: $gray-light;
+  }
+  
+  > li + li:before {
+    padding: 0 1px;
+    top: -1px;
+    position: relative;
+  }
+}

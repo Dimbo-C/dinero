@@ -1,0 +1,28 @@
+.jumbotron {
+  @include box-shadow(0 3px 6px rgba(0, 0, 0, .1));
+  position: relative;
+  
+  @media screen and (min-width: $screen-sm-min) {
+    padding-top: $jumbotron-padding;
+    padding-bottom: $jumbotron-padding;
+  }
+  
+  //@media (min-width: $grid-float-breakpoint) {
+  //  position: fixed;
+  //  left: $sidebar-width;
+  //  right: 0;
+  //  top: $navbar-height;
+  //}
+  
+  .fa-stack {
+    background: #4D5053;
+    border-radius: 3px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  
+  h3 {
+    margin-bottom: 2px;
+  }
+}

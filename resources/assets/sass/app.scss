@@ -1,0 +1,60 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Spacing Helpers
+@import "spacing";
+
+// Elements
+@import "elements/buttons";
+@import "elements/forms";
+@import "elements/tables";
+
+// Components
+@import "components/aside-nav";
+@import "components/breadcrumbs";
+@import "components/dropdowns";
+@import "components/jumbotron";
+@import "components/layout";
+@import "components/navbar";
+@import "components/notifications";
+@import "components/panels";
+@import "components/sidebar";
+
+[v-cloak] {
+  display: none;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: $grid-float-breakpoint) {
+  .loading {
+    left: $sidebar-small-width;
+  }
+  
+  .with-sidebar .loading {
+    left: $sidebar-width;
+  }
+}

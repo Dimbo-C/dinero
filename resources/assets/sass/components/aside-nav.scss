@@ -1,0 +1,12 @@
+.aside-nav {
+  margin-top: -20px;
+  border-right: 1px solid $site-border-color;
+  min-height: 100%;
+  
+  @extend .sidebar-menu;
+  
+  @media (min-width: $grid-float-breakpoint) {
+    margin-left: -15px;
+    width: $sidebar-width;
+  }
+}

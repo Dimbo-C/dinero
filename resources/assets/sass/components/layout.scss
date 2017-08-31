@@ -1,0 +1,29 @@
+html, body, #app, .page-container {
+  min-height: 100%;
+  height: 100%;
+}
+
+.content {
+  min-height: calc(100% - 90 - 56); // - jumbotron - navbar
+}
+
+.content {
+  position: relative;
+}
+
+@media (min-width: $grid-float-breakpoint) {
+  .content {
+    min-height: 100%;
+    padding-top: $navbar-height;
+    padding-left: 0;
+    transition: padding-left 0.3s ease;
+  }
+  
+  .page-sidebar + .page-container .content {
+    padding-left: $sidebar-small-width;
+  }
+  
+  .with-sidebar .page-sidebar + .page-container .content {
+    padding-left: $sidebar-width;
+  }
+}

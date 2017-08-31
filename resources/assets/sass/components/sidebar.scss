@@ -1,0 +1,123 @@
+.page-sidebar {
+  width: $sidebar-small-width;
+  background-color: #fff;
+  border-right: 1px solid $site-border-color;
+  z-index: 1000;
+  position: fixed;
+  //position: absolute;
+  bottom: 0;
+  top: $navbar-height;
+  right: auto;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.sidebar-info {
+  font-size: 12px;
+  padding: 16px $navbar-padding-horizontal 17px;
+  @include box-shadow(0 3px 6px rgba(0, 0, 0, .1));
+  
+  ul {
+    margin: 0;
+    opacity: 0;
+    transition: opacity .3s;
+    
+    > li {
+      white-space: nowrap;
+    }
+  }
+}
+
+.sidebar-menu {
+  .nav > li {
+    border-bottom: 1px solid $site-border-color;
+    margin-top: 0;
+    
+    &:first-child {
+      margin-top: 2px;
+    }
+    
+    &.disabled > a {
+      cursor: default;
+    }
+  }
+  
+  .nav-pills > li > a {
+    border-radius: 0;
+  }
+  
+  li {
+    a {
+      color: $text-color;
+      white-space: nowrap;
+      
+      span:not(.fa-btn) {
+        opacity: 0;
+        transition: opacity .3s;
+      }
+      
+      i, span.fa-btn {
+        display: inline-block;
+        color: $link-color;
+        font-size: 16px;
+        margin-right: 15px;
+      }
+  
+      span.fa-btn {
+        font-size: 14px;
+        opacity: 1;
+        transition: opacity .3s;
+        margin-right: 0;
+      }
+      
+      &[data-toggle='collapse'].active {
+        background: $gray-lighter;
+      }
+    }
+  
+    &.active > a > i,
+    &.active > a > span.fa-btn {
+      color: #fff;
+    }
+  }
+  
+  .nav > li .nav > li {
+    &:first-child {
+      border-top: 1px solid $site-border-color;
+      margin-top: 0;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    a {
+      padding: 7px 10px 7px 25px;
+    }
+  }
+  
+  li.open > a {
+    border-bottom: 1px solid $site-border-color!important;
+  }
+}
+
+.with-sidebar {
+  .page-sidebar {
+    width: $sidebar-width;
+  }
+  
+  .sidebar-info ul,
+  .sidebar-menu li > a > span {
+    opacity: 1;
+  }
+  
+  .sidebar-menu .nav > li .nav > li {
+    > a {
+      //padding-left: 50px;
+      
+      .fa-btn {
+        opacity: 0;
+      }
+    }
+  }
+}

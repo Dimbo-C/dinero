@@ -1,0 +1,137 @@
+.navbar {
+  border-width: 0;
+  
+  @media (min-width: $grid-float-breakpoint) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    
+    > .container-fluid .navbar-brand {
+      margin-left: $sidebar-small-width - $navbar-padding-horizontal;
+    }
+  }
+}
+
+@media (min-width: $grid-float-breakpoint) {
+  .container-fluid > .navbar-header {
+    margin-left: -$navbar-padding-horizontal;
+    padding-left: $navbar-padding-horizontal;
+  }
+}
+
+.navbar-nav {
+  > li > a {
+    @media (min-width: $grid-float-breakpoint) {
+      border-radius: 50px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      padding-bottom: 7px;
+      padding-top: 7px;
+      
+      &.dropdown-toggle {
+        position: relative;
+      }
+    }
+  }
+  
+  @media (min-width: $grid-float-breakpoint) {
+    li:last-child.dropdown {
+      margin-right: $navbar-padding-horizontal;
+    }
+  
+    li.dropdown > a {
+      background: $navbar-default-link-active-bg;
+    
+      &:hover {
+        background: $navbar-default-link-active-bg;
+        color: $navbar-default-link-hover-color;
+      }
+    }
+  
+    .dropdown + .dropdown {
+      margin-left: 10px;
+    }
+  }
+  
+  > li > a[data-toggle='collapse']:not(.collapsed) {
+    color: #fff;
+    background-color: $navbar-default-link-active-bg;
+  }
+  
+  > li .nav > li {
+    a {
+      color: #fff;
+      background: transparent;
+      border-radius: 0;
+      padding: 5px 15px 5px 42px;
+    }
+    
+    &.active > a {
+      color: #fff;
+      background-color: $navbar-default-link-active-bg;
+    }
+  }
+}
+
+.sidebar-toggle-wrapper {
+  border-right: 1px solid rgba(#fff, .5);
+  width: $sidebar-small-width;
+  height: $navbar-height;
+  background: $navbar-default-link-active-bg;
+  position: absolute;
+  left: 0;
+  right: 0;
+  transition: all .3s;
+  
+  .navbar-brand {
+    margin-left: -$navbar-padding-horizontal!important;
+    padding-left: 0;
+    opacity: 0;
+    width: 0;
+    transition: all .3s;
+  }
+}
+
+.sidebar-toggle {
+  @extend .navbar-toggle;
+  margin-right: 8px;
+  transition: all .3s;
+  
+  @media (min-width: $grid-float-breakpoint) {
+    display: block;
+  }
+}
+
+.with-sidebar {
+  .sidebar-toggle-wrapper {
+    width: $sidebar-width;
+    
+    .navbar-brand {
+      width: auto;
+      opacity: 1;
+      padding-left: $navbar-padding-horizontal * 2;
+    }
+  }
+  
+  .sidebar-toggle {
+    margin-right: 15px;
+  }
+}
+
+.sidebar-toggle,
+.navbar-toggle {
+  border-radius: 100%;
+  padding: 9px 7px;
+  
+  .icon-bar {
+    width: 18px;
+  }
+  
+  &:hover,
+  &:focus {
+    .icon-bar {
+      background: $navbar-default-link-hover-color;
+    }
+  }
+}

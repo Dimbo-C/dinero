@@ -1,0 +1,28 @@
+{
+    "name": "cazzzt/laravel-qiwi",
+    "authors": [
+        {
+            "name": "cazzzt",
+            "email": "alex.i.lukin@yandex.ru"
+        }
+    ],
+    "require": {
+        "php" : ">=7.0",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cazzzt\\Qiwi\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cazzzt\\Qiwi\\QiwiServiceProvider"
+            ]
+        }
+    }
+}
