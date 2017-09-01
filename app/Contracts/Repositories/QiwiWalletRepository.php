@@ -28,14 +28,14 @@ interface QiwiWalletRepository {
      * @param $data
      * @return mixed
      */
-    public function storeWallet($data);
+    public function insertWallet($data);
 
     /**
      * Get wallet data from qiwi
      * @param $data
      * @return mixed
      */
-    public function findInQiwi($data);
+    public function getDataFromQiwi($data);
 
 
 }

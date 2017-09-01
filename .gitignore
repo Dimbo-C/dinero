@@ -4,3 +4,5 @@ node_modules/
 vendor/
 .env
 composer.lock
+public/cookie_data
+package-lock.json

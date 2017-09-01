@@ -181,20 +181,15 @@
         },
         methods: {
             submitForm() {
+                this.form.use_proxy = this.useProxy;
                 Dinero.post('/api/qiwi-wallets', this.form)
                     .then(this.processResult)
             },
             processResult(result){
                 console.log(result);
 
-                var args = [];
-                if (result.status === "success") {
-                    args = ['success', result.message];
-                } else {
-                    args = ['warning', result.message];
-                }
-
-                Bus.$emit('showNotification', args[0], args[1])
+                var messageType = result.status === "success" ? "success" : "warning";
+                Bus.$emit('showNotification', messageType, result.message);
             }
 
         },

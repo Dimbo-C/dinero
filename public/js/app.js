@@ -9177,19 +9177,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         submitForm: function submitForm() {
+            this.form.use_proxy = this.useProxy;
             Dinero.post('/api/qiwi-wallets', this.form).then(this.processResult);
         },
         processResult: function processResult(result) {
             console.log(result);
 
-            var args = [];
-            if (result.status === "success") {
-                args = ['success', result.message];
-            } else {
-                args = ['warning', result.message];
-            }
-
-            Bus.$emit('showNotification', args[0], args[1]);
+            var messageType = result.status === "success" ? "success" : "warning";
+            Bus.$emit('showNotification', messageType, result.message);
         }
     },
     computed: {
@@ -11069,7 +11064,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var auth = { "login": login, "password": password };
             Dinero.post('/api/qiwi-wallets/update', new Form(auth)).then(function (data) {
                 console.log(data);
-                console.log(_this2.$refs.login);
+                console.log(_this2.$refs);
                 _this2.$refs.login = data.balance + " " + _this2.currency;
                 _this2.foo = data.balance;
             });
@@ -11178,8 +11173,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "textContent": _vm._s(w.name)
       }
     }), _vm._v(" "), (!_vm.isInactive) ? _c('td', [_c('span', {
-      ref: w.login,
-      refInFor: true,
       attrs: {
         "id": w.login
       }

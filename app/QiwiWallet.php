@@ -38,4 +38,5 @@ class QiwiWallet extends Model {
 
         return $newWallet->save();
     }
+
 }
