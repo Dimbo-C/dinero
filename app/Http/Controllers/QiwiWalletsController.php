@@ -35,7 +35,7 @@ class QiwiWalletsController extends Controller {
     }
 
     public function store(Request $request) {
-        $this->wallet->insertWallet($request);
+        return $this->wallet->insertWallet($request);
     }
 
     public function update(Request $request) {
