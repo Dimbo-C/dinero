@@ -47,19 +47,20 @@
 
             <loading :show="!isLoaded"></loading>
 
-            <div v-if="isLoaded"  class="panel panel-default">
+            <div v-if="isLoaded" class="panel panel-default">
                 <div class="panel-heading">
                     <div class="form-inline">
                         <div class="pull-left">
                             <div class="form-group">
-                                <p class="form-control-static">История транзакций <strong v-text="this.login"></strong> (+17489.5 / -17581.52)</p>
+                                <p class="form-control-static">История транзакций <strong v-text="this.login"></strong>
+                                    (+17489.5 / -17581.52)</p>
                             </div>
                         </div>
                         <div class="pull-right">
                             <label class="control-label" for="">Поиск:</label>
                             <input type="text" class="form-control">
                         </div>
-                            <div class="clearfix"></div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
 
@@ -104,110 +105,111 @@
 </template>
 
 <script>
-  import _sum from 'lodash/sum';
+    import _sum from 'lodash/sum';
 
-  export default {
-    data() {
-      return {
-        isLoaded: false,
-        transactions: null,
-        dateRange: {
-          start: '',
-          end: '',
-        }
-      };
-    },
-
-    watch: {
-      dateRange: {
-        handler (val) {
-          if (val.start !== '' && val.end !== '') {
-            this.fetchReport();
-          }
+    export default {
+        data() {
+            return {
+                isLoaded: false,
+                transactions: null,
+                dateRange: {
+                    start: '',
+                    end: '',
+                }
+            };
         },
-        deep: true,
-      },
-    },
 
-    /**
-     * Prepare the component.
-     */
-    mounted() {
-      this.prepareComponent();
-    },
+        watch: {
+            dateRange: {
+                handler (val) {
+                    if (val.start !== '' && val.end !== '') {
+                        this.fetchReport();
+                    }
+                },
+                deep: true,
+            },
+        },
 
-    methods: {
-      fetchReport() {
-        this.isLoaded = false;
-        axios.get(`/api/qiwi-wallets/${this.login}/report`, { params: this.dateRange })
-          .then((response) => {
-            this.transactions = response.data;
-            this.isLoaded = true;
-          })
-      },
+        /**
+         * Prepare the component.
+         */
+        mounted() {
+            this.prepareComponent();
+        },
 
-      customFormatter (date) {
-        return moment(date).format('dd.MM.yyyy')
-      },
+        methods: {
+            fetchReport() {
+                this.isLoaded = false;
+                axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
+                    .then((response) => {
+                        console.log(response);
+                        this.transactions = response.data;
+                        this.isLoaded = true;
+                    })
+            },
 
-      setDateRange (key) {
-        if (key === 'today') {
-          this.dateRange.start = this.dateRange.end = moment().format('L')
-        } else if (key === 'yesterday') {
-          this.dateRange.start = moment().subtract(1, 'days').format('L');
-          this.dateRange.end = moment().format('L')
-        } else if (key === 'month') {
-          this.dateRange.start = moment().startOf('month').format('L');
-          this.dateRange.end = moment().format('L')
+            customFormatter (date) {
+                return moment(date).format('dd.MM.yyyy')
+            },
+
+            setDateRange (key) {
+                if (key === 'today') {
+                    this.dateRange.start = this.dateRange.end = moment().format('L')
+                } else if (key === 'yesterday') {
+                    this.dateRange.start = moment().subtract(1, 'days').format('L');
+                    this.dateRange.end = moment().format('L')
+                } else if (key === 'month') {
+                    this.dateRange.start = moment().startOf('month').format('L');
+                    this.dateRange.end = moment().format('L')
+                }
+            },
+
+            /**
+             * Prepare the component.
+             */
+            prepareComponent() {
+                this.setDateRange('today');
+
+                this.$nextTick(() => {
+                    $('.tooltip').removeClass('in');
+                });
+            },
+
+            status (t) {
+                if (t.status === 'error') {
+                    return '<i class="fa fa-circle text-danger"></i> Ошибка'
+                } else if (t.status === 'error') {
+                    return '<i class="fa fa-circle text-warning"></i> В обработке'
+                } else {
+                    return '<i class="fa fa-circle text-success"></i> Успешно'
+                }
+            }
+        },
+
+        computed: {
+            login () {
+                return this.$route.params.wallet;
+            },
+
+            income () {
+                if (this.transactions) {
+                    let amounts = [];
+                    let sum = 0;
+                    const transactions = this.transactions.filter(t => t.amount_sign === '-');
+
+                    transactions.forEach((t) => {
+                        amounts.push(parseFloat(t.amount.replace(',', '.').replace(/[^0-9]/, '')))
+                    });
+
+                    return amounts;
+                }
+            },
+
+            expenditure () {
+                if (this.transactions) {
+                    return `${_sum(this.transactions.filter(t => t.amount_sign === '+').amount)}`;
+                }
+            }
         }
-      },
-
-      /**
-       * Prepare the component.
-       */
-      prepareComponent() {
-        this.setDateRange('today');
-
-        this.$nextTick(() => {
-          $('.tooltip').removeClass('in');
-        });
-      },
-
-      status (t) {
-        if (t.status === 'error') {
-          return '<i class="fa fa-circle text-danger"></i> Ошибка'
-        } else if (t.status === 'error') {
-          return '<i class="fa fa-circle text-warning"></i> В обработке'
-        } else {
-          return '<i class="fa fa-circle text-success"></i> Успешно'
-        }
-      }
-    },
-
-    computed: {
-      login () {
-        return this.$route.params.wallet;
-      },
-
-      income () {
-        if (this.transactions) {
-          let amounts = [];
-          let sum = 0;
-          const transactions = this.transactions.filter(t => t.amount_sign === '-');
-
-          transactions.forEach((t) => {
-            amounts.push(parseFloat(t.amount.replace(',', '.').replace(/[^0-9]/,'')))
-          });
-
-          return amounts;
-        }
-      },
-
-      expenditure () {
-        if (this.transactions) {
-          return `${_sum(this.transactions.filter(t => t.amount_sign === '+').amount)}`;
-        }
-      }
-    }
-  };
+    };
 </script>

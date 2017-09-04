@@ -9694,116 +9694,118 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      isLoaded: false,
-      transactions: null,
-      dateRange: {
-        start: '',
-        end: ''
-      }
-    };
-  },
+    data: function data() {
+        return {
+            isLoaded: false,
+            transactions: null,
+            dateRange: {
+                start: '',
+                end: ''
+            }
+        };
+    },
 
 
-  watch: {
-    dateRange: {
-      handler: function handler(val) {
-        if (val.start !== '' && val.end !== '') {
-          this.fetchReport();
+    watch: {
+        dateRange: {
+            handler: function handler(val) {
+                if (val.start !== '' && val.end !== '') {
+                    this.fetchReport();
+                }
+            },
+
+            deep: true
         }
-      },
-
-      deep: true
-    }
-  },
-
-  /**
-   * Prepare the component.
-   */
-  mounted: function mounted() {
-    this.prepareComponent();
-  },
-
-
-  methods: {
-    fetchReport: function fetchReport() {
-      var _this = this;
-
-      this.isLoaded = false;
-      axios.get('/api/qiwi-wallets/' + this.login + '/report', { params: this.dateRange }).then(function (response) {
-        _this.transactions = response.data;
-        _this.isLoaded = true;
-      });
     },
-    customFormatter: function customFormatter(date) {
-      return moment(date).format('dd.MM.yyyy');
-    },
-    setDateRange: function setDateRange(key) {
-      if (key === 'today') {
-        this.dateRange.start = this.dateRange.end = moment().format('L');
-      } else if (key === 'yesterday') {
-        this.dateRange.start = moment().subtract(1, 'days').format('L');
-        this.dateRange.end = moment().format('L');
-      } else if (key === 'month') {
-        this.dateRange.start = moment().startOf('month').format('L');
-        this.dateRange.end = moment().format('L');
-      }
-    },
-
 
     /**
      * Prepare the component.
      */
-    prepareComponent: function prepareComponent() {
-      this.setDateRange('today');
-
-      this.$nextTick(function () {
-        $('.tooltip').removeClass('in');
-      });
+    mounted: function mounted() {
+        this.prepareComponent();
     },
-    status: function status(t) {
-      if (t.status === 'error') {
-        return '<i class="fa fa-circle text-danger"></i> Ошибка';
-      } else if (t.status === 'error') {
-        return '<i class="fa fa-circle text-warning"></i> В обработке';
-      } else {
-        return '<i class="fa fa-circle text-success"></i> Успешно';
-      }
+
+
+    methods: {
+        fetchReport: function fetchReport() {
+            var _this = this;
+
+            this.isLoaded = false;
+            axios.get('/api/qiwi-wallets/' + this.login + '/report', { params: this.dateRange }).then(function (response) {
+                console.log(response);
+                _this.transactions = response.data;
+                _this.isLoaded = true;
+            });
+        },
+        customFormatter: function customFormatter(date) {
+            return moment(date).format('dd.MM.yyyy');
+        },
+        setDateRange: function setDateRange(key) {
+            if (key === 'today') {
+                this.dateRange.start = this.dateRange.end = moment().format('L');
+            } else if (key === 'yesterday') {
+                this.dateRange.start = moment().subtract(1, 'days').format('L');
+                this.dateRange.end = moment().format('L');
+            } else if (key === 'month') {
+                this.dateRange.start = moment().startOf('month').format('L');
+                this.dateRange.end = moment().format('L');
+            }
+        },
+
+
+        /**
+         * Prepare the component.
+         */
+        prepareComponent: function prepareComponent() {
+            this.setDateRange('today');
+
+            this.$nextTick(function () {
+                $('.tooltip').removeClass('in');
+            });
+        },
+        status: function status(t) {
+            if (t.status === 'error') {
+                return '<i class="fa fa-circle text-danger"></i> Ошибка';
+            } else if (t.status === 'error') {
+                return '<i class="fa fa-circle text-warning"></i> В обработке';
+            } else {
+                return '<i class="fa fa-circle text-success"></i> Успешно';
+            }
+        }
+    },
+
+    computed: {
+        login: function login() {
+            return this.$route.params.wallet;
+        },
+        income: function income() {
+            if (this.transactions) {
+                var amounts = [];
+                var sum = 0;
+                var transactions = this.transactions.filter(function (t) {
+                    return t.amount_sign === '-';
+                });
+
+                transactions.forEach(function (t) {
+                    amounts.push(parseFloat(t.amount.replace(',', '.').replace(/[^0-9]/, '')));
+                });
+
+                return amounts;
+            }
+        },
+        expenditure: function expenditure() {
+            if (this.transactions) {
+                return '' + __WEBPACK_IMPORTED_MODULE_0_lodash_sum___default()(this.transactions.filter(function (t) {
+                    return t.amount_sign === '+';
+                }).amount);
+            }
+        }
     }
-  },
-
-  computed: {
-    login: function login() {
-      return this.$route.params.wallet;
-    },
-    income: function income() {
-      if (this.transactions) {
-        var amounts = [];
-        var sum = 0;
-        var transactions = this.transactions.filter(function (t) {
-          return t.amount_sign === '-';
-        });
-
-        transactions.forEach(function (t) {
-          amounts.push(parseFloat(t.amount.replace(',', '.').replace(/[^0-9]/, '')));
-        });
-
-        return amounts;
-      }
-    },
-    expenditure: function expenditure() {
-      if (this.transactions) {
-        return '' + __WEBPACK_IMPORTED_MODULE_0_lodash_sum___default()(this.transactions.filter(function (t) {
-          return t.amount_sign === '+';
-        }).amount);
-      }
-    }
-  }
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
@@ -10008,7 +10010,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(this.login)
     }
-  }), _vm._v(" (+17489.5 / -17581.52)")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+  }), _vm._v("\n                                (+17489.5 / -17581.52)")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   })])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
