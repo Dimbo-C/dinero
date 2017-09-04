@@ -412,9 +412,9 @@ module.exports = Component.exports
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(251),
+  __webpack_require__(256),
   /* template */
-  __webpack_require__(252),
+  __webpack_require__(257),
   /* styles */
   null,
   /* scopeId */
@@ -450,7 +450,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(137);
-module.exports = __webpack_require__(271);
+module.exports = __webpack_require__(276);
 
 
 /***/ }),
@@ -462,8 +462,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bootstrap__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_bootstrap__ = __webpack_require__(248);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bootstrap__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_bootstrap__ = __webpack_require__(253);
 
 
 
@@ -565,11 +565,11 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__views_finance_qiwi_AddQiwiWallet_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__views_finance_qiwi_AddQiwiWallet_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__views_finance_qiwi_AddQiwiWalletSuccess_vue__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__views_finance_qiwi_AddQiwiWalletSuccess_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__views_finance_qiwi_AddQiwiWalletSuccess_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__views_finance_qiwi_QiwiWalletHistory_vue__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__views_finance_qiwi_QiwiWalletHistory_vue__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__views_finance_qiwi_QiwiWalletHistory_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__views_finance_qiwi_QiwiWalletHistory_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__views_finance_qiwi_QiwiWalletSettings_vue__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__views_finance_qiwi_QiwiWalletSettings_vue__ = __webpack_require__(219);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__views_finance_qiwi_QiwiWalletSettings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__views_finance_qiwi_QiwiWalletSettings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__views_finance_FinanceQiwiDashboard_vue__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__views_finance_FinanceQiwiDashboard_vue__ = __webpack_require__(222);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__views_finance_FinanceQiwiDashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__views_finance_FinanceQiwiDashboard_vue__);
 
 
@@ -9187,7 +9187,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(result);
 
             var messageType = result.status === "success" ? "success" : "warning";
-            Bus.$emit('showNotification', messageType, result.message);
+            //                Bus.$emit('showNotification', messageType, result.message);
 
             if (result.status === "success") {
                 this.$router.push({ path: '/finance/qiwi/add-wallet-success/' + this.form.login });
@@ -9555,13 +9555,13 @@ if (false) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(282)
+  __webpack_require__(206)
 }
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(206),
+  __webpack_require__(211),
   /* template */
-  __webpack_require__(286),
+  __webpack_require__(212),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -9594,6 +9594,382 @@ module.exports = Component.exports
 
 /***/ }),
 /* 206 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(207);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(209)("6bfecb8a", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0e93ec9e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddQiwiWalletSuccess.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0e93ec9e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddQiwiWalletSuccess.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 207 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(208)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.body-header[data-v-0e93ec9e] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-0e93ec9e] {\n    padding: 15px;\n}\n.success-notification[data-v-0e93ec9e] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.wallet-info[data-v-0e93ec9e] {\np {\n    margin-bottom: 0;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(210)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction) {
+  isProduction = _isProduction
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+/* 211 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9706,8 +10082,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         processResult: function processResult(result) {
             console.log(result);
 
-            var messageType = result.status === "success" ? "success" : "warning";
-            Bus.$emit('showNotification', messageType, result.message);
+            //                var messageType = result.status === "success" ? "success" : "warning";
+            //                Bus.$emit('showNotification', messageType, result.message);
             //                this.$route.router.go("/finance/qiwi/add-wallet-success");
         }
     },
@@ -9726,16 +10102,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 207 */,
-/* 208 */
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('page-header', {
+    attrs: {
+      "icon": "fa-money",
+      "title": "Добавление кошелька"
+    }
+  }, [_c('li', [_c('a', {
+    staticClass: "disabled"
+  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "tag": "li",
+      "to": "/finance/qiwi"
+    }
+  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "tag": "li",
+      "to": "/finance/qiwi/dashboard"
+    }
+  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "container-fluid"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_vm._v("Регистрация QIWI кошелька завершена")]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_c('h3', {
+    staticClass: "body-header"
+  }, [_vm._v("Регистрация QIWI кошелька")]), _vm._v(" "), _c('div', {
+    staticClass: "body-content"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "wallet-info"
+  }, [_c('p', [_vm._v("Ваш кошелек "), _c('span', {
+    domProps: {
+      "textContent": _vm._s(this.login)
+    }
+  }), _vm._v("\n                                    успешно зарегистрирован в системе Dinero.")]), _vm._v(" "), _c('p', [_vm._v("Вы можете перейти к\n                                    "), _c('router-link', {
+    attrs: {
+      "to": "/finance/qiwi/dashboard"
+    }
+  }, [_c('a', [_vm._v("списку")])]), _vm._v("\n                                    кошельков или\n                                    "), _c('router-link', {
+    attrs: {
+      "to": "/finance/qiwi/add-wallet"
+    }
+  }, [_c('a', [_vm._v("зарегистрировать")])]), _vm._v("\n                                    новый кошелек.\n                                ")], 1)])])])])])])])], 1)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "success-notification"
+  }, [_c('b', [_vm._v("Отлично!")]), _vm._v(" QIWI кошелек успешно зарегистрирован в Dinero\n                            ")])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-0e93ec9e", module.exports)
+  }
+}
+
+/***/ }),
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(209),
+  __webpack_require__(214),
   /* template */
-  __webpack_require__(213),
+  __webpack_require__(218),
   /* styles */
   null,
   /* scopeId */
@@ -9767,12 +10208,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 209 */
+/* 214 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_sum__ = __webpack_require__(210);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_sum__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_sum___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_sum__);
 //
 //
@@ -9995,11 +10436,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 210 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseSum = __webpack_require__(211),
-    identity = __webpack_require__(212);
+var baseSum = __webpack_require__(216),
+    identity = __webpack_require__(217);
 
 /**
  * Computes the sum of the values in `array`.
@@ -10025,7 +10466,7 @@ module.exports = sum;
 
 
 /***/ }),
-/* 211 */
+/* 216 */
 /***/ (function(module, exports) {
 
 /**
@@ -10055,7 +10496,7 @@ module.exports = baseSum;
 
 
 /***/ }),
-/* 212 */
+/* 217 */
 /***/ (function(module, exports) {
 
 /**
@@ -10082,7 +10523,7 @@ module.exports = identity;
 
 
 /***/ }),
-/* 213 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10264,15 +10705,15 @@ if (false) {
 }
 
 /***/ }),
-/* 214 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(215),
+  __webpack_require__(220),
   /* template */
-  __webpack_require__(216),
+  __webpack_require__(221),
   /* styles */
   null,
   /* scopeId */
@@ -10304,7 +10745,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 215 */
+/* 220 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10517,7 +10958,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 216 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10902,15 +11343,15 @@ if (false) {
 }
 
 /***/ }),
-/* 217 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(218),
+  __webpack_require__(223),
   /* template */
-  __webpack_require__(222),
+  __webpack_require__(227),
   /* styles */
   null,
   /* scopeId */
@@ -10942,12 +11383,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 218 */
+/* 223 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue__ = __webpack_require__(224);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue__);
 //
 //
@@ -11069,15 +11510,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 219 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(220),
+  __webpack_require__(225),
   /* template */
-  __webpack_require__(221),
+  __webpack_require__(226),
   /* styles */
   null,
   /* scopeId */
@@ -11109,7 +11550,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 220 */
+/* 225 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11263,7 +11704,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 221 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11496,7 +11937,7 @@ if (false) {
 }
 
 /***/ }),
-/* 222 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11591,7 +12032,7 @@ if (false) {
 }
 
 /***/ }),
-/* 223 */
+/* 228 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11657,12 +12098,12 @@ if (token) {
 /**
  * Define the Vue filters.
  */
-__webpack_require__(243);
+__webpack_require__(248);
 
 /**
  * Load the App form utilities.
  */
-__webpack_require__(244);
+__webpack_require__(249);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -11680,11 +12121,6 @@ __webpack_require__(244);
 // });
 
 /***/ }),
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
 /* 229 */,
 /* 230 */,
 /* 231 */,
@@ -11699,7 +12135,12 @@ __webpack_require__(244);
 /* 240 */,
 /* 241 */,
 /* 242 */,
-/* 243 */
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11742,7 +12183,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.filter('currency', function (value) 
 });
 
 /***/ }),
-/* 244 */
+/* 249 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11763,20 +12204,20 @@ Dinero.forms = {
 /**
  * Load the Form helper class.
  */
-__webpack_require__(245);
+__webpack_require__(250);
 
 /**
  * Define the FormError collection class.
  */
-__webpack_require__(246);
+__webpack_require__(251);
 
 /**
  * Add additional HTTP / form helpers to the Imprinx object.
  */
-__WEBPACK_IMPORTED_MODULE_0_jquery___default.a.extend(Dinero, __webpack_require__(247));
+__WEBPACK_IMPORTED_MODULE_0_jquery___default.a.extend(Dinero, __webpack_require__(252));
 
 /***/ }),
-/* 245 */
+/* 250 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11837,7 +12278,7 @@ window.Form = function (data) {
 };
 
 /***/ }),
-/* 246 */
+/* 251 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11915,7 +12356,7 @@ window.FormErrors = function () {
 };
 
 /***/ }),
-/* 247 */
+/* 252 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -11975,21 +12416,21 @@ module.exports = {
 };
 
 /***/ }),
-/* 248 */
+/* 253 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sidebar_Sidebar_vue__ = __webpack_require__(249);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sidebar_Sidebar_vue__ = __webpack_require__(254);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sidebar_Sidebar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sidebar_Sidebar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PageHeader_vue__ = __webpack_require__(254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PageHeader_vue__ = __webpack_require__(259);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PageHeader_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__PageHeader_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Navbar_vue__ = __webpack_require__(260);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Navbar_vue__ = __webpack_require__(265);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Navbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Navbar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Loading_vue__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Loading_vue__ = __webpack_require__(268);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Loading_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Loading_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Modal_vue__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Modal_vue__ = __webpack_require__(271);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Modal_vue__);
 
 
@@ -12006,18 +12447,18 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('loading', __WEBPACK_IMPOR
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('modal', __WEBPACK_IMPORTED_MODULE_5__Modal_vue___default.a);
 
 // Third Party Components...
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('masked-input', __webpack_require__(269));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('masked-input', __webpack_require__(274));
 
 /***/ }),
-/* 249 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(250),
+  __webpack_require__(255),
   /* template */
-  __webpack_require__(253),
+  __webpack_require__(258),
   /* styles */
   null,
   /* scopeId */
@@ -12049,7 +12490,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 250 */
+/* 255 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12087,7 +12528,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 251 */
+/* 256 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12186,7 +12627,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 252 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12303,7 +12744,7 @@ if (false) {
 }
 
 /***/ }),
-/* 253 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12330,15 +12771,15 @@ if (false) {
 }
 
 /***/ }),
-/* 254 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(255),
+  __webpack_require__(260),
   /* template */
-  __webpack_require__(259),
+  __webpack_require__(264),
   /* styles */
   null,
   /* scopeId */
@@ -12370,12 +12811,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 255 */
+/* 260 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue__ = __webpack_require__(261);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Notification_vue__);
 //
 //
@@ -12418,15 +12859,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 256 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(257),
+  __webpack_require__(262),
   /* template */
-  __webpack_require__(258),
+  __webpack_require__(263),
   /* styles */
   null,
   /* scopeId */
@@ -12458,7 +12899,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 257 */
+/* 262 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12517,7 +12958,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 258 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12566,7 +13007,7 @@ if (false) {
 }
 
 /***/ }),
-/* 259 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12614,15 +13055,15 @@ if (false) {
 }
 
 /***/ }),
-/* 260 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(261),
+  __webpack_require__(266),
   /* template */
-  __webpack_require__(262),
+  __webpack_require__(267),
   /* styles */
   null,
   /* scopeId */
@@ -12654,7 +13095,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 261 */
+/* 266 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12750,7 +13191,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 262 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12883,15 +13324,15 @@ if (false) {
 }
 
 /***/ }),
-/* 263 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(264),
+  __webpack_require__(269),
   /* template */
-  __webpack_require__(265),
+  __webpack_require__(270),
   /* styles */
   null,
   /* scopeId */
@@ -12923,7 +13364,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 264 */
+/* 269 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12942,7 +13383,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 265 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12965,15 +13406,15 @@ if (false) {
 }
 
 /***/ }),
-/* 266 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(267),
+  __webpack_require__(272),
   /* template */
-  __webpack_require__(268),
+  __webpack_require__(273),
   /* styles */
   null,
   /* scopeId */
@@ -13005,7 +13446,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 267 */
+/* 272 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13041,7 +13482,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 268 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13089,10 +13530,10 @@ if (false) {
 }
 
 /***/ }),
-/* 269 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(270);
+/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(275);
 module.exports = {
     template: '<input type="text" ref="input" v-bind:value="value" v-on:blur="formatValue" >',
     props: {
@@ -13120,7 +13561,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 270 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (factory) {
@@ -13577,461 +14018,10 @@ $.fn.extend({
 
 
 /***/ }),
-/* 271 */
+/* 276 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 272 */,
-/* 273 */,
-/* 274 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(283);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(284)("6bfecb8a", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0e93ec9e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddQiwiWalletSuccess.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0e93ec9e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddQiwiWalletSuccess.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 283 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(274)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.body-header[data-v-0e93ec9e] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-0e93ec9e] {\n    padding: 15px;\n}\n.success-notification[data-v-0e93ec9e] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.wallet-info[data-v-0e93ec9e] {\np {\n    margin-bottom: 0;\n}\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 284 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(285)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction) {
-  isProduction = _isProduction
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 285 */
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-/* 286 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Добавление кошелька"
-    }
-  }, [_c('li', [_c('a', {
-    staticClass: "disabled"
-  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi"
-    }
-  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Регистрация QIWI кошелька завершена")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('h3', {
-    staticClass: "body-header"
-  }, [_vm._v("Регистрация QIWI кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "body-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "wallet-info"
-  }, [_c('p', [_vm._v("Ваш кошелек "), _c('span', {
-    domProps: {
-      "textContent": _vm._s(this.login)
-    }
-  }), _vm._v("\n                                    успешно зарегистрирован в системе Dinero.")]), _vm._v(" "), _c('p', [_vm._v("Вы можете перейти к\n                                    "), _c('router-link', {
-    attrs: {
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("списку")])]), _vm._v("\n                                    кошельков или\n                                    "), _c('router-link', {
-    attrs: {
-      "to": "/finance/qiwi/add-wallet"
-    }
-  }, [_c('a', [_vm._v("зарегистрировать")])]), _vm._v("\n                                    новый кошелек.\n                                ")], 1)])])])])])])])], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "success-notification"
-  }, [_c('b', [_vm._v("Отлично!")]), _vm._v(" QIWI кошелек успешно зарегистрирован в Dinero\n                            ")])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0e93ec9e", module.exports)
-  }
-}
 
 /***/ })
 ],[136]);

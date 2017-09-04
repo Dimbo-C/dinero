@@ -109,8 +109,8 @@
             processResult(result){
                 console.log(result);
 
-                var messageType = result.status === "success" ? "success" : "warning";
-                Bus.$emit('showNotification', messageType, result.message);
+//                var messageType = result.status === "success" ? "success" : "warning";
+//                Bus.$emit('showNotification', messageType, result.message);
 //                this.$route.router.go("/finance/qiwi/add-wallet-success");
             }
 
