@@ -189,10 +189,11 @@
                 console.log(result);
 
                 var messageType = result.status === "success" ? "success" : "warning";
-//                Bus.$emit('showNotification', messageType, result.message);
 
                 if (result.status === "success") {
                     this.$router.push({path: `/finance/qiwi/add-wallet-success/${this.form.login}`});
+                }else{
+                    Bus.$emit('showNotification', messageType, result.message);
                 }
             }
         },
