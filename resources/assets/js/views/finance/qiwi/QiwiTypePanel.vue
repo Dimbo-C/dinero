@@ -128,9 +128,12 @@
                 Dinero.post('/api/qiwi-wallets/update', new Form(auth))
                     .then((data) => {
                             console.log(data);
-                            console.log(this.$refs);
-                            this.$refs.login= data.balance + " " + this.currency;
-                            this.foo = data.balance;
+                            this.items.map((item) => {
+                                if (item.login === login) {
+                                    item.balance = data.balance;
+                                    item.month_income = data.month_income;
+                                }
+                            });
                         }
                     )
             }
