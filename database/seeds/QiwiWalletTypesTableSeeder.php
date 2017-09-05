@@ -8,23 +8,22 @@
  */
 class QiwiWalletTypesTableSeeder extends \Illuminate\Database\Seeder {
     public function run() {
-        DB::table('roles')->insert(
-                [
-                        "name" => "Приемные киви",
-                        "slug" => "receive",
-                ],
-                [
-                        "name" => "Резервные киви",
-                        "slug" => "reserve",
-                ],
-                [
-                        "name" => "Выводные киви",
-                        "slug" => "output",
-                ],
-                [
-                        "name" => "Отработанные киви",
-                        "slug" => "spent",
-                ]
-        );
+        DB::table('qiwi_wallet_types')->insert([
+                "name" => "Приемные киви",
+                "slug" => "receive",
+
+        ]);
+        DB::table('qiwi_wallet_types')->insert([
+                "name" => "Резервные киви",
+                "slug" => "reserve",
+        ]);
+        DB::table('qiwi_wallet_types')->insert([
+                "name" => "Выводные киви",
+                "slug" => "output",
+        ]);
+        DB::table('qiwi_wallet_types')->insert([
+                "name" => "Отработанные киви",
+                "slug" => "spent",
+        ]);
     }
 }

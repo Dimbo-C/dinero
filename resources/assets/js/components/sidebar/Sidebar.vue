@@ -24,6 +24,7 @@
     computed: {
       role() {
         return this.user ? this.user.roles[0].name : '';
+//        return "Test role";
       }
     }
   };

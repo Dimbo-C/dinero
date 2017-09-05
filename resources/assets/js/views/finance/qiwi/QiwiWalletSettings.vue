@@ -20,9 +20,10 @@
                         <div class="panel-body">
                             <div class="form-horizontal">
                                 <div class="form-group">
-                                    <label for="" class="col-sm-4 control-label">Комментарий к кошельку</label>
+                                    <label class="col-sm-4 control-label">Комментарий к кошельку</label>
                                     <div class="col-sm-8">
-                                        <textarea class="form-control"></textarea>
+                                        <textarea class="form-control"
+                                                  v-model="form.comment"></textarea>
                                     </div>
                                 </div>
 
@@ -30,7 +31,8 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="useProxy"> Использовать прокси
+                                                <input type="checkbox" v-model="useProxy">
+                                                Использовать прокси
                                             </label>
                                         </div>
                                     </div>
@@ -39,14 +41,21 @@
                                 <div class="form-group" v-if="useProxy">
                                     <label for="" class="col-sm-4 control-label">Прокси сервер</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="proxyServer"
+                                               placeholder="host:port">
                                     </div>
                                 </div>
 
                                 <div class="form-group" v-if="useProxy">
                                     <label for="" class="col-sm-4 control-label">Авторизация прокси</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" :disabled="!useProxy">
+                                        <input type="text"
+                                               class="form-control"
+                                               :disabled="!useProxy"
+                                               v-model="proxyAuth"
+                                               placeholder="login:password">
                                     </div>
                                 </div>
 
@@ -54,7 +63,10 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" checked> Кошелек активен
+                                                <input type="checkbox"
+                                                       v-model="form.wallet_active"
+                                                       checked>
+                                                Кошелек активен
                                             </label>
                                         </div>
                                     </div>
@@ -64,7 +76,10 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" checked> Режим «Всегда онлайн»
+                                                <input type="checkbox"
+                                                       v-model="form.always_online"
+                                                       checked>
+                                                Режим «Всегда онлайн»
                                             </label>
                                         </div>
                                         <span class="help-block">Поставьте галочку, если хотите чтобы сессия кошелька всегда поддерживалась в режиме
@@ -75,7 +90,9 @@
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Частота проверки баланса, мин.</label>
                                     <div class="col-sm-8">
-                                        <input type="number" min="0" class="form-control">
+                                        <input type="number" min="0"
+                                               v-model="form.balance_recheck_timeout"
+                                               class="form-control">
                                         <span class="help-block">Укажите через какое количество минут система должна автоматически
                                         обновлять баланс кошелька. Чтобы отключить функцию введите 0</span>
                                     </div>
@@ -91,7 +108,9 @@
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Максимальный баланс</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="form.maximum_balance">
                                         <span class="help-block">Максимальный баланс кошелька, при достижении которого
                                             кошелек автоматически уходит в резервные</span>
                                     </div>
@@ -110,16 +129,22 @@
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Режим работы автовывода</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" v-model="autoWithdrawalType" :disabled="!autoWithdrawal">
-                                            <option v-for="o in autoWithdrawalOptions" :value="o.value" v-text="o.text"></option>
+                                        <select class="form-control" v-model="autoWithdrawalType"
+                                                :disabled="!autoWithdrawal">
+                                            <option v-for="o in autoWithdrawalOptions" :value="o.value"
+                                                    v-text="o.text"></option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="form-group" v-if="autoWithdrawalType === 'every_x_minutes'">
-                                    <label for="" class="col-sm-4 control-label">Вызывать автовывод каждые X минут</label>
+                                    <label for=""
+                                           class="col-sm-4 control-label">Вызывать автовывод каждые X минут</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="form.autowithdrawal_timeout"
+                                        >
                                     </div>
                                 </div>
 
@@ -127,7 +152,8 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="usingVouchers"> Автовывод с помощью ваучеров
+                                                <input type="checkbox" v-model="usingVouchers">
+                                                Автовывод с помощью ваучеров
                                             </label>
                                         </div>
                                     </div>
@@ -140,7 +166,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" >
+                                <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Данные владелца карты</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" placeholder="Имя">
@@ -152,7 +178,10 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-8">
-                                        <button class="btn btn-primary">Сохранить</button>
+                                        <button class="btn btn-primary"
+                                                @click="saveSettings">
+                                            Сохранить
+                                        </button>
                                     </div>
                                 </div>
 
@@ -168,23 +197,53 @@
 </template>
 
 <script>
-  export default {
-       /*
+    export default {
+        /*
          * The component's data.
          */
         data() {
             return {
-              useProxy: true,
-              autoWithdrawal: true,
-              autoWithdrawalType: 'after_each_balance_update',
-              autoWithdrawalOptions: [
-                { value: 'after_each_balance_update', text: 'Посе каждого обновления баланса' },
-                { value: 'manually', text: 'Вручную' },
-                { value: 'every_x_minutes', text: 'Каждые X минут' },
-              ],
-              autoWithdrawalPeriod: 1,
-              usingVouchers: false,
+                useProxy: true,
+                autoWithdrawal: true,
+                autoWithdrawalType: 'after_each_balance_update',
+                autoWithdrawalOptions: [
+                    {value: 'after_each_balance_update', text: 'Посе каждого обновления баланса'},
+                    {value: 'manually', text: 'Вручную'},
+                    {value: 'every_x_minutes', text: 'Каждые X минут'},
+                ],
+                autoWithdrawalPeriod: 1,
+                usingVouchers: false,
+                proxyServer: '',
+                proxyAuth: '',
+                form: new Form({
+                    comment: '',
+                    balance_recheck_timeout: 0,
+                    proxy: {
+                        host: '',
+                        port: '',
+                        login: '',
+                        password: '',
+                    },
+                    autowithdrawal_timeout: 0,
+                    type: 'receive',
+                    register_new: false,
+                    is_active: true,
+                }),
             };
+        },
+        watch: {
+            proxyServer(val) {
+                const data = val.split(':');
+
+                this.form.proxy.host = data[0];
+                this.form.proxy.port = data[1] ? data[1] : '';
+            },
+            proxyAuth(val) {
+                const data = val.split(':');
+
+                this.form.proxy.login = data.length ? data[0] : '';
+                this.form.proxy.password = data[1] ? data[1] : '';
+            },
         },
 
         /**
@@ -199,10 +258,14 @@
              * Prepare the component.
              */
             prepareComponent() {
-              this.$nextTick(() => {
-                $('.tooltip').removeClass('in');
-              });
+                this.$nextTick(() => {
+                    $('.tooltip').removeClass('in');
+                });
             },
+            saveSettings(){
+                this.form.use_proxy = this.useProxy;
+                console.log(this.form);
+            }
         }
     }
 </script>

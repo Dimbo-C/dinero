@@ -14,6 +14,8 @@ class CreateAutowithdrawTypesTable extends Migration {
         Schema::create('autowithdraw_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
+            $table->string('slug');
+            $table->string('autowithdraw_minutes')->default(0);
 
             $table->timestamps();
         });

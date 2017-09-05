@@ -10920,41 +10920,104 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  /*
-    * The component's data.
-    */
-  data: function data() {
-    return {
-      useProxy: true,
-      autoWithdrawal: true,
-      autoWithdrawalType: 'after_each_balance_update',
-      autoWithdrawalOptions: [{ value: 'after_each_balance_update', text: 'Посе каждого обновления баланса' }, { value: 'manually', text: 'Вручную' }, { value: 'every_x_minutes', text: 'Каждые X минут' }],
-      autoWithdrawalPeriod: 1,
-      usingVouchers: false
-    };
-  },
+    /*
+     * The component's data.
+     */
+    data: function data() {
+        return {
+            useProxy: true,
+            autoWithdrawal: true,
+            autoWithdrawalType: 'after_each_balance_update',
+            autoWithdrawalOptions: [{ value: 'after_each_balance_update', text: 'Посе каждого обновления баланса' }, { value: 'manually', text: 'Вручную' }, { value: 'every_x_minutes', text: 'Каждые X минут' }],
+            autoWithdrawalPeriod: 1,
+            usingVouchers: false,
+            proxyServer: '',
+            proxyAuth: '',
+            form: new Form({
+                comment: '',
+                balance_recheck_timeout: 0,
+                proxy: {
+                    host: '',
+                    port: '',
+                    login: '',
+                    password: ''
+                },
+                autowithdrawal_timeout: 0,
+                type: 'receive',
+                register_new: false,
+                is_active: true
+            })
+        };
+    },
 
+    watch: {
+        proxyServer: function proxyServer(val) {
+            var data = val.split(':');
 
-  /**
-   * Prepare the component.
-   */
-  mounted: function mounted() {
-    this.prepareComponent();
-  },
+            this.form.proxy.host = data[0];
+            this.form.proxy.port = data[1] ? data[1] : '';
+        },
+        proxyAuth: function proxyAuth(val) {
+            var data = val.split(':');
 
+            this.form.proxy.login = data.length ? data[0] : '';
+            this.form.proxy.password = data[1] ? data[1] : '';
+        }
+    },
 
-  methods: {
     /**
      * Prepare the component.
      */
-    prepareComponent: function prepareComponent() {
-      this.$nextTick(function () {
-        $('.tooltip').removeClass('in');
-      });
+    mounted: function mounted() {
+        this.prepareComponent();
+    },
+
+
+    methods: {
+        /**
+         * Prepare the component.
+         */
+        prepareComponent: function prepareComponent() {
+            this.$nextTick(function () {
+                $('.tooltip').removeClass('in');
+            });
+        },
+        saveSettings: function saveSettings() {
+            this.form.use_proxy = this.useProxy;
+            console.log(this.form);
+        }
     }
-  }
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
@@ -10994,7 +11057,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "form-horizontal"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label"
+  }, [_vm._v("Комментарий к кошельку")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.comment),
+      expression: "form.comment"
+    }],
+    staticClass: "form-control",
+    domProps: {
+      "value": (_vm.form.comment)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.comment = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-offset-4 col-sm-8"
@@ -11031,14 +11117,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  }), _vm._v(" Использовать прокси\n                                        ")])])])]), _vm._v(" "), (_vm.useProxy) ? _c('div', {
+  }), _vm._v("\n                                            Использовать прокси\n                                        ")])])])]), _vm._v(" "), (_vm.useProxy) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Прокси сервер")]), _vm._v(" "), _vm._m(1)]) : _vm._e(), _vm._v(" "), (_vm.useProxy) ? _c('div', {
+  }, [_vm._v("Прокси сервер")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.proxyServer),
+      expression: "proxyServer"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "host:port"
+    },
+    domProps: {
+      "value": (_vm.proxyServer)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.proxyServer = $event.target.value
+      }
+    }
+  })])]) : _vm._e(), _vm._v(" "), (_vm.useProxy) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -11048,12 +11157,169 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Авторизация прокси")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-8"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.proxyAuth),
+      expression: "proxyAuth"
+    }],
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "disabled": !_vm.useProxy
+      "disabled": !_vm.useProxy,
+      "placeholder": "login:password"
+    },
+    domProps: {
+      "value": (_vm.proxyAuth)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.proxyAuth = $event.target.value
+      }
     }
-  })])]) : _vm._e(), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm._m(6), _vm._v(" "), _c('div', {
+  })])]) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.wallet_active),
+      expression: "form.wallet_active"
+    }],
+    attrs: {
+      "type": "checkbox",
+      "checked": ""
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.form.wallet_active) ? _vm._i(_vm.form.wallet_active, null) > -1 : (_vm.form.wallet_active)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.form.wallet_active,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.form.wallet_active = $$a.concat($$v))
+          } else {
+            $$i > -1 && (_vm.form.wallet_active = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.form.wallet_active = $$c
+        }
+      }
+    }
+  }), _vm._v("\n                                            Кошелек активен\n                                        ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.always_online),
+      expression: "form.always_online"
+    }],
+    attrs: {
+      "type": "checkbox",
+      "checked": ""
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.form.always_online) ? _vm._i(_vm.form.always_online, null) > -1 : (_vm.form.always_online)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.form.always_online,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.form.always_online = $$a.concat($$v))
+          } else {
+            $$i > -1 && (_vm.form.always_online = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.form.always_online = $$c
+        }
+      }
+    }
+  }), _vm._v("\n                                            Режим «Всегда онлайн»\n                                        ")])]), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Поставьте галочку, если хотите чтобы сессия кошелька всегда поддерживалась в режиме\n                                    онлайн.")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Частота проверки баланса, мин.")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.balance_recheck_timeout),
+      expression: "form.balance_recheck_timeout"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "number",
+      "min": "0"
+    },
+    domProps: {
+      "value": (_vm.form.balance_recheck_timeout)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.balance_recheck_timeout = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Укажите через какое количество минут система должна автоматически\n                                    обновлять баланс кошелька. Чтобы отключить функцию введите 0")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Максимальный баланс")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.maximum_balance),
+      expression: "form.maximum_balance"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.maximum_balance)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.maximum_balance = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Максимальный баланс кошелька, при достижении которого\n                                        кошелек автоматически уходит в резервные")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-offset-4 col-sm-8"
@@ -11135,7 +11401,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Вызывать автовывод каждые X минут")]), _vm._v(" "), _vm._m(7)]) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_vm._v("Вызывать автовывод каждые X минут")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.autowithdrawal_timeout),
+      expression: "form.autowithdrawal_timeout"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.autowithdrawal_timeout)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.autowithdrawal_timeout = $event.target.value
+      }
+    }
+  })])]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-offset-4 col-sm-8"
@@ -11172,77 +11460,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  }), _vm._v(" Автовывод с помощью ваучеров\n                                        ")])])])]), _vm._v(" "), _vm._m(8), _vm._v(" "), _vm._m(9), _vm._v(" "), _vm._m(10)])])])])])])], 1)
+  }), _vm._v("\n                                            Автовывод с помощью ваучеров\n                                        ")])])])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.saveSettings
+    }
+  }, [_vm._v("\n                                        Сохранить\n                                    ")])])])])])])])])])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Комментарий к кошельку")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('textarea', {
-    staticClass: "form-control"
-  })])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    attrs: {
-      "type": "checkbox",
-      "checked": ""
-    }
-  }), _vm._v(" Кошелек активен\n                                        ")])])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    attrs: {
-      "type": "checkbox",
-      "checked": ""
-    }
-  }), _vm._v(" Режим «Всегда онлайн»\n                                        ")])]), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Поставьте галочку, если хотите чтобы сессия кошелька всегда поддерживалась в режиме\n                                    онлайн.")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Частота проверки баланса, мин.")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "number",
-      "min": "0"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Укажите через какое количество минут система должна автоматически\n                                    обновлять баланс кошелька. Чтобы отключить функцию введите 0")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
@@ -11258,33 +11486,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "text"
     }
   })])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Максимальный баланс")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Максимальный баланс кошелька, при достижении которого\n                                        кошелек автоматически уходит в резервные")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-group"
@@ -11326,14 +11527,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Фамилия"
     }
   })])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('button', {
-    staticClass: "btn btn-primary"
-  }, [_vm._v("Сохранить")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -11662,6 +11855,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -11700,6 +11894,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 });
             });
+        }
+    },
+    computed: {
+        firstDayOfTheMonth: function firstDayOfTheMonth() {
+            var today = new Date();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+
+            return "01." + mm + "." + yyyy;
         }
     }
 });
@@ -11763,7 +11969,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  })])])]), _vm._v(" "), _c('th', [_vm._v("Имя кошелька ")]), _vm._v(" "), (!_vm.isInactive) ? _c('th', [_vm._v("Баланс")]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('th', [_vm._v("Принятые средства с 01.07.2017")]) : _vm._e(), _vm._v(" "), _c('th')])]), _vm._v(" "), _c('tbody', _vm._l((_vm.type.wallets), function(w) {
+  })])])]), _vm._v(" "), _c('th', [_vm._v("Имя кошелька ")]), _vm._v(" "), (!_vm.isInactive) ? _c('th', [_vm._v("Баланс")]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('th', [_vm._v("Принятые средства с "), _c('span', {
+    domProps: {
+      "textContent": _vm._s(this.firstDayOfTheMonth)
+    }
+  })]) : _vm._e(), _vm._v(" "), _c('th')])]), _vm._v(" "), _c('tbody', _vm._l((_vm.type.wallets), function(w) {
     return (w.is_active || _vm.isInactive) ? _c('tr', [_c('td', [_c('div', {
       staticClass: "checkbox m-none"
     }, [_c('label', {
@@ -11810,13 +12020,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._v(_vm._s(_vm._f("currency")(w.balance)))]), _vm._v(" "), _c('a', {
       attrs: {
-        "href": "#",
         "data-toggle": "tooltip",
         "data-placement": "top",
         "title": "Обновить"
       },
       on: {
         "click": function($event) {
+          $event.stopPropagation();
           _vm.updateWallet(w.login, w.password)
         }
       }
@@ -12524,6 +12734,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   computed: {
     role: function role() {
       return this.user ? this.user.roles[0].name : '';
+      //        return "Test role";
     }
   }
 });

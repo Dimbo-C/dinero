@@ -18,7 +18,8 @@
                         </th>
                         <th>Имя кошелька </th>
                         <th v-if="!isInactive">Баланс</th>
-                        <th v-if="!isInactive">Принятые средства с 01.07.2017</th>
+                        <th v-if="!isInactive">Принятые средства с <span v-text="this.firstDayOfTheMonth"></span></th>
+
                         <th></th>
                     </tr>
                     </thead>
@@ -34,8 +35,8 @@
                         <td v-text="w.name"></td>
                         <td v-if="!isInactive">
                             <span :id="w.login">{{ w.balance | currency }}</span>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Обновить"
-                               @click="updateWallet(w.login,w.password)">
+                            <a data-toggle="tooltip" data-placement="top" title="Обновить"
+                               v-on:click.stop="updateWallet(w.login,w.password)">
                                 <i class="fa fa-refresh fa-fw"></i>
                             </a>
                         </td>
@@ -138,5 +139,17 @@
                     )
             }
         },
+        computed: {
+            firstDayOfTheMonth () {
+                var today = new Date();
+                var mm = today.getMonth() + 1; //January is 0!
+                var yyyy = today.getFullYear();
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+
+                return "01." + mm + "." + yyyy;
+            },
+        }
     };
 </script>
