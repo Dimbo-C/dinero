@@ -23,3 +23,5 @@ Route::post('/qiwi-wallets/update', 'QiwiWalletsController@update');
 Route::post('/qiwi-wallets/move', 'QiwiWalletsController@move');
 
 Route::get('/qiwi-wallets/{wallet}/report', 'Api\QiwiWalletsController@report');
+Route::get('/qiwi-wallets/{wallet}/settings', 'Api\QiwiWalletsController@settings');
+Route::post('/qiwi-wallets/{wallet}/settings', 'QiwiWalletsController@saveSettings');

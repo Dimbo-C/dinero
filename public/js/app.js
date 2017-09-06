@@ -10949,6 +10949,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -10956,27 +10974,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      */
     data: function data() {
         return {
-            useProxy: true,
-            autoWithdrawal: true,
-            autoWithdrawalType: 'after_each_balance_update',
-            autoWithdrawalOptions: [{ value: 'after_each_balance_update', text: 'Посе каждого обновления баланса' }, { value: 'manually', text: 'Вручную' }, { value: 'every_x_minutes', text: 'Каждые X минут' }],
-            autoWithdrawalPeriod: 1,
-            usingVouchers: false,
-            proxyServer: '',
-            proxyAuth: '',
+            useProxy: false,
+            proxyServer: "",
+            proxyAuth: "",
             form: new Form({
-                comment: '',
+                comments: '',
+                wallet_active: false,
+                wallet_type: '',
+                wallet_types: [],
+                always_online: false,
                 balance_recheck_timeout: 0,
+                maximum_balance: 100,
+                autoWithdrawal_active: true,
+                autoWithdrawal_type: '',
+                autoWithdrawal_options: [],
+                autoWithdrawal_timeout: 0,
+                autoWithdrawal_card_number: "",
+                autoWithdrawal_cardholder_name: "",
+                autoWithdrawal_cardholder_surname: "",
+                using_vouchers: false,
+
                 proxy: {
                     host: '',
                     port: '',
                     login: '',
                     password: ''
                 },
-                autowithdrawal_timeout: 0,
-                type: 'receive',
-                register_new: false,
-                is_active: true
+
+                login: this.$route.params.wallet
+
             })
         };
     },
@@ -11009,13 +11035,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Prepare the component.
          */
         prepareComponent: function prepareComponent() {
+            var _this = this;
+
             this.$nextTick(function () {
                 $('.tooltip').removeClass('in');
             });
+
+            // get settings of this wallet
+            axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/settings").then(function (response) {
+                var data = response.data;
+                console.log(data);
+                _this.loadAutoWithdrawalOptions(data.autowithdraw_types);
+                _this.loadWalletTypes(data.wallet_types);
+                var settings = Object.assign(data.wallet_settings, data.wallet);
+                _this.loadSettings(settings);
+                console.log(settings);
+            });
+        },
+        loadAutoWithdrawalOptions: function loadAutoWithdrawalOptions(options) {
+            var _this2 = this;
+
+            options.map(function (option) {
+                _this2.form.autoWithdrawal_options.push({ value: option.slug, text: option.type });
+            });
+
+            this.form.autoWithdrawal_type = this.form.autoWithdrawal_options[1].value;
+        },
+        loadWalletTypes: function loadWalletTypes(types) {
+            var _this3 = this;
+
+            //                var form=this.form
+            types.map(function (type) {
+                _this3.form.wallet_types.push({ value: type.slug, text: type.name });
+            });
+
+            this.form.wallet_type = this.form.wallet_types[1].value;
+        },
+        loadSettings: function loadSettings(settings) {
+            var form = this.form;
+
+            form.comments = settings.comments;
+            this.useProxy = settings.proxy_id !== null;
+            form.wallet_active = settings.is_active;
+            form.always_online = settings.is_always_online === null ? false : settings.is_always_online;
+            form.balance_recheck_timeout = settings.balance_recheck_timeout;
+            form.maximum_balance = settings.maximum_balance;
+            form.autoWithdrawal_active = settings.autoWithdrawal_active;
+            form.using_vouchers = settings.using_vouchers;
+            form.autoWithdrawal_card_number = settings.autoWithdrawal_card_number;
+            form.autoWithdrawal_cardholder_name = settings.autoWithdrawal_cardholder_name;
+            form.autoWithdrawal_cardholder_surname = settings.autoWithdrawal_cardholder_surname;
+
+            // selects
+            var optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
+            form.autoWithdrawal_option = this.form.autoWithdrawal_options[optionId - 1];
+
+            form.wallet_type = this.form.wallet_types[settings.type_id - 1].value;
         },
         saveSettings: function saveSettings() {
             this.form.use_proxy = this.useProxy;
             console.log(this.form);
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/settings", this.form).then(function (data) {
+                console.log(data);
+                Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
+            });
         }
     }
 });
@@ -11067,17 +11150,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.comment),
-      expression: "form.comment"
+      value: (_vm.form.comments),
+      expression: "form.comments"
     }],
     staticClass: "form-control",
     domProps: {
-      "value": (_vm.form.comment)
+      "value": (_vm.form.comments)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.comment = $event.target.value
+        _vm.form.comments = $event.target.value
       }
     }
   })])]), _vm._v(" "), _c('div', {
@@ -11288,7 +11371,42 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "help-block"
-  }, [_vm._v("Укажите через какое количество минут система должна автоматически\n                                    обновлять баланс кошелька. Чтобы отключить функцию введите 0")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+  }, [_vm._v("Укажите через какое количество минут система должна автоматически\n                                    обновлять баланс кошелька. Чтобы отключить функцию введите 0")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Тип кошелька")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.wallet_type),
+      expression: "form.wallet_type"
+    }],
+    staticClass: "form-control",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.form.wallet_type = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((_vm.form.wallet_types), function(o) {
+    return _c('option', {
+      domProps: {
+        "value": o.value,
+        "textContent": _vm._s(o.text)
+      }
+    })
+  }))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -11329,34 +11447,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.autoWithdrawal),
-      expression: "autoWithdrawal"
+      value: (_vm.form.autoWithdrawal_active),
+      expression: "form.autoWithdrawal_active"
     }],
     attrs: {
       "type": "checkbox"
     },
     domProps: {
-      "checked": Array.isArray(_vm.autoWithdrawal) ? _vm._i(_vm.autoWithdrawal, null) > -1 : (_vm.autoWithdrawal)
+      "checked": Array.isArray(_vm.form.autoWithdrawal_active) ? _vm._i(_vm.form.autoWithdrawal_active, null) > -1 : (_vm.form.autoWithdrawal_active)
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.autoWithdrawal,
+        var $$a = _vm.form.autoWithdrawal_active,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.autoWithdrawal = $$a.concat($$v))
+            $$i < 0 && (_vm.form.autoWithdrawal_active = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.autoWithdrawal = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.form.autoWithdrawal_active = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.autoWithdrawal = $$c
+          _vm.form.autoWithdrawal_active = $$c
         }
       }
     }
-  }), _vm._v(" Автовывод включен\n                                        ")])])])]), _vm._v(" "), _c('div', {
+  }), _vm._v("\n                                            Автовывод включен\n                                        ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -11369,12 +11487,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.autoWithdrawalType),
-      expression: "autoWithdrawalType"
+      value: (_vm.form.autoWithdrawal_type),
+      expression: "form.autoWithdrawal_type"
     }],
     staticClass: "form-control",
     attrs: {
-      "disabled": !_vm.autoWithdrawal
+      "disabled": !_vm.form.autoWithdrawal_active
     },
     on: {
       "change": function($event) {
@@ -11384,43 +11502,50 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.autoWithdrawalType = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+        _vm.form.autoWithdrawal_type = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, _vm._l((_vm.autoWithdrawalOptions), function(o) {
+  }, _vm._l((_vm.form.autoWithdrawal_options), function(o) {
     return _c('option', {
       domProps: {
         "value": o.value,
         "textContent": _vm._s(o.text)
       }
     })
-  }))])]), _vm._v(" "), (_vm.autoWithdrawalType === 'every_x_minutes') ? _c('div', {
+  }))])]), _vm._v(" "), (_vm.form.autoWithdrawal_type === 'every_x_minutes') ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
     attrs: {
       "for": ""
+    },
+    model: {
+      value: (_vm.form.autoWithdrawal_type),
+      callback: function($$v) {
+        _vm.form.autoWithdrawal_type = $$v
+      },
+      expression: "form.autoWithdrawal_type"
     }
-  }, [_vm._v("Вызывать автовывод каждые X минут")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                                    Вызывать автовывод каждые X минут\n                                ")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-8"
   }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.autowithdrawal_timeout),
-      expression: "form.autowithdrawal_timeout"
+      value: (_vm.form.autoWithdrawal_timeout),
+      expression: "form.autoWithdrawal_timeout"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text"
     },
     domProps: {
-      "value": (_vm.form.autowithdrawal_timeout)
+      "value": (_vm.form.autoWithdrawal_timeout)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.autowithdrawal_timeout = $event.target.value
+        _vm.form.autoWithdrawal_timeout = $event.target.value
       }
     }
   })])]) : _vm._e(), _vm._v(" "), _c('div', {
@@ -11433,61 +11558,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.usingVouchers),
-      expression: "usingVouchers"
+      value: (_vm.form.using_vouchers),
+      expression: "form.using_vouchers"
     }],
     attrs: {
       "type": "checkbox"
     },
     domProps: {
-      "checked": Array.isArray(_vm.usingVouchers) ? _vm._i(_vm.usingVouchers, null) > -1 : (_vm.usingVouchers)
+      "checked": Array.isArray(_vm.form.using_vouchers) ? _vm._i(_vm.form.using_vouchers, null) > -1 : (_vm.form.using_vouchers)
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.usingVouchers,
+        var $$a = _vm.form.using_vouchers,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.usingVouchers = $$a.concat($$v))
+            $$i < 0 && (_vm.form.using_vouchers = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.usingVouchers = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.form.using_vouchers = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.usingVouchers = $$c
+          _vm.form.using_vouchers = $$c
         }
       }
     }
-  }), _vm._v("\n                                            Автовывод с помощью ваучеров\n                                        ")])])])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
-    on: {
-      "click": _vm.saveSettings
-    }
-  }, [_vm._v("\n                                        Сохранить\n                                    ")])])])])])])])])])], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Тип кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }), _vm._v("\n                                            Автовывод с помощью ваучеров\n                                        ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -11497,13 +11595,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Карта для автовывода")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-8"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.autoWithdrawal_card_number),
+      expression: "form.autoWithdrawal_card_number"
+    }],
     staticClass: "form-control",
     attrs: {
       "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.autoWithdrawal_card_number)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.autoWithdrawal_card_number = $event.target.value
+      }
     }
-  })])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -11513,21 +11624,60 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Данные владелца карты")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-4"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.autoWithdrawal_cardholder_name),
+      expression: "form.autoWithdrawal_cardholder_name"
+    }],
     staticClass: "form-control",
     attrs: {
       "type": "text",
       "placeholder": "Имя"
+    },
+    domProps: {
+      "value": (_vm.form.autoWithdrawal_cardholder_name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.autoWithdrawal_cardholder_name = $event.target.value
+      }
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-4"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.autoWithdrawal_cardholder_surname),
+      expression: "form.autoWithdrawal_cardholder_surname"
+    }],
     staticClass: "form-control",
     attrs: {
       "type": "text",
       "placeholder": "Фамилия"
+    },
+    domProps: {
+      "value": (_vm.form.autoWithdrawal_cardholder_surname)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.autoWithdrawal_cardholder_surname = $event.target.value
+      }
     }
-  })])])
-}]}
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.saveSettings
+    }
+  }, [_vm._v("\n                                        Сохранить\n                                    ")])])])])])])])])])], 1)
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

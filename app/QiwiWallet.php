@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Cazzzt\Qiwi\Qiwi1;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class QiwiWallet extends Model {
     protected $table = "qiwi_wallets";
@@ -19,24 +20,40 @@ class QiwiWallet extends Model {
 
     /**
      * @param $data
-     * @param $type_id
-     * @param $balance
-     * @param $month_income
      * @param null $proxy_id
-     * @return bool
+     * @return integer id if new wallet
      */
-    public function insertWallet($data, $type_id, $balance, $month_income, $proxy_id = NULL) {
+    public function insertWallet($data, $proxy_id = NULL) {
         $newWallet = new QiwiWallet();
         $newWallet->name = $data->name;
         $newWallet->login = $data->login;
         $newWallet->password = $data->password;
         $newWallet->is_active = $data->is_active;
-        $newWallet->type_id = $type_id;
-        $newWallet->balance = $balance;
-        $newWallet->month_income = $month_income;
+        $newWallet->type_id = $data->typeId;
+        $newWallet->balance = $data->balance;
+        $newWallet->month_income = $data->monthIncome;
         $newWallet->proxy_id = $proxy_id;
+        $newWallet->save();
 
-        return $newWallet->save();
+        return $newWallet->id;
     }
+
+    public function insertSettings($id) {
+        DB::table('qiwi_wallet_settings')->insert([
+                'wallet_id' => $id,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+    }
+
+    public function settings($id) {
+        $settings['wallet'] = $this->find($id);
+        $settings['wallet_settings'] = QiwiWalletSettings::find($id);
+        $settings['wallet_types'] = QiwiWalletType::all();
+        $settings['autowithdraw_types'] = AutowithdrawTypes::all();
+
+        return $settings;
+    }
+
 
 }

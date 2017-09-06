@@ -23,7 +23,7 @@
                                     <label class="col-sm-4 control-label">Комментарий к кошельку</label>
                                     <div class="col-sm-8">
                                         <textarea class="form-control"
-                                                  v-model="form.comment"></textarea>
+                                                  v-model="form.comments"></textarea>
                                     </div>
                                 </div>
 
@@ -98,10 +98,20 @@
                                     </div>
                                 </div>
 
+                                <!--<div class="form-group">-->
+                                <!--<label for="" class="col-sm-4 control-label">Тип кошелька</label>-->
+                                <!--<div class="col-sm-8">-->
+                                <!--<input type="text" class="form-control">-->
+                                <!--</div>-->
+                                <!--</div>-->
+
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Тип кошелька</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control">
+                                        <select class="form-control" v-model="form.wallet_type">
+                                            <option v-for="o in form.wallet_types" :value="o.value"
+                                                    v-text="o.text"></option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -120,7 +130,8 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="autoWithdrawal"> Автовывод включен
+                                                <input type="checkbox" v-model="form.autoWithdrawal_active">
+                                                Автовывод включен
                                             </label>
                                         </div>
                                     </div>
@@ -129,22 +140,24 @@
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Режим работы автовывода</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" v-model="autoWithdrawalType"
-                                                :disabled="!autoWithdrawal">
-                                            <option v-for="o in autoWithdrawalOptions" :value="o.value"
+                                        <select class="form-control" v-model="form.autoWithdrawal_type"
+                                                :disabled="!form.autoWithdrawal_active">
+                                            <option v-for="o in form.autoWithdrawal_options" :value="o.value"
                                                     v-text="o.text"></option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="autoWithdrawalType === 'every_x_minutes'">
+                                <div class="form-group" v-if="form.autoWithdrawal_type === 'every_x_minutes'">
                                     <label for=""
-                                           class="col-sm-4 control-label">Вызывать автовывод каждые X минут</label>
+                                           class="col-sm-4 control-label"
+                                           v-model="form.autoWithdrawal_type">
+                                        Вызывать автовывод каждые X минут
+                                    </label>
                                     <div class="col-sm-8">
                                         <input type="text"
                                                class="form-control"
-                                               v-model="form.autowithdrawal_timeout"
-                                        >
+                                               v-model="form.autoWithdrawal_timeout">
                                     </div>
                                 </div>
 
@@ -152,7 +165,7 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="usingVouchers">
+                                                <input type="checkbox" v-model="form.using_vouchers">
                                                 Автовывод с помощью ваучеров
                                             </label>
                                         </div>
@@ -162,17 +175,22 @@
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Карта для автовывода</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control"
+                                               v-model="form.autoWithdrawal_card_number">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Данные владелца карты</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="Имя">
+                                        <input type="text" class="form-control"
+                                               v-model="form.autoWithdrawal_cardholder_name"
+                                               placeholder="Имя">
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="Фамилия">
+                                        <input type="text" class="form-control"
+                                               v-model="form.autoWithdrawal_cardholder_surname"
+                                               placeholder="Фамилия">
                                     </div>
                                 </div>
 
@@ -203,31 +221,35 @@
          */
         data() {
             return {
-                useProxy: true,
-                autoWithdrawal: true,
-                autoWithdrawalType: 'after_each_balance_update',
-                autoWithdrawalOptions: [
-                    {value: 'after_each_balance_update', text: 'Посе каждого обновления баланса'},
-                    {value: 'manually', text: 'Вручную'},
-                    {value: 'every_x_minutes', text: 'Каждые X минут'},
-                ],
-                autoWithdrawalPeriod: 1,
-                usingVouchers: false,
-                proxyServer: '',
-                proxyAuth: '',
+                useProxy: false,
+                proxyServer: "",
+                proxyAuth: "",
                 form: new Form({
-                    comment: '',
+                    comments: '',
+                    wallet_active: false,
+                    wallet_type: '',
+                    wallet_types: [],
+                    always_online: false,
                     balance_recheck_timeout: 0,
+                    maximum_balance: 100,
+                    autoWithdrawal_active: true,
+                    autoWithdrawal_type: '',
+                    autoWithdrawal_options: [],
+                    autoWithdrawal_timeout: 0,
+                    autoWithdrawal_card_number: "",
+                    autoWithdrawal_cardholder_name: "",
+                    autoWithdrawal_cardholder_surname: "",
+                    using_vouchers: false,
+
                     proxy: {
                         host: '',
                         port: '',
                         login: '',
                         password: '',
                     },
-                    autowithdrawal_timeout: 0,
-                    type: 'receive',
-                    register_new: false,
-                    is_active: true,
+
+                    login: this.$route.params.wallet
+
                 }),
             };
         },
@@ -261,10 +283,68 @@
                 this.$nextTick(() => {
                     $('.tooltip').removeClass('in');
                 });
+
+                // get settings of this wallet
+                axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`)
+                    .then((response) => {
+                        let data = response.data;
+                        console.log(data);
+                        this.loadAutoWithdrawalOptions(data.autowithdraw_types);
+                        this.loadWalletTypes(data.wallet_types);
+                        var settings = Object.assign(data.wallet_settings, data.wallet);
+                        this.loadSettings(settings);
+                        console.log(settings);
+                    })
             },
+
+            loadAutoWithdrawalOptions(options){
+                options.map((option) => {
+                    this.form.autoWithdrawal_options.push({value: option.slug, text: option.type})
+                });
+
+                this.form.autoWithdrawal_type = this.form.autoWithdrawal_options[1].value;
+            },
+
+            loadWalletTypes(types){
+//                var form=this.form
+                types.map((type) => {
+                    this.form.wallet_types.push({value: type.slug, text: type.name})
+                });
+
+                this.form.wallet_type = this.form.wallet_types[1].value;
+            },
+
+            loadSettings(settings){
+                var form = this.form;
+
+                form.comments = settings.comments;
+                this.useProxy = settings.proxy_id !== null;
+                form.wallet_active = settings.is_active;
+                form.always_online = settings.is_always_online === null ? false : settings.is_always_online;
+                form.balance_recheck_timeout = settings.balance_recheck_timeout;
+                form.maximum_balance = settings.maximum_balance;
+                form.autoWithdrawal_active = settings.autoWithdrawal_active;
+                form.using_vouchers = settings.using_vouchers;
+                form.autoWithdrawal_card_number = settings.autoWithdrawal_card_number;
+                form.autoWithdrawal_cardholder_name = settings.autoWithdrawal_cardholder_name;
+                form.autoWithdrawal_cardholder_surname = settings.autoWithdrawal_cardholder_surname;
+
+                // selects
+                let optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
+                form.autoWithdrawal_option = this.form.autoWithdrawal_options[optionId - 1];
+
+                form.wallet_type = this.form.wallet_types[settings.type_id - 1].value;
+            },
+
+
             saveSettings(){
                 this.form.use_proxy = this.useProxy;
                 console.log(this.form);
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`, this.form)
+                    .then((data) => {
+                        console.log(data);
+                        Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
+                    });
             }
         }
     }

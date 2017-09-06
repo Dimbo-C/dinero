@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Contracts\Repositories\QiwiWalletRepository as Contract;
 use App\Proxy;
 use App\QiwiWallet;
+use App\QiwiWalletSettings;
 use App\QiwiWalletType;
 use App\Services\Qiwi\Qiwi;
 
@@ -85,27 +86,30 @@ class QiwiWalletRepository implements Contract {
         //        });
     }
 
+    public function settings($login) {
+        $id = (new QiwiWallet)->where("login", "=", $login)->first()->id;
+
+        return (new QiwiWallet)->settings($id);
+    }
+
     /**
      * Add new wallet
      * @param $data
      * @return mixed
      */
     public function insertWallet($data) {
-        // test
-        //        $data->login = "+380960968460";
-        //        $data->password = "Kekroach2204";
-        //        $data->name = "test";
+        $request = $data;
 
         // get new proxy
         $proxy = $this->createProxy($data);
 
         if (is_object($proxy)) {
-            $proxyData = $data['proxy'];
+            $proxyData = $request['proxy'];
             $controlProxy = $proxyData['host'] . ":" . $proxyData['port'];
             $controlProxyAuth = $proxyData['login'] . ":" . $proxyData['password'];
-            $control = new \QIWIControl($data->login, $data->password, "cookie_data", $controlProxy, $controlProxyAuth);
+            $control = new \QIWIControl($request->login, $request->password, "cookie_data", $controlProxy, $controlProxyAuth);
         } else {
-            $control = new \QIWIControl($data->login, $data->password);
+            $control = new \QIWIControl($request->login, $request->password);
         }
 
         if (!$control->login()) {
@@ -115,25 +119,71 @@ class QiwiWalletRepository implements Contract {
             return $result;
         };
 
-        $typeId = (new QiwiWalletType)->where("slug", $data->type)->first()->id;
-        $balance = $control->loadBalance()['RUB'];
+        $request->typeId = (new QiwiWalletType)->where("slug", $request->type)->first()->id;
+        $request->balance = $control->loadBalance()['RUB'];
 
         // get income data from qiwi (lib returns empty array for now, so it is a dummy)
-        $monthIncome = $balance;
-//                $monthIncome = $control->loadBills(QIWI_BILLS_MODE_IN, date("01.m.Y"), date("d.m.Y"));
+        $request->monthIncome = $request->balance;
+        //                $monthIncome = $control->loadBills(QIWI_BILLS_MODE_IN, date("01.m.Y"), date("d.m.Y"));
+
 
         // add new wallet to DB with proxy or not
         $wallet = new QiwiWallet();
         if (is_object($proxy)) {
-            $wallet->insertWallet($data, $typeId, $balance, $monthIncome, $proxy->id);
+            $newWalletId = $wallet->insertWallet($data, $proxy->id);
         } else {
-            $wallet->insertWallet($data, $typeId, $balance, $monthIncome);
+            $newWalletId = $wallet->insertWallet($data);
         }
+
+        // create a settings row to db
+        $wallet->insertSettings($newWalletId);
+
 
         $result['status'] = "success";
         $result['message'] = "Кошелек успешно добавлен.";
 
         return $result;
+    }
+
+
+    public function saveSettings($data) {
+
+        $this->updateWalletData($data);
+
+        //        return $settings;
+    }
+
+    private function updateWalletData($data) {
+        $this->updateWallet($data);
+        $id = QiwiWallet::where("login", "=", $data->login)->first()->id;
+
+        $this->updateWalletSettings($data, $id);
+    }
+
+    private function updateWallet($data) {
+        $wallet = QiwiWallet::where("login", "=", $data->login)->first();
+        $wallet->is_active = $data->wallet_active;
+        $wallet->save();
+
+        return $wallet->id;
+    }
+
+    private function updateWalletSettings($data, $id) {
+        $settings = QiwiWalletSettings::find($id);
+
+        $settings->comments = $data->comments;
+        $settings->is_always_online = $data->always_online;
+        $settings->balance_recheck_timeout = $data->balance_recheck_timeout;
+        $settings->maximum_balance = $data->maximum_balance;
+        $settings->using_vouchers = $data->using_vouchers;
+        $settings->maximum_balance = $data->maximum_balance;
+
+        $settings->autoWithdrawal_card_number = $data->autoWithdrawal_card_number;
+        $settings->autoWithdrawal_cardholder_name = $data->autoWithdrawal_cardholder_name;
+        $settings->autoWithdrawal_cardholder_surname = $data->autoWithdrawal_cardholder_surname;
+
+        $settings->save();
+
     }
 
     /**
