@@ -9125,8 +9125,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -9144,13 +9142,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 text: 'Автовывод',
                 description: 'На такой кошелек будут выводиться средства с кошельков, принимающих платежи.'
             }],
-            useProxy: true,
+
             proxyServer: '',
             proxyAuth: '',
             form: new Form({
                 login: '',
                 password: '',
                 name: '',
+                useProxy: true,
                 proxy: {
                     host: '',
                     port: '',
@@ -9158,8 +9157,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     password: ''
                 },
                 type: 'receive',
-                register_new: false,
-                is_active: true
+                registerNew: false,
+                isActive: true
             })
         };
     },
@@ -9180,7 +9179,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         submitForm: function submitForm() {
-            this.form.use_proxy = this.useProxy;
             Dinero.post('/api/qiwi-wallets', this.form).then(this.processResult);
         },
         processResult: function processResult(result) {
@@ -9330,34 +9328,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.useProxy),
-      expression: "useProxy"
+      value: (_vm.form.useProxy),
+      expression: "form.useProxy"
     }],
     attrs: {
       "type": "checkbox"
     },
     domProps: {
-      "checked": Array.isArray(_vm.useProxy) ? _vm._i(_vm.useProxy, null) > -1 : (_vm.useProxy)
+      "checked": Array.isArray(_vm.form.useProxy) ? _vm._i(_vm.form.useProxy, null) > -1 : (_vm.form.useProxy)
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.useProxy,
+        var $$a = _vm.form.useProxy,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.useProxy = $$a.concat($$v))
+            $$i < 0 && (_vm.form.useProxy = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.useProxy = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.form.useProxy = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.useProxy = $$c
+          _vm.form.useProxy = $$c
         }
       }
     }
-  }), _vm._v(" Использовать прокси\n                                        ")])])])]), _vm._v(" "), (_vm.useProxy) ? _c('div', {
+  }), _vm._v(" Использовать прокси\n                                        ")])])])]), _vm._v(" "), (_vm.form.useProxy) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label"
@@ -9384,7 +9382,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.proxyServer = $event.target.value
       }
     }
-  })])]) : _vm._e(), _vm._v(" "), (_vm.useProxy) ? _c('div', {
+  })])]) : _vm._e(), _vm._v(" "), (_vm.form.useProxy) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label"
@@ -9462,30 +9460,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.is_active),
-      expression: "form.is_active"
+      value: (_vm.form.isActive),
+      expression: "form.isActive"
     }],
     attrs: {
       "type": "checkbox"
     },
     domProps: {
-      "checked": Array.isArray(_vm.form.is_active) ? _vm._i(_vm.form.is_active, null) > -1 : (_vm.form.is_active)
+      "checked": Array.isArray(_vm.form.isActive) ? _vm._i(_vm.form.isActive, null) > -1 : (_vm.form.isActive)
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.form.is_active,
+        var $$a = _vm.form.isActive,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.form.is_active = $$a.concat($$v))
+            $$i < 0 && (_vm.form.isActive = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.form.is_active = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.form.isActive = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.form.is_active = $$c
+          _vm.form.isActive = $$c
         }
       }
     }
@@ -9501,30 +9499,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.register_new),
-      expression: "form.register_new"
+      value: (_vm.form.registerNew),
+      expression: "form.registerNew"
     }],
     attrs: {
       "type": "checkbox"
     },
     domProps: {
-      "checked": Array.isArray(_vm.form.register_new) ? _vm._i(_vm.form.register_new, null) > -1 : (_vm.form.register_new)
+      "checked": Array.isArray(_vm.form.registerNew) ? _vm._i(_vm.form.registerNew, null) > -1 : (_vm.form.registerNew)
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.form.register_new,
+        var $$a = _vm.form.registerNew,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.form.register_new = $$a.concat($$v))
+            $$i < 0 && (_vm.form.registerNew = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.form.register_new = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.form.registerNew = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.form.register_new = $$c
+          _vm.form.registerNew = $$c
         }
       }
     }
@@ -10330,6 +10328,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             isLoaded: false,
             transactions: null,
+            income: 0,
+            outcome: 0,
             dateRange: {
                 start: '',
                 end: ''
@@ -10365,7 +10365,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.isLoaded = false;
             axios.get('/api/qiwi-wallets/' + this.login + '/report', { params: this.dateRange }).then(function (response) {
                 console.log(response);
-                _this.transactions = response.data;
+                _this.transactions = response.data.history;
+                _this.income = response.data.income;
+                _this.outcome = response.data.outcome;
                 _this.isLoaded = true;
             });
         },
@@ -10410,27 +10412,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         login: function login() {
             return this.$route.params.wallet;
         },
-        income: function income() {
-            if (this.transactions) {
-                var amounts = [];
-                var sum = 0;
-                var transactions = this.transactions.filter(function (t) {
-                    return t.amount_sign === '-';
-                });
 
-                transactions.forEach(function (t) {
-                    amounts.push(parseFloat(t.amount.replace(',', '.').replace(/[^0-9]/, '')));
-                });
 
-                return amounts;
-            }
-        },
+        //            income () {
+        //                if (this.transactions) {
+        ////                    let amounts = [];
+        ////                    let sum = 0;
+        ////                    const transactions = this.transactions.filter(t => t.amount_sign === '-');
+        ////
+        ////                    transactions.forEach((t) => {
+        ////                        amounts.push(parseFloat(t.amount.replace(',', '.').replace(/[^0-9]/, '')))
+        ////                    });
+        ////
+        ////                    return amounts;
+        //                }
+        //            },
+
         expenditure: function expenditure() {
-            if (this.transactions) {
-                return '' + __WEBPACK_IMPORTED_MODULE_0_lodash_sum___default()(this.transactions.filter(function (t) {
-                    return t.amount_sign === '+';
-                }).amount);
-            }
+            //                if (this.transactions) {
+            //                    return `${_sum(this.transactions.filter(t => t.amount_sign === '+').amount)}`;
+            //                }
         }
     }
 });
@@ -10637,7 +10638,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(this.login)
     }
-  }), _vm._v("\n                                (+17489.5 / -17581.52)")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+  }), _vm._v("\n                                (+ " + _vm._s(_vm.income) + " / - " + _vm._s(_vm.outcome) + ")")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   })])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
@@ -10674,7 +10675,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "textContent": _vm._s(t.opNumber)
       }
-    })]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v(_vm._s(t.amount_sign) + " " + _vm._s(t.amount))]), _vm._v(" "), _c('td', {
+    })]), _vm._v(" "), _c('td', [_vm._v(_vm._s(t.comment))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(t.sign) + _vm._s(t.amount) + " " + _vm._s(t.currency))]), _vm._v(" "), _c('td', {
       domProps: {
         "textContent": _vm._s(t.commission)
       }
@@ -10979,20 +10980,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             proxyAuth: "",
             form: new Form({
                 comments: '',
-                wallet_active: false,
-                wallet_type: '',
-                wallet_types: [],
-                always_online: false,
-                balance_recheck_timeout: 0,
-                maximum_balance: 100,
-                autoWithdrawal_active: true,
-                autoWithdrawal_type: '',
-                autoWithdrawal_options: [],
-                autoWithdrawal_timeout: 0,
-                autoWithdrawal_card_number: "",
-                autoWithdrawal_cardholder_name: "",
-                autoWithdrawal_cardholder_surname: "",
-                using_vouchers: false,
+                walletActive: false,
+                walletType: '',
+                walletTypes: [],
+                alwaysOnline: false,
+                balanceRecheckTimeout: 0,
+                maximumBalance: 100,
+                autoWithdrawalActive: true,
+                autoWithdrawalType: '',
+                autoWithdrawalOptions: [],
+                autoWithdrawalTimeout: 0,
+                autoWithdrawalCardNumber: "",
+                autoWithdrawalCardholderName: "",
+                autoWithdrawalCardholderSurname: "",
+                usingVouchers: false,
 
                 proxy: {
                     host: '',
@@ -11045,9 +11046,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/settings").then(function (response) {
                 var data = response.data;
                 console.log(data);
-                _this.loadAutoWithdrawalOptions(data.autowithdraw_types);
-                _this.loadWalletTypes(data.wallet_types);
-                var settings = Object.assign(data.wallet_settings, data.wallet);
+                _this.loadAutoWithdrawalOptions(data.autoWithdrawTypes);
+                _this.loadWalletTypes(data.walletTypes);
+                var settings = Object.assign(data.walletSettings, data.wallet);
                 _this.loadSettings(settings);
                 console.log(settings);
             });
@@ -11056,41 +11057,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             options.map(function (option) {
-                _this2.form.autoWithdrawal_options.push({ value: option.slug, text: option.type });
+                _this2.form.autoWithdrawalOptions.push({ value: option.slug, text: option.type });
             });
 
-            this.form.autoWithdrawal_type = this.form.autoWithdrawal_options[1].value;
+            this.form.autoWithdrawalType = this.form.autoWithdrawalOptions[1].value;
         },
         loadWalletTypes: function loadWalletTypes(types) {
             var _this3 = this;
 
             //                var form=this.form
             types.map(function (type) {
-                _this3.form.wallet_types.push({ value: type.slug, text: type.name });
+                _this3.form.walletTypes.push({ value: type.slug, text: type.name });
             });
 
-            this.form.wallet_type = this.form.wallet_types[1].value;
+            this.form.walletType = this.form.walletTypes[1].value;
         },
         loadSettings: function loadSettings(settings) {
             var form = this.form;
 
             form.comments = settings.comments;
             this.useProxy = settings.proxy_id !== null;
-            form.wallet_active = settings.is_active;
-            form.always_online = settings.is_always_online === null ? false : settings.is_always_online;
-            form.balance_recheck_timeout = settings.balance_recheck_timeout;
-            form.maximum_balance = settings.maximum_balance;
-            form.autoWithdrawal_active = settings.autoWithdrawal_active;
-            form.using_vouchers = settings.using_vouchers;
-            form.autoWithdrawal_card_number = settings.autoWithdrawal_card_number;
-            form.autoWithdrawal_cardholder_name = settings.autoWithdrawal_cardholder_name;
-            form.autoWithdrawal_cardholder_surname = settings.autoWithdrawal_cardholder_surname;
+            form.walletActive = settings.is_active;
+            form.alwaysOnline = settings.is_always_online === null ? false : settings.is_always_online;
+            form.balanceRecheckTimeout = settings.balance_recheck_timeout;
+            form.maximumBalance = settings.maximum_balance;
+            form.autoWithdrawalActive = settings.autoWithdrawal_active;
+            form.usingVouchers = settings.using_vouchers;
+            form.autoWithdrawalCardNumber = settings.autoWithdrawal_card_number;
+            form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
+            form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
 
             // selects
             var optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
-            form.autoWithdrawal_option = this.form.autoWithdrawal_options[optionId - 1];
+            form.autoWithdrawalOption = this.form.autoWithdrawalOptions[optionId - 1];
 
-            form.wallet_type = this.form.wallet_types[settings.type_id - 1].value;
+            form.walletType = this.form.walletTypes[settings.type_id - 1].value;
         },
         saveSettings: function saveSettings() {
             this.form.use_proxy = this.useProxy;
@@ -11271,31 +11272,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.wallet_active),
-      expression: "form.wallet_active"
+      value: (_vm.form.walletActive),
+      expression: "form.walletActive"
     }],
     attrs: {
       "type": "checkbox",
       "checked": ""
     },
     domProps: {
-      "checked": Array.isArray(_vm.form.wallet_active) ? _vm._i(_vm.form.wallet_active, null) > -1 : (_vm.form.wallet_active)
+      "checked": Array.isArray(_vm.form.walletActive) ? _vm._i(_vm.form.walletActive, null) > -1 : (_vm.form.walletActive)
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.form.wallet_active,
+        var $$a = _vm.form.walletActive,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.form.wallet_active = $$a.concat($$v))
+            $$i < 0 && (_vm.form.walletActive = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.form.wallet_active = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.form.walletActive = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.form.wallet_active = $$c
+          _vm.form.walletActive = $$c
         }
       }
     }
@@ -11309,31 +11310,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.always_online),
-      expression: "form.always_online"
+      value: (_vm.form.alwaysOnline),
+      expression: "form.alwaysOnline"
     }],
     attrs: {
       "type": "checkbox",
       "checked": ""
     },
     domProps: {
-      "checked": Array.isArray(_vm.form.always_online) ? _vm._i(_vm.form.always_online, null) > -1 : (_vm.form.always_online)
+      "checked": Array.isArray(_vm.form.alwaysOnline) ? _vm._i(_vm.form.alwaysOnline, null) > -1 : (_vm.form.alwaysOnline)
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.form.always_online,
+        var $$a = _vm.form.alwaysOnline,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.form.always_online = $$a.concat($$v))
+            $$i < 0 && (_vm.form.alwaysOnline = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.form.always_online = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.form.alwaysOnline = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.form.always_online = $$c
+          _vm.form.alwaysOnline = $$c
         }
       }
     }
@@ -11352,8 +11353,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.balance_recheck_timeout),
-      expression: "form.balance_recheck_timeout"
+      value: (_vm.form.balanceRecheckTimeout),
+      expression: "form.balanceRecheckTimeout"
     }],
     staticClass: "form-control",
     attrs: {
@@ -11361,12 +11362,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "min": "0"
     },
     domProps: {
-      "value": (_vm.form.balance_recheck_timeout)
+      "value": (_vm.form.balanceRecheckTimeout)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.balance_recheck_timeout = $event.target.value
+        _vm.form.balanceRecheckTimeout = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -11384,8 +11385,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.wallet_type),
-      expression: "form.wallet_type"
+      value: (_vm.form.walletType),
+      expression: "form.walletType"
     }],
     staticClass: "form-control",
     on: {
@@ -11396,10 +11397,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.form.wallet_type = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+        _vm.form.walletType = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, _vm._l((_vm.form.wallet_types), function(o) {
+  }, _vm._l((_vm.form.walletTypes), function(o) {
     return _c('option', {
       domProps: {
         "value": o.value,
@@ -11419,20 +11420,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.maximum_balance),
-      expression: "form.maximum_balance"
+      value: (_vm.form.maximumBalance),
+      expression: "form.maximumBalance"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text"
     },
     domProps: {
-      "value": (_vm.form.maximum_balance)
+      "value": (_vm.form.maximumBalance)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.maximum_balance = $event.target.value
+        _vm.form.maximumBalance = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -11447,30 +11448,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.autoWithdrawal_active),
-      expression: "form.autoWithdrawal_active"
+      value: (_vm.form.autoWithdrawalActive),
+      expression: "form.autoWithdrawalActive"
     }],
     attrs: {
       "type": "checkbox"
     },
     domProps: {
-      "checked": Array.isArray(_vm.form.autoWithdrawal_active) ? _vm._i(_vm.form.autoWithdrawal_active, null) > -1 : (_vm.form.autoWithdrawal_active)
+      "checked": Array.isArray(_vm.form.autoWithdrawalActive) ? _vm._i(_vm.form.autoWithdrawalActive, null) > -1 : (_vm.form.autoWithdrawalActive)
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.form.autoWithdrawal_active,
+        var $$a = _vm.form.autoWithdrawalActive,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.form.autoWithdrawal_active = $$a.concat($$v))
+            $$i < 0 && (_vm.form.autoWithdrawalActive = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.form.autoWithdrawal_active = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.form.autoWithdrawalActive = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.form.autoWithdrawal_active = $$c
+          _vm.form.autoWithdrawalActive = $$c
         }
       }
     }
@@ -11487,12 +11488,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.autoWithdrawal_type),
-      expression: "form.autoWithdrawal_type"
+      value: (_vm.form.autoWithdrawalType),
+      expression: "form.autoWithdrawalType"
     }],
     staticClass: "form-control",
     attrs: {
-      "disabled": !_vm.form.autoWithdrawal_active
+      "disabled": !_vm.form.autoWithdrawalActive
     },
     on: {
       "change": function($event) {
@@ -11502,17 +11503,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.form.autoWithdrawal_type = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+        _vm.form.autoWithdrawalType = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, _vm._l((_vm.form.autoWithdrawal_options), function(o) {
+  }, _vm._l((_vm.form.autoWithdrawalOptions), function(o) {
     return _c('option', {
       domProps: {
         "value": o.value,
         "textContent": _vm._s(o.text)
       }
     })
-  }))])]), _vm._v(" "), (_vm.form.autoWithdrawal_type === 'every_x_minutes') ? _c('div', {
+  }))])]), _vm._v(" "), (_vm.form.autoWithdrawalType === 'every_x_minutes') ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -11520,11 +11521,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": ""
     },
     model: {
-      value: (_vm.form.autoWithdrawal_type),
+      value: (_vm.form.autoWithdrawalType),
       callback: function($$v) {
-        _vm.form.autoWithdrawal_type = $$v
+        _vm.form.autoWithdrawalType = $$v
       },
-      expression: "form.autoWithdrawal_type"
+      expression: "form.autoWithdrawalType"
     }
   }, [_vm._v("\n                                    Вызывать автовывод каждые X минут\n                                ")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-8"
@@ -11532,20 +11533,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.autoWithdrawal_timeout),
-      expression: "form.autoWithdrawal_timeout"
+      value: (_vm.form.autoWithdrawalTimeout),
+      expression: "form.autoWithdrawalTimeout"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text"
     },
     domProps: {
-      "value": (_vm.form.autoWithdrawal_timeout)
+      "value": (_vm.form.autoWithdrawalTimeout)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawal_timeout = $event.target.value
+        _vm.form.autoWithdrawalTimeout = $event.target.value
       }
     }
   })])]) : _vm._e(), _vm._v(" "), _c('div', {
@@ -11558,30 +11559,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.using_vouchers),
-      expression: "form.using_vouchers"
+      value: (_vm.form.usingVouchers),
+      expression: "form.usingVouchers"
     }],
     attrs: {
       "type": "checkbox"
     },
     domProps: {
-      "checked": Array.isArray(_vm.form.using_vouchers) ? _vm._i(_vm.form.using_vouchers, null) > -1 : (_vm.form.using_vouchers)
+      "checked": Array.isArray(_vm.form.usingVouchers) ? _vm._i(_vm.form.usingVouchers, null) > -1 : (_vm.form.usingVouchers)
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.form.using_vouchers,
+        var $$a = _vm.form.usingVouchers,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.form.using_vouchers = $$a.concat($$v))
+            $$i < 0 && (_vm.form.usingVouchers = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.form.using_vouchers = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.form.usingVouchers = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.form.using_vouchers = $$c
+          _vm.form.usingVouchers = $$c
         }
       }
     }
@@ -11598,20 +11599,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.autoWithdrawal_card_number),
-      expression: "form.autoWithdrawal_card_number"
+      value: (_vm.form.autoWithdrawalCardNumber),
+      expression: "form.autoWithdrawalCardNumber"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text"
     },
     domProps: {
-      "value": (_vm.form.autoWithdrawal_card_number)
+      "value": (_vm.form.autoWithdrawalCardNumber)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawal_card_number = $event.target.value
+        _vm.form.autoWithdrawalCardNumber = $event.target.value
       }
     }
   })])]), _vm._v(" "), _c('div', {
@@ -11627,8 +11628,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.autoWithdrawal_cardholder_name),
-      expression: "form.autoWithdrawal_cardholder_name"
+      value: (_vm.form.autoWithdrawalCardholderName),
+      expression: "form.autoWithdrawalCardholderName"
     }],
     staticClass: "form-control",
     attrs: {
@@ -11636,12 +11637,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Имя"
     },
     domProps: {
-      "value": (_vm.form.autoWithdrawal_cardholder_name)
+      "value": (_vm.form.autoWithdrawalCardholderName)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawal_cardholder_name = $event.target.value
+        _vm.form.autoWithdrawalCardholderName = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -11650,8 +11651,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.autoWithdrawal_cardholder_surname),
-      expression: "form.autoWithdrawal_cardholder_surname"
+      value: (_vm.form.autoWithdrawalCardholderSurname),
+      expression: "form.autoWithdrawalCardholderSurname"
     }],
     staticClass: "form-control",
     attrs: {
@@ -11659,12 +11660,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Фамилия"
     },
     domProps: {
-      "value": (_vm.form.autoWithdrawal_cardholder_surname)
+      "value": (_vm.form.autoWithdrawalCardholderSurname)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawal_cardholder_surname = $event.target.value
+        _vm.form.autoWithdrawalCardholderSurname = $event.target.value
       }
     }
   })])]), _vm._v(" "), _c('div', {

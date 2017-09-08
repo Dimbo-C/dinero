@@ -20,19 +20,19 @@ class QiwiWallet extends Model {
 
     /**
      * @param $data
-     * @param null $proxy_id
+     * @param null $proxyId
      * @return integer id if new wallet
      */
-    public function insertWallet($data, $proxy_id = NULL) {
+    public function insertWallet($data, $proxyId = NULL) {
         $newWallet = new QiwiWallet();
         $newWallet->name = $data->name;
         $newWallet->login = $data->login;
         $newWallet->password = $data->password;
-        $newWallet->is_active = $data->is_active;
+        $newWallet->is_active = $data->isActive;
         $newWallet->type_id = $data->typeId;
         $newWallet->balance = $data->balance;
         $newWallet->month_income = $data->monthIncome;
-        $newWallet->proxy_id = $proxy_id;
+        $newWallet->proxy_id = $proxyId;
         $newWallet->save();
 
         return $newWallet->id;
@@ -48,11 +48,19 @@ class QiwiWallet extends Model {
 
     public function settings($id) {
         $settings['wallet'] = $this->find($id);
-        $settings['wallet_settings'] = QiwiWalletSettings::find($id);
-        $settings['wallet_types'] = QiwiWalletType::all();
-        $settings['autowithdraw_types'] = AutowithdrawTypes::all();
+        $settings['walletSettings'] = QiwiWalletSettings::find($id);
+        $settings['walletTypes'] = QiwiWalletType::all();
+        $settings['autoWithdrawTypes'] = AutowithdrawTypes::all();
+        $settings['id'] = $id;
 
         return $settings;
+    }
+
+    public function updateBalanceAndIncome($login, $balance, $monthIncome) {
+        $this->where("login", $login)->update([
+                'balance' => $balance,
+                'month_income' => $monthIncome
+        ]);
     }
 
 

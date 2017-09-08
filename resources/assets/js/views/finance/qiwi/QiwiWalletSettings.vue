@@ -64,7 +64,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox"
-                                                       v-model="form.wallet_active"
+                                                       v-model="form.walletActive"
                                                        checked>
                                                 Кошелек активен
                                             </label>
@@ -77,7 +77,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox"
-                                                       v-model="form.always_online"
+                                                       v-model="form.alwaysOnline"
                                                        checked>
                                                 Режим «Всегда онлайн»
                                             </label>
@@ -91,7 +91,7 @@
                                     <label for="" class="col-sm-4 control-label">Частота проверки баланса, мин.</label>
                                     <div class="col-sm-8">
                                         <input type="number" min="0"
-                                               v-model="form.balance_recheck_timeout"
+                                               v-model="form.balanceRecheckTimeout"
                                                class="form-control">
                                         <span class="help-block">Укажите через какое количество минут система должна автоматически
                                         обновлять баланс кошелька. Чтобы отключить функцию введите 0</span>
@@ -108,8 +108,8 @@
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Тип кошелька</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" v-model="form.wallet_type">
-                                            <option v-for="o in form.wallet_types" :value="o.value"
+                                        <select class="form-control" v-model="form.walletType">
+                                            <option v-for="o in form.walletTypes" :value="o.value"
                                                     v-text="o.text"></option>
                                         </select>
                                     </div>
@@ -120,7 +120,7 @@
                                     <div class="col-sm-8">
                                         <input type="text"
                                                class="form-control"
-                                               v-model="form.maximum_balance">
+                                               v-model="form.maximumBalance">
                                         <span class="help-block">Максимальный баланс кошелька, при достижении которого
                                             кошелек автоматически уходит в резервные</span>
                                     </div>
@@ -130,7 +130,7 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="form.autoWithdrawal_active">
+                                                <input type="checkbox" v-model="form.autoWithdrawalActive">
                                                 Автовывод включен
                                             </label>
                                         </div>
@@ -140,24 +140,24 @@
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Режим работы автовывода</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" v-model="form.autoWithdrawal_type"
-                                                :disabled="!form.autoWithdrawal_active">
-                                            <option v-for="o in form.autoWithdrawal_options" :value="o.value"
+                                        <select class="form-control" v-model="form.autoWithdrawalType"
+                                                :disabled="!form.autoWithdrawalActive">
+                                            <option v-for="o in form.autoWithdrawalOptions" :value="o.value"
                                                     v-text="o.text"></option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="form.autoWithdrawal_type === 'every_x_minutes'">
+                                <div class="form-group" v-if="form.autoWithdrawalType === 'every_x_minutes'">
                                     <label for=""
                                            class="col-sm-4 control-label"
-                                           v-model="form.autoWithdrawal_type">
+                                           v-model="form.autoWithdrawalType">
                                         Вызывать автовывод каждые X минут
                                     </label>
                                     <div class="col-sm-8">
                                         <input type="text"
                                                class="form-control"
-                                               v-model="form.autoWithdrawal_timeout">
+                                               v-model="form.autoWithdrawalTimeout">
                                     </div>
                                 </div>
 
@@ -165,7 +165,7 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="form.using_vouchers">
+                                                <input type="checkbox" v-model="form.usingVouchers">
                                                 Автовывод с помощью ваучеров
                                             </label>
                                         </div>
@@ -176,7 +176,7 @@
                                     <label for="" class="col-sm-4 control-label">Карта для автовывода</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control"
-                                               v-model="form.autoWithdrawal_card_number">
+                                               v-model="form.autoWithdrawalCardNumber">
                                     </div>
                                 </div>
 
@@ -184,12 +184,12 @@
                                     <label for="" class="col-sm-4 control-label">Данные владелца карты</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control"
-                                               v-model="form.autoWithdrawal_cardholder_name"
+                                               v-model="form.autoWithdrawalCardholderName"
                                                placeholder="Имя">
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control"
-                                               v-model="form.autoWithdrawal_cardholder_surname"
+                                               v-model="form.autoWithdrawalCardholderSurname"
                                                placeholder="Фамилия">
                                     </div>
                                 </div>
@@ -226,20 +226,20 @@
                 proxyAuth: "",
                 form: new Form({
                     comments: '',
-                    wallet_active: false,
-                    wallet_type: '',
-                    wallet_types: [],
-                    always_online: false,
-                    balance_recheck_timeout: 0,
-                    maximum_balance: 100,
-                    autoWithdrawal_active: true,
-                    autoWithdrawal_type: '',
-                    autoWithdrawal_options: [],
-                    autoWithdrawal_timeout: 0,
-                    autoWithdrawal_card_number: "",
-                    autoWithdrawal_cardholder_name: "",
-                    autoWithdrawal_cardholder_surname: "",
-                    using_vouchers: false,
+                    walletActive: false,
+                    walletType: '',
+                    walletTypes: [],
+                    alwaysOnline: false,
+                    balanceRecheckTimeout: 0,
+                    maximumBalance: 100,
+                    autoWithdrawalActive: true,
+                    autoWithdrawalType: '',
+                    autoWithdrawalOptions: [],
+                    autoWithdrawalTimeout: 0,
+                    autoWithdrawalCardNumber: "",
+                    autoWithdrawalCardholderName: "",
+                    autoWithdrawalCardholderSurname: "",
+                    usingVouchers: false,
 
                     proxy: {
                         host: '',
@@ -289,9 +289,9 @@
                     .then((response) => {
                         let data = response.data;
                         console.log(data);
-                        this.loadAutoWithdrawalOptions(data.autowithdraw_types);
-                        this.loadWalletTypes(data.wallet_types);
-                        var settings = Object.assign(data.wallet_settings, data.wallet);
+                        this.loadAutoWithdrawalOptions(data.autoWithdrawTypes);
+                        this.loadWalletTypes(data.walletTypes);
+                        var settings = Object.assign(data.walletSettings, data.wallet);
                         this.loadSettings(settings);
                         console.log(settings);
                     })
@@ -299,19 +299,19 @@
 
             loadAutoWithdrawalOptions(options){
                 options.map((option) => {
-                    this.form.autoWithdrawal_options.push({value: option.slug, text: option.type})
+                    this.form.autoWithdrawalOptions.push({value: option.slug, text: option.type})
                 });
 
-                this.form.autoWithdrawal_type = this.form.autoWithdrawal_options[1].value;
+                this.form.autoWithdrawalType = this.form.autoWithdrawalOptions[1].value;
             },
 
             loadWalletTypes(types){
 //                var form=this.form
                 types.map((type) => {
-                    this.form.wallet_types.push({value: type.slug, text: type.name})
+                    this.form.walletTypes.push({value: type.slug, text: type.name})
                 });
 
-                this.form.wallet_type = this.form.wallet_types[1].value;
+                this.form.walletType = this.form.walletTypes[1].value;
             },
 
             loadSettings(settings){
@@ -319,21 +319,21 @@
 
                 form.comments = settings.comments;
                 this.useProxy = settings.proxy_id !== null;
-                form.wallet_active = settings.is_active;
-                form.always_online = settings.is_always_online === null ? false : settings.is_always_online;
-                form.balance_recheck_timeout = settings.balance_recheck_timeout;
-                form.maximum_balance = settings.maximum_balance;
-                form.autoWithdrawal_active = settings.autoWithdrawal_active;
-                form.using_vouchers = settings.using_vouchers;
-                form.autoWithdrawal_card_number = settings.autoWithdrawal_card_number;
-                form.autoWithdrawal_cardholder_name = settings.autoWithdrawal_cardholder_name;
-                form.autoWithdrawal_cardholder_surname = settings.autoWithdrawal_cardholder_surname;
+                form.walletActive = settings.is_active;
+                form.alwaysOnline = settings.is_always_online === null ? false : settings.is_always_online;
+                form.balanceRecheckTimeout = settings.balance_recheck_timeout;
+                form.maximumBalance = settings.maximum_balance;
+                form.autoWithdrawalActive = settings.autoWithdrawal_active;
+                form.usingVouchers = settings.using_vouchers;
+                form.autoWithdrawalCardNumber = settings.autoWithdrawal_card_number;
+                form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
+                form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
 
                 // selects
                 let optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
-                form.autoWithdrawal_option = this.form.autoWithdrawal_options[optionId - 1];
+                form.autoWithdrawalOption = this.form.autoWithdrawalOptions[optionId - 1];
 
-                form.wallet_type = this.form.wallet_types[settings.type_id - 1].value;
+                form.walletType = this.form.walletTypes[settings.type_id - 1].value;
             },
 
 

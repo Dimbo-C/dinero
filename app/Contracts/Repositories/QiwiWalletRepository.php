@@ -35,7 +35,7 @@ interface QiwiWalletRepository {
      * @param $data
      * @return mixed
      */
-    public function getDataFromQiwi($data);
+    public function updateBalanceAndIncome($data);
 
     /**
      * Save settings

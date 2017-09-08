@@ -3,11 +3,14 @@
 namespace App\Repositories;
 
 use App\Contracts\Repositories\QiwiWalletRepository as Contract;
+use App\Processors\TransactionProcessor;
 use App\Proxy;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
 use App\QiwiWalletType;
 use App\Services\Qiwi\Qiwi;
+use QIWIControl;
+
 
 class QiwiWalletRepository implements Contract {
     public function all() {
@@ -35,19 +38,35 @@ class QiwiWalletRepository implements Contract {
     /**
      * {@inheritdoc}
      */
-    public function getDataFromQiwi($data) {
+    public function updateBalanceAndIncome($data) {
 
-        $control = new \QIWIControl($data->login, $data->password);
+        // library instance
+        $control = new QIWIControl($data->login, $data->password);
         $control->login();
+
+        // In-project class instance (cuz library's not working)
+        $qiwi = $this->getQiwiInstance($data->login);
+
+        // get report for date range
+        $tp = new TransactionProcessor($qiwi->reportForDateRange(date("01.m.Y"), date("d.m.Y")));
+
+        // get RUB from result (doubt that there can be any other)
         $balance = $control->loadBalance()['RUB'];
-        $monthIncome = $control->loadBills(QIWI_BILLS_MODE_IN, date("01.m.Y"), date("d.m.Y"));
+        $monthIncome = $tp->getIncome();
+
+        // update in DB
+        (new QiwiWallet())->updateBalanceAndIncome($data->login, $balance, $monthIncome);
+
+        // get data array
+        $result = $this->formUpdateResult($monthIncome, $balance, [$monthIncome]);
+
+        return $result;
+    }
+
+    private function formUpdateResult($monthIncome, $balance, $optional = []) {
+        $result['optional'] = $optional;
         $result['balance'] = $balance;
         $result['month_income'] = count($monthIncome) > 0 ? $monthIncome : $balance;
-        QiwiWallet::where("login", $data->login)
-                ->update([
-                        'balance' => $result['balance'],
-                        'month_income' => $result['month_income']
-                ]);
 
         return $result;
     }
@@ -62,8 +81,8 @@ class QiwiWalletRepository implements Contract {
         return $wallet ?: null;
     }
 
-    public function reportFor($query, $id) {
-        $wallet = $this->findByLogin($id);
+    public function getQiwiInstance($login) {
+        $wallet = $this->findByLogin($login);
 
         if ($wallet->proxy_id != null) {
             $proxy = Proxy::find($wallet->proxy_id);
@@ -72,22 +91,25 @@ class QiwiWalletRepository implements Contract {
             $qiwi = new Qiwi($wallet->login, $wallet->password);
         }
 
-        // test
-        //        $qiwi = new Qiwi($wallet->login, $wallet->password, "216.56.48.118:9000");
+        return $qiwi;
+    }
 
-        //        $walletNumber = "+79250308492";
-        //        $walletNumber = $wallet->login;
-
+    public function reportFor($query, $id) {
+        $qiwi = $this->getQiwiInstance($id);
 
         //        return Cache::remember("$walletNumber.{$query['start']}-{$query['end']}", 5, function () use ($qiwi, $query) {
-        $report = $qiwi->reportForDateRange($query['start'], $query['end']);
+        $transactionProcessor = new TransactionProcessor($qiwi->reportForDateRange($query['start'], $query['end']));
+
+        $report['history'] = $transactionProcessor->getTransactions();
+        $report['income'] = $transactionProcessor->getIncome();
+        $report['outcome'] = $transactionProcessor->getOutcome();
 
         return $report;
         //        });
     }
 
     public function settings($login) {
-        $id = (new QiwiWallet)->where("login", "=", $login)->first()->id;
+        $id = QiwiWallet::where("login", "=", $login)->first()->id;
 
         return (new QiwiWallet)->settings($id);
     }
@@ -102,15 +124,7 @@ class QiwiWalletRepository implements Contract {
 
         // get new proxy
         $proxy = $this->createProxy($data);
-
-        if (is_object($proxy)) {
-            $proxyData = $request['proxy'];
-            $controlProxy = $proxyData['host'] . ":" . $proxyData['port'];
-            $controlProxyAuth = $proxyData['login'] . ":" . $proxyData['password'];
-            $control = new \QIWIControl($request->login, $request->password, "cookie_data", $controlProxy, $controlProxyAuth);
-        } else {
-            $control = new \QIWIControl($request->login, $request->password);
-        }
+        $control = $this->makeControl($data, $proxy);
 
         if (!$control->login()) {
             $result['status'] = "failure";
@@ -119,13 +133,12 @@ class QiwiWalletRepository implements Contract {
             return $result;
         };
 
-        $request->typeId = (new QiwiWalletType)->where("slug", $request->type)->first()->id;
+        $request->typeId = QiwiWalletType::where("slug", $request->type)->first()->id;
         $request->balance = $control->loadBalance()['RUB'];
 
         // get income data from qiwi (lib returns empty array for now, so it is a dummy)
         $request->monthIncome = $request->balance;
         //                $monthIncome = $control->loadBills(QIWI_BILLS_MODE_IN, date("01.m.Y"), date("d.m.Y"));
-
 
         // add new wallet to DB with proxy or not
         $wallet = new QiwiWallet();
@@ -138,11 +151,24 @@ class QiwiWalletRepository implements Contract {
         // create a settings row to db
         $wallet->insertSettings($newWalletId);
 
-
         $result['status'] = "success";
         $result['message'] = "Кошелек успешно добавлен.";
 
         return $result;
+    }
+
+    // create qiwi-controlling object
+    private function makeControl($data, $proxy) {
+        if (is_object($proxy)) {
+            $proxyData = $data['proxy'];
+            $controlProxy = $proxyData['host'] . ":" . $proxyData['port'];
+            $controlProxyAuth = $proxyData['login'] . ":" . $proxyData['password'];
+            $control = new \QIWIControl($data->login, $data->password, "cookie_data", $controlProxy, $controlProxyAuth);
+        } else {
+            $control = new \QIWIControl($data->login, $data->password);
+        }
+
+        return $control;
     }
 
 
@@ -155,36 +181,19 @@ class QiwiWalletRepository implements Contract {
 
     private function updateWalletData($data) {
         $this->updateWallet($data);
-        $id = QiwiWallet::where("login", "=", $data->login)->first()->id;
+        $id = (new QiwiWallet)->where("login", $data->login)->first()->id;
 
-        $this->updateWalletSettings($data, $id);
+        (new QiwiWalletSettings)->updateWalletSettings($data, $id);
     }
 
     private function updateWallet($data) {
-        $wallet = QiwiWallet::where("login", "=", $data->login)->first();
-        $wallet->is_active = $data->wallet_active;
+        $wallet = QiwiWallet::where("login", $data->login)->first();
+        $wallet->is_active = $data->walletActive;
         $wallet->save();
 
         return $wallet->id;
     }
 
-    private function updateWalletSettings($data, $id) {
-        $settings = QiwiWalletSettings::find($id);
-
-        $settings->comments = $data->comments;
-        $settings->is_always_online = $data->always_online;
-        $settings->balance_recheck_timeout = $data->balance_recheck_timeout;
-        $settings->maximum_balance = $data->maximum_balance;
-        $settings->using_vouchers = $data->using_vouchers;
-        $settings->maximum_balance = $data->maximum_balance;
-
-        $settings->autoWithdrawal_card_number = $data->autoWithdrawal_card_number;
-        $settings->autoWithdrawal_cardholder_name = $data->autoWithdrawal_cardholder_name;
-        $settings->autoWithdrawal_cardholder_surname = $data->autoWithdrawal_cardholder_surname;
-
-        $settings->save();
-
-    }
 
     /**
      * insert data to DB
@@ -200,8 +209,3 @@ class QiwiWalletRepository implements Contract {
         return Proxy::all()->last();
     }
 }
-
-
-
-
-

@@ -39,7 +39,7 @@ class QiwiWalletsController extends Controller {
     }
 
     public function update(Request $request) {
-        return $this->wallet->getDataFromQiwi($request);
+        return $this->wallet->updateBalanceAndIncome($request);
     }
 
     public function saveSettings(Request $request) {

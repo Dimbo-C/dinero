@@ -44,13 +44,13 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="useProxy"> Использовать прокси
+                                                <input type="checkbox" v-model="form.useProxy"> Использовать прокси
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="useProxy">
+                                <div class="form-group" v-if="form.useProxy">
                                     <label class="col-sm-4 control-label">Прокси сервер</label>
                                     <div class="col-sm-8">
                                         <input type="text"
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="useProxy">
+                                <div class="form-group" v-if="form.useProxy">
                                     <label class="col-sm-4 control-label">Авторизация прокси</label>
                                     <div class="col-sm-8">
                                         <input type="text"
@@ -87,7 +87,7 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="form.is_active"> Кошелек активен
+                                                <input type="checkbox" v-model="form.isActive"> Кошелек активен
                                             </label>
                                         </div>
                                         <span class="help-block">После создания кошелек может быть сразу активным (если стоит галочка)
@@ -99,7 +99,7 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="form.register_new">
+                                                <input type="checkbox" v-model="form.registerNew">
                                                 Зарегистрировать новый кошелек
                                             </label>
                                         </div>
@@ -114,10 +114,8 @@
                                         <button class="btn btn-primary" @click="submitForm">Добавить кошелек</button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -146,13 +144,14 @@
                         description: 'На такой кошелек будут выводиться средства с кошельков, принимающих платежи.'
                     },
                 ],
-                useProxy: true,
+
                 proxyServer: '',
                 proxyAuth: '',
                 form: new Form({
                     login: '',
                     password: '',
                     name: '',
+                    useProxy: true,
                     proxy: {
                         host: '',
                         port: '',
@@ -160,8 +159,8 @@
                         password: ''
                     },
                     type: 'receive',
-                    register_new: false,
-                    is_active: true,
+                    registerNew: false,
+                    isActive: true,
                 }),
             };
         },
@@ -181,7 +180,6 @@
         },
         methods: {
             submitForm() {
-                this.form.use_proxy = this.useProxy;
                 Dinero.post('/api/qiwi-wallets', this.form)
                     .then(this.processResult)
             },

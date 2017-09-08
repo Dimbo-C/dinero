@@ -53,7 +53,7 @@
                         <div class="pull-left">
                             <div class="form-group">
                                 <p class="form-control-static">История транзакций <strong v-text="this.login"></strong>
-                                    (+17489.5 / -17581.52)</p>
+                                    (+ {{income}} / - {{outcome}})</p>
                             </div>
                         </div>
                         <div class="pull-right">
@@ -91,8 +91,8 @@
                                     <p class="small m-b-none" v-text="t.provider"></p>
                                     <p class="small m-b-none" v-text="t.opNumber"></p>
                                 </td>
-                                <td></td>
-                                <td>{{ t.amount_sign }} {{ t.amount }}</td>
+                                <td>{{ t.comment }}</td>
+                                <td>{{ t.sign }}{{ t.amount }} {{ t.currency }}</td>
                                 <td v-text="t.commission"></td>
                             </tr>
                             </tbody>
@@ -112,6 +112,8 @@
             return {
                 isLoaded: false,
                 transactions: null,
+                income: 0,
+                outcome: 0,
                 dateRange: {
                     start: '',
                     end: '',
@@ -143,7 +145,9 @@
                 axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
                     .then((response) => {
                         console.log(response);
-                        this.transactions = response.data;
+                        this.transactions = response.data.history;
+                        this.income = response.data.income;
+                        this.outcome = response.data.outcome;
                         this.isLoaded = true;
                     })
             },
@@ -191,24 +195,24 @@
                 return this.$route.params.wallet;
             },
 
-            income () {
-                if (this.transactions) {
-                    let amounts = [];
-                    let sum = 0;
-                    const transactions = this.transactions.filter(t => t.amount_sign === '-');
-
-                    transactions.forEach((t) => {
-                        amounts.push(parseFloat(t.amount.replace(',', '.').replace(/[^0-9]/, '')))
-                    });
-
-                    return amounts;
-                }
-            },
+//            income () {
+//                if (this.transactions) {
+////                    let amounts = [];
+////                    let sum = 0;
+////                    const transactions = this.transactions.filter(t => t.amount_sign === '-');
+////
+////                    transactions.forEach((t) => {
+////                        amounts.push(parseFloat(t.amount.replace(',', '.').replace(/[^0-9]/, '')))
+////                    });
+////
+////                    return amounts;
+//                }
+//            },
 
             expenditure () {
-                if (this.transactions) {
-                    return `${_sum(this.transactions.filter(t => t.amount_sign === '+').amount)}`;
-                }
+//                if (this.transactions) {
+//                    return `${_sum(this.transactions.filter(t => t.amount_sign === '+').amount)}`;
+//                }
             }
         }
     };
