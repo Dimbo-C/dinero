@@ -31,14 +31,14 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="useProxy">
+                                                <input type="checkbox" v-model="form.useProxy">
                                                 Использовать прокси
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="useProxy">
+                                <div class="form-group" v-if="form.useProxy">
                                     <label for="" class="col-sm-4 control-label">Прокси сервер</label>
                                     <div class="col-sm-8">
                                         <input type="text"
@@ -48,12 +48,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="useProxy">
+                                <div class="form-group" v-if="form.useProxy">
                                     <label for="" class="col-sm-4 control-label">Авторизация прокси</label>
                                     <div class="col-sm-8">
                                         <input type="text"
                                                class="form-control"
-                                               :disabled="!useProxy"
+                                               :disabled="!form.useProxy"
                                                v-model="proxyAuth"
                                                placeholder="login:password">
                                     </div>
@@ -221,10 +221,11 @@
          */
         data() {
             return {
-                useProxy: false,
+
                 proxyServer: "",
                 proxyAuth: "",
                 form: new Form({
+                    useProxy: false,
                     comments: '',
                     walletActive: false,
                     walletType: '',
@@ -318,12 +319,13 @@
                 var form = this.form;
 
                 form.comments = settings.comments;
-                this.useProxy = settings.proxy_id !== null;
+                form.useProxy = settings.proxy_id !== null;
                 form.walletActive = settings.is_active;
                 form.alwaysOnline = settings.is_always_online === null ? false : settings.is_always_online;
                 form.balanceRecheckTimeout = settings.balance_recheck_timeout;
                 form.maximumBalance = settings.maximum_balance;
                 form.autoWithdrawalActive = settings.autoWithdrawal_active;
+
                 form.usingVouchers = settings.using_vouchers;
                 form.autoWithdrawalCardNumber = settings.autoWithdrawal_card_number;
                 form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
@@ -331,14 +333,13 @@
 
                 // selects
                 let optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
-                form.autoWithdrawalOption = this.form.autoWithdrawalOptions[optionId - 1];
+                form.autoWithdrawalType = form.autoWithdrawalOptions[optionId - 1].value;
 
                 form.walletType = this.form.walletTypes[settings.type_id - 1].value;
             },
 
 
             saveSettings(){
-                this.form.use_proxy = this.useProxy;
                 console.log(this.form);
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`, this.form)
                     .then((data) => {

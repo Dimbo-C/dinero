@@ -16,7 +16,9 @@ class QiwiWalletSettings extends Model {
         return $settings;
     }
 
-    public function updateWalletSettings($data, $id) {
+    public function updateWithData($data, $id) {
+        $autoWithdrawTypeId = AutowithdrawTypes::where('slug', $data->autoWithdrawalType)->first()->id;
+
         $settings = $this->find($id);
 
         $settings->comments = $data->comments;
@@ -25,6 +27,9 @@ class QiwiWalletSettings extends Model {
         $settings->maximum_balance = $data->maximumBalance;
         $settings->using_vouchers = $data->usingVouchers;
         $settings->maximum_balance = $data->maximumBalance;
+
+        $settings->autoWithdrawal_active = $data->autoWithdrawalActive;
+        $settings->autoWithdrawal_type_id = $autoWithdrawTypeId;
 
         $settings->autoWithdrawal_card_number = $data->autoWithdrawalCardNumber;
         $settings->autoWithdrawal_cardholder_name = $data->autoWithdrawalCardholderName;

@@ -23,7 +23,7 @@ class QiwiWallet extends Model {
      * @param null $proxyId
      * @return integer id if new wallet
      */
-    public function insertWallet($data, $proxyId = NULL) {
+    public function insertWallet($data, $proxyId = null) {
         $newWallet = new QiwiWallet();
         $newWallet->name = $data->name;
         $newWallet->login = $data->login;
@@ -37,6 +37,8 @@ class QiwiWallet extends Model {
 
         return $newWallet->id;
     }
+
+
 
     public function insertSettings($id) {
         DB::table('qiwi_wallet_settings')->insert([

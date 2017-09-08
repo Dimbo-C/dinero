@@ -123,8 +123,8 @@ class QiwiWalletRepository implements Contract {
         $request = $data;
 
         // get new proxy
-        $proxy = $this->createProxy($data);
-        $control = $this->makeControl($data, $proxy);
+        $proxy = $this->createProxy($request);
+        $control = $this->makeControl($request, $proxy);
 
         if (!$control->login()) {
             $result['status'] = "failure";
@@ -138,17 +138,17 @@ class QiwiWalletRepository implements Contract {
 
         // get income data from qiwi (lib returns empty array for now, so it is a dummy)
         $request->monthIncome = $request->balance;
-        //                $monthIncome = $control->loadBills(QIWI_BILLS_MODE_IN, date("01.m.Y"), date("d.m.Y"));
+        // $monthIncome = $control->loadBills(QIWI_BILLS_MODE_IN, date("01.m.Y"), date("d.m.Y"));
 
         // add new wallet to DB with proxy or not
         $wallet = new QiwiWallet();
-        if (is_object($proxy)) {
-            $newWalletId = $wallet->insertWallet($data, $proxy->id);
-        } else {
-            $newWalletId = $wallet->insertWallet($data);
-        }
 
-        // create a settings row to db
+        $newWalletId = $wallet->insertWallet(
+                $data,
+                is_object($proxy) ? $proxy->id : null
+        );
+
+        // create a settings row in DB
         $wallet->insertSettings($newWalletId);
 
         $result['status'] = "success";
@@ -183,12 +183,22 @@ class QiwiWalletRepository implements Contract {
         $this->updateWallet($data);
         $id = (new QiwiWallet)->where("login", $data->login)->first()->id;
 
-        (new QiwiWalletSettings)->updateWalletSettings($data, $id);
+        $this->updateWalletSettings($data, $id);
+
+    }
+
+    private function updateWalletSettings($data, $id) {
+
+        (new QiwiWalletSettings)->updateWithData($data, $id);
     }
 
     private function updateWallet($data) {
+
+        $typeId = QiwiWalletType::where("slug", $data->walletType)->first()->id;
+
         $wallet = QiwiWallet::where("login", $data->login)->first();
         $wallet->is_active = $data->walletActive;
+        $wallet->type_id = $typeId;
         $wallet->save();
 
         return $wallet->id;

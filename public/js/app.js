@@ -10975,10 +10975,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      */
     data: function data() {
         return {
-            useProxy: false,
+
             proxyServer: "",
             proxyAuth: "",
             form: new Form({
+                useProxy: false,
                 comments: '',
                 walletActive: false,
                 walletType: '',
@@ -11076,12 +11077,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var form = this.form;
 
             form.comments = settings.comments;
-            this.useProxy = settings.proxy_id !== null;
+            form.useProxy = settings.proxy_id !== null;
             form.walletActive = settings.is_active;
             form.alwaysOnline = settings.is_always_online === null ? false : settings.is_always_online;
             form.balanceRecheckTimeout = settings.balance_recheck_timeout;
             form.maximumBalance = settings.maximum_balance;
             form.autoWithdrawalActive = settings.autoWithdrawal_active;
+
             form.usingVouchers = settings.using_vouchers;
             form.autoWithdrawalCardNumber = settings.autoWithdrawal_card_number;
             form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
@@ -11089,12 +11091,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             // selects
             var optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
-            form.autoWithdrawalOption = this.form.autoWithdrawalOptions[optionId - 1];
+            form.autoWithdrawalType = form.autoWithdrawalOptions[optionId - 1].value;
 
             form.walletType = this.form.walletTypes[settings.type_id - 1].value;
         },
         saveSettings: function saveSettings() {
-            this.form.use_proxy = this.useProxy;
             console.log(this.form);
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/settings", this.form).then(function (data) {
                 console.log(data);
@@ -11174,34 +11175,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.useProxy),
-      expression: "useProxy"
+      value: (_vm.form.useProxy),
+      expression: "form.useProxy"
     }],
     attrs: {
       "type": "checkbox"
     },
     domProps: {
-      "checked": Array.isArray(_vm.useProxy) ? _vm._i(_vm.useProxy, null) > -1 : (_vm.useProxy)
+      "checked": Array.isArray(_vm.form.useProxy) ? _vm._i(_vm.form.useProxy, null) > -1 : (_vm.form.useProxy)
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.useProxy,
+        var $$a = _vm.form.useProxy,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.useProxy = $$a.concat($$v))
+            $$i < 0 && (_vm.form.useProxy = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.useProxy = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.form.useProxy = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.useProxy = $$c
+          _vm.form.useProxy = $$c
         }
       }
     }
-  }), _vm._v("\n                                            Использовать прокси\n                                        ")])])])]), _vm._v(" "), (_vm.useProxy) ? _c('div', {
+  }), _vm._v("\n                                            Использовать прокси\n                                        ")])])])]), _vm._v(" "), (_vm.form.useProxy) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -11231,7 +11232,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.proxyServer = $event.target.value
       }
     }
-  })])]) : _vm._e(), _vm._v(" "), (_vm.useProxy) ? _c('div', {
+  })])]) : _vm._e(), _vm._v(" "), (_vm.form.useProxy) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -11250,7 +11251,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "disabled": !_vm.useProxy,
+      "disabled": !_vm.form.useProxy,
       "placeholder": "login:password"
     },
     domProps: {
