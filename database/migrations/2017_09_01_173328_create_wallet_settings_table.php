@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -16,11 +17,14 @@ class CreateWalletSettingsTable extends Migration {
             $table->string('comments')->nullable();
             $table->boolean('is_always_online')->nullable();
             $table->integer('balance_recheck_timeout')->default(0);
+            $table->timestamp('last_balance_recheck')->useCurrent();
             $table->double('maximum_balance')->default(floatval(1000000.0));
             $table->boolean('autoWithdrawal_active')->default(false);
 
             $table->integer('autoWithdrawal_type_id')->nullable()->unsigned()->index();
             $table->foreign('autoWithdrawal_type_id')->references("id")->on("autowithdraw_types")->onDelete('cascade');
+            $table->integer('autoWithdrawal_minutes')->default(0);
+
 
             $table->boolean('using_vouchers')->default(false);
             $table->string('autoWithdrawal_card_number')->nullable();

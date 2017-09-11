@@ -10,7 +10,7 @@ class QiwiWalletSettings extends Model {
     public $incrementing = false;
 
     public function findByLogin($login) {
-        $wallet = QiwiWallet::where("login", "=", $login)->first();
+        $wallet = (new QiwiWallet())->findByLogin($login);
         $settings = $this->find($wallet->id);
 
         return $settings;

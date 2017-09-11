@@ -221,7 +221,6 @@
          */
         data() {
             return {
-
                 proxyServer: "",
                 proxyAuth: "",
                 form: new Form({
@@ -248,9 +247,7 @@
                         login: '',
                         password: '',
                     },
-
                     login: this.$route.params.wallet
-
                 }),
             };
         },
@@ -307,16 +304,16 @@
             },
 
             loadWalletTypes(types){
-//                var form=this.form
+                let form = this.form;
                 types.map((type) => {
-                    this.form.walletTypes.push({value: type.slug, text: type.name})
+                    form.walletTypes.push({value: type.slug, text: type.name})
                 });
 
-                this.form.walletType = this.form.walletTypes[1].value;
+                form.walletType = form.walletTypes[1].value;
             },
 
             loadSettings(settings){
-                var form = this.form;
+                let form = this.form;
 
                 form.comments = settings.comments;
                 form.useProxy = settings.proxy_id !== null;
@@ -337,7 +334,6 @@
 
                 form.walletType = this.form.walletTypes[settings.type_id - 1].value;
             },
-
 
             saveSettings(){
                 console.log(this.form);

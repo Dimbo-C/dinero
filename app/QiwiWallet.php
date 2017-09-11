@@ -5,6 +5,9 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use QIWIControl;
+
 
 class QiwiWallet extends Model {
     protected $table = "qiwi_wallets";
@@ -39,7 +42,6 @@ class QiwiWallet extends Model {
     }
 
 
-
     public function insertSettings($id) {
         DB::table('qiwi_wallet_settings')->insert([
                 'wallet_id' => $id,
@@ -58,12 +60,61 @@ class QiwiWallet extends Model {
         return $settings;
     }
 
-    public function updateBalanceAndIncome($login, $balance, $monthIncome) {
-        $this->where("login", $login)->update([
-                'balance' => $balance,
-                'month_income' => $monthIncome
-        ]);
+    public function updateBalanceAndIncome() {
+
     }
 
+    public function saveBalanceAndIncome($login, $balance, $monthIncome) {
+        $wallet = $this->findByLogin($login);
 
+        $wallet->balance = $balance;
+        $wallet->month_income = $monthIncome;
+
+        $wallet->save();
+
+        $this->postUpdateRoutine($login);
+
+    }
+
+    public function saveBalance($login, $balance) {
+        $wallet = $this->findByLogin($login);
+        $wallet->balance = $balance;
+        $wallet->save();
+
+        $this->postUpdateRoutine($login);
+    }
+
+    private function postUpdateRoutine($login) {
+        $this->updateBalanceRecheckTime($login);
+        $this->recheckMaximumBalance($login);
+    }
+
+    private function recheckMaximumBalance($login) {
+        $wallet = $this->findByLogin($login);
+        $settings = (new QiwiWalletSettings())->findByLogin($login);
+        if ($wallet->balance >= $settings->maximum_balance) {
+            $walletType = QiwiWalletType::where("slug", "reserve")->first();
+            $wallet->type_id = $walletType->id;
+            $wallet->save();
+        }
+    }
+
+    private function updateBalanceRecheckTime($login) {
+        $settings = (new QiwiWalletSettings())->findByLogin($login);
+        $settings->last_balance_recheck = Carbon::now()->format('Y-m-d H:i:s');
+        $settings->save();
+    }
+
+    public function updateBalance($login, $password) {
+        $control = new QIWIControl($login, $password);
+        $control->login();
+
+        $balance = $control->loadBalance()['RUB'];
+
+        $this->saveBalance($login, $balance);
+    }
+
+    public function findByLogin($login) {
+        return $this->where("login", $login)->first();
+    }
 }

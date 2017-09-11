@@ -14,6 +14,4 @@ class QiwiWalletType extends Model {
     public function wallets() {
         return $this->hasMany(QiwiWallet::class, 'type_id');
     }
-
-
 }

@@ -132,12 +132,16 @@
                             this.items.map((item) => {
                                 if (item.login === login) {
                                     item.balance = data.balance;
-                                    item.month_income = data.month_income;
+                                    item.month_income = data.monthIncome;
                                 }
                             });
                         }
                     )
+            },
+            withdrawMoney(){
+
             }
+
         },
         computed: {
             firstDayOfTheMonth () {

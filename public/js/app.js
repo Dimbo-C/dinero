@@ -10975,7 +10975,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      */
     data: function data() {
         return {
-
             proxyServer: "",
             proxyAuth: "",
             form: new Form({
@@ -11002,9 +11001,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     login: '',
                     password: ''
                 },
-
                 login: this.$route.params.wallet
-
             })
         };
     },
@@ -11064,14 +11061,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.form.autoWithdrawalType = this.form.autoWithdrawalOptions[1].value;
         },
         loadWalletTypes: function loadWalletTypes(types) {
-            var _this3 = this;
-
-            //                var form=this.form
+            var form = this.form;
             types.map(function (type) {
-                _this3.form.walletTypes.push({ value: type.slug, text: type.name });
+                form.walletTypes.push({ value: type.slug, text: type.name });
             });
 
-            this.form.walletType = this.form.walletTypes[1].value;
+            form.walletType = form.walletTypes[1].value;
         },
         loadSettings: function loadSettings(settings) {
             var form = this.form;
@@ -12042,11 +12037,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.items.map(function (item) {
                     if (item.login === login) {
                         item.balance = data.balance;
-                        item.month_income = data.month_income;
+                        item.month_income = data.monthIncome;
                     }
                 });
             });
-        }
+        },
+        withdrawMoney: function withdrawMoney() {}
     },
     computed: {
         firstDayOfTheMonth: function firstDayOfTheMonth() {

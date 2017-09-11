@@ -15,7 +15,6 @@ class CreateAutowithdrawTypesTable extends Migration {
             $table->increments('id');
             $table->string('type');
             $table->string('slug');
-            $table->string('autowithdraw_minutes')->default(0);
 
             $table->timestamps();
         });

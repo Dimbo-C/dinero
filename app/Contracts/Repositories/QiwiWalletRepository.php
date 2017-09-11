@@ -30,12 +30,14 @@ interface QiwiWalletRepository {
      */
     public function insertWallet($data);
 
+
     /**
      * Get wallet data from qiwi
-     * @param $data
+     * @param $login
+     * @param $password
      * @return mixed
      */
-    public function updateBalanceAndIncome($data);
+    public function updateBalanceAndIncome($login);
 
     /**
      * Save settings
@@ -43,6 +45,5 @@ interface QiwiWalletRepository {
      * @return mixed
      */
     public function saveSettings($data);
-
 
 }
