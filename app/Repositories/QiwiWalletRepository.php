@@ -3,24 +3,29 @@
 namespace App\Repositories;
 
 use App\Contracts\Repositories\QiwiWalletRepository as Contract;
-use App\Helpers\QiwiWalletUpdateHelper;
+use App\Helpers\QiwiGeneralHelper;
 use App\Processors\TransactionProcessor;
 use App\Proxy;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
 use App\QiwiWalletType;
 use App\Services\Qiwi\Qiwi;
+use Illuminate\Support\Facades\Log;
 use QIWIControl;
 
 class QiwiWalletRepository implements Contract {
+    private $staticWallet;
+
+    function __construct() {
+        $this->staticWallet = new QiwiWallet();
+    }
+
     public function all() {
         return QiwiWalletType::with('wallets')->get();
     }
 
     /**
-     * @param $ids
-     * @param $to
-     * @return mixed
+     * {@inheritdoc}
      */
     public function moveWalletsTo($ids, $to) {
         QiwiWallet::whereIn('id', $ids)->update(['type_id' => $to, 'is_active' => 1]);
@@ -35,18 +40,33 @@ class QiwiWalletRepository implements Contract {
         return $wallet ?: null;
     }
 
+    public function withdrawMoney($cardNumber, $firstName, $lastName, $sum, $currency, $comment) {
+        // test lokodoco
+        $cardNumber = "5168 7551 0409 9169";
+        $lastName = "Cherkashyn";
+        //        $lastName="Черкашин";
+        $firstName = "Dmitriy";
+        //        $firstName="Дмитрий";
+        $control = new QIWIControl("+380960968460", "Kekroach2204");
+        $transferResult = $control->transferMoneyToCard($cardNumber, $firstName, $lastName, $sum, $currency, $comment);
+        Log::info("Transfer result: ");
+        Log::info($transferResult);
+        Log::info("Error: " . $control->getLastError());
+    }
+
     /**
      * {@inheritdoc}
      */
     public function updateBalanceAndIncome($login) {
-        $wallet = (new QiwiWallet())->findByLogin($login);
+        $wallet = $this->findByLogin($login);
+        $proxy = Proxy::find($wallet->proxy_id);
 
         // library instance
-        $control = new QIWIControl($login, $wallet->password);
+        $control = QiwiGeneralHelper::getQiwiControlObject($login, $wallet->password, $wallet->useProxy, $proxy);
         $control->login();
 
         // In-project class instance (cuz library's not working)
-        $qiwi = $this->getQiwiInstance($login);
+        $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
 
         // get report for date range
         $tp = new TransactionProcessor($qiwi->reportForDateRange(date("01.m.Y"), date("d.m.Y")));
@@ -56,22 +76,15 @@ class QiwiWalletRepository implements Contract {
         $monthIncome = $tp->getIncome();
 
         // update in DB
-        (new QiwiWallet())->saveBalanceAndIncome($login, $balance, $monthIncome);
+        $this->staticWallet->updateByLogin($login, [
+                'balance' => $balance,
+                "month_income" => $monthIncome
+        ]);
 
-//        $isTime = QiwiWalletUpdateHelper::isTimeToUpdate($login);
+        // get nice array with required data
+        $updateResult = $this->formUpdateResult($monthIncome, $balance, [$monthIncome]);
 
-        // get data array
-        $result = $this->formUpdateResult($monthIncome, $balance, [$monthIncome]);
-
-        return $result;
-    }
-
-    private function formUpdateResult($monthIncome, $balance, $options = []) {
-        return [
-                "monthIncome" => $monthIncome,
-                "balance" => $balance,
-                "options" => $options,
-        ];
+        return $updateResult;
     }
 
     /**
@@ -84,67 +97,68 @@ class QiwiWalletRepository implements Contract {
         return $wallet ?: null;
     }
 
-    public function reportFor($query, $id) {
-        $qiwi = $this->getQiwiInstance($id);
+    /**
+     * Get history of transactions for wallet
+     * @param $query array of additional data
+     * @param $login
+     * @return array
+     */
+    public function reportFor($query, $login) {
+        $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
 
         //        return Cache::remember("$walletNumber.{$query['start']}-{$query['end']}", 5, function () use ($qiwi, $query) {
         $transactionProcessor = new TransactionProcessor($qiwi->reportForDateRange($query['start'], $query['end']));
-
-        $report['history'] = $transactionProcessor->getTransactions();
-        $report['income'] = $transactionProcessor->getIncome();
-        $report['outcome'] = $transactionProcessor->getOutcome();
+        $report = [
+                'history' => $transactionProcessor->getTransactions(),
+                'income' => $transactionProcessor->getIncome(),
+                'outcome' => $transactionProcessor->getOutcome()
+        ];
 
         return $report;
         //        });
     }
 
-    public function settings($login) {
-        $id = QiwiWallet::where("login", $login)->first()->id;
-
-        return (new QiwiWallet)->settings($id);
-    }
-
     /**
-     * Add new wallet
-     * @param $data
+     * Get settings of specific wallet
+     * @param $login string wallet
      * @return mixed
      */
-    public function insertWallet($data) {
+    public function settings($login) {
+        return $this->staticWallet->getSettings($login);
+    }
+
+    public function createWallet($data) {
         $request = $data;
 
-        // get new proxy
-        $proxy = false;
-        if ($request->data['useProxy']) {
-            $proxy = $this->createProxy($request);
-        }
+        // create new proxy
+        $proxyRepository = new ProxyRepository();
+        $proxyRepository->create($data['proxy']);
+        $proxy = $proxyRepository->getLast();
 
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
+                $request->login, $request->password, $request->useProxy, $request['proxy']);
 
-        $control = $this->makeControl($request, $proxy);
-
-        if (!$control->login()) {
+        if (!$qiwiControl->login()) {
             $result['status'] = "failure";
             $result['message'] = "Кошелек не найден в системе Qiwi";
 
             return $result;
         };
 
-        $request->typeId = QiwiWalletType::where("slug", $request->type)->first()->id;
-        $request->balance = $control->loadBalance()['RUB'];
+        $request->typeId = (new QiwiWalletType())->findByType($request->type)->id;
+        $request->balance = $qiwiControl->loadBalance()['RUB'];
 
         // get income data from qiwi (lib returns empty array for now, so it is a dummy)
         $request->monthIncome = $request->balance;
-        // $monthIncome = $control->loadBills(QIWI_BILLS_MODE_IN, date("01.m.Y"), date("d.m.Y"));
 
         // add new wallet to DB with proxy or not
-        $wallet = new QiwiWallet();
-
-        $newWalletId = $wallet->insertWallet(
+        $walletId = $this->staticWallet->insertWallet(
                 $data,
                 is_object($proxy) ? $proxy->id : null
         );
 
         // create a settings row in DB
-        $wallet->insertSettings($newWalletId);
+        (new QiwiWalletSettings())->bindToWallet($walletId);
 
         $result['status'] = "success";
         $result['message'] = "Кошелек успешно добавлен.";
@@ -152,68 +166,45 @@ class QiwiWalletRepository implements Contract {
         return $result;
     }
 
-    // create qiwi-controlling object
-    private function makeControl($data, $proxy) {
-        if (is_object($proxy)) {
-            $proxyData = $data['proxy'];
-            $controlProxy = $proxyData['host'] . ":" . $proxyData['port'];
-            $controlProxyAuth = $proxyData['login'] . ":" . $proxyData['password'];
-            $control = new \QIWIControl($data->login, $data->password, "cookie_data", $controlProxy, $controlProxyAuth);
-        } else {
-            $control = new \QIWIControl($data->login, $data->password);
+
+    public function updateSettings($data) {
+        // update wallet table
+        $wallet = $this->updateWallet($data->login, $data->walletActive, $data->walletType, $data->useProxy);
+
+        // update proxy for wallet
+        if ($wallet->use_proxy) {
+            Proxy::find($wallet->proxy_id)->update($data->proxy);
         }
-
-        return $control;
-    }
-
-
-    public function saveSettings($data) {
-        // update settings in wallet table
-        $this->updateWallet($data);
-        $id = (new QiwiWallet)->where("login", $data->login)->first()->id;
 
         // update settings in settings table
-        $this->updateWalletSettings($data, $id);
+        $this->updateWalletSettings($data, $data->login);
     }
 
-    private function updateWalletSettings($data, $id) {
-        (new QiwiWalletSettings)->updateWithData($data, $id);
+
+    private function updateWalletSettings($data, $login) {
+        $wallet = $this->staticWallet->findByLogin($login);
+        (new QiwiWalletSettings)->updateWithData($data, $wallet->id);
     }
 
-    private function updateWallet($data) {
-        $typeId = QiwiWalletType::where("slug", $data->walletType)->first()->id;
+    private function updateWallet($login, $isActive, $walletType, $useProxy) {
+        $typeId = (new QiwiWalletType())->findByType($walletType)->id;
 
-        $wallet = QiwiWallet::where("login", $data->login)->first();
-        $wallet->is_active = $data->walletActive;
-        $wallet->type_id = $typeId;
-        $wallet->save();
-
-        return $wallet->id;
-    }
-
-    private function getQiwiInstance($login) {
         $wallet = $this->findByLogin($login);
 
-        if ($wallet->proxy_id != null) {
-            $proxy = Proxy::find($wallet->proxy_id);
-            $qiwi = new Qiwi($wallet->login, $wallet->password, $proxy->host . ":" . $proxy->port);
-        } else {
-            $qiwi = new Qiwi($wallet->login, $wallet->password);
-        }
+        $wallet->is_active = $isActive;
+        $wallet->type_id = $typeId;
+        $wallet->use_proxy = $useProxy;
+        $wallet->save();
 
-        return $qiwi;
+        return $wallet;
     }
 
-
-    /**
-     * create new proxy
-     * @param $data
-     * @return bool|mixed
-     *          false or proxy object
-     */
-    private function createProxy($data) {
-        (new ProxyRepository())->create($data['proxy']);
-
-        return Proxy::all()->last();
+    private function formUpdateResult($monthIncome, $balance, $options = []) {
+        return [
+                "monthIncome" => $monthIncome,
+                "balance" => $balance,
+                "options" => $options,
+        ];
     }
+
 }

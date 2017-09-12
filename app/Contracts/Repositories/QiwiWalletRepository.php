@@ -28,22 +28,35 @@ interface QiwiWalletRepository {
      * @param $data
      * @return mixed
      */
-    public function insertWallet($data);
+    public function createWallet($data);
 
 
     /**
      * Get wallet data from qiwi
      * @param $login
-     * @param $password
      * @return mixed
      */
     public function updateBalanceAndIncome($login);
+
+    public function settings($login);
 
     /**
      * Save settings
      * @param $data
      * @return mixed
      */
-    public function saveSettings($data);
+    public function updateSettings($data);
+
+    /**
+     * withdraw moneyz
+     * @param $cardNumber
+     * @param $firstName
+     * @param $lastName
+     * @param $sum
+     * @param $cur
+     * @param $comment
+     * @return mixed
+     */
+    public function withdrawMoney($cardNumber, $firstName, $lastName, $sum, $cur, $comment);
 
 }

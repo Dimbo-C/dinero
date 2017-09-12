@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class QiwiWalletSettings extends Model {
@@ -17,7 +18,7 @@ class QiwiWalletSettings extends Model {
     }
 
     public function updateWithData($data, $id) {
-        $autoWithdrawTypeId = AutowithdrawTypes::where('slug', $data->autoWithdrawalType)->first()->id;
+        $autoWithdrawTypeId = (new AutowithdrawTypes())->findBySlug($data->autoWithdrawalType)->id;
 
         $settings = $this->find($id);
 
@@ -30,11 +31,20 @@ class QiwiWalletSettings extends Model {
 
         $settings->autoWithdrawal_active = $data->autoWithdrawalActive;
         $settings->autoWithdrawal_type_id = $autoWithdrawTypeId;
+        $settings->autoWithdrawal_minutes = $data->autoWithdrawalTimeout;
 
         $settings->autoWithdrawal_card_number = $data->autoWithdrawalCardNumber;
         $settings->autoWithdrawal_cardholder_name = $data->autoWithdrawalCardholderName;
         $settings->autoWithdrawal_cardholder_surname = $data->autoWithdrawalCardholderSurname;
 
         $settings->save();
+    }
+
+    public function bindToWallet($walletId) {
+        $this->insert([
+                'wallet_id' => $walletId,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }

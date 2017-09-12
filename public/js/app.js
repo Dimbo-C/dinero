@@ -11047,6 +11047,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.loadAutoWithdrawalOptions(data.autoWithdrawTypes);
                 _this.loadWalletTypes(data.walletTypes);
                 var settings = Object.assign(data.walletSettings, data.wallet);
+                settings.proxy = data.proxy;
                 _this.loadSettings(settings);
                 console.log(settings);
             });
@@ -11072,12 +11073,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var form = this.form;
 
             form.comments = settings.comments;
-            form.useProxy = settings.proxy_id !== null;
+            form.useProxy = settings.use_proxy;
+
+            this.proxyServer = settings.proxy.host === null ? "" : settings.proxy.host + ":" + settings.proxy.port;
+            this.proxyAuth = settings.proxy.login === null ? "" : settings.proxy.login + "" + ":" + settings.proxy.password;
+
             form.walletActive = settings.is_active;
             form.alwaysOnline = settings.is_always_online === null ? false : settings.is_always_online;
             form.balanceRecheckTimeout = settings.balance_recheck_timeout;
             form.maximumBalance = settings.maximum_balance;
             form.autoWithdrawalActive = settings.autoWithdrawal_active;
+            form.autoWithdrawalTimeout = settings.autoWithdrawal_minutes;
 
             form.usingVouchers = settings.using_vouchers;
             form.autoWithdrawalCardNumber = settings.autoWithdrawal_card_number;

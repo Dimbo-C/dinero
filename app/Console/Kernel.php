@@ -27,15 +27,21 @@ class Kernel extends ConsoleKernel {
     protected function schedule(Schedule $schedule) {
 
         $schedule->call(function () {
-            $wallets = QiwiWallet::all();
-            foreach ($wallets as $wallet) {
-                QiwiWalletUpdateHelper::updateWallet($wallet->login);
-                Log::info("Wallet :" . $wallet->login);
-            }
-            Log::info("end of scheduled task");
+            $this->updateBalances();
+            $this->refreshSessions();
         })->everyMinute();
-        // $schedule->command('inspire')
-        //          ->hourly();
+    }
+
+    private function updateBalances() {
+        foreach (QiwiWallet::all() as $wallet) {
+            QiwiWalletUpdateHelper::updateWallet($wallet->login);
+        }
+    }
+
+    private function refreshSessions() {
+        foreach (QiwiWallet::all() as $wallet) {
+            QiwiWalletUpdateHelper::restoreSession($wallet->login);
+        }
     }
 
     /**

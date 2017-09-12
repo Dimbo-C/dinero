@@ -15,7 +15,7 @@ class CreateProxiesTable extends Migration
     {
         Schema::create('proxies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('host');
+            $table->string('host')->nullable();
             $table->string('port')->nullable();
             $table->string('login')->nullable();
             $table->string('password')->nullable();

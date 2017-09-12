@@ -4,9 +4,6 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use QIWIControl;
 
 
 class QiwiWallet extends Model {
@@ -35,36 +32,27 @@ class QiwiWallet extends Model {
         $newWallet->type_id = $data->typeId;
         $newWallet->balance = $data->balance;
         $newWallet->month_income = $data->monthIncome;
+        $newWallet->use_proxy = $proxyId != null;
         $newWallet->proxy_id = $proxyId;
         $newWallet->save();
 
         return $newWallet->id;
     }
 
+    public function getSettings($login) {
+        $tmpWallet = $this->findByLogin($login);
 
-    public function insertSettings($id) {
-        DB::table('qiwi_wallet_settings')->insert([
-                'wallet_id' => $id,
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-    }
-
-    public function settings($id) {
-        $settings['wallet'] = $this->find($id);
-        $settings['walletSettings'] = QiwiWalletSettings::find($id);
+        $settings['wallet'] = $tmpWallet;
+        $settings['walletSettings'] = QiwiWalletSettings::find($tmpWallet->id);
         $settings['walletTypes'] = QiwiWalletType::all();
         $settings['autoWithdrawTypes'] = AutowithdrawTypes::all();
-        $settings['id'] = $id;
+        $settings['id'] = $tmpWallet->id;
+        $settings['proxy'] = Proxy::find($tmpWallet->proxy_id);
 
         return $settings;
     }
 
-    public function updateBalanceAndIncome() {
-
-    }
-
-    public function saveBalanceAndIncome($login, $balance, $monthIncome) {
+    public function updateBalanceAndIncome($login, $balance, $monthIncome) {
         $wallet = $this->findByLogin($login);
 
         $wallet->balance = $balance;
@@ -76,7 +64,7 @@ class QiwiWallet extends Model {
 
     }
 
-    public function saveBalance($login, $balance) {
+    public function updateBalance($login, $balance) {
         $wallet = $this->findByLogin($login);
         $wallet->balance = $balance;
         $wallet->save();
@@ -84,37 +72,35 @@ class QiwiWallet extends Model {
         $this->postUpdateRoutine($login);
     }
 
+    public function findByLogin($login) {
+        return $this->where("login", $login)->first();
+    }
+
+    public function updateByLogin($login, $arguments = []) {
+        $this->where("login", $login)->update($arguments);
+        $this->postUpdateRoutine($login);
+    }
+
     private function postUpdateRoutine($login) {
-        $this->updateBalanceRecheckTime($login);
+        $this->updateRecheckTime($login);
         $this->recheckMaximumBalance($login);
     }
 
+    // put wallet to reserve if it's maximum balance is more that current balance
     private function recheckMaximumBalance($login) {
         $wallet = $this->findByLogin($login);
         $settings = (new QiwiWalletSettings())->findByLogin($login);
         if ($wallet->balance >= $settings->maximum_balance) {
-            $walletType = QiwiWalletType::where("slug", "reserve")->first();
-            $wallet->type_id = $walletType->id;
+            $walletTypeId = (new QiwiWalletType())->findByType("reserve")->id;
+
+            $wallet->type_id = $walletTypeId;
             $wallet->save();
         }
     }
 
-    private function updateBalanceRecheckTime($login) {
+    private function updateRecheckTime($login) {
         $settings = (new QiwiWalletSettings())->findByLogin($login);
         $settings->last_balance_recheck = Carbon::now()->format('Y-m-d H:i:s');
         $settings->save();
-    }
-
-    public function updateBalance($login, $password) {
-        $control = new QIWIControl($login, $password);
-        $control->login();
-
-        $balance = $control->loadBalance()['RUB'];
-
-        $this->saveBalance($login, $balance);
-    }
-
-    public function findByLogin($login) {
-        return $this->where("login", $login)->first();
     }
 }

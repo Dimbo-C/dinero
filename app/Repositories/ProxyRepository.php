@@ -25,18 +25,26 @@ class ProxyRepository implements Contract {
     public function create(array $data) {
         $proxy = new Proxy;
 
-        $proxy->create([
-                'host' => $data['host'],
-                'port' => $data['port'],
-                'login' => $data['login'],
-                'password' => $data['password'],
-                'type' => isset($data['type']) ? $data['type'] : "",
-                'using_type' => isset($data['using_type']) ? $data['using_type'] : ""
-        ]);
+        if (!isset($data['host']) || $data['host'] == "") {
+            $proxy->create(['type' => "",]);
+        } else {
+            $proxy->create([
+                    'host' => $data['host'],
+                    'port' => $data['port'],
+                    'login' => $data['login'],
+                    'password' => $data['password'],
+                    'type' => isset($data['type']) ? $data['type'] : "",
+                    'using_type' => isset($data['using_type']) ? $data['using_type'] : ""
+            ]);
+        }
 
         event(new ProxyCreated($proxy));
 
         return $proxy;
+    }
+
+    public function getLast() {
+        return Proxy::orderBy('id', 'desc')->first();
     }
 
 
