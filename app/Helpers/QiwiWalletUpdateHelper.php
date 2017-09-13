@@ -14,7 +14,6 @@ class QiwiWalletUpdateHelper {
     public static function isTimeToUpdate($login) {
         $settings = (new QiwiWalletSettings)->findByLogin($login);
 
-        // stop if option is turned off
         if ($settings->balance_recheck_timeout == 0) return false;
 
         $now = Carbon::now();
@@ -46,9 +45,4 @@ class QiwiWalletUpdateHelper {
 
         return false;
     }
-
-    public static function kek($login) {
-
-    }
-
 }

@@ -50,19 +50,12 @@ trait QiwiReports {
                     $transaction->sign = $this->setAmountSign($node->filter('.IncomeWithExpend')->attr('class'));
                     $transaction->commission = trim($node->filter('.commission')->first()->text());
 
+                    if ($transaction->status == "error") {
+                        $transaction->errorMessage = json_decode($node->filter('.IncomeWithExpend .operations .error')->attr('data-params'))->message;
+                    }
+
+
                     return $transaction;
-//                    return [
-//                            'date' => trim($node->filter('.date')->first()->text()),
-//                            'time' => trim($node->filter('.time')->first()->text()),
-//                            'transaction' => trim($node->filter('.transaction')->first()->text()),
-//                            'status' => strtolower(str_replace('reportsLine status_', '', $node->attr('class'))),
-//                            'provider' => trim($node->filter('.ProvWithComment .provider span')->first()->text()),
-//                            'opNumber' => trim($node->filter('.ProvWithComment .provider .opNumber')->first()->text()),
-//                            'comment' => trim($node->filter('.ProvWithComment .comment')->first()->text()),
-//                            'amount' => trim($node->filter('.originalExpense span')->first()->text()),
-//                            'amount_sign' => $this->setAmountSign($node->filter('.IncomeWithExpend')->attr('class')),
-//                            'commission' => trim($node->filter('.commission')->first()->text()),
-//                    ];
                 });
 
         return $items;

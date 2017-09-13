@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder {
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(QiwiWalletTypesTableSeeder::class);
-        $this->call(QiwiWalletsTableSeeder::class);
         $this->call(AutowithdrawTypesTableSeeder::class);
+        $this->call(QiwiWalletsTableSeeder::class);
         $this->call(ModelHasRolesTableSeeder::class);
         //        $this->call(QiwiWalletSettingsSeeder::class);
     }

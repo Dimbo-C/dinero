@@ -9,7 +9,6 @@ use App\Proxy;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
 use App\QiwiWalletType;
-use App\Services\Qiwi\Qiwi;
 use Illuminate\Support\Facades\Log;
 use QIWIControl;
 
@@ -61,25 +60,10 @@ class QiwiWalletRepository implements Contract {
         $wallet = $this->findByLogin($login);
         $proxy = Proxy::find($wallet->proxy_id);
 
-        // library instance
-        $control = QiwiGeneralHelper::getQiwiControlObject($login, $wallet->password, $wallet->useProxy, $proxy);
-        $control->login();
+        $balance = QiwiGeneralHelper::getBalance($login, $wallet->password, $wallet->useProxy, $proxy);
+        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
 
-        // In-project class instance (cuz library's not working)
-        $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
-
-        // get report for date range
-        $tp = new TransactionProcessor($qiwi->reportForDateRange(date("01.m.Y"), date("d.m.Y")));
-
-        // get RUB from result (doubt that there can be any other)
-        $balance = $control->loadBalance()['RUB'];
-        $monthIncome = $tp->getIncome();
-
-        // update in DB
-        $this->staticWallet->updateByLogin($login, [
-                'balance' => $balance,
-                "month_income" => $monthIncome
-        ]);
+        $this->staticWallet->updateBalanceAndIncome($login, $balance, $monthIncome);
 
         // get nice array with required data
         $updateResult = $this->formUpdateResult($monthIncome, $balance, [$monthIncome]);
@@ -88,25 +72,11 @@ class QiwiWalletRepository implements Contract {
     }
 
     /**
-     * @param $login
-     * @return QiwiWallet
-     */
-    public function findByLogin($login) {
-        $wallet = QiwiWallet::where('login', $login)->first();
-
-        return $wallet ?: null;
-    }
-
-    /**
-     * Get history of transactions for wallet
-     * @param $query array of additional data
-     * @param $login
-     * @return array
+     * {@inheritdoc}
      */
     public function reportFor($query, $login) {
         $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
 
-        //        return Cache::remember("$walletNumber.{$query['start']}-{$query['end']}", 5, function () use ($qiwi, $query) {
         $transactionProcessor = new TransactionProcessor($qiwi->reportForDateRange($query['start'], $query['end']));
         $report = [
                 'history' => $transactionProcessor->getTransactions(),
@@ -119,9 +89,7 @@ class QiwiWalletRepository implements Contract {
     }
 
     /**
-     * Get settings of specific wallet
-     * @param $login string wallet
-     * @return mixed
+     * {@inheritdoc}
      */
     public function settings($login) {
         return $this->staticWallet->getSettings($login);
@@ -132,7 +100,7 @@ class QiwiWalletRepository implements Contract {
 
         // create new proxy
         $proxyRepository = new ProxyRepository();
-        $proxyRepository->create($data['proxy']);
+        $proxyRepository->create($request['proxy']);
         $proxy = $proxyRepository->getLast();
 
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
@@ -153,7 +121,7 @@ class QiwiWalletRepository implements Contract {
 
         // add new wallet to DB with proxy or not
         $walletId = $this->staticWallet->insertWallet(
-                $data,
+                $request,
                 is_object($proxy) ? $proxy->id : null
         );
 
@@ -165,7 +133,6 @@ class QiwiWalletRepository implements Contract {
 
         return $result;
     }
-
 
     public function updateSettings($data) {
         // update wallet table
@@ -180,6 +147,11 @@ class QiwiWalletRepository implements Contract {
         $this->updateWalletSettings($data, $data->login);
     }
 
+    private function findByLogin($login) {
+        $wallet = QiwiWallet::where('login', $login)->first();
+
+        return $wallet ?: null;
+    }
 
     private function updateWalletSettings($data, $login) {
         $wallet = $this->staticWallet->findByLogin($login);

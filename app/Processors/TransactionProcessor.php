@@ -38,6 +38,7 @@ class TransactionProcessor {
         $transactions = $this->filterTransactions(QIWI_TRANSACTION_MODE_IN);
         $sum = 0;
         foreach ($transactions as $transaction) {
+            if ($transaction->status == "error") continue;
             $sum += $transaction->amount;
         }
 
@@ -48,6 +49,7 @@ class TransactionProcessor {
         $transactions = $this->filterTransactions(QIWI_TRANSACTION_MODE_OUT);
         $sum = 0;
         foreach ($transactions as $transaction) {
+            if ($transaction->status == "error") continue;
             $sum += $transaction->amount;
         }
 

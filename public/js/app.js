@@ -10397,6 +10397,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 $('.tooltip').removeClass('in');
             });
         },
+        comment: function comment(t) {
+            if (t.status === 'error') {
+                return t.comment + '<p style="color:red"> (' + t.errorMessage + ')</p>';
+            } else {
+                return t.comment;
+            }
+        },
         status: function status(t) {
             if (t.status === 'error') {
                 return '<i class="fa fa-circle text-danger"></i> Ошибка';
@@ -10675,7 +10682,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "textContent": _vm._s(t.opNumber)
       }
-    })]), _vm._v(" "), _c('td', [_vm._v(_vm._s(t.comment))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(t.sign) + _vm._s(t.amount) + " " + _vm._s(t.currency))]), _vm._v(" "), _c('td', {
+    })]), _vm._v(" "), _c('td', {
+      domProps: {
+        "innerHTML": _vm._s(_vm.comment(t))
+      }
+    }), _vm._v(" "), _c('td', [_vm._v(_vm._s(t.sign) + _vm._s(t.amount) + " " + _vm._s(t.currency))]), _vm._v(" "), _c('td', {
       domProps: {
         "textContent": _vm._s(t.commission)
       }

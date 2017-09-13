@@ -14,6 +14,7 @@ class CreateWalletSettingsTable extends Migration {
     public function up() {
         Schema::create('qiwi_wallet_settings', function (Blueprint $table) {
             $table->integer('wallet_id')->unsigned()->index();
+            $table->foreign('wallet_id')->references("id")->on("qiwi_wallets")->onDelete('cascade');
             $table->string('comments')->nullable();
             $table->boolean('is_always_online')->nullable();
             $table->integer('balance_recheck_timeout')->default(0);
@@ -24,6 +25,7 @@ class CreateWalletSettingsTable extends Migration {
             $table->integer('autoWithdrawal_type_id')->nullable()->unsigned()->index();
             $table->foreign('autoWithdrawal_type_id')->references("id")->on("autowithdraw_types")->onDelete('cascade');
             $table->integer('autoWithdrawal_minutes')->default(0);
+            $table->timestamp('last_withdrawal_time')->useCurrent();
 
 
             $table->boolean('using_vouchers')->default(false);

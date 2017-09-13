@@ -61,12 +61,13 @@ class QiwiWallet extends Model {
         $wallet->save();
 
         $this->postUpdateRoutine($login);
-
     }
 
     public function updateBalance($login, $balance) {
         $wallet = $this->findByLogin($login);
+
         $wallet->balance = $balance;
+
         $wallet->save();
 
         $this->postUpdateRoutine($login);

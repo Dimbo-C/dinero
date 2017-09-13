@@ -91,7 +91,7 @@
                                     <p class="small m-b-none" v-text="t.provider"></p>
                                     <p class="small m-b-none" v-text="t.opNumber"></p>
                                 </td>
-                                <td>{{ t.comment }}</td>
+                                <td v-html="comment(t)"></td>
                                 <td>{{ t.sign }}{{ t.amount }} {{ t.currency }}</td>
                                 <td v-text="t.commission"></td>
                             </tr>
@@ -177,6 +177,14 @@
                 this.$nextTick(() => {
                     $('.tooltip').removeClass('in');
                 });
+            },
+
+            comment(t){
+                if (t.status === 'error') {
+                    return t.comment + '<p style="color:red"> (' + t.errorMessage + ')</p>'
+                } else {
+                    return t.comment;
+                }
             },
 
             status (t) {

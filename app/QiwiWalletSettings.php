@@ -47,4 +47,16 @@ class QiwiWalletSettings extends Model {
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }
+
+    public function isAutoWidthdrawalActive() {
+        return $this->autoWithdrawal_active;
+    }
+
+    public function isTimeToWithdraw() {
+        $now = Carbon::now();
+        $end = Carbon::parse($this->last_withdraw_time);
+        $len = $end->diffInMinutes($now);
+
+        return $len >= $this->autoWithdrawal_minutes;
+    }
 }

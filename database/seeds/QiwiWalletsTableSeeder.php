@@ -42,11 +42,13 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
 
         DB::table('qiwi_wallet_settings')->insert([
                 "wallet_id" => 1,
-                "balance_recheck_timeout" => 1
+                "balance_recheck_timeout" => 1,
+                "autoWithdrawal_type_id" => 2
         ]);
         DB::table('qiwi_wallet_settings')->insert([
                 "wallet_id" => 2,
-                "balance_recheck_timeout" => 2
+                "balance_recheck_timeout" => 2,
+                "autoWithdrawal_type_id" => 2
         ]);
 
     }

@@ -14,4 +14,5 @@ class Transaction {
     public $sign;
     public $commission;
     public $currency = "руб.";
+    public $errorMessage = "";
 }

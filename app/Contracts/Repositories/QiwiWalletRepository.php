@@ -24,21 +24,34 @@ interface QiwiWalletRepository {
     public function find($id);
 
     /**
-     * Add new wallet
-     * @param $data
-     * @return mixed
-     */
-    public function createWallet($data);
-
-
-    /**
-     * Get wallet data from qiwi
+     * Update balance of specific wallet
+     * and return balance and income for the current month
      * @param $login
      * @return mixed
      */
     public function updateBalanceAndIncome($login);
 
+    /**
+     * Get report for specific DateRange
+     * @param $query
+     * @param $login
+     * @return mixed
+     */
+    public function reportFor($query, $login);
+
+    /**
+     * Get settings of specific wallet
+     * @param $login string wallet
+     * @return mixed
+     */
     public function settings($login);
+
+    /**
+     * Add new wallet
+     * @param $data
+     * @return mixed
+     */
+    public function createWallet($data);
 
     /**
      * Save settings
