@@ -35,11 +35,15 @@ class Autowithdraw {
         $this->autoWithdrawType = AutowithdrawTypes::find($this->settings->autoWithdrawal_type_id);
     }
 
-    public function autowithdraw($autowithdrawMode) {
+    public function autoWithdraw(int $autowithdrawMode) {
         if (!$this->guards($autowithdrawMode)) return;
+        $a = 3;
 
 
     }
+
+
+    //    private function
 
     private function guards($mode) {
         if (!$this->isModeRight($mode)) return false;
@@ -51,10 +55,7 @@ class Autowithdraw {
     private function isModeRight($mode) {
         switch ($mode) {
             case AUTOWITHDRAW_EVERY_X_MINUTES:
-                if (
-                        $this->autoWithdrawType->isEveryXMinutes()
-                        && $this->settings->isTimeToWithdraw()
-                ) {
+                if ($this->autoWithdrawType->isEveryXMinutes() && $this->settings->isTimeToWithdraw()) {
                     return true;
                 }
                 break;

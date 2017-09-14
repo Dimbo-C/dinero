@@ -16,9 +16,18 @@
             <div class="row">
                 <div class="col-sm-8">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Настройки кошелька Qiwi</div>
+                        <div class="panel-heading">Настройки кошелька Qiwi ({{ form.login}})</div>
                         <div class="panel-body">
                             <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Название кошелька</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="form.name">
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Комментарий к кошельку</label>
                                     <div class="col-sm-8">
@@ -162,11 +171,59 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="" class="col-sm-4 control-label">Минимальная сума для автовывода</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="form.minimumAutoWithdrawAmount"
+                                               :disabled="!form.autoWithdrawalActive">
+                                        <span class="help-block">Минимальный баланс кошелька при котором должен быть совершен вывод</span>
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group">-->
+                                <!--<div class="col-sm-offset-4 col-sm-8">-->
+                                <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                <!--<input type="radio" v-model="form.usingVouchers">-->
+                                <!--Автовывод с помощью ваучеров-->
+                                <!--</label>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+
+                                <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" v-model="form.usingVouchers">
+                                                <input type="radio"
+                                                       value="wallet"
+                                                       v-model="form.withdrawTarget">
                                                 Автовывод с помощью ваучеров
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="col-sm-4 control-label">Кошельки для автовывода</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="+79123456789;+79111111111"
+                                               :disabled="form.withdrawTarget!='wallet'"
+                                               v-model="form.autoWithdrawalWallets">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="radio"
+                                                       value="card"
+                                                       v-model="form.withdrawTarget">
+                                                Автовывод на карту
                                             </label>
                                         </div>
                                     </div>
@@ -175,21 +232,26 @@
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Карта для автовывода</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control"
-                                               v-model="form.autoWithdrawalCardNumber">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="cardNumber"
+                                               placeholder="XXXX XXXX XXXX XXXX"
+                                               :disabled="form.withdrawTarget!='card'">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="" class="col-sm-4 control-label">Данные владелца карты</label>
+                                    <label for="" class="col-sm-4 control-label">Данные владельца карты</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control"
                                                v-model="form.autoWithdrawalCardholderName"
+                                               :disabled="form.withdrawTarget!='card'"
                                                placeholder="Имя">
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control"
                                                v-model="form.autoWithdrawalCardholderSurname"
+                                               :disabled="form.withdrawTarget!='card'"
                                                placeholder="Фамилия">
                                     </div>
                                 </div>
@@ -223,35 +285,43 @@
             return {
                 proxyServer: "",
                 proxyAuth: "",
+                cardNumber: "",
                 form: new Form({
                     useProxy: false,
-                    comments: '',
+                    name: "",
+                    comments: "",
                     walletActive: false,
-                    walletType: '',
+                    walletType: "",
                     walletTypes: [],
                     alwaysOnline: false,
                     balanceRecheckTimeout: 0,
                     maximumBalance: 100,
                     autoWithdrawalActive: true,
-                    autoWithdrawalType: '',
+                    autoWithdrawalType: "",
                     autoWithdrawalOptions: [],
                     autoWithdrawalTimeout: 0,
+                    minimumAutoWithdrawAmount: 2500,
                     autoWithdrawalCardNumber: "",
                     autoWithdrawalCardholderName: "",
                     autoWithdrawalCardholderSurname: "",
                     usingVouchers: false,
+                    withdrawTarget: "card",
 
                     proxy: {
-                        host: '',
-                        port: '',
-                        login: '',
-                        password: '',
+                        host: "",
+                        port: "",
+                        login: "",
+                        password: "",
                     },
                     login: this.$route.params.wallet
                 }),
             };
         },
         watch: {
+            cardNumber(val){
+                this.form.autoWithdrawalCardNumber = val.replace(/\s/g, '');
+            },
+
             proxyServer(val) {
                 const data = val.split(':');
 
@@ -316,9 +386,6 @@
             loadSettings(settings){
                 let form = this.form;
 
-                form.comments = settings.comments;
-                form.useProxy = settings.use_proxy;
-
                 this.proxyServer = settings.proxy.host === null
                     ? ""
                     : settings.proxy.host + ":" + settings.proxy.port;
@@ -327,17 +394,22 @@
                     : settings.proxy.login + "" + ":" + settings.proxy.password;
 
 
+                form.name = settings.name;
+                form.comments = settings.comments;
+                form.useProxy = settings.use_proxy;
                 form.walletActive = settings.is_active;
                 form.alwaysOnline = settings.is_always_online === null ? false : settings.is_always_online;
                 form.balanceRecheckTimeout = settings.balance_recheck_timeout;
                 form.maximumBalance = settings.maximum_balance;
                 form.autoWithdrawalActive = settings.autoWithdrawal_active;
                 form.autoWithdrawalTimeout = settings.autoWithdrawal_minutes;
-
+                form.withdrawTarget = settings.autoWithdrawal_target;
                 form.usingVouchers = settings.using_vouchers;
-                form.autoWithdrawalCardNumber = settings.autoWithdrawal_card_number;
                 form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
                 form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
+
+                let results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
+                this.cardNumber = results.join(" ");
 
                 // selects
                 let optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;

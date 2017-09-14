@@ -20,7 +20,7 @@ class QiwiGeneralHelper {
      * @param $proxy array|object with host,port,login and password
      * @return \QIWIControl
      */
-    public static function getQiwiControlObject($login, $password, $useProxy, $proxy) {
+    public static function getQiwiControlObject($login, $password, $useProxy, $proxy = []) {
         //        if (is_object($proxy)) $proxy = (array) $proxy;
         if ($useProxy) {
             $controlProxy = $proxy['host'] . ":" . $proxy['port'];
@@ -56,7 +56,7 @@ class QiwiGeneralHelper {
     public static function getQiwiInstance($login) {
         $wallet = QiwiWallet::where("login", $login)->first();
 
-//        if (is_array($wallet)) $wallet = (object) $wallet;
+        //        if (is_array($wallet)) $wallet = (object) $wallet;
 
         if ($wallet->use_proxy) {
             $proxy = Proxy::find($wallet->proxy_id);

@@ -10979,6 +10979,68 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -10988,29 +11050,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             proxyServer: "",
             proxyAuth: "",
+            cardNumber: "",
             form: new Form({
                 useProxy: false,
-                comments: '',
+                name: "",
+                comments: "",
                 walletActive: false,
-                walletType: '',
+                walletType: "",
                 walletTypes: [],
                 alwaysOnline: false,
                 balanceRecheckTimeout: 0,
                 maximumBalance: 100,
                 autoWithdrawalActive: true,
-                autoWithdrawalType: '',
+                autoWithdrawalType: "",
                 autoWithdrawalOptions: [],
                 autoWithdrawalTimeout: 0,
+                minimumAutoWithdrawAmount: 2500,
                 autoWithdrawalCardNumber: "",
                 autoWithdrawalCardholderName: "",
                 autoWithdrawalCardholderSurname: "",
                 usingVouchers: false,
+                withdrawTarget: "card",
 
                 proxy: {
-                    host: '',
-                    port: '',
-                    login: '',
-                    password: ''
+                    host: "",
+                    port: "",
+                    login: "",
+                    password: ""
                 },
                 login: this.$route.params.wallet
             })
@@ -11018,6 +11084,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     watch: {
+        cardNumber: function cardNumber(val) {
+            this.form.autoWithdrawalCardNumber = val.replace(/\s/g, '');
+        },
         proxyServer: function proxyServer(val) {
             var data = val.split(':');
 
@@ -11083,23 +11152,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         loadSettings: function loadSettings(settings) {
             var form = this.form;
 
-            form.comments = settings.comments;
-            form.useProxy = settings.use_proxy;
-
             this.proxyServer = settings.proxy.host === null ? "" : settings.proxy.host + ":" + settings.proxy.port;
             this.proxyAuth = settings.proxy.login === null ? "" : settings.proxy.login + "" + ":" + settings.proxy.password;
 
+            form.name = settings.name;
+            form.comments = settings.comments;
+            form.useProxy = settings.use_proxy;
             form.walletActive = settings.is_active;
             form.alwaysOnline = settings.is_always_online === null ? false : settings.is_always_online;
             form.balanceRecheckTimeout = settings.balance_recheck_timeout;
             form.maximumBalance = settings.maximum_balance;
             form.autoWithdrawalActive = settings.autoWithdrawal_active;
             form.autoWithdrawalTimeout = settings.autoWithdrawal_minutes;
-
+            form.withdrawTarget = settings.autoWithdrawal_target;
             form.usingVouchers = settings.using_vouchers;
-            form.autoWithdrawalCardNumber = settings.autoWithdrawal_card_number;
             form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
             form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
+
+            var results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
+            this.cardNumber = results.join(" ");
 
             // selects
             var optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
@@ -11150,11 +11221,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("Настройки кошелька Qiwi")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Настройки кошелька Qiwi (" + _vm._s(_vm.form.login) + ")")]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "form-horizontal"
   }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label"
+  }, [_vm._v("Название кошелька")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.name),
+      expression: "form.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.name = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label"
@@ -11564,6 +11661,38 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })])]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Минимальная сума для автовывода")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.minimumAutoWithdrawAmount),
+      expression: "form.minimumAutoWithdrawAmount"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "disabled": !_vm.form.autoWithdrawalActive
+    },
+    domProps: {
+      "value": (_vm.form.minimumAutoWithdrawAmount)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.minimumAutoWithdrawAmount = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Минимальный баланс кошелька при котором должен быть совершен вывод")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-offset-4 col-sm-8"
   }, [_c('div', {
@@ -11572,34 +11701,78 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.usingVouchers),
-      expression: "form.usingVouchers"
+      value: (_vm.form.withdrawTarget),
+      expression: "form.withdrawTarget"
     }],
     attrs: {
-      "type": "checkbox"
+      "type": "radio",
+      "value": "wallet"
     },
     domProps: {
-      "checked": Array.isArray(_vm.form.usingVouchers) ? _vm._i(_vm.form.usingVouchers, null) > -1 : (_vm.form.usingVouchers)
+      "checked": _vm._q(_vm.form.withdrawTarget, "wallet")
     },
     on: {
       "__c": function($event) {
-        var $$a = _vm.form.usingVouchers,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.form.usingVouchers = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.form.usingVouchers = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.form.usingVouchers = $$c
-        }
+        _vm.form.withdrawTarget = "wallet"
       }
     }
   }), _vm._v("\n                                            Автовывод с помощью ваучеров\n                                        ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Кошельки для автовывода")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.autoWithdrawalWallets),
+      expression: "form.autoWithdrawalWallets"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "+79123456789;+79111111111",
+      "disabled": _vm.form.withdrawTarget != 'wallet'
+    },
+    domProps: {
+      "value": (_vm.form.autoWithdrawalWallets)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.autoWithdrawalWallets = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.withdrawTarget),
+      expression: "form.withdrawTarget"
+    }],
+    attrs: {
+      "type": "radio",
+      "value": "card"
+    },
+    domProps: {
+      "checked": _vm._q(_vm.form.withdrawTarget, "card")
+    },
+    on: {
+      "__c": function($event) {
+        _vm.form.withdrawTarget = "card"
+      }
+    }
+  }), _vm._v("\n                                            Автовывод на карту\n                                        ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -11612,20 +11785,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.autoWithdrawalCardNumber),
-      expression: "form.autoWithdrawalCardNumber"
+      value: (_vm.cardNumber),
+      expression: "cardNumber"
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "text"
+      "type": "text",
+      "placeholder": "XXXX XXXX XXXX XXXX",
+      "disabled": _vm.form.withdrawTarget != 'card'
     },
     domProps: {
-      "value": (_vm.form.autoWithdrawalCardNumber)
+      "value": (_vm.cardNumber)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawalCardNumber = $event.target.value
+        _vm.cardNumber = $event.target.value
       }
     }
   })])]), _vm._v(" "), _c('div', {
@@ -11635,7 +11810,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Данные владелца карты")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Данные владельца карты")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-4"
   }, [_c('input', {
     directives: [{
@@ -11647,6 +11822,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
+      "disabled": _vm.form.withdrawTarget != 'card',
       "placeholder": "Имя"
     },
     domProps: {
@@ -11670,6 +11846,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
+      "disabled": _vm.form.withdrawTarget != 'card',
       "placeholder": "Фамилия"
     },
     domProps: {
@@ -12019,7 +12196,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -12038,6 +12214,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.items = this.type.wallets;
+        console.log(this.items);
     },
 
     methods: {
@@ -12197,14 +12374,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('i', {
       staticClass: "fa fa-refresh fa-fw"
-    })])]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('td', [_c('span', [_vm._v(_vm._s(_vm._f("currency")(w.month_income)))]), _vm._v(" "), _vm._m(0, true)]) : _vm._e(), _vm._v(" "), _c('td', {
+    })])]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('td', [_c('span', [_vm._v(_vm._s(_vm._f("currency")(w.month_income)))]), _vm._v(" "), _c('a', {
+      attrs: {
+        "href": "#",
+        "data-toggle": "tooltip",
+        "data-placement": "top",
+        "title": "Вывести"
+      },
+      on: {
+        "click": function($event) {
+          $event.stopPropagation();
+          _vm.withdrawMoney(w.login)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-sign-out fa-fw"
+    })])]) : _vm._e(), _vm._v(" "), _c('td', {
       staticClass: "text-right"
     }, [_c('div', {
       staticClass: "btn-group",
       attrs: {
         "role": "group"
       }
-    }, [_vm._m(1, true), _vm._v(" "), _c('router-link', {
+    }, [_vm._m(0, true), _vm._v(" "), _c('router-link', {
       staticClass: "btn btn-default",
       attrs: {
         "to": '/finance/qiwi/' + w.login + '/history',
@@ -12281,17 +12473,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "clearfix"
   })])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    attrs: {
-      "href": "#",
-      "data-toggle": "tooltip",
-      "data-placement": "top",
-      "title": "Вывести"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-sign-out fa-fw"
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('button', {
     staticClass: "btn btn-default",
     attrs: {

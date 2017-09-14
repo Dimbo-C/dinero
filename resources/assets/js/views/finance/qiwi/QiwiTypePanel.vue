@@ -42,7 +42,8 @@
                         </td>
                         <td v-if="!isInactive">
                             <span>{{ w.month_income | currency }}</span>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Вывести">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Вывести"
+                               v-on:click.stop="withdrawMoney(w.login)">
                                 <i class="fa fa-sign-out fa-fw"></i>
                             </a>
                         </td>
@@ -51,24 +52,22 @@
                                 <button type="button"
                                         class="btn btn-default"
                                         data-toggle="tooltip"
-                                        data-placement="top" title="Ручной вывод"
-                                >
+                                        data-placement="top"
+                                        title="Ручной вывод">
                                     <i class="fa fa-usd"></i>
                                 </button>
                                 <router-link :to="'/finance/qiwi/' + w.login + '/history'"
                                              class="btn btn-default"
                                              data-toggle="tooltip"
                                              data-placement="top"
-                                             title="История"
-                                >
+                                             title="История">
                                     <i class="fa fa-history"></i>
                                 </router-link>
                                 <router-link :to="'/finance/qiwi/' + w.login + '/settings'"
                                              class="btn btn-default"
                                              data-toggle="tooltip"
                                              data-placement="top"
-                                             title="Настройки"
-                                >
+                                             title="Настройки">
                                     <i class="fa fa-cog"></i>
                                 </router-link>
                             </div>
@@ -117,6 +116,7 @@
         },
         mounted () {
             this.items = this.type.wallets;
+            console.log(this.items);
         },
         methods: {
             moveWallets () {

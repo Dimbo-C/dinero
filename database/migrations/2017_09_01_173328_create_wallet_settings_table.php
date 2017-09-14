@@ -21,6 +21,7 @@ class CreateWalletSettingsTable extends Migration {
             $table->timestamp('last_balance_recheck')->useCurrent();
             $table->double('maximum_balance')->default(floatval(1000000.0));
             $table->boolean('autoWithdrawal_active')->default(false);
+            $table->string('autoWithdrawal_target')->default("card");
 
             $table->integer('autoWithdrawal_type_id')->nullable()->unsigned()->index();
             $table->foreign('autoWithdrawal_type_id')->references("id")->on("autowithdraw_types")->onDelete('cascade');

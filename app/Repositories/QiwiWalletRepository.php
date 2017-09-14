@@ -66,9 +66,13 @@ class QiwiWalletRepository implements Contract {
         $this->staticWallet->updateBalanceAndIncome($login, $balance, $monthIncome);
 
         // get nice array with required data
-        $updateResult = $this->formUpdateResult($monthIncome, $balance, [$monthIncome]);
+//        $updateResult = $this->formUpdateResult($monthIncome, $balance, [$monthIncome]);
 
-        return $updateResult;
+        return [
+                "monthIncome" => $monthIncome,
+                "balance" => $balance,
+                "options" => [],
+        ];
     }
 
     /**
@@ -136,7 +140,7 @@ class QiwiWalletRepository implements Contract {
 
     public function updateSettings($data) {
         // update wallet table
-        $wallet = $this->updateWallet($data->login, $data->walletActive, $data->walletType, $data->useProxy);
+        $wallet = $this->updateWallet($data->login, $data->name, $data->walletActive, $data->walletType, $data->useProxy);
 
         // update proxy for wallet
         if ($wallet->use_proxy) {
@@ -158,11 +162,12 @@ class QiwiWalletRepository implements Contract {
         (new QiwiWalletSettings)->updateWithData($data, $wallet->id);
     }
 
-    private function updateWallet($login, $isActive, $walletType, $useProxy) {
+    private function updateWallet($login, $name, $isActive, $walletType, $useProxy) {
         $typeId = (new QiwiWalletType())->findByType($walletType)->id;
 
         $wallet = $this->findByLogin($login);
 
+        $wallet->name = $name;
         $wallet->is_active = $isActive;
         $wallet->type_id = $typeId;
         $wallet->use_proxy = $useProxy;
@@ -172,11 +177,7 @@ class QiwiWalletRepository implements Contract {
     }
 
     private function formUpdateResult($monthIncome, $balance, $options = []) {
-        return [
-                "monthIncome" => $monthIncome,
-                "balance" => $balance,
-                "options" => $options,
-        ];
+
     }
 
 }
