@@ -39,8 +39,12 @@ class QiwiWalletsController extends Controller {
     }
 
     public function updateBalanceAndIncome(Request $request) {
-//        $this->wallet->withdrawMoney("", "", "", 5, "RUB", "Test comment");
+        //        $this->wallet->withdrawMoney("", "", "", 5, "RUB", "Test comment");
         return $this->wallet->updateBalanceAndIncome($request->login);
+    }
+
+    public function withdraw(Request $request) {
+        return $this->wallet->withdrawTest($request->login);
     }
 
     public function saveSettings(Request $request) {

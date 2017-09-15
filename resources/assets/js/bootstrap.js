@@ -2,6 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import lodash from 'lodash';
 import moment from 'moment';
+import {Pagination, PaginationEvent} from 'vue-pagination-2';
 
 window.Bus = new Vue();
 
@@ -9,6 +10,8 @@ window._ = lodash;
 window.moment = moment;
 
 window.moment.locale('ru');
+
+Vue.component('pagination', Pagination);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

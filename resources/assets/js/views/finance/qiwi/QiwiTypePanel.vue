@@ -36,7 +36,7 @@
                         <td v-if="!isInactive">
                             <span :id="w.login">{{ w.balance | currency }}</span>
                             <a data-toggle="tooltip" data-placement="top" title="Обновить"
-                               v-on:click.stop="updateWallet(w.login,w.password)">
+                               v-on:click.stop="updateWallet(w.login)">
                                 <i class="fa fa-refresh fa-fw"></i>
                             </a>
                         </td>
@@ -123,9 +123,8 @@
                 const moveFrom = this.isInactive ? this.selected[0].type_id : this.type.id;
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
             },
-            updateWallet(login, password) {
-
-                let auth = {"login": login, "password": password};
+            updateWallet(login) {
+                let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update', new Form(auth))
                     .then((data) => {
                             console.log(data);
@@ -138,8 +137,19 @@
                         }
                     )
             },
-            withdrawMoney(){
-
+            withdrawMoney(login){
+                let auth = {"login": login};
+                Dinero.post('/api/qiwi-wallets/withdraw', new Form(auth))
+                    .then((data) => {
+                            console.log(data);
+//                            this.items.map((item) => {
+//                                if (item.login === login) {
+//                                    item.balance = data.balance;
+//                                    item.month_income = data.monthIncome;
+//                                }
+//                            });
+                        }
+                    )
             }
 
         },

@@ -473,57 +473,57 @@ window.Vue = __WEBPACK_IMPORTED_MODULE_0_vue___default.a;
 
 
 $('[data-toggle="tooltip"]').tooltip({
-  container: 'body'
+    container: 'body'
 });
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-  el: '#app',
-  router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */],
-  data: {
-    user: Dinero.state.user,
-    version: window.Dinero.version,
-    updatedAt: window.Dinero.updated_at,
-    showSidebar: true,
-    windowWidth: 0
-  },
-  created: function created() {
-    var self = this;
-
-    Bus.$on('toggleSidebar', function () {
-      self.toggleSidebar();
-    });
-
-    Bus.$on('initTooltip', function () {
-      this.$nextTick(function () {
-        $('[data-toggle="tooltip"]').tooltip({
-          container: 'body'
-        });
-      });
-    });
-
-    if (localStorage.showSidebar) {
-      this.showSidebar = JSON.parse(localStorage.showSidebar);
-    }
-  },
-  mounted: function mounted() {
-    var self = this;
-
-    //Init
-    this.getWindowWidth();
-
-    window.addEventListener('resize', function () {
-      self.getWindowWidth();
-    });
-  },
-
-  methods: {
-    toggleSidebar: function toggleSidebar() {
-      localStorage.showSidebar = this.showSidebar = !this.showSidebar;
+    el: '#app',
+    router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */],
+    data: {
+        user: Dinero.state.user,
+        version: window.Dinero.version,
+        updatedAt: window.Dinero.updated_at,
+        showSidebar: true,
+        windowWidth: 0
     },
-    getWindowWidth: function getWindowWidth() {
-      this.windowWidth = document.documentElement.clientWidth;
+    created: function created() {
+        var self = this;
+
+        Bus.$on('toggleSidebar', function () {
+            self.toggleSidebar();
+        });
+
+        Bus.$on('initTooltip', function () {
+            this.$nextTick(function () {
+                $('[data-toggle="tooltip"]').tooltip({
+                    container: 'body'
+                });
+            });
+        });
+
+        if (localStorage.showSidebar) {
+            this.showSidebar = JSON.parse(localStorage.showSidebar);
+        }
+    },
+    mounted: function mounted() {
+        var self = this;
+
+        //Init
+        this.getWindowWidth();
+
+        window.addEventListener('resize', function () {
+            self.getWindowWidth();
+        });
+    },
+
+    methods: {
+        toggleSidebar: function toggleSidebar() {
+            localStorage.showSidebar = this.showSidebar = !this.showSidebar;
+        },
+        getWindowWidth: function getWindowWidth() {
+            this.windowWidth = document.documentElement.clientWidth;
+        }
     }
-  }
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
@@ -12222,10 +12222,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var moveFrom = this.isInactive ? this.selected[0].type_id : this.type.id;
             this.$emit('moveWallets', this.selected, moveFrom, this.moveTo);
         },
-        updateWallet: function updateWallet(login, password) {
+        updateWallet: function updateWallet(login) {
             var _this2 = this;
 
-            var auth = { "login": login, "password": password };
+            var auth = { "login": login };
             Dinero.post('/api/qiwi-wallets/update', new Form(auth)).then(function (data) {
                 console.log(data);
                 _this2.items.map(function (item) {
@@ -12236,7 +12236,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             });
         },
-        withdrawMoney: function withdrawMoney() {}
+        withdrawMoney: function withdrawMoney(login) {
+            var auth = { "login": login };
+            Dinero.post('/api/qiwi-wallets/withdraw', new Form(auth)).then(function (data) {
+                console.log(data);
+                //                            this.items.map((item) => {
+                //                                if (item.login === login) {
+                //                                    item.balance = data.balance;
+                //                                    item.month_income = data.monthIncome;
+                //                                }
+                //                            });
+            });
+        }
     },
     computed: {
         firstDayOfTheMonth: function firstDayOfTheMonth() {
@@ -12369,7 +12380,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       on: {
         "click": function($event) {
           $event.stopPropagation();
-          _vm.updateWallet(w.login, w.password)
+          _vm.updateWallet(w.login)
         }
       }
     }, [_c('i', {
@@ -12601,6 +12612,9 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_pagination_2__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_pagination_2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vue_pagination_2__);
+
 
 
 
@@ -12612,6 +12626,8 @@ window._ = __WEBPACK_IMPORTED_MODULE_2_lodash___default.a;
 window.moment = __WEBPACK_IMPORTED_MODULE_3_moment___default.a;
 
 window.moment.locale('ru');
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pagination', __WEBPACK_IMPORTED_MODULE_4_vue_pagination_2__["Pagination"]);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -14580,6 +14596,308 @@ $.fn.extend({
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _vue = __webpack_require__(4);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var bus = new _vue2.default();
+
+module.exports = bus;
+
+/***/ }),
+/* 287 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Pagination = __webpack_require__(288);
+var PaginationEvent = __webpack_require__(286);
+
+module.exports = {
+  Pagination:Pagination,
+  PaginationEvent:PaginationEvent
+}
+
+
+/***/ }),
+/* 288 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var template = __webpack_require__(289);
+var bus = __webpack_require__(286);
+
+module.exports = {
+  render: template(),
+  props: {
+    for: {
+      type: String,
+      required: true
+    },
+    records: {
+      type: Number,
+      required: true
+    },
+    perPage: {
+      type: Number,
+      required: false,
+      default: 25
+    },
+    chunk: {
+      type: Number,
+      required: false,
+      default: 10
+    },
+    countText: {
+      type: String,
+      required: false,
+      default: 'Showing {from} to {to} of {count} records|{count} records|One record'
+    },
+    vuex: {
+      type: Boolean
+    }
+  },
+  created: function created() {
+
+    if (!this.vuex) return;
+
+    var name = this.for;
+
+    if (this.$store.state[name]) return;
+
+    this.$store.registerModule(this.for, {
+      state: {
+        page: 1
+      },
+      mutations: _defineProperty({}, name + '/PAGINATE', function undefined(state, page) {
+        state.page = page;
+      })
+    });
+  },
+  data: function data() {
+    return {
+      Page: 1
+    };
+  },
+  computed: {
+    page: function page() {
+      return this.vuex ? this.$store.state[this.for].page : this.Page;
+    },
+
+    pages: function pages() {
+      if (!this.records) return [];
+
+      return range(this.paginationStart, this.pagesInCurrentChunk);
+    },
+    totalPages: function totalPages() {
+      return this.records ? Math.ceil(this.records / this.perPage) : 1;
+    },
+    totalChunks: function totalChunks() {
+      return Math.ceil(this.totalPages / this.chunk);
+    },
+    currentChunk: function currentChunk() {
+      return Math.ceil(this.page / this.chunk);
+    },
+    paginationStart: function paginationStart() {
+      return (this.currentChunk - 1) * this.chunk + 1;
+    },
+    pagesInCurrentChunk: function pagesInCurrentChunk() {
+
+      return this.paginationStart + this.chunk <= this.totalPages ? this.chunk : this.totalPages - this.paginationStart + 1;
+    },
+    count: function count() {
+
+      var from = (this.page - 1) * this.perPage + 1;
+      var to = this.page == this.totalPages ? this.records : from + this.perPage - 1;
+      var parts = this.countText.split('|');
+      var i = Math.min(this.records == 1 ? 2 : this.totalPages == 1 ? 1 : 0, parts.length - 1);
+
+      return parts[i].replace('{count}', this.records).replace('{from}', from).replace('{to}', to);
+    }
+  },
+  methods: {
+    setPage: function setPage(page) {
+      if (this.allowedPage(page)) {
+        this.paginate(page);
+      }
+    },
+    paginate: function paginate(page) {
+      if (this.vuex) {
+        this.$store.commit(this.for + '/PAGINATE', page);
+      } else {
+        this.Page = page;
+        bus.$emit('vue-pagination::' + this.for, page);
+      }
+    },
+
+    next: function next() {
+      return this.setPage(this.page + 1);
+    },
+    prev: function prev() {
+      return this.setPage(this.page - 1);
+    },
+    nextChunk: function nextChunk() {
+      return this.setChunk(1);
+    },
+    prevChunk: function prevChunk() {
+      return this.setChunk(-1);
+    },
+    setChunk: function setChunk(direction) {
+      this.setPage((this.currentChunk - 1 + direction) * this.chunk + 1);
+    },
+    allowedPage: function allowedPage(page) {
+      return page >= 1 && page <= this.totalPages;
+    },
+    allowedChunk: function allowedChunk(direction) {
+      return direction == 1 && this.currentChunk < this.totalChunks || direction == -1 && this.currentChunk > 1;
+    },
+    allowedPageClass: function allowedPageClass(direction) {
+      return this.allowedPage(direction) ? '' : 'disabled';
+    },
+    allowedChunkClass: function allowedChunkClass(direction) {
+      return this.allowedChunk(direction) ? '' : 'disabled';
+    },
+    activeClass: function activeClass(page) {
+      return this.page == page ? 'active' : '';
+    }
+  }
+};
+
+function range(start, count) {
+  return Array.apply(0, Array(count)).map(function (element, index) {
+    return index + start;
+  });
+}
+
+/***/ }),
+/* 289 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function () {
+  return function (h) {
+
+    var items = [];
+
+    this.pages.map(function (page) {
+      items.push(h(
+        "li",
+        { "class": "VuePagination__pagination-item page-item " + this.activeClass(page) },
+        [h(
+          "a",
+          { "class": "page-link", attrs: { role: "button"
+            },
+            on: {
+              click: this.setPage.bind(this, page)
+            }
+          },
+          [page]
+        )]
+      ));
+    }.bind(this));
+
+    return h(
+      "div",
+      { "class": "VuePagination" },
+      [h(
+        "ul",
+        {
+          directives: [{
+            name: "show",
+            value: this.totalPages > 1
+          }],
+
+          "class": "pagination VuePagination__pagination" },
+        [h(
+          "li",
+          { "class": "VuePagination__pagination-item page-item VuePagination__pagination-item-prev-chunk " + this.allowedChunkClass(-1) },
+          [h(
+            "a",
+            { "class": "page-link", attrs: { href: "javascript:void(0);"
+              },
+              on: {
+                click: this.setChunk.bind(this, -1)
+              }
+            },
+            ["<<"]
+          )]
+        ), h(
+          "li",
+          { "class": "VuePagination__pagination-item page-item VuePagination__pagination-item-prev-page " + this.allowedPageClass(this.page - 1) },
+          [h(
+            "a",
+            { "class": "page-link", attrs: { href: "javascript:void(0);"
+              },
+              on: {
+                click: this.prev.bind(this)
+              }
+            },
+            ["<"]
+          )]
+        ), items, h(
+          "li",
+          { "class": "VuePagination__pagination-item page-item VuePagination__pagination-item-next-page " + this.allowedPageClass(this.page + 1) },
+          [h(
+            "a",
+            { "class": "page-link", attrs: { href: "javascript:void(0);"
+              },
+              on: {
+                click: this.next.bind(this)
+              }
+            },
+            [">"]
+          )]
+        ), h(
+          "li",
+          { "class": "VuePagination__pagination-item page-item VuePagination__pagination-item-next-chunk " + this.allowedChunkClass(1) },
+          [h(
+            "a",
+            { "class": "page-link", attrs: { href: "javascript:void(0);"
+              },
+              on: {
+                click: this.setChunk.bind(this, 1)
+              }
+            },
+            [">>"]
+          )]
+        )]
+      ), h(
+        "p",
+        {
+          directives: [{
+            name: "show",
+            value: parseInt(this.records)
+          }],
+
+          "class": "VuePagination__count" },
+        [this.count]
+      )]
+    );
+  };
+};
 
 /***/ })
 ],[136]);

@@ -11,6 +11,7 @@ use App\QiwiWalletSettings;
 use App\QiwiWalletType;
 use Illuminate\Support\Facades\Log;
 use QIWIControl;
+use App\Services\Withdraw;
 
 class QiwiWalletRepository implements Contract {
     private $staticWallet;
@@ -53,10 +54,20 @@ class QiwiWalletRepository implements Contract {
         Log::info("Error: " . $control->getLastError());
     }
 
+    public function withdrawTest($login) {
+//        $to = "+380507308340";
+        $to = "+380960968460";
+
+        $withdrawResult = Withdraw::toQiwiWallet($login, $to, "RUB", 1, "Monneyz");
+
+        return $withdrawResult;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function updateBalanceAndIncome($login) {
+
         $wallet = $this->findByLogin($login);
         $proxy = Proxy::find($wallet->proxy_id);
 
@@ -64,9 +75,6 @@ class QiwiWalletRepository implements Contract {
         $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
 
         $this->staticWallet->updateBalanceAndIncome($login, $balance, $monthIncome);
-
-        // get nice array with required data
-//        $updateResult = $this->formUpdateResult($monthIncome, $balance, [$monthIncome]);
 
         return [
                 "monthIncome" => $monthIncome,
@@ -174,10 +182,6 @@ class QiwiWalletRepository implements Contract {
         $wallet->save();
 
         return $wallet;
-    }
-
-    private function formUpdateResult($monthIncome, $balance, $options = []) {
-
     }
 
 }

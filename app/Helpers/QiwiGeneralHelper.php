@@ -7,7 +7,6 @@ use App\Processors\TransactionProcessor;
 use App\Proxy;
 use App\QiwiWallet;
 use App\Services\Qiwi\Qiwi;
-use Illuminate\Support\Facades\Log;
 use QIWIControl;
 
 class QiwiGeneralHelper {

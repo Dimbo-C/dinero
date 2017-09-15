@@ -19,6 +19,7 @@ Route::post('/proxies', 'ProxiesController@store');
 Route::get('/qiwi-wallets', 'QiwiWalletsController@all');
 Route::post('/qiwi-wallets', 'QiwiWalletsController@store');
 Route::post('/qiwi-wallets/update', 'QiwiWalletsController@updateBalanceAndIncome');
+Route::post('/qiwi-wallets/withdraw', 'QiwiWalletsController@withdraw');
 
 Route::post('/qiwi-wallets/move', 'QiwiWalletsController@move');
 

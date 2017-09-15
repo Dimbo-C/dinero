@@ -37,7 +37,6 @@ class Autowithdraw {
 
     public function autoWithdraw(int $autowithdrawMode) {
         if (!$this->guards($autowithdrawMode)) return;
-        $a = 3;
 
 
     }

@@ -1,15 +1,16 @@
 <?php
 
+namespace App\Services;
+
 use App\Helpers\QiwiGeneralHelper;
 use App\QiwiWallet;
 
 class Withdraw {
 
-    public function toQiwiWallet($login, $to, $currency, $amount, $comment = false) {
+    public static function toQiwiWallet($login, $to, $currency, $amount, $comment = false) {
         $wallet = QiwiWallet::where("login", $login)->first();
-        if ($wallet->use_proxy) {
-            $proxy = Proxy::find($wallet->proxy_id);
-        }
+        $proxy = $wallet->use_proxy ? Proxy::find($wallet->proxy_id) : null;
+
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
                 $wallet->login,
                 $wallet->password,
@@ -17,5 +18,11 @@ class Withdraw {
                 $proxy);
 
         $qiwiControl->transferMoney($to, $currency, $amount, $comment);
+
+        return [
+                "login" => $login,
+                "error" => $qiwiControl->getLastError(),
+                "qiwicontrol" => $qiwiControl
+        ];
     }
 }
