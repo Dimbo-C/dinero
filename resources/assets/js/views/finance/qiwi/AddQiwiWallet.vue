@@ -109,6 +109,13 @@
                                     </div>
                                 </div>
 
+                                <!--<iframe id="myiframe"-->
+                                        <!--:src="qiwi.com/"-->
+                                        <!--height="700"-->
+                                        <!--width="600"-->
+                                        <!--v-model="watchedIframe">-->
+                                <!--</iframe>-->
+
                                 <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <button class="btn btn-primary" @click="submitForm">Добавить кошелек</button>
@@ -147,6 +154,7 @@
 
                 proxyServer: '',
                 proxyAuth: '',
+                watchedIframe: '',
                 form: new Form({
                     login: '',
                     password: '',
@@ -165,6 +173,9 @@
             };
         },
         watch: {
+            watchedIframe(val){
+                console.log(val.contents());
+            },
             proxyServer(val) {
                 const data = val.split(':');
 
@@ -190,7 +201,7 @@
 
                 if (result.status === "success") {
                     this.$router.push({path: `/finance/qiwi/add-wallet-success/${this.form.login}`});
-                }else{
+                } else {
                     Bus.$emit('showNotification', messageType, result.message);
                 }
             }

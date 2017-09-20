@@ -35,7 +35,7 @@ class Autowithdraw {
         $this->autoWithdrawType = AutowithdrawTypes::find($this->settings->autoWithdrawal_type_id);
     }
 
-    public function autoWithdraw(int $autowithdrawMode) {
+    public function autoWithdraw($autowithdrawMode) {
         if (!$this->guards($autowithdrawMode)) return;
 
 

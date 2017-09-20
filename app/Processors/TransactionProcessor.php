@@ -25,15 +25,6 @@ class TransactionProcessor {
         return $this->transactions;
     }
 
-    public function tidyTransactions() {
-        $this->detectCurrency();
-        $this->stripCurrency();
-        $this->defaulterizeComments();
-        $this->findCommissions();
-
-        // ... probably something else to tidy transactions
-    }
-
     public function getIncome() {
         $transactions = $this->filterTransactions(QIWI_TRANSACTION_MODE_IN);
         $sum = 0;
@@ -54,6 +45,15 @@ class TransactionProcessor {
         }
 
         return $sum;
+    }
+
+    private function tidyTransactions() {
+        $this->detectCurrency();
+        $this->stripCurrency();
+        $this->defaulterizeComments();
+        $this->findCommissions();
+
+        // ... probably something else to tidy transactions
     }
 
 

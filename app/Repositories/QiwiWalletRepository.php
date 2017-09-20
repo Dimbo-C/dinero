@@ -9,6 +9,7 @@ use App\Proxy;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
 use App\QiwiWalletType;
+use Autowithdraw;
 use Illuminate\Support\Facades\Log;
 use QIWIControl;
 use App\Services\Withdraw;
@@ -55,10 +56,11 @@ class QiwiWalletRepository implements Contract {
     }
 
     public function withdrawTest($login) {
-//        $to = "+380507308340";
+
         $to = "+380960968460";
 
-        $withdrawResult = Withdraw::toQiwiWallet($login, $to, "RUB", 1, "Monneyz");
+//        $withdrawResult = Withdraw::toQiwiWallet($login, $to, "RUB", 2, "Monneyz");
+        $withdrawResult = Withdraw::viaVoucher($login);
 
         return $withdrawResult;
     }

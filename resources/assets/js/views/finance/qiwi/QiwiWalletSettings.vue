@@ -408,8 +408,11 @@
                 form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
                 form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
 
-                let results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
-                this.cardNumber = results.join(" ");
+                if (settings.autoWithdrawal_card_number !== null) {
+                    let results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
+                    this.cardNumber = results.join(" ");
+                } else this.cardNumber = "";
+
 
                 // selects
                 let optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;

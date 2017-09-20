@@ -18,6 +18,7 @@ import AddQiwiWallet from './../views/finance/qiwi/AddQiwiWallet.vue'
 import AddQiwiWalletSuccess from './../views/finance/qiwi/AddQiwiWalletSuccess.vue'
 import QiwiWalletHistory from './../views/finance/qiwi/QiwiWalletHistory.vue'
 import QiwiWalletSettings from './../views/finance/qiwi/QiwiWalletSettings.vue'
+import QiwiWalletWithdraw from './../views/finance/qiwi/QiwiWalletWithdraw.vue'
 import FinanceQiwiDashboard from './../views/finance/FinanceQiwiDashboard.vue'
 
 Vue.use(Router);
@@ -42,6 +43,7 @@ const router = new Router({
         {path: '/finance/qiwi/add-wallet-success/:wallet', component: AddQiwiWalletSuccess},
         {path: '/finance/qiwi/:wallet/history', component: QiwiWalletHistory},
         {path: '/finance/qiwi/:wallet/settings', component: QiwiWalletSettings},
+        {path: '/finance/qiwi/:wallet/withdraw', component: QiwiWalletWithdraw},
         {path: '/finance/qiwi/dashboard', component: FinanceQiwiDashboard},
         {path: '/finance/bitcoin/history', component: FinanceBitcoinHistory},
     ]

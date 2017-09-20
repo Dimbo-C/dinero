@@ -19,7 +19,6 @@
                         <th>Имя кошелька </th>
                         <th v-if="!isInactive">Баланс</th>
                         <th v-if="!isInactive">Принятые средства с <span v-text="this.firstDayOfTheMonth"></span></th>
-
                         <th></th>
                     </tr>
                     </thead>
@@ -42,20 +41,26 @@
                         </td>
                         <td v-if="!isInactive">
                             <span>{{ w.month_income | currency }}</span>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Вывести"
-                               v-on:click.stop="withdrawMoney(w.login)">
-                                <i class="fa fa-sign-out fa-fw"></i>
-                            </a>
+                            <!--<router-link :to="'/finance/qiwi/' + w.login + '/settings'"-->
+                            <!--class="btn btn-default"-->
+                            <!--data-toggle="tooltip"-->
+                            <!--data-placement="top"-->
+                            <!--title="Настройки">-->
+                            <!--<i class="fa fa-cog"></i>-->
+                            <!--</router-link>-->
+                            <!--<a href="#" data-toggle="tooltip" data-placement="top" title="Вывести"-->
+                            <!--v-on:click.stop="withdrawMoney(w.login)">-->
+                            <!--</a>-->
                         </td>
                         <td class="text-right">
                             <div class="btn-group" role="group">
-                                <button type="button"
-                                        class="btn btn-default"
-                                        data-toggle="tooltip"
-                                        data-placement="top"
-                                        title="Ручной вывод">
+                                <router-link :to="'/finance/qiwi/' + w.login + '/withdraw'"
+                                             class="btn btn-default"
+                                             data-toggle="tooltip"
+                                             data-placement="top"
+                                             title="Ручной вывод">
                                     <i class="fa fa-usd"></i>
-                                </button>
+                                </router-link>
                                 <router-link :to="'/finance/qiwi/' + w.login + '/history'"
                                              class="btn btn-default"
                                              data-toggle="tooltip"
@@ -142,12 +147,7 @@
                 Dinero.post('/api/qiwi-wallets/withdraw', new Form(auth))
                     .then((data) => {
                             console.log(data);
-//                            this.items.map((item) => {
-//                                if (item.login === login) {
-//                                    item.balance = data.balance;
-//                                    item.month_income = data.monthIncome;
-//                                }
-//                            });
+
                         }
                     )
             }
