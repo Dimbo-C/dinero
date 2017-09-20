@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Cazzzt\Qiwi\QiwiControl;
+
 use Illuminate\Support\Facades\Log;
 
 if (!defined('PHP_VERSION_ID')) {

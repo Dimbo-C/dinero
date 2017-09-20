@@ -7,7 +7,8 @@ use App\Processors\TransactionProcessor;
 use App\Proxy;
 use App\QiwiWallet;
 use App\Services\Qiwi\Qiwi;
-use QIWIControl;
+use App\Cazzzt\Qiwi\QiwiControl\QIWIControl;
+
 
 class QiwiGeneralHelper {
 
@@ -17,7 +18,7 @@ class QiwiGeneralHelper {
      * @param $password
      * @param $useProxy
      * @param $proxy array|object with host,port,login and password
-     * @return \QIWIControl
+     * @return QIWIControl
      */
     public static function getQiwiControlObject($login, $password, $useProxy, $proxy = []) {
         //        if (is_object($proxy)) $proxy = (array) $proxy;

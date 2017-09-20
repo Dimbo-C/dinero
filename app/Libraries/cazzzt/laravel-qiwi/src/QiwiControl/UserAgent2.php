@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Cazzzt\Qiwi\QiwiControl;
  //* Юзерагент браузера
  //*/
 define('USERAGENT_USERAGENT', "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36");
