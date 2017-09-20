@@ -7,12 +7,6 @@
   ],
   "license": "MIT",
   "type": "project",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "./app/Libraries/cazzzt/laravel-qiwi"
-    }
-  ],
   "require": {
     "php": ">=5.6.4",
     "guzzlehttp/guzzle": "^6.3",
@@ -21,8 +15,7 @@
     "predis/predis": "^1.1",
     "spatie/laravel-permission": "^2.2",
     "symfony/dom-crawler": "^3.3",
-    "longman/telegram-bot": "*",
-    "cazzzt/laravel-qiwi": "dev-master"
+    "longman/telegram-bot": "*"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

@@ -2,7 +2,6 @@ logs
 *.log
 node_modules/
 vendor/
-!vendor/cazzzt/laravel-qiwi/src/QiwiControl/*
 .env
 composer.lock
 public/cookie_data
