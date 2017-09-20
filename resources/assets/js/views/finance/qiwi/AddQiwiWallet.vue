@@ -110,10 +110,10 @@
                                 </div>
 
                                 <!--<iframe id="myiframe"-->
-                                        <!--:src="qiwi.com/"-->
-                                        <!--height="700"-->
-                                        <!--width="600"-->
-                                        <!--v-model="watchedIframe">-->
+                                <!--:src="qiwi.com/"-->
+                                <!--height="700"-->
+                                <!--width="600"-->
+                                <!--v-model="watchedIframe">-->
                                 <!--</iframe>-->
 
                                 <div class="form-group">

@@ -429,9 +429,9 @@ module.exports = bus;
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(260),
+  __webpack_require__(263),
   /* template */
-  __webpack_require__(261),
+  __webpack_require__(264),
   /* styles */
   null,
   /* scopeId */
@@ -467,7 +467,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(138);
-module.exports = __webpack_require__(280);
+module.exports = __webpack_require__(283);
 
 
 /***/ }),
@@ -479,8 +479,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bootstrap__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_bootstrap__ = __webpack_require__(257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bootstrap__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_bootstrap__ = __webpack_require__(260);
 
 
 
@@ -586,9 +586,9 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__views_finance_qiwi_QiwiWalletHistory_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__views_finance_qiwi_QiwiWalletHistory_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__views_finance_qiwi_QiwiWalletSettings_vue__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__views_finance_qiwi_QiwiWalletSettings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__views_finance_qiwi_QiwiWalletSettings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__views_finance_qiwi_QiwiWalletWithdraw_vue__ = __webpack_require__(290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__views_finance_qiwi_QiwiWalletWithdraw_vue__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__views_finance_qiwi_QiwiWalletWithdraw_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__views_finance_qiwi_QiwiWalletWithdraw_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__views_finance_FinanceQiwiDashboard_vue__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__views_finance_FinanceQiwiDashboard_vue__ = __webpack_require__(226);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__views_finance_FinanceQiwiDashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__views_finance_FinanceQiwiDashboard_vue__);
 
 
@@ -11072,6 +11072,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -11919,7 +11920,545 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(224),
   /* template */
-  __webpack_require__(228),
+  __webpack_require__(225),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/qiwi/QiwiWalletWithdraw.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] QiwiWalletWithdraw.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-55c9c2ac", Component.options)
+  } else {
+    hotAPI.reload("data-v-55c9c2ac", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 224 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    /*
+     * The component's data.
+     */
+    data: function data() {
+        return {
+            types: {
+                card: {
+                    "label": "Номер карты",
+                    "placeholder": "Например: 1234 5678 9012 3456"
+                },
+                wallet: {
+                    "label": "Номер кошелька",
+                    "placeholder": "Например: +71234567890"
+                },
+                voucher: {
+                    "label": "email получателя ваучера",
+                    //                        "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD"
+                    "placeholder": "Например: name.surname@gmail.com"
+                }
+            },
+            switcher: "",
+            proxyServer: "",
+            label: "",
+            placeholder: "",
+            balance: 0,
+
+            form: new Form({
+                sum: 0,
+                comment: "",
+                targetField: "5168 7422 0767 3892",
+                withdrawType: "",
+                cardholderName: "VLAD",
+                cardholderSurname: "GORBATKO",
+
+                login: this.$route.params.wallet
+
+            })
+        };
+    },
+
+
+    watch: {
+        switcher: function switcher(val) {
+            this.form.withdrawType = val;
+            this.label = this.types[val].label;
+            this.placeholder = this.types[val].placeholder;
+        }
+    },
+
+    /**
+     * Prepare the component.
+     */
+    mounted: function mounted() {
+        this.prepareComponent();
+    },
+
+
+    methods: {
+        /**
+         * Prepare the component.
+         */
+        prepareComponent: function prepareComponent() {
+            this.initBalance();
+            this.switcher = "wallet";
+        },
+        proceed: function proceed() {
+            var _this = this;
+
+            console.log(this.form);
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/withdraw", this.form).then(function (data) {
+                console.log(data);
+                var notificationType = data.status == 200 ? "success" : "danger";
+                Bus.$emit('showNotification', notificationType, data.resultText);
+                _this.updateWallet(_this.$route.params.wallet);
+            });
+        },
+        initBalance: function initBalance() {
+            var _this2 = this;
+
+            axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/settings").then(function (response) {
+                var data = response.data;
+                _this2.form.sum = data.wallet.balance;
+            });
+        },
+        updateWallet: function updateWallet(login) {
+            var _this3 = this;
+
+            var auth = { "login": login };
+            Dinero.post('/api/qiwi-wallets/update', new Form(auth)).then(function (data) {
+                console.log(data);
+                _this3.form.sum = data.balance;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('page-header', {
+    attrs: {
+      "icon": "fa-money",
+      "title": "Вывод средств"
+    }
+  }, [_c('li', [_c('a', {
+    staticClass: "disabled"
+  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "tag": "li",
+      "to": "/finance/qiwi"
+    }
+  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "tag": "li",
+      "to": "/finance/qiwi/dashboard"
+    }
+  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "container-fluid"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_vm._v("Вывод средств с Qiwi кошелька (" + _vm._s(_vm.form.login) + ")")]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_c('div', {
+    staticClass: "form-horizontal"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label"
+  }, [_vm._v("Сумма")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.sum),
+      expression: "form.sum"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.sum)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.sum = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label"
+  }, [_vm._v("Комментарий к переводу")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.comment),
+      expression: "form.comment"
+    }],
+    staticClass: "form-control",
+    domProps: {
+      "value": (_vm.form.comment)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.comment = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.switcher),
+      expression: "switcher"
+    }],
+    attrs: {
+      "type": "radio",
+      "value": "wallet",
+      "id": "withdraw.wallet"
+    },
+    domProps: {
+      "checked": _vm._q(_vm.switcher, "wallet")
+    },
+    on: {
+      "__c": function($event) {
+        _vm.switcher = "wallet"
+      }
+    }
+  }), _vm._v("\n                                            Перевод на Qiwi кошелек\n                                        ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.switcher),
+      expression: "switcher"
+    }],
+    attrs: {
+      "type": "radio",
+      "value": "card",
+      "id": "withdraw.card"
+    },
+    domProps: {
+      "checked": _vm._q(_vm.switcher, "card")
+    },
+    on: {
+      "__c": function($event) {
+        _vm.switcher = "card"
+      }
+    }
+  }), _vm._v("\n                                            Перевод на банковскую карту\n                                        ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.switcher),
+      expression: "switcher"
+    }],
+    attrs: {
+      "type": "radio",
+      "value": "voucher",
+      "id": "withdraw.voucher"
+    },
+    domProps: {
+      "checked": _vm._q(_vm.switcher, "voucher")
+    },
+    on: {
+      "__c": function($event) {
+        _vm.switcher = "voucher"
+      }
+    }
+  }), _vm._v("\n                                            Отправить ваучер\n                                        ")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label"
+  }, [_vm._v(_vm._s(_vm.label))]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.targetField),
+      expression: "form.targetField"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": _vm.placeholder
+    },
+    domProps: {
+      "value": (_vm.form.targetField)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.targetField = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), (_vm.form.withdrawType == 'card') ? [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label"
+  }, [_vm._v("Фамилия получателя")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.cardholderName),
+      expression: "form.cardholderName"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "SEMENOV"
+    },
+    domProps: {
+      "value": (_vm.form.cardholderName)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.cardholderName = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label"
+  }, [_vm._v("Имя получателя")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.cardholderSurname),
+      expression: "form.cardholderSurname"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "SEMEN"
+    },
+    domProps: {
+      "value": (_vm.form.cardholderSurname)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.cardholderSurname = $event.target.value
+      }
+    }
+  })])])] : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.proceed
+    }
+  }, [_vm._v("\n                                        Продолжить\n                                    ")])])])], 2)])])])])])], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-55c9c2ac", module.exports)
+  }
+}
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(227),
+  /* template */
+  __webpack_require__(231),
   /* styles */
   null,
   /* scopeId */
@@ -11951,12 +12490,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 224 */
+/* 227 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue__ = __webpack_require__(228);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue__);
 //
 //
@@ -12078,15 +12617,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 225 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(226),
+  __webpack_require__(229),
   /* template */
-  __webpack_require__(227),
+  __webpack_require__(230),
   /* styles */
   null,
   /* scopeId */
@@ -12118,7 +12657,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 226 */
+/* 229 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12296,7 +12835,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 227 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12520,7 +13059,7 @@ if (false) {
 }
 
 /***/ }),
-/* 228 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12615,7 +13154,7 @@ if (false) {
 }
 
 /***/ }),
-/* 229 */
+/* 232 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12627,7 +13166,7 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_pagination_2__ = __webpack_require__(249);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_pagination_2__ = __webpack_require__(252);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_pagination_2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vue_pagination_2__);
 
 
@@ -12686,12 +13225,12 @@ if (token) {
 /**
  * Define the Vue filters.
  */
-__webpack_require__(252);
+__webpack_require__(255);
 
 /**
  * Load the App form utilities.
  */
-__webpack_require__(253);
+__webpack_require__(256);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -12709,9 +13248,6 @@ __webpack_require__(253);
 // });
 
 /***/ }),
-/* 230 */,
-/* 231 */,
-/* 232 */,
 /* 233 */,
 /* 234 */,
 /* 235 */,
@@ -12728,10 +13264,13 @@ __webpack_require__(253);
 /* 246 */,
 /* 247 */,
 /* 248 */,
-/* 249 */
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Pagination = __webpack_require__(250);
+var Pagination = __webpack_require__(253);
 var PaginationEvent = __webpack_require__(134);
 
 module.exports = {
@@ -12741,7 +13280,7 @@ module.exports = {
 
 
 /***/ }),
-/* 250 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12749,7 +13288,7 @@ module.exports = {
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var template = __webpack_require__(251);
+var template = __webpack_require__(254);
 var bus = __webpack_require__(134);
 
 module.exports = {
@@ -12895,7 +13434,7 @@ function range(start, count) {
 }
 
 /***/ }),
-/* 251 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13004,7 +13543,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 252 */
+/* 255 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13047,7 +13586,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.filter('currency', function (value) 
 });
 
 /***/ }),
-/* 253 */
+/* 256 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13068,20 +13607,20 @@ Dinero.forms = {
 /**
  * Load the Form helper class.
  */
-__webpack_require__(254);
+__webpack_require__(257);
 
 /**
  * Define the FormError collection class.
  */
-__webpack_require__(255);
+__webpack_require__(258);
 
 /**
  * Add additional HTTP / form helpers to the Imprinx object.
  */
-__WEBPACK_IMPORTED_MODULE_0_jquery___default.a.extend(Dinero, __webpack_require__(256));
+__WEBPACK_IMPORTED_MODULE_0_jquery___default.a.extend(Dinero, __webpack_require__(259));
 
 /***/ }),
-/* 254 */
+/* 257 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13142,7 +13681,7 @@ window.Form = function (data) {
 };
 
 /***/ }),
-/* 255 */
+/* 258 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13220,7 +13759,7 @@ window.FormErrors = function () {
 };
 
 /***/ }),
-/* 256 */
+/* 259 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -13280,21 +13819,21 @@ module.exports = {
 };
 
 /***/ }),
-/* 257 */
+/* 260 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sidebar_Sidebar_vue__ = __webpack_require__(258);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sidebar_Sidebar_vue__ = __webpack_require__(261);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sidebar_Sidebar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sidebar_Sidebar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PageHeader_vue__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PageHeader_vue__ = __webpack_require__(266);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PageHeader_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__PageHeader_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Navbar_vue__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Navbar_vue__ = __webpack_require__(272);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Navbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Navbar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Loading_vue__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Loading_vue__ = __webpack_require__(275);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Loading_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Loading_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Modal_vue__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Modal_vue__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Modal_vue__);
 
 
@@ -13311,18 +13850,18 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('loading', __WEBPACK_IMPOR
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('modal', __WEBPACK_IMPORTED_MODULE_5__Modal_vue___default.a);
 
 // Third Party Components...
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('masked-input', __webpack_require__(278));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('masked-input', __webpack_require__(281));
 
 /***/ }),
-/* 258 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(259),
-  /* template */
   __webpack_require__(262),
+  /* template */
+  __webpack_require__(265),
   /* styles */
   null,
   /* scopeId */
@@ -13354,7 +13893,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 259 */
+/* 262 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13393,7 +13932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 260 */
+/* 263 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13492,7 +14031,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 261 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13609,7 +14148,7 @@ if (false) {
 }
 
 /***/ }),
-/* 262 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13636,15 +14175,15 @@ if (false) {
 }
 
 /***/ }),
-/* 263 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(264),
+  __webpack_require__(267),
   /* template */
-  __webpack_require__(268),
+  __webpack_require__(271),
   /* styles */
   null,
   /* scopeId */
@@ -13676,12 +14215,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 264 */
+/* 267 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue__ = __webpack_require__(265);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue__ = __webpack_require__(268);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Notification_vue__);
 //
 //
@@ -13724,15 +14263,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 265 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(266),
+  __webpack_require__(269),
   /* template */
-  __webpack_require__(267),
+  __webpack_require__(270),
   /* styles */
   null,
   /* scopeId */
@@ -13764,7 +14303,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 266 */
+/* 269 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13823,7 +14362,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 267 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13872,7 +14411,7 @@ if (false) {
 }
 
 /***/ }),
-/* 268 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13920,15 +14459,15 @@ if (false) {
 }
 
 /***/ }),
-/* 269 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(270),
+  __webpack_require__(273),
   /* template */
-  __webpack_require__(271),
+  __webpack_require__(274),
   /* styles */
   null,
   /* scopeId */
@@ -13960,7 +14499,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 270 */
+/* 273 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14056,7 +14595,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 271 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14189,15 +14728,15 @@ if (false) {
 }
 
 /***/ }),
-/* 272 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(273),
+  __webpack_require__(276),
   /* template */
-  __webpack_require__(274),
+  __webpack_require__(277),
   /* styles */
   null,
   /* scopeId */
@@ -14229,7 +14768,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 273 */
+/* 276 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14248,7 +14787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 274 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14271,15 +14810,15 @@ if (false) {
 }
 
 /***/ }),
-/* 275 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(276),
+  __webpack_require__(279),
   /* template */
-  __webpack_require__(277),
+  __webpack_require__(280),
   /* styles */
   null,
   /* scopeId */
@@ -14311,7 +14850,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 276 */
+/* 279 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14347,7 +14886,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 277 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14395,10 +14934,10 @@ if (false) {
 }
 
 /***/ }),
-/* 278 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(279);
+/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(282);
 module.exports = {
     template: '<input type="text" ref="input" v-bind:value="value" v-on:blur="formatValue" >',
     props: {
@@ -14426,7 +14965,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 279 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (factory) {
@@ -14883,503 +15422,10 @@ $.fn.extend({
 
 
 /***/ }),
-/* 280 */
+/* 283 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(291),
-  /* template */
-  __webpack_require__(292),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/qiwi/QiwiWalletWithdraw.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] QiwiWalletWithdraw.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-55c9c2ac", Component.options)
-  } else {
-    hotAPI.reload("data-v-55c9c2ac", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 291 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function($) {//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    /*
-     * The component's data.
-     */
-    data: function data() {
-        return {
-            proxyServer: "",
-
-            form: new Form({
-                useProxy: false,
-
-                login: this.$route.params.wallet
-            })
-        };
-    },
-
-    watch: {
-        cardNumber: function cardNumber(val) {
-            this.form.autoWithdrawalCardNumber = val.replace(/\s/g, '');
-        },
-        proxyServer: function proxyServer(val) {
-            var data = val.split(':');
-
-            this.form.proxy.host = data[0];
-            this.form.proxy.port = data[1] ? data[1] : '';
-        },
-        proxyAuth: function proxyAuth(val) {
-            var data = val.split(':');
-
-            this.form.proxy.login = data.length ? data[0] : '';
-            this.form.proxy.password = data[1] ? data[1] : '';
-        }
-    },
-
-    /**
-     * Prepare the component.
-     */
-    mounted: function mounted() {
-        this.prepareComponent();
-    },
-
-
-    methods: {
-        /**
-         * Prepare the component.
-         */
-        prepareComponent: function prepareComponent() {
-            var _this = this;
-
-            this.$nextTick(function () {
-                $('.tooltip').removeClass('in');
-            });
-
-            // get settings of this wallet
-            axios.get('/api/qiwi-wallets/' + this.$route.params.wallet + '/settings').then(function (response) {
-                var data = response.data;
-                console.log(data);
-                _this.loadAutoWithdrawalOptions(data.autoWithdrawTypes);
-                _this.loadWalletTypes(data.walletTypes);
-                var settings = Object.assign(data.walletSettings, data.wallet);
-                settings.proxy = data.proxy;
-                _this.loadSettings(settings);
-                console.log(settings);
-            });
-        },
-        proceed: function proceed() {},
-        loadAutoWithdrawalOptions: function loadAutoWithdrawalOptions(options) {
-            var _this2 = this;
-
-            options.map(function (option) {
-                _this2.form.autoWithdrawalOptions.push({ value: option.slug, text: option.type });
-            });
-
-            this.form.autoWithdrawalType = this.form.autoWithdrawalOptions[1].value;
-        },
-        loadWalletTypes: function loadWalletTypes(types) {
-            var form = this.form;
-            types.map(function (type) {
-                form.walletTypes.push({ value: type.slug, text: type.name });
-            });
-
-            form.walletType = form.walletTypes[1].value;
-        },
-        loadSettings: function loadSettings(settings) {
-            var form = this.form;
-
-            this.proxyServer = settings.proxy.host === null ? "" : settings.proxy.host + ":" + settings.proxy.port;
-            this.proxyAuth = settings.proxy.login === null ? "" : settings.proxy.login + "" + ":" + settings.proxy.password;
-
-            form.name = settings.name;
-            form.comments = settings.comments;
-            form.useProxy = settings.use_proxy;
-            form.walletActive = settings.is_active;
-            form.alwaysOnline = settings.is_always_online === null ? false : settings.is_always_online;
-            form.balanceRecheckTimeout = settings.balance_recheck_timeout;
-            form.maximumBalance = settings.maximum_balance;
-            form.autoWithdrawalActive = settings.autoWithdrawal_active;
-            form.autoWithdrawalTimeout = settings.autoWithdrawal_minutes;
-            form.withdrawTarget = settings.autoWithdrawal_target;
-            form.usingVouchers = settings.using_vouchers;
-            form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
-            form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
-
-            if (settings.autoWithdrawal_card_number !== null) {
-                var results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
-                this.cardNumber = results.join(" ");
-            } else this.cardNumber = "";
-
-            // selects
-            var optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
-            form.autoWithdrawalType = form.autoWithdrawalOptions[optionId - 1].value;
-
-            form.walletType = this.form.walletTypes[settings.type_id - 1].value;
-        },
-        saveSettings: function saveSettings() {
-            console.log(this.form);
-            Dinero.post('/api/qiwi-wallets/' + this.$route.params.wallet + '/settings', this.form).then(function (data) {
-                console.log(data);
-                Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
-            });
-        }
-    }
-});
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
-
-/***/ }),
-/* 292 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Вывод средств"
-    }
-  }, [_c('li', [_c('a', {
-    staticClass: "disabled"
-  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi"
-    }
-  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Вывод средств с Qiwi кошелька (" + _vm._s(_vm.form.login) + ")")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Название кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.name),
-      expression: "form.name"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.name)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.name = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Комментарий к переводу")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.comments),
-      expression: "form.comments"
-    }],
-    staticClass: "form-control",
-    domProps: {
-      "value": (_vm.form.comments)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.comments = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.withdrawType),
-      expression: "withdrawType"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "wallet"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.withdrawType, "wallet")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.withdrawType = "wallet"
-      }
-    }
-  }), _vm._v("\n                                            Перевод на Qiwi кошелек\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.withdrawType),
-      expression: "withdrawType"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "card"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.withdrawType, "card")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.withdrawType = "card"
-      }
-    }
-  }), _vm._v("\n                                            Перевод на банковскую карту\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.withdrawType),
-      expression: "withdrawType"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "voucher"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.withdrawType, "voucher")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.withdrawType = "voucher"
-      }
-    }
-  }), _vm._v("\n                                            Отправить ваучер\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Название кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.name),
-      expression: "form.name"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.name)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.name = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
-    on: {
-      "click": _vm.proceed
-    }
-  }, [_vm._v("\n                                        Продолжить\n                                    ")])])])])])])])])])], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-55c9c2ac", module.exports)
-  }
-}
 
 /***/ })
 ],[137]);

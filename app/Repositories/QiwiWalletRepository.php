@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Cazzzt\Qiwi\QiwiControl\QIWIControl;
 use App\Contracts\Repositories\QiwiWalletRepository as Contract;
 use App\Helpers\QiwiGeneralHelper;
 use App\Processors\TransactionProcessor;
@@ -9,10 +10,8 @@ use App\Proxy;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
 use App\QiwiWalletType;
-use Autowithdraw;
-use Illuminate\Support\Facades\Log;
-use QIWIControl;
 use App\Services\Withdraw;
+use Illuminate\Support\Facades\Log;
 
 class QiwiWalletRepository implements Contract {
     private $staticWallet;
@@ -55,11 +54,50 @@ class QiwiWalletRepository implements Contract {
         Log::info("Error: " . $control->getLastError());
     }
 
+    /**
+     * @param $login
+     * @param $withdrawType
+     * @param $sum
+     * @param $comment
+     * @param $targetField
+     * @param $cardholderName
+     * @param $cardholderSurname
+     * @return \App\Structures\WithdrawResult
+     */
+    public function withdraw($login, $withdrawType,
+                             $sum, $comment,
+                             $targetField, $cardholderName,
+                             $cardholderSurname) {
+
+
+        switch ($withdrawType) {
+            case "wallet":
+                $result = Withdraw::toQiwiWallet($login, $targetField, "RUB", $sum, $comment);
+                break;
+
+            case "card":
+                $result = Withdraw::toCreditCard(
+                        $login, $targetField,
+                        $cardholderName, $cardholderSurname,
+                        $sum, "RUB", $comment);
+                break;
+
+            case "voucher":
+                $result = Withdraw::viaVoucher($login, $targetField, "RUB", $sum, $comment);
+                break;
+
+            default:
+                $result = new WithdrawResult();
+        }
+        return json_encode($result);
+
+    }
+
     public function withdrawTest($login) {
 
         $to = "+380960968460";
 
-//        $withdrawResult = Withdraw::toQiwiWallet($login, $to, "RUB", 2, "Monneyz");
+        //        $withdrawResult = Withdraw::toQiwiWallet($login, $to, "RUB", 2, "Monneyz");
         $withdrawResult = Withdraw::viaVoucher($login);
 
         return $withdrawResult;

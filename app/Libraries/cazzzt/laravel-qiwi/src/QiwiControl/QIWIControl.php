@@ -70,6 +70,7 @@ class QIWIControl {
     private $lastErrorNo;
     private $lastErrorStr;
     private $ua;
+    private $responseData;
 
     /**
      * Создает экземпляр класса
@@ -111,8 +112,11 @@ class QIWIControl {
         return $this->lastErrorStr;
     }
 
+    public function getResponseData() {
+        return $this->responseData;
+    }
+
     private function trace($msg) {
-        //        //Log::info("Error in lib: " . $msg);
         if ($this->debug) {
             echo $msg . "\n";
         }
@@ -1037,6 +1041,7 @@ class QIWIControl {
 
         Log::info("14: ");
         Log::info($content);
+        $this->responseData = $content;
 
         if ($this->ua->getStatus() !== 200 || !$content) {
             $this->trace("Failed to confirm payment");
@@ -1186,7 +1191,6 @@ class QIWIControl {
                 'type' => "Account",
                 'accountId' => "$currencyId"
         );
-
 
         if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
             $this->trace("[PAY] Failed to validate field.");

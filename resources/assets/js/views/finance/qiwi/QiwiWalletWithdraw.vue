@@ -16,15 +16,15 @@
             <div class="row">
                 <div class="col-sm-8">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Вывод средств с Qiwi кошелька ({{ form.login}})</div>
+                        <div class="panel-heading">Вывод средств с Qiwi кошелька ({{ form.login }})</div>
                         <div class="panel-body">
                             <div class="form-horizontal">
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">Название кошелька</label>
+                                    <label class="col-sm-4 control-label">Сумма</label>
                                     <div class="col-sm-8">
                                         <input type="text"
                                                class="form-control"
-                                               v-model="form.name">
+                                               v-model="form.sum">
                                     </div>
                                 </div>
 
@@ -32,7 +32,7 @@
                                     <label class="col-sm-4 control-label">Комментарий к переводу</label>
                                     <div class="col-sm-8">
                                         <textarea class="form-control"
-                                                  v-model="form.comments"></textarea>
+                                                  v-model="form.comment"></textarea>
                                     </div>
                                 </div>
 
@@ -42,7 +42,8 @@
                                             <label>
                                                 <input type="radio"
                                                        value="wallet"
-                                                       v-model="withdrawType">
+                                                       id="withdraw.wallet"
+                                                       v-model="switcher">
                                                 Перевод на Qiwi кошелек
                                             </label>
                                         </div>
@@ -55,7 +56,8 @@
                                             <label>
                                                 <input type="radio"
                                                        value="card"
-                                                       v-model="withdrawType">
+                                                       id="withdraw.card"
+                                                       v-model="switcher">
                                                 Перевод на банковскую карту
                                             </label>
                                         </div>
@@ -68,7 +70,8 @@
                                             <label>
                                                 <input type="radio"
                                                        value="voucher"
-                                                       v-model="withdrawType">
+                                                       id="withdraw.voucher"
+                                                       v-model="switcher">
                                                 Отправить ваучер
                                             </label>
                                         </div>
@@ -76,13 +79,36 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">Название кошелька</label>
+                                    <label class="col-sm-4 control-label">{{ label }}</label>
                                     <div class="col-sm-8">
                                         <input type="text"
                                                class="form-control"
-                                               v-model="form.name">
+                                               :placeholder="placeholder"
+                                               v-model="form.targetField">
                                     </div>
                                 </div>
+
+                                <template v-if="form.withdrawType=='card'">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Фамилия получателя</label>
+                                        <div class="col-sm-8">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   placeholder="SEMENOV"
+                                                   v-model="form.cardholderName">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Имя получателя</label>
+                                        <div class="col-sm-8">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   placeholder="SEMEN"
+                                                   v-model="form.cardholderSurname">
+                                        </div>
+                                    </div>
+                                </template>
 
 
                                 <div class="form-group">
@@ -96,12 +122,10 @@
 
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -112,34 +136,46 @@
          */
         data() {
             return {
+                types: {
+                    card: {
+                        "label": "Номер карты",
+                        "placeholder": "Например: 1234 5678 9012 3456"
+                    },
+                    wallet: {
+                        "label": "Номер кошелька",
+                        "placeholder": "Например: +71234567890"
+                    },
+                    voucher: {
+                        "label": "email получателя ваучера",
+//                        "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD"
+                        "placeholder": "Например: name.surname@gmail.com"
+                    },
+                },
+                switcher: "",
                 proxyServer: "",
+                label: "",
+                placeholder: "",
+                balance: 0,
 
                 form: new Form({
-                    useProxy: false,
-
+                    sum: 0,
+                    comment: "",
+                    targetField: "5168 7422 0767 3892",
+                    withdrawType: "",
+                    cardholderName: "VLAD",
+                    cardholderSurname: "GORBATKO",
 
                     login: this.$route.params.wallet
+
                 }),
             };
         },
+
         watch: {
-
-
-            cardNumber(val){
-                this.form.autoWithdrawalCardNumber = val.replace(/\s/g, '');
-            },
-
-            proxyServer(val) {
-                const data = val.split(':');
-
-                this.form.proxy.host = data[0];
-                this.form.proxy.port = data[1] ? data[1] : '';
-            },
-            proxyAuth(val) {
-                const data = val.split(':');
-
-                this.form.proxy.login = data.length ? data[0] : '';
-                this.form.proxy.password = data[1] ? data[1] : '';
+            switcher(val){
+                this.form.withdrawType = val;
+                this.label = this.types[val].label;
+                this.placeholder = this.types[val].placeholder;
             },
         },
 
@@ -155,91 +191,34 @@
              * Prepare the component.
              */
             prepareComponent() {
-                this.$nextTick(() => {
-                    $('.tooltip').removeClass('in');
-                });
-
-                // get settings of this wallet
+                this.initBalance();
+                this.switcher = "wallet";
+            },
+            proceed() {
+                console.log(this.form);
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/withdraw`, this.form)
+                    .then((data) => {
+                        console.log(data);
+                        let notificationType = data.status == 200 ? "success" : "danger";
+                        Bus.$emit('showNotification', notificationType, data.resultText);
+                        this.updateWallet(this.$route.params.wallet);
+                    });
+            },
+            initBalance(){
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`)
                     .then((response) => {
                         let data = response.data;
-                        console.log(data);
-                        this.loadAutoWithdrawalOptions(data.autoWithdrawTypes);
-                        this.loadWalletTypes(data.walletTypes);
-                        let settings = Object.assign(data.walletSettings, data.wallet);
-                        settings.proxy = data.proxy;
-                        this.loadSettings(settings);
-                        console.log(settings);
+                        this.form.sum = data.wallet.balance;
                     })
             },
-
-            proceed(){
-
-            },
-
-            loadAutoWithdrawalOptions(options){
-                options.map((option) => {
-                    this.form.autoWithdrawalOptions.push({value: option.slug, text: option.type})
-                });
-
-                this.form.autoWithdrawalType = this.form.autoWithdrawalOptions[1].value;
-            },
-
-            loadWalletTypes(types){
-                let form = this.form;
-                types.map((type) => {
-                    form.walletTypes.push({value: type.slug, text: type.name})
-                });
-
-                form.walletType = form.walletTypes[1].value;
-            },
-
-            loadSettings(settings){
-                let form = this.form;
-
-                this.proxyServer = settings.proxy.host === null
-                    ? ""
-                    : settings.proxy.host + ":" + settings.proxy.port;
-                this.proxyAuth = settings.proxy.login === null
-                    ? ""
-                    : settings.proxy.login + "" + ":" + settings.proxy.password;
-
-
-                form.name = settings.name;
-                form.comments = settings.comments;
-                form.useProxy = settings.use_proxy;
-                form.walletActive = settings.is_active;
-                form.alwaysOnline = settings.is_always_online === null ? false : settings.is_always_online;
-                form.balanceRecheckTimeout = settings.balance_recheck_timeout;
-                form.maximumBalance = settings.maximum_balance;
-                form.autoWithdrawalActive = settings.autoWithdrawal_active;
-                form.autoWithdrawalTimeout = settings.autoWithdrawal_minutes;
-                form.withdrawTarget = settings.autoWithdrawal_target;
-                form.usingVouchers = settings.using_vouchers;
-                form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
-                form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
-
-                if (settings.autoWithdrawal_card_number !== null) {
-                    let results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
-                    this.cardNumber = results.join(" ");
-                } else this.cardNumber = "";
-
-
-                // selects
-                let optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
-                form.autoWithdrawalType = form.autoWithdrawalOptions[optionId - 1].value;
-
-                form.walletType = this.form.walletTypes[settings.type_id - 1].value;
-            },
-
-            saveSettings(){
-                console.log(this.form);
-                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`, this.form)
+            updateWallet(login) {
+                let auth = {"login": login};
+                Dinero.post('/api/qiwi-wallets/update', new Form(auth))
                     .then((data) => {
                         console.log(data);
-                        Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
-                    });
-            }
+                        this.form.sum = data.balance;
+                    })
+            },
         }
     }
 </script>

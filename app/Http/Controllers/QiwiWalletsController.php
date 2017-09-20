@@ -36,7 +36,14 @@ class QiwiWalletsController extends Controller {
     }
 
     public function withdraw(Request $request) {
-        return $this->wallet->withdrawTest($request->login);
+        return $this->wallet->withdraw(
+                $request->login,
+                $request->withdrawType,
+                $request->sum,
+                $request->comment,
+                $request->targetField,
+                $request->cardholderName,
+                $request->cardholderSurname);
     }
 
     public function saveSettings(Request $request) {

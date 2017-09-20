@@ -26,3 +26,4 @@ Route::post('/qiwi-wallets/move', 'QiwiWalletsController@move');
 Route::get('/qiwi-wallets/{wallet}/report', 'Api\QiwiWalletsController@report');
 Route::get('/qiwi-wallets/{wallet}/settings', 'Api\QiwiWalletsController@settings');
 Route::post('/qiwi-wallets/{wallet}/settings', 'QiwiWalletsController@saveSettings');
+Route::post('/qiwi-wallets/{wallet}/withdraw', 'QiwiWalletsController@withdraw');
