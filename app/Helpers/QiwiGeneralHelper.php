@@ -11,31 +11,31 @@ use App\Cazzzt\Qiwi\QiwiControl\QIWIControl;
 
 
 class QiwiGeneralHelper {
-
     /**
      *  Get qiwi-controlling object from library
      * @param $login
-     * @param $password
-     * @param $useProxy
-     * @param $proxy array|object with host,port,login and password
      * @return QIWIControl
      */
-    public static function getQiwiControlObject($login, $password, $useProxy, $proxy = []) {
-        //        if (is_object($proxy)) $proxy = (array) $proxy;
-        if ($useProxy) {
+    public static function getQiwiControlObject($login) {
+        $wallet = QiwiWallet::where("login", $login)->first();
+        $proxy = $wallet->use_proxy ? Proxy::find($wallet->proxy_id) : null;
+
+        if ($wallet->useProxy) {
             $controlProxy = $proxy['host'] . ":" . $proxy['port'];
             $controlProxyAuth = $proxy['login'] . ":" . $proxy['password'];
-            $control = new QIWIControl($login, $password, "cookie_data", $controlProxy, $controlProxyAuth);
+            $control = new QIWIControl($login, $wallet->password, "cookie_data", $controlProxy, $controlProxyAuth);
         } else {
-            $control = new QIWIControl($login, $password);
+            $control = new QIWIControl($login, $wallet->password);
         }
+        $control->login();
 
         return $control;
     }
 
-    public static function getBalance($login, $password, $useProxy, $proxy) {
-        $control = QiwiGeneralHelper::getQiwiControlObject($login, $password, $useProxy, $proxy);
-        $control->login();
+
+    public static function getBalance($login) {
+        $control = QiwiGeneralHelper::getQiwiControlObject($login);
+
 
         return $control->loadBalance()['RUB'];
     }

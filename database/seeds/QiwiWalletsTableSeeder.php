@@ -15,12 +15,15 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
         DB::table('proxies')->insert([
                 "type" => ""
         ]);
+        DB::table('proxies')->insert([
+                "type" => ""
+        ]);
 
         DB::table('qiwi_wallets')->insert([
                 "type_id" => 1,
                 "name" => "Main Wallet",
                 "login" => "+380960968460",
-                "password" => "Kekroach2204",
+                "password" => "Crixalis2204",
                 "is_active" => 1,
                 "proxy_id" => 1,
 
@@ -39,6 +42,17 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+        DB::table('qiwi_wallets')->insert([
+                "type_id" => 1,
+                "name" => "Eugene Wallet",
+                "login" => "+380639720273",
+                "password" => "!%)@!((%Jack/15",
+                "is_active" => 1,
+                "proxy_id" => 3,
+
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
 
         DB::table('qiwi_wallet_settings')->insert([
                 "wallet_id" => 1,
@@ -47,6 +61,11 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
         ]);
         DB::table('qiwi_wallet_settings')->insert([
                 "wallet_id" => 2,
+                "balance_recheck_timeout" => 2,
+                "autoWithdrawal_type_id" => 2
+        ]);
+        DB::table('qiwi_wallet_settings')->insert([
+                "wallet_id" => 3,
                 "balance_recheck_timeout" => 2,
                 "autoWithdrawal_type_id" => 2
         ]);

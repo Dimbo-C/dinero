@@ -85,6 +85,7 @@
                                                class="form-control"
                                                :placeholder="placeholder"
                                                v-model="form.targetField">
+                                        <span class="help-block">{{ underTip}}</span>
                                     </div>
                                 </div>
 
@@ -139,22 +140,25 @@
                 types: {
                     card: {
                         "label": "Номер карты",
-                        "placeholder": "Например: 1234 5678 9012 3456"
+                        "placeholder": "Например: 1234 5678 9012 3456",
+                        "underTip": "Номер банковской карты, на которую вы хотите перевести деньги"
                     },
                     wallet: {
                         "label": "Номер кошелька",
-                        "placeholder": "Например: +71234567890"
+                        "placeholder": "Например: +71234567890",
+                        "underTip": "Номер кошелька, на который вы хотите перевести деньги"
                     },
                     voucher: {
-                        "label": "email получателя ваучера",
-//                        "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD"
-                        "placeholder": "Например: name.surname@gmail.com"
+                        "label": "Код ваучера для активации",
+                        "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD",
+                        "underTip": "Оставьте поле пустым, чтобы создать ваучер на указанную сумму"
                     },
                 },
                 switcher: "",
                 proxyServer: "",
                 label: "",
                 placeholder: "",
+                underTip: "",
                 balance: 0,
 
                 form: new Form({
@@ -176,6 +180,7 @@
                 this.form.withdrawType = val;
                 this.label = this.types[val].label;
                 this.placeholder = this.types[val].placeholder;
+                this.underTip = this.types[val].underTip;
             },
         },
 

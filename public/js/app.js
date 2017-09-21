@@ -12088,6 +12088,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -12098,22 +12099,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             types: {
                 card: {
                     "label": "Номер карты",
-                    "placeholder": "Например: 1234 5678 9012 3456"
+                    "placeholder": "Например: 1234 5678 9012 3456",
+                    "underTip": "Номер банковской карты, на которую вы хотите перевести деньги"
                 },
                 wallet: {
                     "label": "Номер кошелька",
-                    "placeholder": "Например: +71234567890"
+                    "placeholder": "Например: +71234567890",
+                    "underTip": "Номер кошелька, на который вы хотите перевести деньги"
                 },
                 voucher: {
-                    "label": "email получателя ваучера",
-                    //                        "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD"
-                    "placeholder": "Например: name.surname@gmail.com"
+                    "label": "Код ваучера для активации",
+                    "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD",
+                    "underTip": "Оставьте поле пустым, чтобы создать ваучер на указанную сумму"
                 }
             },
             switcher: "",
             proxyServer: "",
             label: "",
             placeholder: "",
+            underTip: "",
             balance: 0,
 
             form: new Form({
@@ -12136,6 +12140,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.form.withdrawType = val;
             this.label = this.types[val].label;
             this.placeholder = this.types[val].placeholder;
+            this.underTip = this.types[val].underTip;
         }
     },
 
@@ -12376,7 +12381,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.targetField = $event.target.value
       }
     }
-  })])]), _vm._v(" "), (_vm.form.withdrawType == 'card') ? [_c('div', {
+  }), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v(_vm._s(_vm.underTip))])])]), _vm._v(" "), (_vm.form.withdrawType == 'card') ? [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label"

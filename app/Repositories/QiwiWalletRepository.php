@@ -11,6 +11,7 @@ use App\QiwiWallet;
 use App\QiwiWalletSettings;
 use App\QiwiWalletType;
 use App\Services\Withdraw;
+use App\Structures\WithdrawResult;
 use Illuminate\Support\Facades\Log;
 
 class QiwiWalletRepository implements Contract {
@@ -83,7 +84,12 @@ class QiwiWalletRepository implements Contract {
                 break;
 
             case "voucher":
-                $result = Withdraw::viaVoucher($login, $targetField, "RUB", $sum, $comment);
+                if ($targetField != "") {
+                    $result = Withdraw::activateVoucher($login, $targetField);
+                } else {
+                    $result = Withdraw::purchaseVoucher($login, $sum);
+                }
+
                 break;
 
             default:
@@ -107,11 +113,7 @@ class QiwiWalletRepository implements Contract {
      * {@inheritdoc}
      */
     public function updateBalanceAndIncome($login) {
-
-        $wallet = $this->findByLogin($login);
-        $proxy = Proxy::find($wallet->proxy_id);
-
-        $balance = QiwiGeneralHelper::getBalance($login, $wallet->password, $wallet->useProxy, $proxy);
+        $balance = QiwiGeneralHelper::getBalance($login);
         $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
 
         $this->staticWallet->updateBalanceAndIncome($login, $balance, $monthIncome);

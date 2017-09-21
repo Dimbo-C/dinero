@@ -3,6 +3,7 @@
 namespace App\Cazzzt\Qiwi\QiwiControl;
 
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\DomCrawler\Crawler;
 
 if (!defined('PHP_VERSION_ID')) {
     $version = explode('.', PHP_VERSION);
@@ -1122,25 +1123,119 @@ class QIWIControl {
     }
 
     /**
-     * Перевести средства через ваучер (через email)
-     * @param $email
-     * @param $currency
+     * Приобрести ваучер
      * @param $amount
      * @param bool $comment
      * @return bool
      */
-    function sendVoucherViaEmail($email, $currency, $amount, $comment = false) {
+    function purchaseVoucher($amount, $comment = false) {
         $fields = array(
                 "account" => "708",
-                "to_account" => $email,
-                "to_account_type" => "email",
+            //                "to_account" => $email,
+            //                "to_account_type" => "email",
+                "to_account_type" => "undefined",
         );
-        if (!($currencyId = $this->currencyToId($currency))) {
-            $this->trace("[QIWI:TRANSFER] Currency $currency not supported.");
-            return false;
-        }
-        return $this->payProvider(QIWI_PROVIDER_EMAIL_VOUCHER, $currency, $amount, $fields, $comment);
+        return $this->payProvider(QIWI_PROVIDER_EMAIL_VOUCHER, "RUB", $amount, $fields, $comment);
     }
+
+    /**
+     * Активировать ваучер
+     * @param $code
+     */
+    public function activateVoucher($code) {
+        $validateProviderFieldsUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/form.action";
+        $post_data = json_encode(['code' => $code]);
+        $additionalHeaders = [
+                "Accept" => "text/html, */*; q=0.01",
+                "Content-Type" => "application/x-www-form-urlencoded; charset=UTF-8",
+                "Origin" => QIWI_URL_MAIN,
+                "Content-Length" => strlen($post_data),
+                "X-Requested-With" => "XMLHttpRequest"
+        ];
+        $content = $this->ua->request(
+                USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
+                false, $post_data, $additionalHeaders);
+
+        $token = $this->extractToken($content);
+        $post_data = "token=$token&code=$code";
+        $additionalHeaders["Content-Length"] = strlen($post_data);
+        $content = $this->ua->request(
+                USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
+                true, $post_data, $additionalHeaders);
+
+        $this->responseData = $content;
+
+        if ($this->isError($content)) {
+            $this->lastErrorStr = $this->extractError($content);
+        } else {
+            $this->activateVoucherPostAction($code);
+            $this->responseData = "Активация ваучера прошла успешно";
+        }
+    }
+
+    //    public function activateVoucher($code) {
+    //        $validateProviderFieldsUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/form.action";
+    //        $post_data = json_encode(['code' => $code]);
+    //        $additionalHeaders = [
+    //                "Accept" => "text/html, */*; q=0.01",
+    //                "Content-Type" => "application/x-www-form-urlencoded",
+    //                "Origin" => QIWI_URL_MAIN,
+    //                "Content-length" => strlen($post_data),
+    //                "X-Requested-With" => "XMLHttpRequest"
+    //        ];
+    //
+    //        $url = $validateProviderFieldsUrl;
+    //        $data = array('code' => $code);
+    //
+    //        // use key 'http' even if you send the request to https://...
+    //        $options = array(
+    //                'http' => array(
+    //                        'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+    //                        'method' => 'POST',
+    //                        'content' => http_build_query($data)
+    //                )
+    //        );
+    //        $context = stream_context_create($options);
+    //        $result = file_get_contents($url, false, $context);
+    //
+    //        $this->responseData = $result;
+    //    }
+
+    private function activateVoucherPostAction($code) {
+        $validateProviderFieldsUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/activate.action";
+        $post_data = json_encode(['code' => $code]);
+        $additionalHeaders = [
+                "Accept" => "application/json, text/javascript, */*; q=0.01",
+                "Content-Type" => "application/x-www-form-urlencoded; charset=UTF-8",
+                "Origin" => QIWI_URL_MAIN,
+                "Content-Length" => strlen($post_data),
+                "X-Requested-With" => "XMLHttpRequest"
+        ];
+        $this->ua->request(USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
+                false, $post_data, $additionalHeaders);
+    }
+
+    private function extractToken($html) {
+        $crawler = new Crawler($html);
+        $token = $crawler->filter("input[name='token']")->attr("value");
+
+        return $token;
+    }
+
+    private function isError($html) {
+        $crawler = new Crawler($html);
+        $successDivsNumber = $crawler->filter("div.right-text")->count();
+
+        return $successDivsNumber == 0;
+    }
+
+    private function extractError($html) {
+        $crawler = new Crawler($html);
+        $error = $crawler->filter("p:nth-child(2)")->first()->html();
+
+        return mb_convert_encoding($error, "ISO-8859-1", "UTF-8");
+    }
+
 
     /**
      * Оплатить провайдера
