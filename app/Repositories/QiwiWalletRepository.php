@@ -162,7 +162,7 @@ class QiwiWalletRepository implements Contract {
         Log::info($qiwiControl->getLastError());
         if (!$qiwiControl->login()) {
             $result['status'] = "failure";
-            $result['message'] = "Кошелек не найден в системе Qiwi" . $qiwiControl->getLastError();
+            $result['message'] = "Кошелек не найден в системе Qiwi " . $qiwiControl->getLastError();
 
             return $result;
         };
