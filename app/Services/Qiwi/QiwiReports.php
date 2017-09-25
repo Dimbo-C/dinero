@@ -54,7 +54,6 @@ trait QiwiReports {
                         $transaction->errorMessage = json_decode($node->filter('.IncomeWithExpend .operations .error')->attr('data-params'))->message;
                     }
 
-
                     return $transaction;
                 });
 
