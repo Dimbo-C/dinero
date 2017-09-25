@@ -72,6 +72,7 @@ class QIWIControl {
     private $lastErrorStr;
     private $ua;
     private $responseData;
+    public $debugData;
 
     /**
      * Создает экземпляр класса
@@ -1122,20 +1123,99 @@ class QIWIControl {
         return $this->payProvider(QIWI_PROVIDER_QIWI_WALLET, $currency, $amount, $fields, $comment);
     }
 
+
+    //    function purchaseVoucher($amount, $comment = false) {
+    //        $fields = array(
+    //                "account" => "708",
+    //                "to_account_type" => "undefined",
+    //        );
+    //        return $this->payProvider(QIWI_PROVIDER_EMAIL_VOUCHER, "RUB", $amount, $fields, $comment);
+    //    }
+
     /**
      * Приобрести ваучер
      * @param $amount
-     * @param bool $comment
      * @return bool
      */
-    function purchaseVoucher($amount, $comment = false) {
-        $fields = array(
+    function purchaseVoucher($amount) {
+        $purchaseVoucherFirstStepUrl = QIWI_URL_MAIN . "/user/sinap/api/terms/" . QIWI_PROVIDER_EMAIL_VOUCHER . "/payments/proxy.action";
+        $postData = $this->getPostDataForVoucherPurchase($amount);
+        $additionalHeaders = $this->getHeadersForVoucherPurchase($postData);
+        $paymentResponseJson = $this->ua->request(
+                USERAGENT_METHOD_POST, $purchaseVoucherFirstStepUrl,
+                false, $postData, $additionalHeaders);
+
+        // return if error (not nuff moneyz)
+        $paymentResponse = json_decode($paymentResponseJson);
+        if ($paymentResponse->data->status != 200) {
+            $this->responseData = $paymentResponseJson;
+            return false;
+        }
+
+        // extract transaction id from first request
+        $transactionId = $paymentResponse->data->body->transaction->id;
+
+        // prepare and send second (success request
+        $postData = "provider=" . QIWI_PROVIDER_EMAIL_VOUCHER
+                . "&transaction=$transactionId"
+                . "&cashback=false"
+                . "&binded=false"
+                . "&identification=true";
+        $additionalHeaders['Accept'] = "text/html, */*; q=0.01";
+        $additionalHeaders['Content-Type'] = "application/x-www-form-urlencoded; charset=UTF-8";
+        $additionalHeaders['Content-Length'] = strlen($postData);
+
+        $successResponseHtml = $this->ua->request(
+                USERAGENT_METHOD_POST, $purchaseVoucherFirstStepUrl,
+                false, $postData, $additionalHeaders);
+
+        $voucherCode = $this->extractVoucherCode($successResponseHtml);
+        $this->responseData = "Вы приобрели ваучер на сумму: $amount руб.Kод ваучера: $voucherCode";
+
+        return true;
+    }
+
+    private function extractVoucherCode($html) {
+        $crawler = new Crawler($html);
+        $codeLine = $crawler->filter("p")->first()->html();
+        $code = explode(":", $codeLine)[1];
+
+        return trim($code);
+    }
+
+    private function getPostDataForVoucherPurchase($amount) {
+        $fields = [
                 "account" => "708",
-            //                "to_account" => $email,
-            //                "to_account_type" => "email",
-                "to_account_type" => "undefined",
-        );
-        return $this->payProvider(QIWI_PROVIDER_EMAIL_VOUCHER, "RUB", $amount, $fields, $comment);
+                "to_account_type" => "undefind"
+        ];
+        $paymentMethod = [
+                "accountId" => "643",
+                "type" => "Account"
+        ];
+        $sum = [
+                "amount" => $amount,
+                "currency" => "643"
+        ];
+        $post_data = json_encode([
+                "comment" => "",
+                "fields" => $fields,
+                "id" => "" . round(microtime(true) * 1000),
+                "paymentMethod" => $paymentMethod,
+                "source" => "account_643",
+                "sum" => $sum
+        ]);
+
+        return $post_data;
+    }
+
+    private function getHeadersForVoucherPurchase($postData) {
+        return [
+                "Accept" => "application/vnd.qiwi.v2+json",
+                "Content-Type" => "application/json",
+                "Origin" => QIWI_URL_MAIN,
+                "Content-Length" => strlen($postData),
+                "X-Requested-With" => "XMLHttpRequest"
+        ];
     }
 
     /**
@@ -1145,32 +1225,38 @@ class QIWIControl {
     public function activateVoucher($code) {
         $validateProviderFieldsUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/form.action";
         $post_data = json_encode(['code' => $code]);
-        $additionalHeaders = [
-                "Accept" => "text/html, */*; q=0.01",
-                "Content-Type" => "application/x-www-form-urlencoded; charset=UTF-8",
-                "Origin" => QIWI_URL_MAIN,
-                "Content-Length" => strlen($post_data),
-                "X-Requested-With" => "XMLHttpRequest"
-        ];
-        $content = $this->ua->request(
+        $additionalHeaders = $this->getActivateVoucherHeaders($post_data);
+        $voucherActivationFirstResponseHtml = $this->ua->request(
                 USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
                 false, $post_data, $additionalHeaders);
 
-        $token = $this->extractToken($content);
+        $token = $this->extractToken($voucherActivationFirstResponseHtml);
         $post_data = "token=$token&code=$code";
         $additionalHeaders["Content-Length"] = strlen($post_data);
-        $content = $this->ua->request(
+        $voucherActivationSecondResponseHtml = $this->ua->request(
                 USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
                 true, $post_data, $additionalHeaders);
 
-        $this->responseData = $content;
-
-        if ($this->isError($content)) {
-            $this->lastErrorStr = $this->extractError($content);
+        if ($this->isErrorActivatingVoucher($voucherActivationSecondResponseHtml)) {
+            $this->lastErrorStr = $this->extractErrorFromVoucherActivation($voucherActivationSecondResponseHtml);
         } else {
-            $this->activateVoucherPostAction($code);
-            $this->responseData = "Активация ваучера прошла успешно";
+            $activationResult = $this->activateVoucherStepTwo($code);
+            if ($activationResult !== true) {
+                $this->lastErrorStr = $activationResult;
+            } else {
+                $this->responseData = "Активация ваучера прошла успешно";
+            }
         }
+    }
+
+    private function getActivateVoucherHeaders($postData) {
+        return [
+                "Accept" => "text/html, */*; q=0.01",
+                "Content-Type" => "application/x-www-form-urlencoded; charset=UTF-8",
+                "Origin" => QIWI_URL_MAIN,
+                "Content-Length" => strlen($postData),
+                "X-Requested-With" => "XMLHttpRequest"
+        ];
     }
 
     //    public function activateVoucher($code) {
@@ -1201,7 +1287,7 @@ class QIWIControl {
     //        $this->responseData = $result;
     //    }
 
-    private function activateVoucherPostAction($code) {
+    private function activateVoucherStepTwo($code) {
         $validateProviderFieldsUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/activate.action";
         $post_data = json_encode(['code' => $code]);
         $additionalHeaders = [
@@ -1211,8 +1297,16 @@ class QIWIControl {
                 "Content-Length" => strlen($post_data),
                 "X-Requested-With" => "XMLHttpRequest"
         ];
-        $this->ua->request(USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
+        $responseJson = $this->ua->request(USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
                 false, $post_data, $additionalHeaders);
+        $this->debugData = $responseJson;
+        $response = json_decode($responseJson);
+
+        if (isset($response->code) && isset($response->code->_name) && $response->code->_name == "ERROR") {
+            return $response->message;
+        } else {
+            return true;
+        }
     }
 
     private function extractToken($html) {
@@ -1222,14 +1316,14 @@ class QIWIControl {
         return $token;
     }
 
-    private function isError($html) {
+    private function isErrorActivatingVoucher($html) {
         $crawler = new Crawler($html);
         $successDivsNumber = $crawler->filter("div.right-text")->count();
 
         return $successDivsNumber == 0;
     }
 
-    private function extractError($html) {
+    private function extractErrorFromVoucherActivation($html) {
         $crawler = new Crawler($html);
         $error = $crawler->filter("p:nth-child(2)")->first()->html();
 

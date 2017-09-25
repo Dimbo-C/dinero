@@ -7,4 +7,6 @@ class WithdrawResult {
     public $resultText;
     public $error;
     public $customData;
+
+    public $debugData;
 }

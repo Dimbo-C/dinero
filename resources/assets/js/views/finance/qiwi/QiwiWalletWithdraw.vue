@@ -72,7 +72,7 @@
                                                        value="voucher"
                                                        id="withdraw.voucher"
                                                        v-model="switcher">
-                                                Отправить ваучер
+                                                Активировать/Купить ваучер
                                             </label>
                                         </div>
                                     </div>

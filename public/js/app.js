@@ -493,6 +493,42 @@ $('[data-toggle="tooltip"]').tooltip({
     container: 'body'
 });
 
+var test = {
+    "code": { "value": "0", "_name": "NORMAL" },
+    "data": {
+        "body": {
+            "id": "1506065852518",
+            "terms": "22496",
+            "fields": {
+                "browser_user_agent_crc": "10891c10",
+                "_meta_pay_partner": "",
+                "sinap-form-version": "qw::22496, 3",
+                "account": "708",
+                "to_account_type": "undefind"
+            },
+            "sum": { "amount": 5, "currency": "643" },
+            "transaction": { "id": "11371492716", "state": { "code": "Accepted" } },
+            "comment": "",
+            "source": "account_643"
+        }, "status": 200
+    },
+    "message": null,
+    "messages": null
+};
+
+var data = {
+    "code": { "value": "0", "_name": "NORMAL" },
+    "data": {
+        "body": {
+            "code": "QWPRC-220",
+            "message": '\u041D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u0441\u0440\u0435\u0434\u0441\u0442\u0432 '
+        },
+        "status": 400
+    },
+    "message": null,
+    "messages": null
+};
+
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */],
@@ -12354,7 +12390,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.switcher = "voucher"
       }
     }
-  }), _vm._v("\n                                            Отправить ваучер\n                                        ")])])])]), _vm._v(" "), _c('div', {
+  }), _vm._v("\n                                            Активировать/Купить ваучер\n                                        ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label"

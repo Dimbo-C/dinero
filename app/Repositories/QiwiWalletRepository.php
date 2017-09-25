@@ -69,8 +69,6 @@ class QiwiWalletRepository implements Contract {
                              $sum, $comment,
                              $targetField, $cardholderName,
                              $cardholderSurname) {
-
-
         switch ($withdrawType) {
             case "wallet":
                 $result = Withdraw::toQiwiWallet($login, $targetField, "RUB", $sum, $comment);
@@ -130,7 +128,6 @@ class QiwiWalletRepository implements Contract {
      */
     public function reportFor($query, $login) {
         $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
-
         $transactionProcessor = new TransactionProcessor($qiwi->reportForDateRange($query['start'], $query['end']));
         $report = [
                 'history' => $transactionProcessor->getTransactions(),
@@ -158,14 +155,19 @@ class QiwiWalletRepository implements Contract {
         $proxy = $proxyRepository->getLast();
 
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
-                $request->login, $request->password, $request->useProxy, $request['proxy']);
-
+                $request->login, $request->password,
+                $request->useProxy, $request['proxy']);
+        Log::info("before");
+        Log::info($qiwiControl->getLastError());
         if (!$qiwiControl->login()) {
             $result['status'] = "failure";
-            $result['message'] = "Кошелек не найден в системе Qiwi";
+            $result['message'] = "Кошелек не найден в системе Qiwi" . $qiwiControl->getLastError();
 
             return $result;
         };
+
+        Log::info("after");
+        Log::info($qiwiControl->getLastError());
 
         $request->typeId = (new QiwiWalletType())->findByType($request->type)->id;
         $request->balance = $qiwiControl->loadBalance()['RUB'];

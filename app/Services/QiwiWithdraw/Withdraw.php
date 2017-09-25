@@ -67,6 +67,7 @@ class Withdraw {
     private static function getNiceResult($qiwiControl) {
         $result = new WithdrawResult();
         $result->error = $qiwiControl->getLastError();
+        $result->debugData = $qiwiControl->debugData;
 
         if ($result->error != null) {
             $result->status = 400;
