@@ -39,7 +39,6 @@ class QiwiWalletUpdateHelper {
 
         if ($settings->is_always_online) {
             $control = QiwiGeneralHelper::getQiwiControlObject($login, $wallet->password, $wallet->use_proxy, $proxy);
-//            Log::info("Session for wallet " . $login . " refreshed");
             return $control->login();
         }
 

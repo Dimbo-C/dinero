@@ -48,9 +48,8 @@ class QiwiGeneralHelper {
 
     public static function getMonthIncome($login) {
         $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
-        Log::info("Qiwi:");
-        Log::info($qiwi->reportForDateRange(date("01.m.Y"), date("d.m.Y")));
         $tp = new TransactionProcessor($qiwi->reportForDateRange(date("01.m.Y"), date("d.m.Y")));
+        Log::info("After getmonthincome");
 
         return $tp->getIncome();
     }
@@ -63,15 +62,16 @@ class QiwiGeneralHelper {
      */
     public static function getQiwiInstance($login) {
         $wallet = QiwiWallet::where("login", $login)->first();
-
-        //        if (is_array($wallet)) $wallet = (object) $wallet;
-
+        Log::info("Before");
         if ($wallet->use_proxy) {
             $proxy = Proxy::find($wallet->proxy_id);
             $qiwi = new Qiwi($wallet->login, $wallet->password, $proxy->host . ":" . $proxy->port);
         } else {
             $qiwi = new Qiwi($wallet->login, $wallet->password);
         }
+        $qiwi->login();
+
+        Log::info("after qiwi instance");
 
         return $qiwi;
     }

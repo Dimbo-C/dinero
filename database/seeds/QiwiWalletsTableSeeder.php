@@ -27,7 +27,6 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
                 "is_active" => 1,
                 "proxy_id" => 1,
 
-
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
@@ -56,17 +55,17 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
 
         DB::table('qiwi_wallet_settings')->insert([
                 "wallet_id" => 1,
-                "balance_recheck_timeout" => 1,
+                "balance_recheck_timeout" => 0,
                 "autoWithdrawal_type_id" => 2
         ]);
         DB::table('qiwi_wallet_settings')->insert([
                 "wallet_id" => 2,
-                "balance_recheck_timeout" => 2,
+                "balance_recheck_timeout" => 0,
                 "autoWithdrawal_type_id" => 2
         ]);
         DB::table('qiwi_wallet_settings')->insert([
                 "wallet_id" => 3,
-                "balance_recheck_timeout" => 2,
+                "balance_recheck_timeout" => 0,
                 "autoWithdrawal_type_id" => 2
         ]);
 
