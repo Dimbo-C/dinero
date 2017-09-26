@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class QiwiGeneralHelper {
     /**
-     * @param $login
+     * @param string $login
      * @param string $password
      * @param bool $useProxy
      * @param array $proxy
@@ -32,8 +32,7 @@ class QiwiGeneralHelper {
             $controlProxyAuth = $proxy['login'] . ":" . $proxy['password'];
             $control = new QIWIControl(
                     $login, $password, "cookie_data",
-                    $controlProxy, $controlProxyAuth
-            );
+                    $controlProxy, $controlProxyAuth);
         } else {
             $control = new QIWIControl($login, $password);
         }

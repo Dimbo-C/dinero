@@ -920,6 +920,7 @@ class QIWIControl {
         ]);
         if ($this->ua->getStatus() !== 200 || !$data) {
             $this->lastErrorStr = "Failed to check provider identification for #$provider. Status=" . $this->ua->getStatus();
+            $this->debugData = $data;
             $this->trace($this->lastErrorStr);
             return false;
         }
@@ -1138,6 +1139,7 @@ class QIWIControl {
      * @return bool
      */
     function purchaseVoucher($amount) {
+        // initial request
         $purchaseVoucherFirstStepUrl = QIWI_URL_MAIN . "/user/sinap/api/terms/" . QIWI_PROVIDER_EMAIL_VOUCHER . "/payments/proxy.action";
         $postData = $this->getPostDataForVoucherPurchase($amount);
         $additionalHeaders = $this->getHeadersForVoucherPurchase($postData);
@@ -1155,7 +1157,10 @@ class QIWIControl {
         // extract transaction id from first request
         $transactionId = $paymentResponse->data->body->transaction->id;
 
-        // prepare and send second (success request
+        // url for second request
+        $purchaseVoucherSecondStepUrl = QIWI_URL_MAIN . "/payment/form/success.action";
+
+        // prepare and send second (success ) request
         $postData = "provider=" . QIWI_PROVIDER_EMAIL_VOUCHER
                 . "&transaction=$transactionId"
                 . "&cashback=false"
@@ -1166,11 +1171,13 @@ class QIWIControl {
         $additionalHeaders['Content-Length'] = strlen($postData);
 
         $successResponseHtml = $this->ua->request(
-                USERAGENT_METHOD_POST, $purchaseVoucherFirstStepUrl,
-                false, $postData, $additionalHeaders);
+                USERAGENT_METHOD_POST, $purchaseVoucherSecondStepUrl,
+                false, $postData, $additionalHeaders
+        );
+        $this->debugData = $successResponseHtml;
 
         $voucherCode = $this->extractVoucherCode($successResponseHtml);
-        $this->responseData = "Вы приобрели ваучер на сумму: $amount руб.Kод ваучера: $voucherCode";
+        $this->responseData = $voucherCode;
 
         return true;
     }
@@ -1219,10 +1226,11 @@ class QIWIControl {
     }
 
     /**
-     * Активировать ваучер
+     * Activate voucher
      * @param $code
      */
     public function activateVoucher($code) {
+        // send first request to get to confirmation
         $validateProviderFieldsUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/form.action";
         $post_data = json_encode(['code' => $code]);
         $additionalHeaders = $this->getActivateVoucherHeaders($post_data);
@@ -1230,6 +1238,7 @@ class QIWIControl {
                 USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
                 false, $post_data, $additionalHeaders);
 
+        // send activation request
         $token = $this->extractToken($voucherActivationFirstResponseHtml);
         $post_data = "token=$token&code=$code";
         $additionalHeaders["Content-Length"] = strlen($post_data);
@@ -1237,8 +1246,10 @@ class QIWIControl {
                 USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
                 true, $post_data, $additionalHeaders);
 
+        // response
         if ($this->isErrorActivatingVoucher($voucherActivationSecondResponseHtml)) {
-            $this->lastErrorStr = $this->extractErrorFromVoucherActivation($voucherActivationSecondResponseHtml);
+            $this->lastErrorStr = $this->extractErrorFromVoucherActivation(
+                    $voucherActivationSecondResponseHtml);
         } else {
             $activationResult = $this->activateVoucherStepTwo($code);
             if ($activationResult !== true) {

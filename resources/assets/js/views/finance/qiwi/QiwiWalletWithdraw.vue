@@ -86,8 +86,17 @@
                                                :placeholder="placeholder"
                                                v-model="form.targetField">
                                         <span class="help-block">{{ underTip}}</span>
+
+                                        <template v-if="this.responseText!=''">
+                                            <div class="alert alert-info">
+                                                <strong>
+                                                    {{ responseText }}
+                                                </strong>
+                                            </div>
+                                        </template>
                                     </div>
                                 </div>
+
 
                                 <template v-if="form.withdrawType=='card'">
                                     <div class="form-group">
@@ -160,6 +169,7 @@
                 placeholder: "",
                 underTip: "",
                 balance: 0,
+                responseText: "",
 
                 form: new Form({
                     sum: 0,
@@ -206,6 +216,7 @@
                         console.log(data);
                         let notificationType = data.status == 200 ? "success" : "danger";
                         Bus.$emit('showNotification', notificationType, data.resultText);
+                        this.responseText = data.resultText;
                         this.updateWallet(this.$route.params.wallet);
                     });
             },

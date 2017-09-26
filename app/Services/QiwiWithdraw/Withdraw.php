@@ -17,6 +17,7 @@ class Withdraw {
 
     public static function toCreditCard($login, $cardNumber, $firstName, $lastName, $sum, $currency, $comment = "") {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $qiwiControl->login();
         $qiwiControl->transferMoneyToCard($cardNumber, $firstName, $lastName, $sum, $currency, $comment);
 
         return self::getNiceResult($qiwiControl);
@@ -69,11 +70,11 @@ class Withdraw {
         $result->error = $qiwiControl->getLastError();
         $result->debugData = $qiwiControl->debugData;
 
+        $result->status = 200;
         if ($result->error != null) {
             $result->status = 400;
             $result->resultText = $result->error;
         } else {
-            $result->status = 200;
             if (json_decode($qiwiControl->getResponseData()) == null) {
                 $result->resultText = $qiwiControl->getResponseData();
             } else {
@@ -84,6 +85,7 @@ class Withdraw {
                 $result->resultText = $responseData->status == 200
                         ? "Операция успешна"
                         : trim($responseData->body->message);
+                $result->debugData = $responseData;
             }
         }
 

@@ -12089,6 +12089,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -12119,6 +12128,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             placeholder: "",
             underTip: "",
             balance: 0,
+            responseText: "",
 
             form: new Form({
                 sum: 0,
@@ -12168,6 +12178,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(data);
                 var notificationType = data.status == 200 ? "success" : "danger";
                 Bus.$emit('showNotification', notificationType, data.resultText);
+                _this.responseText = data.resultText;
                 _this.updateWallet(_this.$route.params.wallet);
             });
         },
@@ -12383,7 +12394,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "help-block"
-  }, [_vm._v(_vm._s(_vm.underTip))])])]), _vm._v(" "), (_vm.form.withdrawType == 'card') ? [_c('div', {
+  }, [_vm._v(_vm._s(_vm.underTip))]), _vm._v(" "), (this.responseText != '') ? [_c('div', {
+    staticClass: "alert alert-info"
+  }, [_c('strong', [_vm._v("\n                                                " + _vm._s(_vm.responseText) + "\n                                            ")])])] : _vm._e()], 2)]), _vm._v(" "), (_vm.form.withdrawType == 'card') ? [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label"
