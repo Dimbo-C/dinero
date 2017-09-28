@@ -1231,25 +1231,26 @@ class QIWIControl {
      */
     public function activateVoucher($code) {
         // send first request to get to confirmation
-        $validateProviderFieldsUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/form.action";
+        $voucherActivateUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/form.action";
         $post_data = json_encode(['code' => $code]);
         $additionalHeaders = $this->getActivateVoucherHeaders($post_data);
         $voucherActivationFirstResponseHtml = $this->ua->request(
-                USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
+                USERAGENT_METHOD_POST, $voucherActivateUrl,
                 false, $post_data, $additionalHeaders);
 
-        // send activation request
+        // extract token from response
         $token = $this->extractToken($voucherActivationFirstResponseHtml);
+
+        // send
         $post_data = "token=$token&code=$code";
         $additionalHeaders["Content-Length"] = strlen($post_data);
         $voucherActivationSecondResponseHtml = $this->ua->request(
-                USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
+                USERAGENT_METHOD_POST, $voucherActivateUrl,
                 true, $post_data, $additionalHeaders);
 
         // response
         if ($this->isErrorActivatingVoucher($voucherActivationSecondResponseHtml)) {
-            $this->lastErrorStr = $this->extractErrorFromVoucherActivation(
-                    $voucherActivationSecondResponseHtml);
+            $this->lastErrorStr = $this->extractErrorFromVoucherActivation($voucherActivationSecondResponseHtml);
         } else {
             $activationResult = $this->activateVoucherStepTwo($code);
             if ($activationResult !== true) {
@@ -1270,37 +1271,10 @@ class QIWIControl {
         ];
     }
 
-    //    public function activateVoucher($code) {
-    //        $validateProviderFieldsUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/form.action";
-    //        $post_data = json_encode(['code' => $code]);
-    //        $additionalHeaders = [
-    //                "Accept" => "text/html, */*; q=0.01",
-    //                "Content-Type" => "application/x-www-form-urlencoded",
-    //                "Origin" => QIWI_URL_MAIN,
-    //                "Content-length" => strlen($post_data),
-    //                "X-Requested-With" => "XMLHttpRequest"
-    //        ];
-    //
-    //        $url = $validateProviderFieldsUrl;
-    //        $data = array('code' => $code);
-    //
-    //        // use key 'http' even if you send the request to https://...
-    //        $options = array(
-    //                'http' => array(
-    //                        'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-    //                        'method' => 'POST',
-    //                        'content' => http_build_query($data)
-    //                )
-    //        );
-    //        $context = stream_context_create($options);
-    //        $result = file_get_contents($url, false, $context);
-    //
-    //        $this->responseData = $result;
-    //    }
 
     private function activateVoucherStepTwo($code) {
-        $validateProviderFieldsUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/activate.action";
-        $post_data = json_encode(['code' => $code]);
+        $activateVoucherStepTwoUrl = QIWI_URL_MAIN . "/user/eggs/activate/content/activate.action";
+        $post_data = "code=$code";
         $additionalHeaders = [
                 "Accept" => "application/json, text/javascript, */*; q=0.01",
                 "Content-Type" => "application/x-www-form-urlencoded; charset=UTF-8",
@@ -1308,9 +1282,9 @@ class QIWIControl {
                 "Content-Length" => strlen($post_data),
                 "X-Requested-With" => "XMLHttpRequest"
         ];
-        $responseJson = $this->ua->request(USERAGENT_METHOD_POST, $validateProviderFieldsUrl,
+        $responseJson = $this->ua->request(USERAGENT_METHOD_POST, $activateVoucherStepTwoUrl,
                 false, $post_data, $additionalHeaders);
-        $this->debugData = $responseJson;
+
         $response = json_decode($responseJson);
 
         if (isset($response->code) && isset($response->code->_name) && $response->code->_name == "ERROR") {
@@ -1328,10 +1302,9 @@ class QIWIControl {
     }
 
     private function isErrorActivatingVoucher($html) {
-        $crawler = new Crawler($html);
-        $successDivsNumber = $crawler->filter("div.right-text")->count();
+        $word = "Активировать";
 
-        return $successDivsNumber == 0;
+        return strpos($html, $word) === false;
     }
 
     private function extractErrorFromVoucherActivation($html) {

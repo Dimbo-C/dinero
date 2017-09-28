@@ -11,12 +11,20 @@ define("QIWI_TRANSACTION_MODE_INOUT", 3);
 
 class TransactionProcessor {
     private $transactions;
+    private $commissionEmptyMessage = "Отсутствует";
+    private $commentEmptyMessage = "Отсутствует";
+
 
     /**
      * TransactionProcessor constructor.
      * @param array $transactions
+     * @param null $commissionEmptyMessage
+     * @param null $commentEmptyMessage
      */
-    function __construct(array $transactions) {
+    function __construct(array $transactions, $commissionEmptyMessage = null, $commentEmptyMessage = null) {
+        if ($commissionEmptyMessage != null) $this->commissionEmptyMessage = $commissionEmptyMessage;
+        if ($commentEmptyMessage != null) $this->commentEmptyMessage = $commentEmptyMessage;
+
         $this->transactions = $transactions;
         $this->tidyTransactions();
     }
@@ -47,6 +55,7 @@ class TransactionProcessor {
         return $sum;
     }
 
+    // initially tidy transactions after they come in
     private function tidyTransactions() {
         $this->detectCurrency();
         $this->stripCurrency();
@@ -57,6 +66,7 @@ class TransactionProcessor {
     }
 
 
+    // get only specific transactions (in or out, or both)
     private function filterTransactions($mode) {
         $result = [];
         foreach ($this->transactions as $transaction) {
@@ -93,7 +103,9 @@ class TransactionProcessor {
     // put '-' as comment if there is none
     private function defaulterizeComments() {
         foreach ($this->transactions as &$transaction) {
-            $transaction->comment = $transaction->comment == "" ? "Отсутствует" : $transaction->comment;
+            $transaction->comment = $transaction->comment == ""
+                    ? $this->commentEmptyMessage
+                    : $transaction->comment;
         }
     }
 
@@ -106,7 +118,7 @@ class TransactionProcessor {
                     unset($this->transactions[$key]);
                 }
             }
-            if ($transaction->commission == "") $transaction->commission = "Отсутствует";
+            if ($transaction->commission == "") $transaction->commission = $this->commissionEmptyMessage;
         }
         $this->transactions = array_values($this->transactions);
     }
