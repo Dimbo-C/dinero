@@ -27,13 +27,9 @@
                                     <p>Ваш кошелек <span v-text="this.login"></span>
                                         успешно зарегистрирован в системе Dinero.</p>
                                     <p>Вы можете перейти к
-                                        <router-link to="/finance/qiwi/dashboard">
-                                            <a>списку</a>
-                                        </router-link>
+                                        <router-link to="/finance/qiwi/dashboard"><a>списку</a></router-link>
                                         кошельков или
-                                        <router-link to="/finance/qiwi/add-wallet">
-                                            <a>зарегистрировать</a>
-                                        </router-link>
+                                        <router-link to="/finance/qiwi/add-wallet"><a>зарегистрировать</a></router-link>
                                         новый кошелек.
                                     </p>
                                 </div>

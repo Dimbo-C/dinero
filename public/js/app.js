@@ -10355,10 +10355,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -12933,7 +12929,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         moveWallets: function moveWallets(wallets, fromId, toId) {
             var _this2 = this;
 
-            axios.post('/api/qiwi-wallets/move', { wallets: wallets, to: toId }).then(function () {
+            var ids = wallets.map(function (wallet) {
+                return wallet.id;
+            });
+            axios.post('/api/qiwi-wallets/move', { wallets: ids, to: toId }).then(function () {
                 var moveTo = _this2.walletsTypes.find(function (type) {
                     return type.id === toId;
                 });
@@ -13131,6 +13130,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -13172,12 +13173,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         item.month_income = data.monthIncome;
                     }
                 });
-            });
-        },
-        withdrawMoney: function withdrawMoney(login) {
-            var auth = { "login": login };
-            Dinero.post('/api/qiwi-wallets/withdraw', new Form(auth)).then(function (data) {
-                console.log(data);
             });
         }
     },
@@ -13308,15 +13303,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "data-toggle": "tooltip",
         "data-placement": "top",
         "title": "Обновить"
-      },
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-refresh fa-fw",
       on: {
         "click": function($event) {
           $event.stopPropagation();
           _vm.updateWallet(w.login)
         }
       }
-    }, [_c('i', {
-      staticClass: "fa fa-refresh fa-fw"
     })])]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('td', [_c('span', [_vm._v(_vm._s(_vm._f("currency")(w.month_income)))])]) : _vm._e(), _vm._v(" "), _c('td', {
       staticClass: "text-right"
     }, [_c('div', {

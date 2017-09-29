@@ -34,9 +34,11 @@
                         <td v-text="w.name"></td>
                         <td v-if="!isInactive">
                             <span :id="w.login">{{ w.balance | currency }}</span>
-                            <a data-toggle="tooltip" data-placement="top" title="Обновить"
-                               v-on:click.stop="updateWallet(w.login)">
-                                <i class="fa fa-refresh fa-fw"></i>
+                            <a data-toggle="tooltip"
+                               data-placement="top"
+                               title="Обновить">
+                                <i class="fa fa-refresh fa-fw"
+                                   v-on:click.stop="updateWallet(w.login)"></i>
                             </a>
                         </td>
                         <td v-if="!isInactive">
@@ -122,7 +124,9 @@
         },
         methods: {
             moveWallets () {
-                const moveFrom = this.isInactive ? this.selected[0].type_id : this.type.id;
+                const moveFrom = this.isInactive
+                    ? this.selected[0].type_id
+                    : this.type.id;
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
             },
             removeWallet(login){
@@ -142,15 +146,6 @@
                         }
                     )
             },
-            withdrawMoney(login){
-                let auth = {"login": login};
-                Dinero.post('/api/qiwi-wallets/withdraw', new Form(auth))
-                    .then((data) => {
-                            console.log(data);
-                        }
-                    )
-            }
-
         },
         computed: {
             firstDayOfTheMonth () {

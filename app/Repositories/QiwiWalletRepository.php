@@ -29,6 +29,7 @@ class QiwiWalletRepository implements Contract {
      * {@inheritdoc}
      */
     public function moveWalletsTo($ids, $to) {
+//        dd(QiwiWallet::whereIn('id', [5, 6, 7]));
         QiwiWallet::whereIn('id', $ids)->update(['type_id' => $to, 'is_active' => 1]);
     }
 

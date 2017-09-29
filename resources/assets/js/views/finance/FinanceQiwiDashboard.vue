@@ -107,7 +107,8 @@
                     })
             },
             moveWallets (wallets, fromId, toId) {
-                axios.post('/api/qiwi-wallets/move', {wallets, to: toId})
+                let ids = wallets.map((wallet) => wallet.id);
+                axios.post('/api/qiwi-wallets/move', {wallets: ids, to: toId})
                     .then(() => {
                         let moveTo = this.walletsTypes.find(type => type.id === toId);
 

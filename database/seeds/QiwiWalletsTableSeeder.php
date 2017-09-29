@@ -70,11 +70,11 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
         ]);
 
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             DB::table('qiwi_wallets')->insert([
                     "type_id" => 1,
                     "name" => "Eugene Wallet " . $i,
-                    "login" => "+380639720273",
+                    "login" => "+380639720273$i",
                     "password" => "!%)@!((%Jack/15",
                     "is_active" => 1,
                     "proxy_id" => 3,
