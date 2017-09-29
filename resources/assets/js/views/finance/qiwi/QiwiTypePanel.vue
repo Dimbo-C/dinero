@@ -143,7 +143,6 @@
                     ? this.selected[0].type_id
                     : this.type.id;
 
-                this.hueta(moveFrom);
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
             },
             removeWallet(login){

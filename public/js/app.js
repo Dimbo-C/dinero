@@ -13182,7 +13182,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(this.selected);
             var moveFrom = this.isInactive ? this.selected[0].type_id : this.type.id;
 
-            this.hueta(moveFrom);
             this.$emit('moveWallets', this.selected, moveFrom, this.moveTo);
         },
         removeWallet: function removeWallet(login) {
