@@ -27,6 +27,7 @@
                         <td>
                             <div class="checkbox m-none">
                                 <label class="p -t-xs">
+                                    <!--<input type="checkbox" v-model="selected" :value="w">-->
                                     <input type="checkbox" v-model="selected" :value="w">
                                 </label>
                             </div>
@@ -97,7 +98,10 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-default" @click="moveWallets()" :disabled="!selected.length">Выполнить
+                    <button class="btn btn-default"
+                            @click="moveWallets()"
+                            :disabled="!selected.length">
+                        Выполнить
                     </button>
                 </div>
             </div>
@@ -115,18 +119,31 @@
         data () {
             return {
                 moveTo: this.types.filter(t => t.id !== this.type.id)[0].id,
-                foo: ''
+                foo: '',
+                onChangeSelect: ""
             };
         },
         mounted () {
             this.items = this.type.wallets;
             console.log(this.items);
+
+        },
+        watch: {
+            selected(val){
+                console.log(this.selected);
+                console.log(val);
+
+//                Bus.$emit('func', data);
+            },
         },
         methods: {
             moveWallets () {
+                console.log(this.selected);
                 const moveFrom = this.isInactive
                     ? this.selected[0].type_id
                     : this.type.id;
+
+                this.hueta(moveFrom);
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
             },
             removeWallet(login){

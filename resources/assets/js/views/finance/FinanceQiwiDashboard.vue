@@ -59,6 +59,7 @@
             <qiwi-type-panel :type="inactive"
                              :types="walletsTypes"
                              :exclude="'spent'"
+                             @func="func"
                              :is-inactive="true"
                              @moveWallets="moveWallets">
             </qiwi-type-panel>
@@ -67,6 +68,7 @@
 </template>
 
 <script>
+    import Table from '../../mixins/table';
     import QiwiTypePanel from './qiwi/QiwiTypePanel.vue';
 
     export default {
@@ -88,15 +90,21 @@
                 searchQuery: '',
                 walletsIsLoaded: false,
                 walletsTypes: null,
+
+                hui: []
             };
         },
         watch: {
-
             filter () {
 
             }
         },
         methods: {
+
+            func(arg){
+                console.log(arg);
+
+            },
             fetchWallets () {
                 axios.get('/api/qiwi-wallets')
                     .then((response) => {
@@ -106,7 +114,9 @@
                         Bus.$emit('initTooltip');
                     })
             },
+
             moveWallets (wallets, fromId, toId) {
+                // convert array of wallets entities to array ids
                 let ids = wallets.map((wallet) => wallet.id);
                 axios.post('/api/qiwi-wallets/move', {wallets: ids, to: toId})
                     .then(() => {
@@ -122,13 +132,13 @@
                             w.is_active = 1;
                             moveTo.wallets.push(w)
                         });
-
                     });
             },
 
             massAction () {
                 console.log(this.massActionValue);
-                console.log(this.selected);
+                console.log(this.$children);
+                console.log(this.$children[0].$attrs);
             },
             removeFromType (wallets, fromId) {
 
@@ -148,22 +158,6 @@
 
                 return inactive;
             },
-
-//      filteredData () {
-//        let filterKey = this.searchQuery && this.searchQuery.toLowerCase();
-//        let data = this.walletsTypes;
-//        if (filterKey) {
-//          data.forEach((t) => {
-//            t.wallets = t.wallets.filter((row) => {
-//              return Object.keys(row).some((key) => {
-//                return String(row[key]).toLowerCase().indexOf(filterKey) > -1
-//              })
-//            })
-//          });
-//        }
-//
-//        return data
-//      }
         },
     };
 </script>

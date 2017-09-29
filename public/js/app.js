@@ -12817,8 +12817,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue__ = __webpack_require__(233);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__mixins_table__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__qiwi_QiwiTypePanel_vue__ = __webpack_require__(233);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__qiwi_QiwiTypePanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__qiwi_QiwiTypePanel_vue__);
 //
 //
 //
@@ -12887,11 +12889,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { QiwiTypePanel: __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue___default.a },
+    components: { QiwiTypePanel: __WEBPACK_IMPORTED_MODULE_1__qiwi_QiwiTypePanel_vue___default.a },
     mounted: function mounted() {
         this.fetchWallets();
     },
@@ -12908,7 +12912,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             searchQuery: '',
             walletsIsLoaded: false,
-            walletsTypes: null
+            walletsTypes: null,
+
+            hui: []
         };
     },
 
@@ -12916,6 +12922,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         filter: function filter() {}
     },
     methods: {
+        func: function func(arg) {
+            console.log(arg);
+        },
         fetchWallets: function fetchWallets() {
             var _this = this;
 
@@ -12929,6 +12938,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         moveWallets: function moveWallets(wallets, fromId, toId) {
             var _this2 = this;
 
+            // convert array of wallets entities to array ids
             var ids = wallets.map(function (wallet) {
                 return wallet.id;
             });
@@ -12955,7 +12965,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         massAction: function massAction() {
             console.log(this.massActionValue);
-            console.log(this.selected);
+            console.log(this.$children);
+            console.log(this.$children[0].$attrs);
         },
         removeFromType: function removeFromType(wallets, fromId) {}
     },
@@ -13132,6 +13143,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -13145,7 +13160,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             moveTo: this.types.filter(function (t) {
                 return t.id !== _this.type.id;
             })[0].id,
-            foo: ''
+            foo: '',
+            onChangeSelect: ""
         };
     },
     mounted: function mounted() {
@@ -13153,9 +13169,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(this.items);
     },
 
+    watch: {
+        selected: function selected(val) {
+            console.log(this.selected);
+            console.log(val);
+
+            //                Bus.$emit('func', data);
+        }
+    },
     methods: {
         moveWallets: function moveWallets() {
+            console.log(this.selected);
             var moveFrom = this.isInactive ? this.selected[0].type_id : this.type.id;
+
+            this.hueta(moveFrom);
             this.$emit('moveWallets', this.selected, moveFrom, this.moveTo);
         },
         removeWallet: function removeWallet(login) {
@@ -13412,7 +13439,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.moveWallets()
       }
     }
-  }, [_vm._v("Выполнить\n                ")])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                    Выполнить\n                ")])])]), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   })])])
 },staticRenderFns: []}
@@ -13540,6 +13567,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "is-inactive": true
     },
     on: {
+      "func": _vm.func,
       "moveWallets": _vm.moveWallets
     }
   })], 2) : _vm._e()], 1)
