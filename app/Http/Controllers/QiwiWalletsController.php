@@ -31,6 +31,10 @@ class QiwiWalletsController extends Controller {
         return $this->wallet->createWallet($request);
     }
 
+    public function remove($login) {
+        return $this->wallet->remove($login);
+    }
+
     public function updateBalanceAndIncome(Request $request) {
         return $this->wallet->updateBalanceAndIncome($request->login);
     }

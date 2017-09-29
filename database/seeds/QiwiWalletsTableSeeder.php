@@ -69,5 +69,19 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
                 "autoWithdrawal_type_id" => 2
         ]);
 
+
+        for ($i = 0; $i < 50; $i++) {
+            DB::table('qiwi_wallets')->insert([
+                    "type_id" => 1,
+                    "name" => "Eugene Wallet " . $i,
+                    "login" => "+380639720273",
+                    "password" => "!%)@!((%Jack/15",
+                    "is_active" => 1,
+                    "proxy_id" => 3,
+
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+        }
     }
 }

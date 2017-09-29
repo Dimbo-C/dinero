@@ -41,16 +41,6 @@
                         </td>
                         <td v-if="!isInactive">
                             <span>{{ w.month_income | currency }}</span>
-                            <!--<router-link :to="'/finance/qiwi/' + w.login + '/settings'"-->
-                            <!--class="btn btn-default"-->
-                            <!--data-toggle="tooltip"-->
-                            <!--data-placement="top"-->
-                            <!--title="Настройки">-->
-                            <!--<i class="fa fa-cog"></i>-->
-                            <!--</router-link>-->
-                            <!--<a href="#" data-toggle="tooltip" data-placement="top" title="Вывести"-->
-                            <!--v-on:click.stop="withdrawMoney(w.login)">-->
-                            <!--</a>-->
                         </td>
                         <td class="text-right">
                             <div class="btn-group" role="group">
@@ -74,6 +64,13 @@
                                              data-placement="top"
                                              title="Настройки">
                                     <i class="fa fa-cog"></i>
+                                </router-link>
+                                <router-link :to="'/finance/qiwi/remove/' + w.login "
+                                             class="btn btn-default"
+                                             data-toggle="tooltip"
+                                             data-placement="top"
+                                             title="Удалить кошелек">
+                                    <i class="fa fa-times"></i>
                                 </router-link>
                             </div>
                         </td>
@@ -128,6 +125,9 @@
                 const moveFrom = this.isInactive ? this.selected[0].type_id : this.type.id;
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
             },
+            removeWallet(login){
+                this.$router.push({path: `/finance/qiwi/remove/${login}`});
+            },
             updateWallet(login) {
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update', new Form(auth))
@@ -147,7 +147,6 @@
                 Dinero.post('/api/qiwi-wallets/withdraw', new Form(auth))
                     .then((data) => {
                             console.log(data);
-
                         }
                     )
             }

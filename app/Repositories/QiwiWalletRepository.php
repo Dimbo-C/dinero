@@ -41,18 +41,10 @@ class QiwiWalletRepository implements Contract {
         return $wallet ?: null;
     }
 
-    public function withdrawMoney($cardNumber, $firstName, $lastName, $sum, $currency, $comment) {
-        // test lokodoco
-        $cardNumber = "5168 7551 0409 9169";
-        $lastName = "Cherkashyn";
-        //        $lastName="Черкашин";
-        $firstName = "Dmitriy";
-        //        $firstName="Дмитрий";
-        $control = new QIWIControl("+380960968460", "Kekroach2204");
-        $transferResult = $control->transferMoneyToCard($cardNumber, $firstName, $lastName, $sum, $currency, $comment);
-        Log::info("Transfer result: ");
-        Log::info($transferResult);
-        Log::info("Error: " . $control->getLastError());
+    public function remove($login) {
+        $deleted = QiwiWallet::where("login", $login)->delete();
+
+        return $deleted;
     }
 
     /**
@@ -95,16 +87,6 @@ class QiwiWalletRepository implements Contract {
         }
         return json_encode($result);
 
-    }
-
-    public function withdrawTest($login) {
-
-        $to = "+380960968460";
-
-        //        $withdrawResult = Withdraw::toQiwiWallet($login, $to, "RUB", 2, "Monneyz");
-        $withdrawResult = Withdraw::viaVoucher($login);
-
-        return $withdrawResult;
     }
 
     /**

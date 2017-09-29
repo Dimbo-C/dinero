@@ -15,6 +15,7 @@ import FinanceBitcoin from './../views/finance/FinanceBitcoin.vue'
 import FinanceBitcoinHistory from './../views/finance/FinanceBitcoinHistory.vue'
 import FinanceQiwiWallet from './../views/finance/FinanceQiwiWallet.vue'
 import AddQiwiWallet from './../views/finance/qiwi/AddQiwiWallet.vue'
+import RemoveQiwiWallet from './../views/finance/qiwi/RemoveQiwiWallet.vue'
 import AddQiwiWalletSuccess from './../views/finance/qiwi/AddQiwiWalletSuccess.vue'
 import QiwiWalletHistory from './../views/finance/qiwi/QiwiWalletHistory.vue'
 import QiwiWalletSettings from './../views/finance/qiwi/QiwiWalletSettings.vue'
@@ -41,6 +42,7 @@ const router = new Router({
         {path: '/finance/qiwi', component: FinanceQiwiWallet},
         {path: '/finance/qiwi/add-wallet', component: AddQiwiWallet},
         {path: '/finance/qiwi/add-wallet-success/:wallet', component: AddQiwiWalletSuccess},
+        {path: '/finance/qiwi/remove/:wallet', component: RemoveQiwiWallet},
         {path: '/finance/qiwi/:wallet/history', component: QiwiWalletHistory},
         {path: '/finance/qiwi/:wallet/settings', component: QiwiWalletSettings},
         {path: '/finance/qiwi/:wallet/withdraw', component: QiwiWalletWithdraw},

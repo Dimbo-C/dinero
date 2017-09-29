@@ -60,16 +60,4 @@ interface QiwiWalletRepository {
      */
     public function updateSettings($data);
 
-    /**
-     * withdraw moneyz
-     * @param $cardNumber
-     * @param $firstName
-     * @param $lastName
-     * @param $sum
-     * @param $cur
-     * @param $comment
-     * @return mixed
-     */
-    public function withdrawMoney($cardNumber, $firstName, $lastName, $sum, $cur, $comment);
-
 }
