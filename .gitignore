@@ -6,3 +6,4 @@ vendor/
 composer.lock
 public/cookie_data
 package-lock.json
+.idea
