@@ -58,6 +58,10 @@ class QiwiWalletsController extends Controller {
         return $this->wallet->withdrawMoneys($request);
     }
 
+    public function massAction(Request $request) {
+        return $this->wallet->massAction($request->action, $request->wallets);
+    }
+
     public function test(Request $request) {
 
     }

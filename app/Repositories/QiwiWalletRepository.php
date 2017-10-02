@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Cazzzt\Qiwi\QiwiControl\QIWIControl;
 use App\Contracts\Repositories\QiwiWalletRepository as Contract;
 use App\Helpers\QiwiGeneralHelper;
+use App\Processors\MassActionProcessor;
 use App\Processors\TransactionProcessor;
 use App\Proxy;
 use App\QiwiWallet;
@@ -141,17 +142,13 @@ class QiwiWalletRepository implements Contract {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
                 $request->login, $request->password,
                 $request->useProxy, $request['proxy']);
-        Log::info("before");
-        Log::info($qiwiControl->getLastError());
+
         if (!$qiwiControl->login()) {
             $result['status'] = "failure";
             $result['message'] = "Кошелек не найден в системе Qiwi " . $qiwiControl->getLastError();
 
             return $result;
         };
-
-        Log::info("after");
-        Log::info($qiwiControl->getLastError());
 
         $request->typeId = (new QiwiWalletType())->findByType($request->type)->id;
         $request->balance = $qiwiControl->loadBalance()['RUB'];
@@ -187,6 +184,17 @@ class QiwiWalletRepository implements Contract {
         $this->updateWalletSettings($data, $data->login);
     }
 
+    /**
+     * @param $action string
+     * @param $wallets array
+     * @return mixed|bool
+     */
+    public function massAction($action, $wallets) {
+        $map = new MassActionProcessor($action, $wallets);
+return $wallets;
+        return strval($map->execute());
+    }
+
     private function findByLogin($login) {
         $wallet = QiwiWallet::where('login', $login)->first();
 
@@ -207,9 +215,11 @@ class QiwiWalletRepository implements Contract {
         $wallet->is_active = $isActive;
         $wallet->type_id = $typeId;
         $wallet->use_proxy = $useProxy;
+
         $wallet->save();
 
         return $wallet;
     }
+
 
 }

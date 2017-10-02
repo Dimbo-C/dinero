@@ -18,6 +18,10 @@ class QiwiWallet extends Model {
         return $this->belongsTo(QiwiWalletType::class);
     }
 
+    public function deleteByIds($ids) {
+        return $this->destroy($ids);
+    }
+
     /**
      * @param $data
      * @param null $proxyId

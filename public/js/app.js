@@ -322,19 +322,25 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(185),
-  /* template */
-  __webpack_require__(186),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(185)
+/* template */
+var __vue_template__ = __webpack_require__(186)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/TakeBitCoinModal.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\TakeBitCoinModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TakeBitCoinModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -345,9 +351,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8b8fc3a8", Component.options)
+    hotAPI.createRecord("data-v-1290b408", Component.options)
   } else {
-    hotAPI.reload("data-v-8b8fc3a8", Component.options)
+    hotAPI.reload("data-v-1290b408", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -362,19 +368,25 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(187),
-  /* template */
-  __webpack_require__(188),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(187)
+/* template */
+var __vue_template__ = __webpack_require__(188)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/SendBitcoinModal.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\SendBitcoinModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SendBitcoinModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -385,9 +397,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-52a73166", Component.options)
+    hotAPI.createRecord("data-v-2f04fd29", Component.options)
   } else {
-    hotAPI.reload("data-v-52a73166", Component.options)
+    hotAPI.reload("data-v-2f04fd29", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -730,19 +742,25 @@ module.exports = bus;
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(268),
-  /* template */
-  __webpack_require__(269),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(268)
+/* template */
+var __vue_template__ = __webpack_require__(269)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/components/Nav.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Nav.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Nav.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -753,9 +771,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-07e84d6c", Component.options)
+    hotAPI.createRecord("data-v-09a3a726", Component.options)
   } else {
-    hotAPI.reload("data-v-07e84d6c", Component.options)
+    hotAPI.reload("data-v-09a3a726", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -3446,19 +3464,25 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  null,
-  /* template */
-  __webpack_require__(144),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(144)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/NotFound.vue"
+Component.options.__file = "resources\\assets\\js\\views\\NotFound.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] NotFound.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -3469,9 +3493,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-45f64260", Component.options)
+    hotAPI.createRecord("data-v-2ac6a6a8", Component.options)
   } else {
-    hotAPI.reload("data-v-45f64260", Component.options)
+    hotAPI.reload("data-v-2ac6a6a8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -3485,14 +3509,19 @@ module.exports = Component.exports
 /* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._v("\n    Страниц не найдена\n")])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._v("\n    Страниц не найдена\n")])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-45f64260", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-2ac6a6a8", module.exports)
   }
 }
 
@@ -3501,19 +3530,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  null,
-  /* template */
-  __webpack_require__(146),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(146)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/Dashboard.vue"
+Component.options.__file = "resources\\assets\\js\\views\\Dashboard.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Dashboard.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -3524,9 +3559,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-57e86903", Component.options)
+    hotAPI.createRecord("data-v-056b52b2", Component.options)
   } else {
-    hotAPI.reload("data-v-57e86903", Component.options)
+    hotAPI.reload("data-v-056b52b2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -3540,21 +3575,29 @@ module.exports = Component.exports
 /* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-home",
-      "title": "Инфо. панель"
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_vm._v("\n        Инфо.панель\n    ")])], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("page-header", { attrs: { icon: "fa-home", title: "Инфо. панель" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _vm._v("\n        Инфо.панель\n    ")
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-57e86903", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-056b52b2", module.exports)
   }
 }
 
@@ -3563,19 +3606,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(148),
-  /* template */
-  __webpack_require__(155),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(148)
+/* template */
+var __vue_template__ = __webpack_require__(155)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/admins/own/Own.vue"
+Component.options.__file = "resources\\assets\\js\\views\\admins\\own\\Own.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Own.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -3586,9 +3635,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-de3f715a", Component.options)
+    hotAPI.createRecord("data-v-b6f57fa2", Component.options)
   } else {
-    hotAPI.reload("data-v-de3f715a", Component.options)
+    hotAPI.reload("data-v-b6f57fa2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -3754,19 +3803,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(150),
-  /* template */
-  __webpack_require__(151),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(150)
+/* template */
+var __vue_template__ = __webpack_require__(151)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/admins/own/AddOwnAdminModal.vue"
+Component.options.__file = "resources\\assets\\js\\views\\admins\\own\\AddOwnAdminModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AddOwnAdminModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -3777,9 +3832,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7fec70a6", Component.options)
+    hotAPI.createRecord("data-v-6cb3bd4a", Component.options)
   } else {
-    hotAPI.reload("data-v-7fec70a6", Component.options)
+    hotAPI.reload("data-v-6cb3bd4a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -3957,255 +4012,347 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal fade",
-    attrs: {
-      "id": "modal-add-own-admin",
-      "tabindex": "-1",
-      "role": "dialog"
-    }
-  }, [_c('div', {
-    staticClass: "modal-dialog"
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "tab-content"
-  }, [_c('div', {
-    staticClass: "tab-pane active",
-    attrs: {
-      "role": "tabpanel",
-      "id": "modal-add-own-admin-credentials"
-    }
-  }, [_c('div', {
-    staticClass: "modal-body p-b-none"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Логин")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.login),
-      expression: "form.login"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "autofocus": "",
-      "required": ""
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: { id: "modal-add-own-admin", tabindex: "-1", role: "dialog" }
     },
-    domProps: {
-      "value": (_vm.form.login)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.login = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Пароль")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.password),
-      expression: "form.password"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.form.password)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.password = $event.target.value
-      }
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer border-none"
-  }, [_c('button', {
-    staticClass: "btn btn-default pull-left",
-    attrs: {
-      "data-dismiss": "modal"
-    }
-  }, [_vm._v("Отменить")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary pull-right",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.changeTabTo('info')
-      }
-    }
-  }, [_vm._v("Далее")])])]), _vm._v(" "), _c('div', {
-    staticClass: "tab-pane",
-    attrs: {
-      "role": "tabpanel",
-      "id": "info"
-    }
-  }, [_c('div', {
-    staticClass: "modal-body p-b-none"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Права")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.role),
-      expression: "form.role"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.form.role = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.roles), function(role) {
-    return _c('option', {
-      domProps: {
-        "value": role.value
-      }
-    }, [_vm._v("\n                                            " + _vm._s(role.text) + "\n                                        ")])
-  }))])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Баланс, руб.")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.balance),
-      expression: "form.balance"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.form.balance)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.balance = $event.target.value
-      }
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer border-none"
-  }, [_c('button', {
-    staticClass: "btn btn-default pull-left",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.changeTabTo('modal-add-own-admin-credentials')
-      }
-    }
-  }, [_vm._v("Назад")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary pull-right",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.add()
-      }
-    }
-  }, [_vm._v("Добавить администратора")])])])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-header"
-  }, [_c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "modal",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
-    staticClass: "modal-title"
-  }, [_vm._v("Добавить администратора")]), _vm._v(" "), _c('div', {
-    staticClass: "form-wizard m-t-md"
-  }, [_c('ul', {
-    staticClass: "btn-group btn-group-justified",
-    attrs: {
-      "role": "tablist"
-    }
-  }, [_c('li', {
-    staticClass: "active btn btn-default disabled",
-    attrs: {
-      "role": "presentation"
-    }
-  }, [_c('a', {
-    staticClass: "hidden",
-    attrs: {
-      "href": "#modal-add-own-admin-credentials",
-      "data-toggle": "tab"
-    }
-  }), _vm._v("\n                            Базовая информация\n                        ")]), _vm._v(" "), _c('li', {
-    staticClass: "btn btn-default disabled",
-    attrs: {
-      "role": "presentation"
-    }
-  }, [_c('a', {
-    staticClass: "hidden",
-    attrs: {
-      "href": "#info",
-      "data-toggle": "tab"
-    }
-  }), _vm._v("\n                            Корпоративная информация\n                        ")])])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Проект")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('select', {
-    staticClass: "form-control"
-  }, [_c('option')])])])
-}]}
-module.exports.render._withStripped = true
+    [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "tab-content" }, [
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane active",
+                attrs: {
+                  role: "tabpanel",
+                  id: "modal-add-own-admin-credentials"
+                }
+              },
+              [
+                _c("div", { staticClass: "modal-body p-b-none" }, [
+                  _c("div", { staticClass: "form-horizontal" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Логин")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.login,
+                              expression: "form.login"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", autofocus: "", required: "" },
+                          domProps: { value: _vm.form.login },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.login = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Пароль")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.password,
+                              expression: "form.password"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", required: "" },
+                          domProps: { value: _vm.form.password },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.password = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer border-none" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default pull-left",
+                      attrs: { "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Отменить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary pull-right",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.changeTabTo("info")
+                        }
+                      }
+                    },
+                    [_vm._v("Далее")]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane",
+                attrs: { role: "tabpanel", id: "info" }
+              },
+              [
+                _c("div", { staticClass: "modal-body p-b-none" }, [
+                  _c("div", { staticClass: "form-horizontal" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Права")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.role,
+                                expression: "form.role"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.form.role = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          _vm._l(_vm.roles, function(role) {
+                            return _c(
+                              "option",
+                              { domProps: { value: role.value } },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(role.text) +
+                                    "\n                                        "
+                                )
+                              ]
+                            )
+                          })
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Баланс, руб.")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.balance,
+                              expression: "form.balance"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", required: "" },
+                          domProps: { value: _vm.form.balance },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.balance = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer border-none" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default pull-left",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.changeTabTo("modal-add-own-admin-credentials")
+                        }
+                      }
+                    },
+                    [_vm._v("Назад")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary pull-right",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.add()
+                        }
+                      }
+                    },
+                    [_vm._v("Добавить администратора")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [
+        _vm._v("Добавить администратора")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-wizard m-t-md" }, [
+        _c(
+          "ul",
+          {
+            staticClass: "btn-group btn-group-justified",
+            attrs: { role: "tablist" }
+          },
+          [
+            _c(
+              "li",
+              {
+                staticClass: "active btn btn-default disabled",
+                attrs: { role: "presentation" }
+              },
+              [
+                _c("a", {
+                  staticClass: "hidden",
+                  attrs: {
+                    href: "#modal-add-own-admin-credentials",
+                    "data-toggle": "tab"
+                  }
+                }),
+                _vm._v(
+                  "\n                            Базовая информация\n                        "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "btn btn-default disabled",
+                attrs: { role: "presentation" }
+              },
+              [
+                _c("a", {
+                  staticClass: "hidden",
+                  attrs: { href: "#info", "data-toggle": "tab" }
+                }),
+                _vm._v(
+                  "\n                            Корпоративная информация\n                        "
+                )
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { staticClass: "col-md-4 control-label" }, [
+        _vm._v("Проект")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("select", { staticClass: "form-control" }, [_c("option")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-7fec70a6", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-6cb3bd4a", module.exports)
   }
 }
 
@@ -4214,19 +4361,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(153),
-  /* template */
-  __webpack_require__(154),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(153)
+/* template */
+var __vue_template__ = __webpack_require__(154)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/admins/own/AddCoWorkerModal.vue"
+Component.options.__file = "resources\\assets\\js\\views\\admins\\own\\AddCoWorkerModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AddCoWorkerModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -4237,9 +4390,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b0365bb6", Component.options)
+    hotAPI.createRecord("data-v-d6a7c26e", Component.options)
   } else {
-    hotAPI.reload("data-v-b0365bb6", Component.options)
+    hotAPI.reload("data-v-d6a7c26e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -4423,274 +4576,379 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal fade",
-    attrs: {
-      "id": "modal-add-co-worker",
-      "tabindex": "-1",
-      "role": "dialog"
-    }
-  }, [_c('div', {
-    staticClass: "modal-dialog"
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "tab-content"
-  }, [_c('div', {
-    staticClass: "tab-pane active",
-    attrs: {
-      "role": "tabpanel",
-      "id": "modal-add-co-worker-credentials"
-    }
-  }, [_c('div', {
-    staticClass: "modal-body p-b-none"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Логин")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.login),
-      expression: "form.login"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "autofocus": "",
-      "required": ""
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: { id: "modal-add-co-worker", tabindex: "-1", role: "dialog" }
     },
-    domProps: {
-      "value": (_vm.form.login)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.login = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Пароль")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.password),
-      expression: "form.password"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.form.password)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.password = $event.target.value
-      }
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer border-none"
-  }, [_c('button', {
-    staticClass: "btn btn-default pull-left",
-    attrs: {
-      "data-dismiss": "modal"
-    }
-  }, [_vm._v("Отменить")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary pull-right",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.changeTabTo('co-worker-info')
-      }
-    }
-  }, [_vm._v("Далее")])])]), _vm._v(" "), _c('div', {
-    staticClass: "tab-pane",
-    attrs: {
-      "role": "tabpanel",
-      "id": "co-worker-info"
-    }
-  }, [_c('div', {
-    staticClass: "modal-body p-b-none"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Права")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.role),
-      expression: "form.role"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.form.role = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.roles), function(role) {
-    return _c('option', {
-      domProps: {
-        "value": role.value
-      }
-    }, [_vm._v("\n                                            " + _vm._s(role.text) + "\n                                        ")])
-  }))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label p-t-none"
-  }, [_vm._v("Второстепенные сотрудники")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.secondary_employees),
-      expression: "form.secondary_employees"
-    }],
-    staticClass: "form-control m-t-xs",
-    attrs: {
-      "disabled": _vm.form.role === 'manager'
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.form.secondary_employees = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.secondary), function(item) {
-    return _c('option', {
-      domProps: {
-        "value": item.value
-      }
-    }, [_vm._v("\n                                            " + _vm._s(item.text) + "\n                                        ")])
-  }))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Баланс, руб.")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.balance),
-      expression: "form.balance"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.form.balance)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.balance = $event.target.value
-      }
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer border-none"
-  }, [_c('button', {
-    staticClass: "btn btn-default pull-left",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.changeTabTo('modal-add-co-worker-credentials')
-      }
-    }
-  }, [_vm._v("Назад")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary pull-right",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Добавить сотрудника")])])])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-header"
-  }, [_c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "modal",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
-    staticClass: "modal-title"
-  }, [_vm._v("Добавить сотрудника")]), _vm._v(" "), _c('div', {
-    staticClass: "form-wizard m-t-md"
-  }, [_c('ul', {
-    staticClass: "btn-group btn-group-justified",
-    attrs: {
-      "role": "tablist"
-    }
-  }, [_c('li', {
-    staticClass: "active btn btn-default disabled",
-    attrs: {
-      "role": "presentation"
-    }
-  }, [_c('a', {
-    staticClass: "hidden",
-    attrs: {
-      "href": "#modal-add-co-worker-credentials",
-      "data-toggle": "tab"
-    }
-  }), _vm._v("\n                            Базовая информация\n                        ")]), _vm._v(" "), _c('li', {
-    staticClass: "btn btn-default disabled",
-    attrs: {
-      "role": "presentation"
-    }
-  }, [_c('a', {
-    staticClass: "hidden",
-    attrs: {
-      "href": "#co-worker-info",
-      "data-toggle": "tab"
-    }
-  }), _vm._v("\n                            Корпоративная информация\n                        ")])])])])
-}]}
-module.exports.render._withStripped = true
+    [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "tab-content" }, [
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane active",
+                attrs: {
+                  role: "tabpanel",
+                  id: "modal-add-co-worker-credentials"
+                }
+              },
+              [
+                _c("div", { staticClass: "modal-body p-b-none" }, [
+                  _c("div", { staticClass: "form-horizontal" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Логин")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.login,
+                              expression: "form.login"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", autofocus: "", required: "" },
+                          domProps: { value: _vm.form.login },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.login = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Пароль")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.password,
+                              expression: "form.password"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", required: "" },
+                          domProps: { value: _vm.form.password },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.password = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer border-none" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default pull-left",
+                      attrs: { "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Отменить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary pull-right",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.changeTabTo("co-worker-info")
+                        }
+                      }
+                    },
+                    [_vm._v("Далее")]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane",
+                attrs: { role: "tabpanel", id: "co-worker-info" }
+              },
+              [
+                _c("div", { staticClass: "modal-body p-b-none" }, [
+                  _c("div", { staticClass: "form-horizontal" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Права")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.role,
+                                expression: "form.role"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.form.role = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          _vm._l(_vm.roles, function(role) {
+                            return _c(
+                              "option",
+                              { domProps: { value: role.value } },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(role.text) +
+                                    "\n                                        "
+                                )
+                              ]
+                            )
+                          })
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { staticClass: "col-md-4 control-label p-t-none" },
+                        [_vm._v("Второстепенные сотрудники")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.secondary_employees,
+                                expression: "form.secondary_employees"
+                              }
+                            ],
+                            staticClass: "form-control m-t-xs",
+                            attrs: { disabled: _vm.form.role === "manager" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.form.secondary_employees = $event.target
+                                  .multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          _vm._l(_vm.secondary, function(item) {
+                            return _c(
+                              "option",
+                              { domProps: { value: item.value } },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(item.text) +
+                                    "\n                                        "
+                                )
+                              ]
+                            )
+                          })
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Баланс, руб.")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.balance,
+                              expression: "form.balance"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", required: "" },
+                          domProps: { value: _vm.form.balance },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.balance = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer border-none" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default pull-left",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.changeTabTo("modal-add-co-worker-credentials")
+                        }
+                      }
+                    },
+                    [_vm._v("Назад")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary pull-right",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Добавить сотрудника")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Добавить сотрудника")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-wizard m-t-md" }, [
+        _c(
+          "ul",
+          {
+            staticClass: "btn-group btn-group-justified",
+            attrs: { role: "tablist" }
+          },
+          [
+            _c(
+              "li",
+              {
+                staticClass: "active btn btn-default disabled",
+                attrs: { role: "presentation" }
+              },
+              [
+                _c("a", {
+                  staticClass: "hidden",
+                  attrs: {
+                    href: "#modal-add-co-worker-credentials",
+                    "data-toggle": "tab"
+                  }
+                }),
+                _vm._v(
+                  "\n                            Базовая информация\n                        "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "btn btn-default disabled",
+                attrs: { role: "presentation" }
+              },
+              [
+                _c("a", {
+                  staticClass: "hidden",
+                  attrs: { href: "#co-worker-info", "data-toggle": "tab" }
+                }),
+                _vm._v(
+                  "\n                            Корпоративная информация\n                        "
+                )
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-b0365bb6", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-d6a7c26e", module.exports)
   }
 }
 
@@ -4698,150 +4956,243 @@ if (false) {
 /* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-users",
-      "title": "Администраторы системы"
-    }
-  }), _vm._v(" "), _c('loading', {
-    attrs: {
-      "show": _vm.loading
-    }
-  }), _vm._v(" "), (_vm.admins) ? _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "m-b-lg"
-  }, [_c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('button', {
-    staticClass: "btn btn-success",
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-add-own-admin')
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-btn fa-fw fa-user"
-  }), _vm._v("Добавить администратора\n                ")])]), _vm._v(" "), _c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('button', {
-    staticClass: "btn btn-success",
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-add-co-worker')
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-btn fa-fw fa-user-plus"
-  }), _vm._v("Добавить сотрудника\n                ")])]), _vm._v(" "), _c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('router-link', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "to": "/admins/own/metrics"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-btn fa-fw fa-bar-chart"
-  }), _vm._v("Посмотреть статистику\n                ")])], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "table-responsive"
-  }, [_c('table', {
-    staticClass: "table table-striped table-hover"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.admins), function(admin) {
-    return _c('tr', [_c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.id)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.name)
-      }
-    }), _vm._v(" "), _c('td', [_c('ul', {
-      staticClass: "list-unstyled m-b-none"
-    }, _vm._l((admin.roles), function(role) {
-      return _c('li', {
-        domProps: {
-          "textContent": _vm._s(role.name)
-        }
-      })
-    }))]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.gross_turnover)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.staff)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.bots)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.clients)
-      }
-    }), _vm._v(" "), _c('td', {
-      staticClass: "text-success",
-      domProps: {
-        "textContent": _vm._s(admin.status)
-      }
-    }), _vm._v(" "), _c('td'), _vm._v(" "), _vm._m(1, true)])
-  }))])])]) : _vm._e(), _vm._v(" "), _c('add-own-admin-modal'), _vm._v(" "), _c('add-co-worker-modal')], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Логин")]), _vm._v(" "), _c('th', [_vm._v("Права")]), _vm._v(" "), _c('th', [_vm._v("Валовый оборот")]), _vm._v(" "), _c('th', [_vm._v("Персонал")]), _vm._v(" "), _c('th', [_vm._v("Ботов")]), _vm._v(" "), _c('th', [_vm._v("Клиентов")]), _vm._v(" "), _c('th', [_vm._v("Статус")]), _vm._v(" "), _c('th', [_vm._v("Обновлено")]), _vm._v(" "), _c('th')])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', [_c('div', {
-    staticClass: "btn-group",
-    attrs: {
-      "role": "group"
-    }
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button",
-      "data-toggle": "tooltip",
-      "data-placement": "top",
-      "title": "Изменить"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-pencil"
-  })]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button",
-      "data-toggle": "tooltip",
-      "data-placement": "top",
-      "title": "Заблокировать"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-ban"
-  })]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button",
-      "data-toggle": "tooltip",
-      "data-placement": "top",
-      "title": "Удалить"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-trash-o"
-  })]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button",
-      "data-toggle": "tooltip",
-      "data-placement": "top",
-      "title": "Войти в панель"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-sign-in"
-  })])])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("page-header", {
+        attrs: { icon: "fa-users", title: "Администраторы системы" }
+      }),
+      _vm._v(" "),
+      _c("loading", { attrs: { show: _vm.loading } }),
+      _vm._v(" "),
+      _vm.admins
+        ? _c("div", { staticClass: "container-fluid" }, [
+            _c("div", { staticClass: "m-b-lg" }, [
+              _c("div", { staticClass: "btn-group p-b-xs" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    on: {
+                      click: function($event) {
+                        _vm.showModal("modal-add-own-admin")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-btn fa-fw fa-user" }),
+                    _vm._v("Добавить администратора\n                ")
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "btn-group p-b-xs" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    on: {
+                      click: function($event) {
+                        _vm.showModal("modal-add-co-worker")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-btn fa-fw fa-user-plus" }),
+                    _vm._v("Добавить сотрудника\n                ")
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "btn-group p-b-xs" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { to: "/admins/own/metrics" }
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-btn fa-fw fa-bar-chart" }),
+                      _vm._v("Посмотреть статистику\n                ")
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table table-striped table-hover" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.admins, function(admin) {
+                    return _c("tr", [
+                      _c("td", { domProps: { textContent: _vm._s(admin.id) } }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(admin.name) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "ul",
+                          { staticClass: "list-unstyled m-b-none" },
+                          _vm._l(admin.roles, function(role) {
+                            return _c("li", {
+                              domProps: { textContent: _vm._s(role.name) }
+                            })
+                          })
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(admin.gross_turnover) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(admin.staff) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(admin.bots) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(admin.clients) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "text-success",
+                        domProps: { textContent: _vm._s(admin.status) }
+                      }),
+                      _vm._v(" "),
+                      _c("td"),
+                      _vm._v(" "),
+                      _vm._m(1, true)
+                    ])
+                  })
+                )
+              ])
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("add-own-admin-modal"),
+      _vm._v(" "),
+      _c("add-co-worker-modal")
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Логин")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Права")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Валовый оборот")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Персонал")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Ботов")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Клиентов")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Статус")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Обновлено")]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn-group", attrs: { role: "group" } }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Изменить"
+            }
+          },
+          [_c("i", { staticClass: "fa fa-pencil" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Заблокировать"
+            }
+          },
+          [_c("i", { staticClass: "fa fa-ban" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Удалить"
+            }
+          },
+          [_c("i", { staticClass: "fa fa-trash-o" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Войти в панель"
+            }
+          },
+          [_c("i", { staticClass: "fa fa-sign-in" })]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-de3f715a", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-b6f57fa2", module.exports)
   }
 }
 
@@ -4850,19 +5201,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(157),
-  /* template */
-  __webpack_require__(159),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(157)
+/* template */
+var __vue_template__ = __webpack_require__(159)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/admins/own/Metrics.vue"
+Component.options.__file = "resources\\assets\\js\\views\\admins\\own\\Metrics.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Metrics.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -4873,9 +5230,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0a3d60e0", Component.options)
+    hotAPI.createRecord("data-v-4f667a6c", Component.options)
   } else {
-    hotAPI.reload("data-v-0a3d60e0", Component.options)
+    hotAPI.reload("data-v-4f667a6c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -5159,119 +5516,201 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-bar-chart",
-      "title": "Статистика"
-    }
-  }, [_c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/admins/own"
-    }
-  }, [_c('a', [_vm._v("Администраторы системы")])]), _vm._v(" "), _c('li', [_c('span', [_vm._v("OWN")])])], 1), _vm._v(" "), _c('loading', {
-    attrs: {
-      "show": _vm.loading
-    }
-  }), _vm._v(" "), _c('transition', {
-    attrs: {
-      "name": "fade"
-    }
-  }, [(_vm.admins) ? _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-3"
-  }, [_c('div', {
-    staticClass: "panel panel-default panel-flush"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Персонал")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('ul', {
-    staticClass: "nav nav-stacked",
-    attrs: {
-      "role": "tablist"
-    }
-  }, _vm._l((_vm.admins), function(admin) {
-    return _c('li', [_c('router-link', {
-      attrs: {
-        "to": '/admins/own/metrics/'
-      }
-    }, [_vm._v("\n                                        " + _vm._s(admin.name) + "\n                                    ")])], 1)
-  }))])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-9"
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.lastMonthsIndicators.length > 0),
-      expression: "lastMonthsIndicators.length > 0"
-    }],
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-12"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Текущий месяц")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('canvas', {
-    attrs: {
-      "id": "lastMonthGrossTurnover",
-      "height": "100"
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.previousMonthsIndicators.length > 0),
-      expression: "previousMonthsIndicators.length > 0"
-    }],
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-12"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Предыдущий месяц")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('canvas', {
-    attrs: {
-      "id": "previousMonthGrossTurnover",
-      "height": "100"
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-12"
-  }, [_c('div', {
-    staticClass: "panel panel-primary panel-flush"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_c('i', {
-    staticClass: "fa fa-bar-chart fa-btn"
-  }), _vm._v("Сводка\n                                ")]), _vm._v(" "), _c('ul', {
-    staticClass: "list-group"
-  }, [_c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("Общее за текущий месяц: " + _vm._s(_vm._f("currency")(_vm.totalCurrentMonth)))]), _vm._v(" "), _c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("Общее за прошлый месяц: " + _vm._s(_vm._f("currency")(_vm.totalPreviouslyMonth)))]), _vm._v(" "), _c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("Разница: " + _vm._s(_vm._f("currency")(_vm.difference)))]), _vm._v(" "), _c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("Результат:")])])])])])])])]) : _vm._e()])], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-bar-chart", title: "Статистика" } },
+        [
+          _c("router-link", { attrs: { tag: "li", to: "/admins/own" } }, [
+            _c("a", [_vm._v("Администраторы системы")])
+          ]),
+          _vm._v(" "),
+          _c("li", [_c("span", [_vm._v("OWN")])])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("loading", { attrs: { show: _vm.loading } }),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "fade" } }, [
+        _vm.admins
+          ? _c("div", { staticClass: "container-fluid" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-sm-3" }, [
+                  _c(
+                    "div",
+                    { staticClass: "panel panel-default panel-flush" },
+                    [
+                      _c("div", { staticClass: "panel-heading" }, [
+                        _vm._v("Персонал")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "panel-body" }, [
+                        _c(
+                          "ul",
+                          {
+                            staticClass: "nav nav-stacked",
+                            attrs: { role: "tablist" }
+                          },
+                          _vm._l(_vm.admins, function(admin) {
+                            return _c(
+                              "li",
+                              [
+                                _c(
+                                  "router-link",
+                                  { attrs: { to: "/admins/own/metrics/" } },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(admin.name) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          })
+                        )
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-9" }, [
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.lastMonthsIndicators.length > 0,
+                          expression: "lastMonthsIndicators.length > 0"
+                        }
+                      ],
+                      staticClass: "row"
+                    },
+                    [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _c("div", { staticClass: "panel panel-default" }, [
+                          _c("div", { staticClass: "panel-heading" }, [
+                            _vm._v("Текущий месяц")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "panel-body" }, [
+                            _c("canvas", {
+                              attrs: {
+                                id: "lastMonthGrossTurnover",
+                                height: "100"
+                              }
+                            })
+                          ])
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.previousMonthsIndicators.length > 0,
+                          expression: "previousMonthsIndicators.length > 0"
+                        }
+                      ],
+                      staticClass: "row"
+                    },
+                    [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _c("div", { staticClass: "panel panel-default" }, [
+                          _c("div", { staticClass: "panel-heading" }, [
+                            _vm._v("Предыдущий месяц")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "panel-body" }, [
+                            _c("canvas", {
+                              attrs: {
+                                id: "previousMonthGrossTurnover",
+                                height: "100"
+                              }
+                            })
+                          ])
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c(
+                        "div",
+                        { staticClass: "panel panel-primary panel-flush" },
+                        [
+                          _c("div", { staticClass: "panel-heading" }, [
+                            _c("i", { staticClass: "fa fa-bar-chart fa-btn" }),
+                            _vm._v("Сводка\n                                ")
+                          ]),
+                          _vm._v(" "),
+                          _c("ul", { staticClass: "list-group" }, [
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _vm._v(
+                                "Общее за текущий месяц: " +
+                                  _vm._s(
+                                    _vm._f("currency")(_vm.totalCurrentMonth)
+                                  )
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _vm._v(
+                                "Общее за прошлый месяц: " +
+                                  _vm._s(
+                                    _vm._f("currency")(_vm.totalPreviouslyMonth)
+                                  )
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _vm._v(
+                                "Разница: " +
+                                  _vm._s(_vm._f("currency")(_vm.difference))
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _vm._v("Результат:")
+                            ])
+                          ])
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e()
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0a3d60e0", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-4f667a6c", module.exports)
   }
 }
 
@@ -5280,19 +5719,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(161),
-  /* template */
-  __webpack_require__(168),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(161)
+/* template */
+var __vue_template__ = __webpack_require__(168)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/admins/rent/Rent.vue"
+Component.options.__file = "resources\\assets\\js\\views\\admins\\rent\\Rent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Rent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5303,9 +5748,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-10e98436", Component.options)
+    hotAPI.createRecord("data-v-9455207e", Component.options)
   } else {
-    hotAPI.reload("data-v-10e98436", Component.options)
+    hotAPI.reload("data-v-9455207e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -5482,19 +5927,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(163),
-  /* template */
-  __webpack_require__(164),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(163)
+/* template */
+var __vue_template__ = __webpack_require__(164)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/admins/rent/AddRentAdminModal.vue"
+Component.options.__file = "resources\\assets\\js\\views\\admins\\rent\\AddRentAdminModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AddRentAdminModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5505,9 +5956,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f88a6388", Component.options)
+    hotAPI.createRecord("data-v-5be181e0", Component.options)
   } else {
-    hotAPI.reload("data-v-f88a6388", Component.options)
+    hotAPI.reload("data-v-5be181e0", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -5670,264 +6121,335 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal fade",
-    attrs: {
-      "id": "modal-add-rent-admin",
-      "tabindex": "-1",
-      "role": "dialog"
-    }
-  }, [_c('div', {
-    staticClass: "modal-dialog"
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "tab-content"
-  }, [_c('div', {
-    staticClass: "tab-pane active",
-    attrs: {
-      "role": "tabpanel",
-      "id": "modal-add-rent-admin-credentials"
-    }
-  }, [_c('div', {
-    staticClass: "modal-body p-b-none"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Логин")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.login),
-      expression: "form.login"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "autofocus": "",
-      "required": ""
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: { id: "modal-add-rent-admin", tabindex: "-1", role: "dialog" }
     },
-    domProps: {
-      "value": (_vm.form.login)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.login = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Пароль")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.password),
-      expression: "form.password"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.form.password)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.password = $event.target.value
-      }
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer border-none"
-  }, [_c('button', {
-    staticClass: "btn btn-default pull-left",
-    attrs: {
-      "data-dismiss": "modal"
-    }
-  }, [_vm._v("Отменить")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary pull-right",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.changeTabTo('settings')
-      }
-    }
-  }, [_vm._v("Далее")])])]), _vm._v(" "), _c('div', {
-    staticClass: "tab-pane",
-    attrs: {
-      "role": "tabpanel",
-      "id": "settings"
-    }
-  }, [_c('div', {
-    staticClass: "modal-body p-b-none"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Стоимость")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.value),
-      expression: "form.value"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "autofocus": "",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.form.value)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.value = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Процент")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.percent),
-      expression: "form.percent"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.form.percent)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.percent = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Баланс, руб.")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.balance),
-      expression: "form.balance"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.form.balance)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.balance = $event.target.value
-      }
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer border-none"
-  }, [_c('button', {
-    staticClass: "btn btn-default pull-left",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.changeTabTo('modal-add-rent-admin-credentials')
-      }
-    }
-  }, [_vm._v("Назад")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary pull-right",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Добавить администратора")])])])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-header"
-  }, [_c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "modal",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
-    staticClass: "modal-title"
-  }, [_vm._v("Добавить администратора")]), _vm._v(" "), _c('div', {
-    staticClass: "form-wizard m-t-md"
-  }, [_c('ul', {
-    staticClass: "btn-group btn-group-justified",
-    attrs: {
-      "role": "tablist"
-    }
-  }, [_c('li', {
-    staticClass: "active btn btn-default disabled",
-    attrs: {
-      "role": "presentation"
-    }
-  }, [_c('a', {
-    staticClass: "hidden",
-    attrs: {
-      "href": "#modal-add-rent-admin-credentials",
-      "data-toggle": "tab"
-    }
-  }), _vm._v("\n                            Базовая информация\n                        ")]), _vm._v(" "), _c('li', {
-    staticClass: "btn btn-default disabled",
-    attrs: {
-      "role": "presentation"
-    }
-  }, [_c('a', {
-    staticClass: "hidden",
-    attrs: {
-      "href": "#settings",
-      "data-toggle": "tab"
-    }
-  }), _vm._v("\n                            Условия аренды\n                        ")])])])])
-}]}
-module.exports.render._withStripped = true
+    [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "tab-content" }, [
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane active",
+                attrs: {
+                  role: "tabpanel",
+                  id: "modal-add-rent-admin-credentials"
+                }
+              },
+              [
+                _c("div", { staticClass: "modal-body p-b-none" }, [
+                  _c("div", { staticClass: "form-horizontal" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Логин")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.login,
+                              expression: "form.login"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", autofocus: "", required: "" },
+                          domProps: { value: _vm.form.login },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.login = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Пароль")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.password,
+                              expression: "form.password"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", required: "" },
+                          domProps: { value: _vm.form.password },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.password = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer border-none" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default pull-left",
+                      attrs: { "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Отменить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary pull-right",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.changeTabTo("settings")
+                        }
+                      }
+                    },
+                    [_vm._v("Далее")]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane",
+                attrs: { role: "tabpanel", id: "settings" }
+              },
+              [
+                _c("div", { staticClass: "modal-body p-b-none" }, [
+                  _c("div", { staticClass: "form-horizontal" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Стоимость")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.value,
+                              expression: "form.value"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", autofocus: "", required: "" },
+                          domProps: { value: _vm.form.value },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.value = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Процент")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.percent,
+                              expression: "form.percent"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", required: "" },
+                          domProps: { value: _vm.form.percent },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.percent = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-md-4 control-label" }, [
+                        _vm._v("Баланс, руб.")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.balance,
+                              expression: "form.balance"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", required: "" },
+                          domProps: { value: _vm.form.balance },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.balance = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer border-none" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default pull-left",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.changeTabTo("modal-add-rent-admin-credentials")
+                        }
+                      }
+                    },
+                    [_vm._v("Назад")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary pull-right",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Добавить администратора")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [
+        _vm._v("Добавить администратора")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-wizard m-t-md" }, [
+        _c(
+          "ul",
+          {
+            staticClass: "btn-group btn-group-justified",
+            attrs: { role: "tablist" }
+          },
+          [
+            _c(
+              "li",
+              {
+                staticClass: "active btn btn-default disabled",
+                attrs: { role: "presentation" }
+              },
+              [
+                _c("a", {
+                  staticClass: "hidden",
+                  attrs: {
+                    href: "#modal-add-rent-admin-credentials",
+                    "data-toggle": "tab"
+                  }
+                }),
+                _vm._v(
+                  "\n                            Базовая информация\n                        "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "btn btn-default disabled",
+                attrs: { role: "presentation" }
+              },
+              [
+                _c("a", {
+                  staticClass: "hidden",
+                  attrs: { href: "#settings", "data-toggle": "tab" }
+                }),
+                _vm._v(
+                  "\n                            Условия аренды\n                        "
+                )
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-f88a6388", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-5be181e0", module.exports)
   }
 }
 
@@ -5936,19 +6458,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(166),
-  /* template */
-  __webpack_require__(167),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(166)
+/* template */
+var __vue_template__ = __webpack_require__(167)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/admins/rent/SendMessageModal.vue"
+Component.options.__file = "resources\\assets\\js\\views\\admins\\rent\\SendMessageModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SendMessageModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5959,9 +6487,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3c5a00ba", Component.options)
+    hotAPI.createRecord("data-v-2f076ed4", Component.options)
   } else {
-    hotAPI.reload("data-v-3c5a00ba", Component.options)
+    hotAPI.reload("data-v-2f076ed4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -6062,93 +6590,127 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal fade",
-    attrs: {
-      "id": "modal-send-message-admin",
-      "tabindex": "-1",
-      "role": "dialog"
-    }
-  }, [_c('div', {
-    staticClass: "modal-dialog"
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "modal-body p-b-none"
-  }, [_c('div', {
-    staticClass: "form"
-  }, [(!_vm.showConfirmation) ? _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Сообщение")]), _vm._v(" "), _c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.message),
-      expression: "form.message"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "rows": "5",
-      "autofocus": "",
-      "required": ""
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: { id: "modal-send-message-admin", tabindex: "-1", role: "dialog" }
     },
-    domProps: {
-      "value": (_vm.form.message)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.message = $event.target.value
-      }
-    }
-  })]) : _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v("Вы уверены, что хотите отправить это сообщение?")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer border-none"
-  }, [_c('button', {
-    staticClass: "btn btn-default pull-left",
-    on: {
-      "click": function($event) {
-        _vm.cancel()
-      }
-    }
-  }, [_vm._v("Отменить")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary pull-right",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.submitForm()
-      }
-    }
-  }, [(!_vm.showConfirmation) ? _c('span', [_vm._v("Отправить сообщение")]) : _c('span', [_vm._v("Да, отправить сообщение")])])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-header"
-  }, [_c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "modal",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
-    staticClass: "modal-title"
-  }, [_vm._v("Добавить администратора")])])
-}]}
-module.exports.render._withStripped = true
+    [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body p-b-none" }, [
+            _c("div", { staticClass: "form" }, [
+              !_vm.showConfirmation
+                ? _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "control-label" }, [
+                      _vm._v("Сообщение")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.message,
+                          expression: "form.message"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { rows: "5", autofocus: "", required: "" },
+                      domProps: { value: _vm.form.message },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.form.message = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                : _c("div", { staticClass: "form-group" }, [
+                    _c("label", [
+                      _vm._v("Вы уверены, что хотите отправить это сообщение?")
+                    ])
+                  ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer border-none" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-default pull-left",
+                on: {
+                  click: function($event) {
+                    _vm.cancel()
+                  }
+                }
+              },
+              [_vm._v("Отменить")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary pull-right",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.submitForm()
+                  }
+                }
+              },
+              [
+                !_vm.showConfirmation
+                  ? _c("span", [_vm._v("Отправить сообщение")])
+                  : _c("span", [_vm._v("Да, отправить сообщение")])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [
+        _vm._v("Добавить администратора")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-3c5a00ba", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-2f076ed4", module.exports)
   }
 }
 
@@ -6156,223 +6718,305 @@ if (false) {
 /* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-users",
-      "title": "Администраторы системы"
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "m-b-lg"
-  }, [_c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('button', {
-    staticClass: "btn btn-success",
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-add-rent-admin')
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-btn fa-fw fa-user"
-  }), _vm._v("Добавить администратора\n                ")])])]), _vm._v(" "), _c('div', {
-    staticClass: "table-responsive"
-  }, [_c('table', {
-    staticClass: "table table-striped table-hover"
-  }, [_c('thead', [_c('tr', [_c('th', {
-    attrs: {
-      "width": "20"
-    }
-  }, [_c('div', {
-    staticClass: "checkbox m-none"
-  }, [_c('label', {
-    staticClass: "p-t-xs"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.selectAll),
-      expression: "selectAll"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.selectAll) ? _vm._i(_vm.selectAll, null) > -1 : (_vm.selectAll)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.selectAll,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.selectAll = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.selectAll = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.selectAll = $$c
-        }
-      }
-    }
-  })])])]), _vm._v(" "), _c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Логин")]), _vm._v(" "), _c('th', [_vm._v("Аренды (руб.)")]), _vm._v(" "), _c('th', [_vm._v("%")]), _vm._v(" "), _c('th', [_vm._v("Персонал")]), _vm._v(" "), _c('th', [_vm._v("Ботов")]), _vm._v(" "), _c('th', [_vm._v("Клиентов")]), _vm._v(" "), _c('th', [_vm._v("Аренда до")]), _vm._v(" "), _c('th', [_vm._v("Статус")]), _vm._v(" "), _c('th', [_vm._v("Обновлено")]), _vm._v(" "), _c('th')])]), _vm._v(" "), _c('tbody', _vm._l((_vm.admins), function(admin) {
-    return _c('tr', [_c('td', [_c('div', {
-      staticClass: "checkbox m-none"
-    }, [_c('label', {
-      staticClass: "p-t-xs"
-    }, [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.selected),
-        expression: "selected"
-      }],
-      attrs: {
-        "type": "checkbox"
-      },
-      domProps: {
-        "value": admin,
-        "checked": Array.isArray(_vm.selected) ? _vm._i(_vm.selected, admin) > -1 : (_vm.selected)
-      },
-      on: {
-        "__c": function($event) {
-          var $$a = _vm.selected,
-            $$el = $event.target,
-            $$c = $$el.checked ? (true) : (false);
-          if (Array.isArray($$a)) {
-            var $$v = admin,
-              $$i = _vm._i($$a, $$v);
-            if ($$el.checked) {
-              $$i < 0 && (_vm.selected = $$a.concat($$v))
-            } else {
-              $$i > -1 && (_vm.selected = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("page-header", {
+        attrs: { icon: "fa-users", title: "Администраторы системы" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "m-b-lg" }, [
+          _c("div", { staticClass: "btn-group p-b-xs" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                on: {
+                  click: function($event) {
+                    _vm.showModal("modal-add-rent-admin")
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fa fa-btn fa-fw fa-user" }),
+                _vm._v("Добавить администратора\n                ")
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table table-striped table-hover" }, [
+            _c("thead", [
+              _c("tr", [
+                _c("th", { attrs: { width: "20" } }, [
+                  _c("div", { staticClass: "checkbox m-none" }, [
+                    _c("label", { staticClass: "p-t-xs" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.selectAll,
+                            expression: "selectAll"
+                          }
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: Array.isArray(_vm.selectAll)
+                            ? _vm._i(_vm.selectAll, null) > -1
+                            : _vm.selectAll
+                        },
+                        on: {
+                          __c: function($event) {
+                            var $$a = _vm.selectAll,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 && (_vm.selectAll = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.selectAll = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.selectAll = $$c
+                            }
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("th", [_vm._v("ID")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Логин")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Аренды (руб.)")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("%")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Персонал")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Ботов")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Клиентов")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Аренда до")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Статус")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Обновлено")]),
+                _vm._v(" "),
+                _c("th")
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.admins, function(admin) {
+                return _c("tr", [
+                  _c("td", [
+                    _c("div", { staticClass: "checkbox m-none" }, [
+                      _c("label", { staticClass: "p-t-xs" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selected,
+                              expression: "selected"
+                            }
+                          ],
+                          attrs: { type: "checkbox" },
+                          domProps: {
+                            value: admin,
+                            checked: Array.isArray(_vm.selected)
+                              ? _vm._i(_vm.selected, admin) > -1
+                              : _vm.selected
+                          },
+                          on: {
+                            __c: function($event) {
+                              var $$a = _vm.selected,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = admin,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 && (_vm.selected = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.selected = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.selected = $$c
+                              }
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(admin.id) } }),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(admin.login) } }),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(admin.rents) } }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(admin.percent) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(admin.staff) } }),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(admin.bots) } }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(admin.clients) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(admin.rent_to) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    staticClass: "text-success",
+                    domProps: { textContent: _vm._s(admin.status) }
+                  }),
+                  _vm._v(" "),
+                  _c("td"),
+                  _vm._v(" "),
+                  _vm._m(0, true)
+                ])
+              })
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "btn-group p-b-xs" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { disabled: !_vm.selected.length },
+              on: {
+                click: function($event) {
+                  _vm.showModal("modal-send-message-admin")
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fa fa-btn fa-fw fa-comments-o" }),
+              _vm._v("Выслать уведомление\n            ")
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("add-rent-admin-modal"),
+      _vm._v(" "),
+      _c("send-message-modal", { on: { unselect: _vm.unselectAll } })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn-group", attrs: { role: "group" } }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Изменить"
             }
-          } else {
-            _vm.selected = $$c
-          }
-        }
-      }
-    })])])]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.id)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.login)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.rents)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.percent)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.staff)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.bots)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.clients)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(admin.rent_to)
-      }
-    }), _vm._v(" "), _c('td', {
-      staticClass: "text-success",
-      domProps: {
-        "textContent": _vm._s(admin.status)
-      }
-    }), _vm._v(" "), _c('td'), _vm._v(" "), _vm._m(0, true)])
-  }))])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "disabled": !_vm.selected.length
-    },
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-send-message-admin')
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-btn fa-fw fa-comments-o"
-  }), _vm._v("Выслать уведомление\n            ")])])]), _vm._v(" "), _c('add-rent-admin-modal'), _vm._v(" "), _c('send-message-modal', {
-    on: {
-      "unselect": _vm.unselectAll
-    }
-  })], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', [_c('div', {
-    staticClass: "btn-group",
-    attrs: {
-      "role": "group"
-    }
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button",
-      "data-toggle": "tooltip",
-      "data-placement": "top",
-      "title": "Изменить"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-pencil"
-  })]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button",
-      "data-toggle": "tooltip",
-      "data-placement": "top",
-      "title": "Заблокировать"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-ban"
-  })]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button",
-      "data-toggle": "tooltip",
-      "data-placement": "top",
-      "title": "Удалить"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-trash-o"
-  })]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button",
-      "data-toggle": "tooltip",
-      "data-placement": "top",
-      "title": "Войти в панель"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-sign-in"
-  })])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-group"
-  }, [_c('i', {
-    staticClass: "fa fa-btn fa-hand-o-up m-l-sm hidden-xs"
-  }), _vm._v(" С отмеченными:\n        ")])
-}]}
-module.exports.render._withStripped = true
+          },
+          [_c("i", { staticClass: "fa fa-pencil" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Заблокировать"
+            }
+          },
+          [_c("i", { staticClass: "fa fa-ban" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Удалить"
+            }
+          },
+          [_c("i", { staticClass: "fa fa-trash-o" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Войти в панель"
+            }
+          },
+          [_c("i", { staticClass: "fa fa-sign-in" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "btn-group" }, [
+      _c("i", { staticClass: "fa fa-btn fa-hand-o-up m-l-sm hidden-xs" }),
+      _vm._v(" С отмеченными:\n        ")
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-10e98436", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-9455207e", module.exports)
   }
 }
 
@@ -6381,19 +7025,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  null,
-  /* template */
-  __webpack_require__(170),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(170)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/proxies/Proxies.vue"
+Component.options.__file = "resources\\assets\\js\\views\\proxies\\Proxies.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Proxies.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -6404,9 +7054,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6a2bfeb8", Component.options)
+    hotAPI.createRecord("data-v-69b3bd48", Component.options)
   } else {
-    hotAPI.reload("data-v-6a2bfeb8", Component.options)
+    hotAPI.reload("data-v-69b3bd48", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -6420,67 +7070,125 @@ module.exports = Component.exports
 /* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-shield",
-      "title": "Управление PROXY"
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row m-b-lg"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6"
-  }, [_c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('router-link', {
-    staticClass: "btn btn-success",
-    attrs: {
-      "to": "/proxies/admin"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-btn fa-fw fa-sitemap"
-  }), _vm._v("PROXY для Администраторов\n                    ")])], 1), _vm._v(" "), _c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('router-link', {
-    staticClass: "btn btn-success",
-    attrs: {
-      "to": "/proxies/system"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-btn fa-fw fa-cubes"
-  }), _vm._v("PROXY для системных нужд\n                    ")])], 1)])])])], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-md-6"
-  }, [_c('div', {
-    staticClass: "panel panel-primary"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_c('h3', {
-    staticClass: "panel-title"
-  }, [_c('i', {
-    staticClass: "fa fa-signal fa-btn"
-  }), _vm._v("Статус PROXY адресов\n                        ")])]), _vm._v(" "), _c('ul', {
-    staticClass: "list-group"
-  }, [_c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("В очереди на проверку: "), _c('strong', [_vm._v("0")]), _vm._v(" шт.")]), _vm._v(" "), _c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("В резерве для Администраторов: "), _c('strong', [_vm._v("0")]), _vm._v(" шт.")]), _vm._v(" "), _c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("В резерве для системы: "), _c('strong', [_vm._v("0")]), _vm._v(" шт.")]), _vm._v(" "), _c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("Арендовано: "), _c('strong', [_vm._v("0")]), _vm._v(" шт. / "), _c('strong', [_vm._v("0")]), _vm._v(" шт.")]), _vm._v(" "), _c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("Общее кол-во: "), _c('strong', [_vm._v("0")]), _vm._v(" шт. / "), _c('strong', [_vm._v("0")]), _vm._v(" шт.")])])])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("page-header", {
+        attrs: { icon: "fa-shield", title: "Управление PROXY" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row m-b-lg" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c(
+              "div",
+              { staticClass: "btn-group p-b-xs" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { to: "/proxies/admin" }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-btn fa-fw fa-sitemap" }),
+                    _vm._v("PROXY для Администраторов\n                    ")
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "btn-group p-b-xs" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { to: "/proxies/system" }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-btn fa-fw fa-cubes" }),
+                    _vm._v("PROXY для системных нужд\n                    ")
+                  ]
+                )
+              ],
+              1
+            )
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "panel panel-primary" }, [
+        _c("div", { staticClass: "panel-heading" }, [
+          _c("h3", { staticClass: "panel-title" }, [
+            _c("i", { staticClass: "fa fa-signal fa-btn" }),
+            _vm._v("Статус PROXY адресов\n                        ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "list-group" }, [
+          _c("li", { staticClass: "list-group-item" }, [
+            _vm._v("В очереди на проверку: "),
+            _c("strong", [_vm._v("0")]),
+            _vm._v(" шт.")
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "list-group-item" }, [
+            _vm._v("В резерве для Администраторов: "),
+            _c("strong", [_vm._v("0")]),
+            _vm._v(" шт.")
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "list-group-item" }, [
+            _vm._v("В резерве для системы: "),
+            _c("strong", [_vm._v("0")]),
+            _vm._v(" шт.")
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "list-group-item" }, [
+            _vm._v("Арендовано: "),
+            _c("strong", [_vm._v("0")]),
+            _vm._v(" шт. / "),
+            _c("strong", [_vm._v("0")]),
+            _vm._v(" шт.")
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "list-group-item" }, [
+            _vm._v("Общее кол-во: "),
+            _c("strong", [_vm._v("0")]),
+            _vm._v(" шт. / "),
+            _c("strong", [_vm._v("0")]),
+            _vm._v(" шт.")
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6a2bfeb8", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-69b3bd48", module.exports)
   }
 }
 
@@ -6489,19 +7197,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(172),
-  /* template */
-  __webpack_require__(176),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(172)
+/* template */
+var __vue_template__ = __webpack_require__(176)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/proxies/ProxiesSystem.vue"
+Component.options.__file = "resources\\assets\\js\\views\\proxies\\ProxiesSystem.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ProxiesSystem.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -6512,9 +7226,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-59c60587", Component.options)
+    hotAPI.createRecord("data-v-0e9c9d2b", Component.options)
   } else {
-    hotAPI.reload("data-v-59c60587", Component.options)
+    hotAPI.reload("data-v-0e9c9d2b", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -6671,19 +7385,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(174),
-  /* template */
-  __webpack_require__(175),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(174)
+/* template */
+var __vue_template__ = __webpack_require__(175)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/proxies/AddProxySystemModal.vue"
+Component.options.__file = "resources\\assets\\js\\views\\proxies\\AddProxySystemModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AddProxySystemModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -6694,9 +7414,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-db695846", Component.options)
+    hotAPI.createRecord("data-v-7f12a081", Component.options)
   } else {
-    hotAPI.reload("data-v-db695846", Component.options)
+    hotAPI.reload("data-v-7f12a081", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -6823,94 +7543,122 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal fade",
-    attrs: {
-      "id": "modal-add-proxy-system",
-      "tabindex": "-1",
-      "role": "dialog"
-    }
-  }, [_c('div', {
-    staticClass: "modal-dialog"
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "modal-body p-b-none"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label",
-    attrs: {
-      "for": "proxy-list"
-    }
-  }, [_vm._v("Список прокси")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.proxies_string),
-      expression: "proxies_string"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "id": "proxy-list",
-      "rows": "6",
-      "placeholder": _vm.proxiesPlaceholder
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: { id: "modal-add-proxy-system", tabindex: "-1", role: "dialog" }
     },
-    domProps: {
-      "value": (_vm.proxies_string)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.proxies_string = $event.target.value
-      }
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer border-none"
-  }, [_c('button', {
-    staticClass: "btn btn-default pull-left",
-    attrs: {
-      "data-dismiss": "modal"
-    }
-  }, [_vm._v("Отменить")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary pull-right",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.submitForm()
-      }
-    }
-  }, [_vm._v("Добавить")])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-header"
-  }, [_c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "modal",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
-    staticClass: "modal-title"
-  }, [_vm._v("Добавить прокси")])])
-}]}
-module.exports.render._withStripped = true
+    [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body p-b-none" }, [
+            _c("div", { staticClass: "form-horizontal" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-4 control-label",
+                    attrs: { for: "proxy-list" }
+                  },
+                  [_vm._v("Список прокси")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.proxies_string,
+                        expression: "proxies_string"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "proxy-list",
+                      rows: "6",
+                      placeholder: _vm.proxiesPlaceholder
+                    },
+                    domProps: { value: _vm.proxies_string },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.proxies_string = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer border-none" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-default pull-left",
+                attrs: { "data-dismiss": "modal" }
+              },
+              [_vm._v("Отменить")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary pull-right",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.submitForm()
+                  }
+                }
+              },
+              [_vm._v("Добавить")]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Добавить прокси")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-db695846", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-7f12a081", module.exports)
   }
 }
 
@@ -6918,172 +7666,257 @@ if (false) {
 /* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-cubes",
-      "title": "PROXY для работы системы"
-    }
-  }, [_c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/proxies"
-    }
-  }, [_c('a', [_vm._v("Управление PROXY")])])], 1), _vm._v(" "), _c('loading', {
-    attrs: {
-      "show": _vm.loading
-    }
-  }), _vm._v(" "), (_vm.proxies) ? _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "m-b-lg"
-  }, [_c('button', {
-    staticClass: "btn btn-success",
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-add-proxy-system')
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-plus-square fa-btn"
-  }), _vm._v("Добавить\n            ")])]), _vm._v(" "), _c('div', {
-    staticClass: "table-responsive"
-  }, [_c('table', {
-    staticClass: "table table-striped table-hover"
-  }, [_c('thead', [_c('tr', [_c('th', {
-    attrs: {
-      "width": "20"
-    }
-  }, [_c('div', {
-    staticClass: "checkbox m-none"
-  }, [_c('label', {
-    staticClass: "p-t-xs"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.selectAll),
-      expression: "selectAll"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.selectAll) ? _vm._i(_vm.selectAll, null) > -1 : (_vm.selectAll)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.selectAll,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.selectAll = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.selectAll = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.selectAll = $$c
-        }
-      }
-    }
-  })])])]), _vm._v(" "), _c('th', [_vm._v("IP:Port - Тип PROXY")]), _vm._v(" "), _c('th', [_vm._v("Login:Password")]), _vm._v(" "), _c('th', [_vm._v("Страна")]), _vm._v(" "), _c('th', [_vm._v("Статус")]), _vm._v(" "), _c('th', [_vm._v("Обновлен статус")]), _vm._v(" "), _c('th', [_vm._v("Добавлен")])])]), _vm._v(" "), _c('tbody', _vm._l((_vm.proxies), function(proxy) {
-    return _c('tr', [_c('td', [_c('div', {
-      staticClass: "checkbox m-none"
-    }, [_c('label', {
-      staticClass: "p-t-xs"
-    }, [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.selected),
-        expression: "selected"
-      }],
-      attrs: {
-        "type": "checkbox"
-      },
-      domProps: {
-        "value": proxy,
-        "checked": Array.isArray(_vm.selected) ? _vm._i(_vm.selected, proxy) > -1 : (_vm.selected)
-      },
-      on: {
-        "__c": function($event) {
-          var $$a = _vm.selected,
-            $$el = $event.target,
-            $$c = $$el.checked ? (true) : (false);
-          if (Array.isArray($$a)) {
-            var $$v = proxy,
-              $$i = _vm._i($$a, $$v);
-            if ($$el.checked) {
-              $$i < 0 && (_vm.selected = $$a.concat($$v))
-            } else {
-              $$i > -1 && (_vm.selected = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-            }
-          } else {
-            _vm.selected = $$c
-          }
-        }
-      }
-    })])])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(proxy.host) + _vm._s(proxy.port ? ':' + proxy.port : ''))]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(proxy.login ? proxy.login + ':' + proxy.password : '')
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(proxy.country)
-      }
-    }), _vm._v(" "), _c('td', [(proxy.status === 'check') ? _c('i', {
-      staticClass: "fa fa-circle-o-notch fa-spin"
-    }) : (proxy.status === 'ok') ? _c('i', {
-      staticClass: "fa fa-circle text-success"
-    }) : _c('i', {
-      staticClass: "fa fa-circle text-danger"
-    })]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(proxy.updated_at)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(proxy.created_at)
-      }
-    })])
-  }))])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)]) : _vm._e(), _vm._v(" "), _c('add-proxy-system-modal', {
-    on: {
-      "add-proxies": _vm.addProxies
-    }
-  })], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-group"
-  }, [_c('i', {
-    staticClass: "fa fa-btn fa-hand-o-up m-l-sm hidden-xs"
-  }), _vm._v(" С отмеченными:\n        ")])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-group"
-  }, [_c('a', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Перепроверить")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-group"
-  }, [_c('a', {
-    staticClass: "btn btn-danger",
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Удалить")])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-cubes", title: "PROXY для работы системы" } },
+        [
+          _c("router-link", { attrs: { tag: "li", to: "/proxies" } }, [
+            _c("a", [_vm._v("Управление PROXY")])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("loading", { attrs: { show: _vm.loading } }),
+      _vm._v(" "),
+      _vm.proxies
+        ? _c("div", { staticClass: "container-fluid" }, [
+            _c("div", { staticClass: "m-b-lg" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  on: {
+                    click: function($event) {
+                      _vm.showModal("modal-add-proxy-system")
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fa fa-plus-square fa-btn" }),
+                  _vm._v("Добавить\n            ")
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table table-striped table-hover" }, [
+                _c("thead", [
+                  _c("tr", [
+                    _c("th", { attrs: { width: "20" } }, [
+                      _c("div", { staticClass: "checkbox m-none" }, [
+                        _c("label", { staticClass: "p-t-xs" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.selectAll,
+                                expression: "selectAll"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(_vm.selectAll)
+                                ? _vm._i(_vm.selectAll, null) > -1
+                                : _vm.selectAll
+                            },
+                            on: {
+                              __c: function($event) {
+                                var $$a = _vm.selectAll,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.selectAll = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.selectAll = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.selectAll = $$c
+                                }
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("IP:Port - Тип PROXY")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Login:Password")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Страна")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Статус")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Обновлен статус")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Добавлен")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.proxies, function(proxy) {
+                    return _c("tr", [
+                      _c("td", [
+                        _c("div", { staticClass: "checkbox m-none" }, [
+                          _c("label", { staticClass: "p-t-xs" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selected,
+                                  expression: "selected"
+                                }
+                              ],
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                value: proxy,
+                                checked: Array.isArray(_vm.selected)
+                                  ? _vm._i(_vm.selected, proxy) > -1
+                                  : _vm.selected
+                              },
+                              on: {
+                                __c: function($event) {
+                                  var $$a = _vm.selected,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = proxy,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.selected = $$a.concat([$$v]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.selected = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.selected = $$c
+                                  }
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(proxy.host) +
+                            _vm._s(proxy.port ? ":" + proxy.port : "")
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: {
+                          textContent: _vm._s(
+                            proxy.login
+                              ? proxy.login + ":" + proxy.password
+                              : ""
+                          )
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(proxy.country) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        proxy.status === "check"
+                          ? _c("i", {
+                              staticClass: "fa fa-circle-o-notch fa-spin"
+                            })
+                          : proxy.status === "ok"
+                            ? _c("i", {
+                                staticClass: "fa fa-circle text-success"
+                              })
+                            : _c("i", {
+                                staticClass: "fa fa-circle text-danger"
+                              })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(proxy.updated_at) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(proxy.created_at) }
+                      })
+                    ])
+                  })
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("add-proxy-system-modal", { on: { "add-proxies": _vm.addProxies } })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "btn-group" }, [
+      _c("i", { staticClass: "fa fa-btn fa-hand-o-up m-l-sm hidden-xs" }),
+      _vm._v(" С отмеченными:\n        ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "btn-group" }, [
+      _c("a", { staticClass: "btn btn-primary", attrs: { href: "#" } }, [
+        _vm._v("Перепроверить")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "btn-group" }, [
+      _c("a", { staticClass: "btn btn-danger", attrs: { href: "#" } }, [
+        _vm._v("Удалить")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-59c60587", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-0e9c9d2b", module.exports)
   }
 }
 
@@ -7092,19 +7925,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(178),
-  /* template */
-  __webpack_require__(182),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(178)
+/* template */
+var __vue_template__ = __webpack_require__(182)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/proxies/ProxiesAdmin.vue"
+Component.options.__file = "resources\\assets\\js\\views\\proxies\\ProxiesAdmin.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ProxiesAdmin.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -7115,9 +7954,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0ab843b2", Component.options)
+    hotAPI.createRecord("data-v-4289c203", Component.options)
   } else {
-    hotAPI.reload("data-v-0ab843b2", Component.options)
+    hotAPI.reload("data-v-4289c203", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -7304,19 +8143,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(180),
-  /* template */
-  __webpack_require__(181),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(180)
+/* template */
+var __vue_template__ = __webpack_require__(181)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/proxies/AddProxyAdminModal.vue"
+Component.options.__file = "resources\\assets\\js\\views\\proxies\\AddProxyAdminModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AddProxyAdminModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -7327,9 +8172,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a2521662", Component.options)
+    hotAPI.createRecord("data-v-536183ab", Component.options)
   } else {
-    hotAPI.reload("data-v-a2521662", Component.options)
+    hotAPI.reload("data-v-536183ab", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -7480,169 +8325,204 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal fade",
-    attrs: {
-      "id": "modal-add-proxy-admin",
-      "tabindex": "-1",
-      "role": "dialog"
-    }
-  }, [_c('div', {
-    staticClass: "modal-dialog"
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "modal-body p-b-none"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Прокси для")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('label', {
-    staticClass: "radio-inline"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.using_type),
-      expression: "using_type"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "own"
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: { id: "modal-add-proxy-admin", tabindex: "-1", role: "dialog" }
     },
-    domProps: {
-      "checked": _vm._q(_vm.using_type, "own")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.using_type = "own"
-      }
-    }
-  }), _vm._v(" OWN\n                            ")]), _vm._v(" "), _c('label', {
-    staticClass: "radio-inline"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.using_type),
-      expression: "using_type"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "rent"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.using_type, "rent")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.using_type = "rent"
-      }
-    }
-  }), _vm._v(" RENT\n                            ")])])]), _vm._v(" "), (_vm.using_type === 'rent') ? _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label"
-  }, [_vm._v("Цена (руб.)")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.price),
-      expression: "price"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.price)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.price = $event.target.value
-      }
-    }
-  })])]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label",
-    attrs: {
-      "for": "proxy-list"
-    }
-  }, [_vm._v("Список прокси")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8"
-  }, [_c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.proxies_string),
-      expression: "proxies_string"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "id": "proxy-list",
-      "rows": "6",
-      "placeholder": _vm.proxiesPlaceholder
-    },
-    domProps: {
-      "value": (_vm.proxies_string)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.proxies_string = $event.target.value
-      }
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer border-none"
-  }, [_c('button', {
-    staticClass: "btn btn-default pull-left",
-    attrs: {
-      "data-dismiss": "modal"
-    }
-  }, [_vm._v("Отменить")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary pull-right",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.submitForm()
-      }
-    }
-  }, [_vm._v("Добавить")])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-header"
-  }, [_c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "modal",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
-    staticClass: "modal-title"
-  }, [_vm._v("Добавить прокси")])])
-}]}
-module.exports.render._withStripped = true
+    [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body p-b-none" }, [
+            _c("div", { staticClass: "form-horizontal" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { staticClass: "col-md-4 control-label" }, [
+                  _vm._v("Прокси для")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("label", { staticClass: "radio-inline" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.using_type,
+                          expression: "using_type"
+                        }
+                      ],
+                      attrs: { type: "radio", value: "own" },
+                      domProps: { checked: _vm._q(_vm.using_type, "own") },
+                      on: {
+                        __c: function($event) {
+                          _vm.using_type = "own"
+                        }
+                      }
+                    }),
+                    _vm._v(" OWN\n                            ")
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "radio-inline" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.using_type,
+                          expression: "using_type"
+                        }
+                      ],
+                      attrs: { type: "radio", value: "rent" },
+                      domProps: { checked: _vm._q(_vm.using_type, "rent") },
+                      on: {
+                        __c: function($event) {
+                          _vm.using_type = "rent"
+                        }
+                      }
+                    }),
+                    _vm._v(" RENT\n                            ")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm.using_type === "rent"
+                ? _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "col-md-4 control-label" }, [
+                      _vm._v("Цена (руб.)")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.price,
+                            expression: "price"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.price },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.price = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-4 control-label",
+                    attrs: { for: "proxy-list" }
+                  },
+                  [_vm._v("Список прокси")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.proxies_string,
+                        expression: "proxies_string"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "proxy-list",
+                      rows: "6",
+                      placeholder: _vm.proxiesPlaceholder
+                    },
+                    domProps: { value: _vm.proxies_string },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.proxies_string = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer border-none" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-default pull-left",
+                attrs: { "data-dismiss": "modal" }
+              },
+              [_vm._v("Отменить")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary pull-right",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.submitForm()
+                  }
+                }
+              },
+              [_vm._v("Добавить")]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Добавить прокси")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-a2521662", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-536183ab", module.exports)
   }
 }
 
@@ -7650,190 +8530,278 @@ if (false) {
 /* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-sitemap",
-      "title": "PROXY на продажу"
-    }
-  }, [_c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/proxies"
-    }
-  }, [_c('a', [_vm._v("Управление PROXY")])])], 1), _vm._v(" "), _c('loading', {
-    attrs: {
-      "show": _vm.loading
-    }
-  }), _vm._v(" "), (_vm.proxies) ? _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "m-b-lg"
-  }, [_c('button', {
-    staticClass: "btn btn-success",
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-add-proxy-admin')
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-plus-square fa-btn"
-  }), _vm._v("Добавить\n            ")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "table-responsive"
-  }, [_c('table', {
-    staticClass: "table table-striped table-hover"
-  }, [_c('thead', [_c('tr', [_c('th', {
-    attrs: {
-      "width": "20"
-    }
-  }, [_c('div', {
-    staticClass: "checkbox m-none"
-  }, [_c('label', {
-    staticClass: "p-t-xs"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.selectAll),
-      expression: "selectAll"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.selectAll) ? _vm._i(_vm.selectAll, null) > -1 : (_vm.selectAll)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.selectAll,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.selectAll = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.selectAll = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.selectAll = $$c
-        }
-      }
-    }
-  })])])]), _vm._v(" "), _c('th', [_vm._v("IP:Port - Тип PROXY")]), _vm._v(" "), _c('th', [_vm._v("Login:Password")]), _vm._v(" "), _c('th', [_vm._v("Страна")]), _vm._v(" "), _c('th', [_vm._v("Статус")]), _vm._v(" "), _c('th', [_vm._v("Обновлен статус")]), _vm._v(" "), _c('th', [_vm._v("Добавлен")])])]), _vm._v(" "), _c('tbody', _vm._l((_vm.proxies), function(proxy) {
-    return _c('tr', [_c('td', [_c('div', {
-      staticClass: "checkbox m-none"
-    }, [_c('label', {
-      staticClass: "p-t-xs"
-    }, [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.selected),
-        expression: "selected"
-      }],
-      attrs: {
-        "type": "checkbox"
-      },
-      domProps: {
-        "value": proxy,
-        "checked": Array.isArray(_vm.selected) ? _vm._i(_vm.selected, proxy) > -1 : (_vm.selected)
-      },
-      on: {
-        "__c": function($event) {
-          var $$a = _vm.selected,
-            $$el = $event.target,
-            $$c = $$el.checked ? (true) : (false);
-          if (Array.isArray($$a)) {
-            var $$v = proxy,
-              $$i = _vm._i($$a, $$v);
-            if ($$el.checked) {
-              $$i < 0 && (_vm.selected = $$a.concat($$v))
-            } else {
-              $$i > -1 && (_vm.selected = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-            }
-          } else {
-            _vm.selected = $$c
-          }
-        }
-      }
-    })])])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(proxy.host) + _vm._s(proxy.port ? ':' + proxy.port : ''))]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(proxy.login ? proxy.login + ':' + proxy.password : '')
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(proxy.country)
-      }
-    }), _vm._v(" "), _c('td', [(proxy.status === 'check') ? _c('i', {
-      staticClass: "fa fa-circle-o-notch fa-spin"
-    }) : (proxy.status === 'ok') ? _c('i', {
-      staticClass: "fa fa-circle text-success"
-    }) : _c('i', {
-      staticClass: "fa fa-circle text-danger"
-    })]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(proxy.updated_at)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(proxy.created_at)
-      }
-    })])
-  }))])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
-    staticClass: "btn-group"
-  }, [_c('a', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "href": "#"
-    },
-    on: {
-      "click": _vm.check
-    }
-  }, [_vm._v("Перепроверить")])]), _vm._v(" "), _vm._m(2)]) : _vm._e(), _vm._v(" "), _c('add-proxy-admin-modal', {
-    on: {
-      "add-proxies": _vm.addProxies
-    }
-  })], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "input-group m-b-lg"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": ""
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "input-group-btn"
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Поиск")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-group"
-  }, [_c('i', {
-    staticClass: "fa fa-btn fa-hand-o-up m-l-sm hidden-xs"
-  }), _vm._v(" С отмеченными:\n        ")])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-group"
-  }, [_c('a', {
-    staticClass: "btn btn-danger",
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Удалить")])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-sitemap", title: "PROXY на продажу" } },
+        [
+          _c("router-link", { attrs: { tag: "li", to: "/proxies" } }, [
+            _c("a", [_vm._v("Управление PROXY")])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("loading", { attrs: { show: _vm.loading } }),
+      _vm._v(" "),
+      _vm.proxies
+        ? _c("div", { staticClass: "container-fluid" }, [
+            _c("div", { staticClass: "m-b-lg" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  on: {
+                    click: function($event) {
+                      _vm.showModal("modal-add-proxy-admin")
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fa fa-plus-square fa-btn" }),
+                  _vm._v("Добавить\n            ")
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table table-striped table-hover" }, [
+                _c("thead", [
+                  _c("tr", [
+                    _c("th", { attrs: { width: "20" } }, [
+                      _c("div", { staticClass: "checkbox m-none" }, [
+                        _c("label", { staticClass: "p-t-xs" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.selectAll,
+                                expression: "selectAll"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(_vm.selectAll)
+                                ? _vm._i(_vm.selectAll, null) > -1
+                                : _vm.selectAll
+                            },
+                            on: {
+                              __c: function($event) {
+                                var $$a = _vm.selectAll,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.selectAll = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.selectAll = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.selectAll = $$c
+                                }
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("IP:Port - Тип PROXY")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Login:Password")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Страна")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Статус")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Обновлен статус")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Добавлен")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.proxies, function(proxy) {
+                    return _c("tr", [
+                      _c("td", [
+                        _c("div", { staticClass: "checkbox m-none" }, [
+                          _c("label", { staticClass: "p-t-xs" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selected,
+                                  expression: "selected"
+                                }
+                              ],
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                value: proxy,
+                                checked: Array.isArray(_vm.selected)
+                                  ? _vm._i(_vm.selected, proxy) > -1
+                                  : _vm.selected
+                              },
+                              on: {
+                                __c: function($event) {
+                                  var $$a = _vm.selected,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = proxy,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.selected = $$a.concat([$$v]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.selected = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.selected = $$c
+                                  }
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(proxy.host) +
+                            _vm._s(proxy.port ? ":" + proxy.port : "")
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: {
+                          textContent: _vm._s(
+                            proxy.login
+                              ? proxy.login + ":" + proxy.password
+                              : ""
+                          )
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(proxy.country) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        proxy.status === "check"
+                          ? _c("i", {
+                              staticClass: "fa fa-circle-o-notch fa-spin"
+                            })
+                          : proxy.status === "ok"
+                            ? _c("i", {
+                                staticClass: "fa fa-circle text-success"
+                              })
+                            : _c("i", {
+                                staticClass: "fa fa-circle text-danger"
+                              })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(proxy.updated_at) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(proxy.created_at) }
+                      })
+                    ])
+                  })
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "btn-group" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { href: "#" },
+                  on: { click: _vm.check }
+                },
+                [_vm._v("Перепроверить")]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("add-proxy-admin-modal", { on: { "add-proxies": _vm.addProxies } })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group m-b-lg" }, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "" }
+      }),
+      _vm._v(" "),
+      _c("span", { staticClass: "input-group-btn" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-default", attrs: { type: "button" } },
+          [_vm._v("Поиск")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "btn-group" }, [
+      _c("i", { staticClass: "fa fa-btn fa-hand-o-up m-l-sm hidden-xs" }),
+      _vm._v(" С отмеченными:\n        ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "btn-group" }, [
+      _c("a", { staticClass: "btn btn-danger", attrs: { href: "#" } }, [
+        _vm._v("Удалить")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0ab843b2", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-4289c203", module.exports)
   }
 }
 
@@ -7842,19 +8810,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(184),
-  /* template */
-  __webpack_require__(189),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(184)
+/* template */
+var __vue_template__ = __webpack_require__(189)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/Finance.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\Finance.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Finance.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -7865,9 +8839,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ed635958", Component.options)
+    hotAPI.createRecord("data-v-2b6f1410", Component.options)
   } else {
-    hotAPI.reload("data-v-ed635958", Component.options)
+    hotAPI.reload("data-v-2b6f1410", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -8031,28 +9005,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('modal', {
-    attrs: {
-      "id": 'modal-take-bitcoin',
-      "title": 'Принять BitCoin'
-    }
-  }, [_c('template', {
-    slot: "modal-body"
-  }, [_c('div', {
-    staticClass: "text-center"
-  }, [_c('img', {
-    attrs: {
-      "src": "https://vignette1.wikia.nocookie.net/alanwake/images/a/a6/Qrcode01.png/revision/latest?cb=20120227220057",
-      "alt": ""
-    }
-  })])])], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "modal",
+    { attrs: { id: "modal-take-bitcoin", title: "Принять BitCoin" } },
+    [
+      _c("template", { attrs: { slot: "modal-body" }, slot: "modal-body" }, [
+        _c("div", { staticClass: "text-center" }, [
+          _c("img", {
+            attrs: {
+              src:
+                "https://vignette1.wikia.nocookie.net/alanwake/images/a/a6/Qrcode01.png/revision/latest?cb=20120227220057",
+              alt: ""
+            }
+          })
+        ])
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-8b8fc3a8", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-1290b408", module.exports)
   }
 }
 
@@ -8134,99 +9116,126 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('modal', {
-    attrs: {
-      "id": "modal-send-bitcoin",
-      "title": "Отправить bitcoin"
-    }
-  }, [_c('template', {
-    slot: "modal-body"
-  }, [_c('div', {
-    staticClass: "form form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "control-label col-sm-4"
-  }, [_vm._v("Доступно:")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('p', {
-    staticClass: "form-control-static"
-  }, [_vm._v("0,006021317843424 BTC")])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "control-label col-sm-4",
-    attrs: {
-      "for": "amount"
-    }
-  }, [_vm._v("Сумма перевода")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.amount),
-      expression: "form.amount"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "id": "amount",
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.amount)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.amount = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "control-label col-sm-4",
-    attrs: {
-      "for": "bitcoin-wallet-address"
-    }
-  }, [_vm._v("Адрес кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.wallet),
-      expression: "form.wallet"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "id": "bitcoin-wallet-address",
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.wallet)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.wallet = $event.target.value
-      }
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer",
-    slot: "modal-footer"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Отправить")])])], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "modal",
+    { attrs: { id: "modal-send-bitcoin", title: "Отправить bitcoin" } },
+    [
+      _c("template", { attrs: { slot: "modal-body" }, slot: "modal-body" }, [
+        _c("div", { staticClass: "form form-horizontal" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { staticClass: "control-label col-sm-4" }, [
+              _vm._v("Доступно:")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("p", { staticClass: "form-control-static" }, [
+                _vm._v("0,006021317843424 BTC")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "label",
+              {
+                staticClass: "control-label col-sm-4",
+                attrs: { for: "amount" }
+              },
+              [_vm._v("Сумма перевода")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.amount,
+                    expression: "form.amount"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "amount", type: "text" },
+                domProps: { value: _vm.form.amount },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.form.amount = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "label",
+              {
+                staticClass: "control-label col-sm-4",
+                attrs: { for: "bitcoin-wallet-address" }
+              },
+              [_vm._v("Адрес кошелька")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.wallet,
+                    expression: "form.wallet"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "bitcoin-wallet-address", type: "text" },
+                domProps: { value: _vm.form.wallet },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.form.wallet = $event.target.value
+                  }
+                }
+              })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal-footer",
+          attrs: { slot: "modal-footer" },
+          slot: "modal-footer"
+        },
+        [
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", attrs: { type: "button" } },
+            [_vm._v("Отправить")]
+          )
+        ]
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-52a73166", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-2f04fd29", module.exports)
   }
 }
 
@@ -8234,115 +9243,219 @@ if (false) {
 /* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Финансы"
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "m-b-lg"
-  }, [_c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('router-link', {
-    staticClass: "btn btn-success",
-    attrs: {
-      "to": "/finance/rent"
-    }
-  }, [_vm._v("\n                    Счета аренды\n                ")])], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('div', {
-    staticClass: "panel panel-default panel-flush"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "panel-body tab-content"
-  }, [_c('div', {
-    staticClass: "tab-pane active",
-    attrs: {
-      "role": "tabpanel",
-      "id": "bitcoin"
-    }
-  }, [_c('div', {
-    staticClass: "p-md"
-  }, [_c('p', [_c('strong', [_vm._v("Баланс:")]), _vm._v("\n                                    0.006021317843424 BTC (" + _vm._s(_vm._f("currency")(1000, 'RUB')) + ")")]), _vm._v(" "), _c('p', {
-    staticClass: "small"
-  }, [_vm._v("Данная конвертация примерная,\n                                    разница в курсах может быть значительной от бирже к бирже")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-take-bitcoin')
-      }
-    }
-  }, [_vm._v("Принять")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-send-bitcoin')
-      }
-    }
-  }, [_vm._v("Отправить")]), _vm._v(" "), _c('router-link', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "to": "/finance/history/bitcoin"
-    }
-  }, [_vm._v("\n                                    История транзакций\n                                ")])], 1)]), _vm._v(" "), _vm._m(1)])])])])]), _vm._v(" "), _c('take-bitcoin-modal'), _vm._v(" "), _c('send-bitcoin-modal')], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "panel-heading"
-  }, [_c('ul', {
-    staticClass: "nav nav-pills nav-justified",
-    attrs: {
-      "role": "tablist"
-    }
-  }, [_c('li', {
-    staticClass: "active",
-    attrs: {
-      "role": "presentation"
-    }
-  }, [_c('a', {
-    attrs: {
-      "href": "#bitcoin",
-      "aria-controls": "home",
-      "role": "tab",
-      "data-toggle": "tab"
-    }
-  }, [_vm._v("BitCoin")])]), _vm._v(" "), _c('li', {
-    attrs: {
-      "role": "presentation"
-    }
-  }, [_c('a', {
-    attrs: {
-      "href": "#qiwi",
-      "aria-controls": "profile",
-      "role": "tab",
-      "data-toggle": "tab"
-    }
-  }, [_vm._v("Qiwi Wallet")])])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "tab-pane",
-    attrs: {
-      "role": "tabpanel",
-      "id": "qiwi"
-    }
-  }, [_c('div', {
-    staticClass: "p-md"
-  }, [_c('p', [_c('button', {
-    staticClass: "btn btn-default"
-  }, [_vm._v("Панель управления")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default"
-  }, [_vm._v("Персональный просмотр")])]), _vm._v(" "), _c('table', {
-    staticClass: "table"
-  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("Финасовая информация:")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("Оборот за месяц (руб.):")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Оборот за сегодня:")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Оборот за вчера:")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Доступные к выводу средства (на данный момент):")])])])])])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("page-header", { attrs: { icon: "fa-money", title: "Финансы" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "m-b-lg" }, [
+          _c(
+            "div",
+            { staticClass: "btn-group p-b-xs" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { to: "/finance/rent" }
+                },
+                [_vm._v("\n                    Счета аренды\n                ")]
+              )
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("div", { staticClass: "panel panel-default panel-flush" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel-body tab-content" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane active",
+                    attrs: { role: "tabpanel", id: "bitcoin" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "p-md" },
+                      [
+                        _c("p", [
+                          _c("strong", [_vm._v("Баланс:")]),
+                          _vm._v(
+                            "\n                                    0.006021317843424 BTC (" +
+                              _vm._s(_vm._f("currency")(1000, "RUB")) +
+                              ")"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "small" }, [
+                          _vm._v(
+                            "Данная конвертация примерная,\n                                    разница в курсах может быть значительной от бирже к бирже"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-default",
+                            on: {
+                              click: function($event) {
+                                _vm.showModal("modal-take-bitcoin")
+                              }
+                            }
+                          },
+                          [_vm._v("Принять")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-default",
+                            on: {
+                              click: function($event) {
+                                _vm.showModal("modal-send-bitcoin")
+                              }
+                            }
+                          },
+                          [_vm._v("Отправить")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn btn-default",
+                            attrs: { to: "/finance/history/bitcoin" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    История транзакций\n                                "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("take-bitcoin-modal"),
+      _vm._v(" "),
+      _c("send-bitcoin-modal")
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "nav nav-pills nav-justified",
+          attrs: { role: "tablist" }
+        },
+        [
+          _c("li", { staticClass: "active", attrs: { role: "presentation" } }, [
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "#bitcoin",
+                  "aria-controls": "home",
+                  role: "tab",
+                  "data-toggle": "tab"
+                }
+              },
+              [_vm._v("BitCoin")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { attrs: { role: "presentation" } }, [
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "#qiwi",
+                  "aria-controls": "profile",
+                  role: "tab",
+                  "data-toggle": "tab"
+                }
+              },
+              [_vm._v("Qiwi Wallet")]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "tab-pane", attrs: { role: "tabpanel", id: "qiwi" } },
+      [
+        _c("div", { staticClass: "p-md" }, [
+          _c("p", [
+            _c("button", { staticClass: "btn btn-default" }, [
+              _vm._v("Панель управления")
+            ]),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn btn-default" }, [
+              _vm._v("Персональный просмотр")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table" }, [
+            _c("thead", [
+              _c("tr", [_c("th", [_vm._v("Финасовая информация:")])])
+            ]),
+            _vm._v(" "),
+            _c("tbody", [
+              _c("tr", [_c("td", [_vm._v("Оборот за месяц (руб.):")])]),
+              _vm._v(" "),
+              _c("tr", [_c("td", [_vm._v("Оборот за сегодня:")])]),
+              _vm._v(" "),
+              _c("tr", [_c("td", [_vm._v("Оборот за вчера:")])]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _vm._v("Доступные к выводу средства (на данный момент):")
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-ed635958", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-2b6f1410", module.exports)
   }
 }
 
@@ -8351,19 +9464,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(191),
-  /* template */
-  __webpack_require__(192),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(191)
+/* template */
+var __vue_template__ = __webpack_require__(192)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/FinanceRent.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\FinanceRent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FinanceRent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -8374,9 +9493,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5435dfa6", Component.options)
+    hotAPI.createRecord("data-v-120540d1", Component.options)
   } else {
-    hotAPI.reload("data-v-5435dfa6", Component.options)
+    hotAPI.reload("data-v-120540d1", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -8485,139 +9604,199 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Счета аренды"
-    }
-  }, [_c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance"
-    }
-  }, [_c('a', [_vm._v("Финансы")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "table-responsive"
-  }, [_c('table', {
-    staticClass: "table table-striped table-hover"
-  }, [_c('thead', [_c('tr', [_c('th', {
-    attrs: {
-      "width": "20"
-    }
-  }, [_c('div', {
-    staticClass: "checkbox m-none"
-  }, [_c('label', {
-    staticClass: "p-t-xs"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.selectAll),
-      expression: "selectAll"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.selectAll) ? _vm._i(_vm.selectAll, null) > -1 : (_vm.selectAll)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.selectAll,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.selectAll = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.selectAll = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.selectAll = $$c
-        }
-      }
-    }
-  })])])]), _vm._v(" "), _c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Логин")]), _vm._v(" "), _c('th', [_vm._v("Длительность")]), _vm._v(" "), _c('th', [_vm._v("Цена за месяц (руб.)")]), _vm._v(" "), _c('th', [_vm._v("Сумма к оплате (руб.)")]), _vm._v(" "), _c('th', [_vm._v("Статус")]), _vm._v(" "), _c('th', [_vm._v("Кем выставлено")]), _vm._v(" "), _c('th', [_vm._v("Действителен")])])]), _vm._v(" "), _c('tbody', _vm._l((_vm.invoices), function(invoice) {
-    return _c('tr', [_c('td', [_c('div', {
-      staticClass: "checkbox m-none"
-    }, [_c('label', {
-      staticClass: "p-t-xs"
-    }, [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.selected),
-        expression: "selected"
-      }],
-      attrs: {
-        "type": "checkbox"
-      },
-      domProps: {
-        "value": invoice.id,
-        "checked": Array.isArray(_vm.selected) ? _vm._i(_vm.selected, invoice.id) > -1 : (_vm.selected)
-      },
-      on: {
-        "__c": function($event) {
-          var $$a = _vm.selected,
-            $$el = $event.target,
-            $$c = $$el.checked ? (true) : (false);
-          if (Array.isArray($$a)) {
-            var $$v = invoice.id,
-              $$i = _vm._i($$a, $$v);
-            if ($$el.checked) {
-              $$i < 0 && (_vm.selected = $$a.concat($$v))
-            } else {
-              $$i > -1 && (_vm.selected = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-            }
-          } else {
-            _vm.selected = $$c
-          }
-        }
-      }
-    })])])]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(invoice.id)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(invoice.login)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(invoice.duration)
-      }
-    }), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm._f("currency")(invoice.month_price)))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm._f("currency")(invoice.amount)))]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(invoice.status)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(invoice.invoice_person)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(invoice.until)
-      }
-    })])
-  }))])])])], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "m-b-lg"
-  }, [_c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('button', {
-    staticClass: "btn btn-success"
-  }, [_vm._v("\n                    Выставить счет\n                ")])])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "Счета аренды" } },
+        [
+          _c("router-link", { attrs: { tag: "li", to: "/finance" } }, [
+            _c("a", [_vm._v("Финансы")])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table table-striped table-hover" }, [
+            _c("thead", [
+              _c("tr", [
+                _c("th", { attrs: { width: "20" } }, [
+                  _c("div", { staticClass: "checkbox m-none" }, [
+                    _c("label", { staticClass: "p-t-xs" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.selectAll,
+                            expression: "selectAll"
+                          }
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: Array.isArray(_vm.selectAll)
+                            ? _vm._i(_vm.selectAll, null) > -1
+                            : _vm.selectAll
+                        },
+                        on: {
+                          __c: function($event) {
+                            var $$a = _vm.selectAll,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 && (_vm.selectAll = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.selectAll = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.selectAll = $$c
+                            }
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("th", [_vm._v("ID")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Логин")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Длительность")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Цена за месяц (руб.)")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Сумма к оплате (руб.)")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Статус")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Кем выставлено")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Действителен")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.invoices, function(invoice) {
+                return _c("tr", [
+                  _c("td", [
+                    _c("div", { staticClass: "checkbox m-none" }, [
+                      _c("label", { staticClass: "p-t-xs" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selected,
+                              expression: "selected"
+                            }
+                          ],
+                          attrs: { type: "checkbox" },
+                          domProps: {
+                            value: invoice.id,
+                            checked: Array.isArray(_vm.selected)
+                              ? _vm._i(_vm.selected, invoice.id) > -1
+                              : _vm.selected
+                          },
+                          on: {
+                            __c: function($event) {
+                              var $$a = _vm.selected,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = invoice.id,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 && (_vm.selected = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.selected = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.selected = $$c
+                              }
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(invoice.id) } }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(invoice.login) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(invoice.duration) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm._f("currency")(invoice.month_price)))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm._f("currency")(invoice.amount)))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(invoice.status) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(invoice.invoice_person) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(invoice.until) } })
+                ])
+              })
+            )
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "m-b-lg" }, [
+      _c("div", { staticClass: "btn-group p-b-xs" }, [
+        _c("button", { staticClass: "btn btn-success" }, [
+          _vm._v("\n                    Выставить счет\n                ")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5435dfa6", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-120540d1", module.exports)
   }
 }
 
@@ -8626,19 +9805,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(194),
-  /* template */
-  __webpack_require__(195),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(194)
+/* template */
+var __vue_template__ = __webpack_require__(195)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/FinanceBitcoin.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\FinanceBitcoin.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FinanceBitcoin.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -8649,9 +9834,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ccba674c", Component.options)
+    hotAPI.createRecord("data-v-7f9f2936", Component.options)
   } else {
-    hotAPI.reload("data-v-ccba674c", Component.options)
+    hotAPI.reload("data-v-7f9f2936", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -8730,57 +9915,109 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Bitcoin"
-    }
-  }, [_c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance"
-    }
-  }, [_c('a', [_vm._v("Финансы")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-6"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-body"
-  }, [_c('p', [_c('strong', [_vm._v("Баланс:")]), _vm._v("\n                            0.006021317843424 BTC (" + _vm._s(_vm._f("currency")(1000, 'RUB')) + ")")]), _vm._v(" "), _c('p', {
-    staticClass: "small"
-  }, [_vm._v("Данная конвертация примерная,\n                            разница в курсах может быть значительной от бирже к бирже")])]), _vm._v(" "), _c('div', {
-    staticClass: "panel-footer"
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-take-bitcoin')
-      }
-    }
-  }, [_vm._v("Принять")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-send-bitcoin')
-      }
-    }
-  }, [_vm._v("Отправить")]), _vm._v(" "), _c('router-link', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "to": "/finance/bitcoin/history"
-    }
-  }, [_vm._v("\n                            История транзакций\n                        ")])], 1)])])])]), _vm._v(" "), _c('take-bitcoin-modal'), _vm._v(" "), _c('send-bitcoin-modal')], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "Bitcoin" } },
+        [
+          _c("router-link", { attrs: { tag: "li", to: "/finance" } }, [
+            _c("a", [_vm._v("Финансы")])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "panel panel-default" }, [
+              _c("div", { staticClass: "panel-body" }, [
+                _c("p", [
+                  _c("strong", [_vm._v("Баланс:")]),
+                  _vm._v(
+                    "\n                            0.006021317843424 BTC (" +
+                      _vm._s(_vm._f("currency")(1000, "RUB")) +
+                      ")"
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "small" }, [
+                  _vm._v(
+                    "Данная конвертация примерная,\n                            разница в курсах может быть значительной от бирже к бирже"
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "panel-footer" },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      on: {
+                        click: function($event) {
+                          _vm.showModal("modal-take-bitcoin")
+                        }
+                      }
+                    },
+                    [_vm._v("Принять")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      on: {
+                        click: function($event) {
+                          _vm.showModal("modal-send-bitcoin")
+                        }
+                      }
+                    },
+                    [_vm._v("Отправить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { to: "/finance/bitcoin/history" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            История транзакций\n                        "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("take-bitcoin-modal"),
+      _vm._v(" "),
+      _c("send-bitcoin-modal")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-ccba674c", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-7f9f2936", module.exports)
   }
 }
 
@@ -8789,19 +10026,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(197),
-  /* template */
-  __webpack_require__(198),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(197)
+/* template */
+var __vue_template__ = __webpack_require__(198)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/FinanceBitcoinHistory.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\FinanceBitcoinHistory.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FinanceBitcoinHistory.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -8812,9 +10055,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0164c5ec", Component.options)
+    hotAPI.createRecord("data-v-51175ea4", Component.options)
   } else {
-    hotAPI.reload("data-v-0164c5ec", Component.options)
+    hotAPI.reload("data-v-51175ea4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -8898,36 +10141,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "История транзакций Bitcoin"
-    }
-  }, [_c('li', [_c('span', [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/bitcoin"
-    }
-  }, [_c('a', [_vm._v("Bitcoin")])])], 1), _vm._v(" "), _vm._m(0)], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-6"
-  }, [_c('div', {
-    staticClass: "table-responsive"
-  }, [_c('table', {
-    staticClass: "table table-striped table-hover"
-  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("Сумма")]), _vm._v(" "), _c('th', [_vm._v("Адрес кошелька")]), _vm._v(" "), _c('th', [_vm._v("Ссылка на запись в блокчейне")])])]), _vm._v(" "), _c('tbody')])])])])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "История транзакций Bitcoin" } },
+        [
+          _c("li", [_c("span", [_vm._v("Финансы")])]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { tag: "li", to: "/finance/bitcoin" } }, [
+            _c("a", [_vm._v("Bitcoin")])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm._m(0)
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("table", { staticClass: "table table-striped table-hover" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", [_vm._v("Сумма")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Адрес кошелька")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Ссылка на запись в блокчейне")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody")
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0164c5ec", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-51175ea4", module.exports)
   }
 }
 
@@ -8936,19 +10208,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(200),
-  /* template */
-  __webpack_require__(204),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(200)
+/* template */
+var __vue_template__ = __webpack_require__(204)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/FinanceQiwiWallet.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\FinanceQiwiWallet.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FinanceQiwiWallet.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -8959,9 +10237,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1b766b12", Component.options)
+    hotAPI.createRecord("data-v-b6021fca", Component.options)
   } else {
-    hotAPI.reload("data-v-1b766b12", Component.options)
+    hotAPI.reload("data-v-b6021fca", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -9040,19 +10318,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(202),
-  /* template */
-  __webpack_require__(203),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(202)
+/* template */
+var __vue_template__ = __webpack_require__(203)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/PersonalBrowsingModal.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\PersonalBrowsingModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PersonalBrowsingModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9063,9 +10347,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-083691c0", Component.options)
+    hotAPI.createRecord("data-v-3f457538", Component.options)
   } else {
-    hotAPI.reload("data-v-083691c0", Component.options)
+    hotAPI.reload("data-v-3f457538", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -9162,56 +10446,125 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('modal', {
-    attrs: {
-      "id": "modal-personal-browsing",
-      "title": "Список сотрудников"
-    }
-  }, [_c('template', {
-    slot: "modal-body"
-  }, [_c('table', {
-    staticClass: "table"
-  }, [_c('tbody', [_c('tr', [_c('td', [_c('strong', [_vm._v("co0001")]), _vm._v(" "), _c('a', {
-    staticClass: "btn btn-default btn-sm pull-right",
-    attrs: {
-      "href": "/",
-      "target": "_blank"
-    }
-  }, [_vm._v("\n                        Перейти в панель управления\n                    ")])])]), _vm._v(" "), _c('tr', [_c('td', [_c('strong', [_vm._v("co0002")]), _vm._v(" "), _c('a', {
-    staticClass: "btn btn-default btn-sm pull-right",
-    attrs: {
-      "href": "/",
-      "target": "_blank"
-    }
-  }, [_vm._v("\n                        Перейти в панель управления\n                    ")])])]), _vm._v(" "), _c('tr', [_c('td', [_c('strong', [_vm._v("co0003")]), _vm._v(" "), _c('a', {
-    staticClass: "btn btn-default btn-sm pull-right",
-    attrs: {
-      "href": "/",
-      "target": "_blank"
-    }
-  }, [_vm._v("\n                        Перейти в панель управления\n                    ")])])]), _vm._v(" "), _c('tr', [_c('td', [_c('strong', [_vm._v("co0004")]), _vm._v(" "), _c('a', {
-    staticClass: "btn btn-default btn-sm pull-right",
-    attrs: {
-      "href": "/",
-      "target": "_blank"
-    }
-  }, [_vm._v("\n                        Перейти в панель управления\n                    ")])])])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer",
-    slot: "modal-footer"
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "modal"
-    }
-  }, [_vm._v("Закрыть")])])], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "modal",
+    { attrs: { id: "modal-personal-browsing", title: "Список сотрудников" } },
+    [
+      _c("template", { attrs: { slot: "modal-body" }, slot: "modal-body" }, [
+        _c("table", { staticClass: "table" }, [
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [
+                _c("strong", [_vm._v("co0001")]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-default btn-sm pull-right",
+                    attrs: { href: "/", target: "_blank" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Перейти в панель управления\n                    "
+                    )
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [
+                _c("strong", [_vm._v("co0002")]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-default btn-sm pull-right",
+                    attrs: { href: "/", target: "_blank" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Перейти в панель управления\n                    "
+                    )
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [
+                _c("strong", [_vm._v("co0003")]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-default btn-sm pull-right",
+                    attrs: { href: "/", target: "_blank" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Перейти в панель управления\n                    "
+                    )
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [
+                _c("strong", [_vm._v("co0004")]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-default btn-sm pull-right",
+                    attrs: { href: "/", target: "_blank" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Перейти в панель управления\n                    "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal-footer",
+          attrs: { slot: "modal-footer" },
+          slot: "modal-footer"
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-default",
+              attrs: { type: "button", "data-dismiss": "modal" }
+            },
+            [_vm._v("Закрыть")]
+          )
+        ]
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-083691c0", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-3f457538", module.exports)
   }
 }
 
@@ -9219,64 +10572,112 @@ if (false) {
 /* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Qiwi Visa Wallet"
-    }
-  }, [_c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance"
-    }
-  }, [_c('a', [_vm._v("Финансы")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "m-b-lg"
-  }, [_c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('router-link', {
-    staticClass: "btn btn-success",
-    attrs: {
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_vm._v("\n                    Панель управления\n                ")])], 1), _vm._v(" "), _c('div', {
-    staticClass: "btn-group p-b-xs"
-  }, [_c('button', {
-    staticClass: "btn btn-success",
-    on: {
-      "click": function($event) {
-        _vm.showModal('modal-personal-browsing')
-      }
-    }
-  }, [_vm._v("Персональный просмотр")])])]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c('personal-browsing-modal')], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-6"
-  }, [_c('div', {
-    staticClass: "panel panel-primary"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("\n                        Финасовая информация:\n                    ")]), _vm._v(" "), _c('ul', {
-    staticClass: "list-group"
-  }, [_c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("Оборот за месяц (руб.):")]), _vm._v(" "), _c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("Оборот за сегодня:")]), _vm._v(" "), _c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("Оборот за вчера:")]), _vm._v(" "), _c('li', {
-    staticClass: "list-group-item"
-  }, [_vm._v("Доступные к выводу средства (на данный момент):")])])])])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "Qiwi Visa Wallet" } },
+        [
+          _c("router-link", { attrs: { tag: "li", to: "/finance" } }, [
+            _c("a", [_vm._v("Финансы")])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "m-b-lg" }, [
+          _c(
+            "div",
+            { staticClass: "btn-group p-b-xs" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { to: "/finance/qiwi/dashboard" }
+                },
+                [
+                  _vm._v(
+                    "\n                    Панель управления\n                "
+                  )
+                ]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "btn-group p-b-xs" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                on: {
+                  click: function($event) {
+                    _vm.showModal("modal-personal-browsing")
+                  }
+                }
+              },
+              [_vm._v("Персональный просмотр")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _c("personal-browsing-modal")
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-6" }, [
+        _c("div", { staticClass: "panel panel-primary" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _vm._v(
+              "\n                        Финасовая информация:\n                    "
+            )
+          ]),
+          _vm._v(" "),
+          _c("ul", { staticClass: "list-group" }, [
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("Оборот за месяц (руб.):")
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("Оборот за сегодня:")
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("Оборот за вчера:")
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("Доступные к выводу средства (на данный момент):")
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-1b766b12", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-b6021fca", module.exports)
   }
 }
 
@@ -9285,19 +10686,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(206),
-  /* template */
-  __webpack_require__(207),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(206)
+/* template */
+var __vue_template__ = __webpack_require__(207)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/qiwi/AddQiwiWallet.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\qiwi\\AddQiwiWallet.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AddQiwiWallet.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9308,9 +10715,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-52832855", Component.options)
+    hotAPI.createRecord("data-v-11e4919e", Component.options)
   } else {
-    hotAPI.reload("data-v-52832855", Component.options)
+    hotAPI.reload("data-v-11e4919e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -9539,342 +10946,444 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Добавить кошелек Qiwi"
-    }
-  }, [_c('li', [_c('a', {
-    staticClass: "disabled"
-  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi"
-    }
-  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Добавление кошелька Qiwi")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Номер кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.login),
-      expression: "form.login"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.login)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.login = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Пароль")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.password),
-      expression: "form.password"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "password"
-    },
-    domProps: {
-      "value": (_vm.form.password)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.password = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Имя кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.name),
-      expression: "form.name"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.name)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.name = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.useProxy),
-      expression: "form.useProxy"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.form.useProxy) ? _vm._i(_vm.form.useProxy, null) > -1 : (_vm.form.useProxy)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.form.useProxy,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.form.useProxy = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.form.useProxy = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.form.useProxy = $$c
-        }
-      }
-    }
-  }), _vm._v(" Использовать прокси\n                                        ")])])])]), _vm._v(" "), (_vm.form.useProxy) ? _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Прокси сервер")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.proxyServer),
-      expression: "proxyServer"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "host:port"
-    },
-    domProps: {
-      "value": (_vm.proxyServer)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.proxyServer = $event.target.value
-      }
-    }
-  })])]) : _vm._e(), _vm._v(" "), (_vm.form.useProxy) ? _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Авторизация прокси")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.proxyAuth),
-      expression: "proxyAuth"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "login:password"
-    },
-    domProps: {
-      "value": (_vm.proxyAuth)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.proxyAuth = $event.target.value
-      }
-    }
-  })])]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Тип кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.type),
-      expression: "form.type"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "name": "",
-      "id": ""
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.form.type = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.walletTypes), function(type) {
-    return _c('option', {
-      domProps: {
-        "value": type.value,
-        "textContent": _vm._s(type.text)
-      }
-    })
-  })), _vm._v(" "), _c('span', {
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.walletTypeDescription)
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.isActive),
-      expression: "form.isActive"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.form.isActive) ? _vm._i(_vm.form.isActive, null) > -1 : (_vm.form.isActive)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.form.isActive,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.form.isActive = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.form.isActive = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.form.isActive = $$c
-        }
-      }
-    }
-  }), _vm._v(" Кошелек активен\n                                        ")])]), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("После создания кошелек может быть сразу активным (если стоит галочка)\n                                        или же попасть в списо неактивных кошельков для последующей донастройки.")])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.registerNew),
-      expression: "form.registerNew"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.form.registerNew) ? _vm._i(_vm.form.registerNew, null) > -1 : (_vm.form.registerNew)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.form.registerNew,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.form.registerNew = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.form.registerNew = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.form.registerNew = $$c
-        }
-      }
-    }
-  }), _vm._v("\n                                            Зарегистрировать новый кошелек\n                                        ")])]), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Если вы хотите добавить существующий кошелек, то эта галочка должна быть снята.\n                                    Если вы хотите зарегистрировать новый кошелек в системе Qiwi с текущими параметрами,\n                                    то вам необходимо отметить галочку.")])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
-    on: {
-      "click": _vm.submitForm
-    }
-  }, [_vm._v("Добавить кошелек")])])])])])])])])])], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "Добавить кошелек Qiwi" } },
+        [
+          _c("li", [_c("a", { staticClass: "disabled" }, [_vm._v("Финансы")])]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { tag: "li", to: "/finance/qiwi" } }, [
+            _c("a", [_vm._v("Qiwi Visa Wallet")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { attrs: { tag: "li", to: "/finance/qiwi/dashboard" } },
+            [_c("a", [_vm._v("Панель управления")])]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("div", { staticClass: "panel panel-default" }, [
+              _c("div", { staticClass: "panel-heading" }, [
+                _vm._v("Добавление кошелька Qiwi")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel-body" }, [
+                _c("div", { staticClass: "form-horizontal" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "col-sm-4 control-label" }, [
+                      _vm._v("Номер кошелька")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.login,
+                            expression: "form.login"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.form.login },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.login = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "col-sm-4 control-label" }, [
+                      _vm._v("Пароль")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.password,
+                            expression: "form.password"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "password" },
+                        domProps: { value: _vm.form.password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.password = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "col-sm-4 control-label" }, [
+                      _vm._v("Имя кошелька")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.name,
+                            expression: "form.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.form.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.name = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c("div", { staticClass: "checkbox" }, [
+                        _c("label", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.useProxy,
+                                expression: "form.useProxy"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(_vm.form.useProxy)
+                                ? _vm._i(_vm.form.useProxy, null) > -1
+                                : _vm.form.useProxy
+                            },
+                            on: {
+                              __c: function($event) {
+                                var $$a = _vm.form.useProxy,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.form.useProxy = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.form.useProxy = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.form.useProxy = $$c
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            " Использовать прокси\n                                        "
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.form.useProxy
+                    ? _c("div", { staticClass: "form-group" }, [
+                        _c("label", { staticClass: "col-sm-4 control-label" }, [
+                          _vm._v("Прокси сервер")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-8" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.proxyServer,
+                                expression: "proxyServer"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text", placeholder: "host:port" },
+                            domProps: { value: _vm.proxyServer },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.proxyServer = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.form.useProxy
+                    ? _c("div", { staticClass: "form-group" }, [
+                        _c("label", { staticClass: "col-sm-4 control-label" }, [
+                          _vm._v("Авторизация прокси")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-8" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.proxyAuth,
+                                expression: "proxyAuth"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              placeholder: "login:password"
+                            },
+                            domProps: { value: _vm.proxyAuth },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.proxyAuth = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "col-sm-4 control-label" }, [
+                      _vm._v("Тип кошелька")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.type,
+                              expression: "form.type"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "", id: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.form.type = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.walletTypes, function(type) {
+                          return _c("option", {
+                            domProps: {
+                              value: type.value,
+                              textContent: _vm._s(type.text)
+                            }
+                          })
+                        })
+                      ),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "help-block",
+                        domProps: {
+                          textContent: _vm._s(_vm.walletTypeDescription)
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c("div", { staticClass: "checkbox" }, [
+                        _c("label", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.isActive,
+                                expression: "form.isActive"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(_vm.form.isActive)
+                                ? _vm._i(_vm.form.isActive, null) > -1
+                                : _vm.form.isActive
+                            },
+                            on: {
+                              __c: function($event) {
+                                var $$a = _vm.form.isActive,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.form.isActive = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.form.isActive = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.form.isActive = $$c
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            " Кошелек активен\n                                        "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help-block" }, [
+                        _vm._v(
+                          "После создания кошелек может быть сразу активным (если стоит галочка)\n                                        или же попасть в списо неактивных кошельков для последующей донастройки."
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c("div", { staticClass: "checkbox" }, [
+                        _c("label", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.registerNew,
+                                expression: "form.registerNew"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(_vm.form.registerNew)
+                                ? _vm._i(_vm.form.registerNew, null) > -1
+                                : _vm.form.registerNew
+                            },
+                            on: {
+                              __c: function($event) {
+                                var $$a = _vm.form.registerNew,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.form.registerNew = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.form.registerNew = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.form.registerNew = $$c
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                                            Зарегистрировать новый кошелек\n                                        "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help-block" }, [
+                        _vm._v(
+                          "Если вы хотите добавить существующий кошелек, то эта галочка должна быть снята.\n                                    Если вы хотите зарегистрировать новый кошелек в системе Qiwi с текущими параметрами,\n                                    то вам необходимо отметить галочку."
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          on: { click: _vm.submitForm }
+                        },
+                        [_vm._v("Добавить кошелек")]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-52832855", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-11e4919e", module.exports)
   }
 }
 
@@ -9887,19 +11396,25 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(209)
 }
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(212),
-  /* template */
-  __webpack_require__(213),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-57dac6e6",
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(212)
+/* template */
+var __vue_template__ = __webpack_require__(213)
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-30017a8a"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/qiwi/RemoveQiwiWallet.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\qiwi\\RemoveQiwiWallet.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] RemoveQiwiWallet.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9910,9 +11425,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-57dac6e6", Component.options)
+    hotAPI.createRecord("data-v-30017a8a", Component.options)
   } else {
-    hotAPI.reload("data-v-57dac6e6", Component.options)
+    hotAPI.reload("data-v-30017a8a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -9933,13 +11448,13 @@ var content = __webpack_require__(210);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(128)("009017fd", content, false);
+var update = __webpack_require__(128)("73cb9b4b", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-57dac6e6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./RemoveQiwiWallet.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-57dac6e6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./RemoveQiwiWallet.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-30017a8a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./RemoveQiwiWallet.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-30017a8a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./RemoveQiwiWallet.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -9957,7 +11472,7 @@ exports = module.exports = __webpack_require__(127)(undefined);
 
 
 // module
-exports.push([module.i, "\n.body-header[data-v-57dac6e6] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-57dac6e6] {\n    padding: 15px;\n}\n.alert-notification[data-v-57dac6e6] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #8a6d3b;\n    font-size: 14px;\n    background-color: #fcf8e3;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.success-notification[data-v-57dac6e6] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n", ""]);
+exports.push([module.i, "\n.body-header[data-v-30017a8a] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-30017a8a] {\n    padding: 15px;\n}\n.alert-notification[data-v-30017a8a] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #8a6d3b;\n    font-size: 14px;\n    background-color: #fcf8e3;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.success-notification[data-v-30017a8a] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n", ""]);
 
 // exports
 
@@ -10105,118 +11620,208 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Добавление кошелька"
-    }
-  }, [_c('li', [_c('a', {
-    staticClass: "disabled"
-  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi"
-    }
-  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-body"
-  }, [_c('h3', {
-    staticClass: "body-header"
-  }, [_vm._v("Удаление QIWI кошелька")]), _vm._v(" "), (!_vm.success) ? [_c('div', {
-    staticClass: "body-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.confirm),
-      expression: "confirm"
-    }],
-    attrs: {
-      "type": "checkbox",
-      "id": "confirm",
-      "name": "confirm"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.confirm) ? _vm._i(_vm.confirm, null) > -1 : (_vm.confirm)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.confirm,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.confirm = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.confirm = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.confirm = $$c
-        }
-      }
-    }
-  }), _vm._v(" "), _c('label', {
-    attrs: {
-      "for": "confirm"
-    }
-  }, [_vm._v("\n                                            Я подтверждаю, что хочу удалить кошелек " + _vm._s(_vm.login) + "\n                                        ")])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "disabled": !_vm.confirm
-    },
-    on: {
-      "click": _vm.proceed
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-times"
-  }), _vm._v("\n                                            Удалить кошелек\n                                        ")])])])])] : _vm._e(), _vm._v(" "), (_vm.success) ? [_c('div', {
-    staticClass: "body-content"
-  }, [_vm._m(1), _vm._v(" "), _c('div', [_vm._v("\n                                    Вы можете перейти к\n                                    "), _c('router-link', {
-    attrs: {
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("списку")])]), _vm._v("\n                                    кошельков или\n                                    "), _c('router-link', {
-    attrs: {
-      "to": "/finance/qiwi/add-wallet"
-    }
-  }, [_c('a', [_vm._v("загеристрировать новый")])]), _vm._v("\n                                    кошелек\n                                ")], 1)])] : _vm._e()], 2)])])])])], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "alert-notification"
-  }, [_c('b', [_vm._v("Внимание!")]), _vm._v(" Вы собираетесь удалить QIWI кошелек из системы\n                                ")])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "success-notification"
-  }, [_c('b', [_vm._v("Отлично!")]), _vm._v(" Qiwi кошелек успешно удален из системы\n                                ")])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "Добавление кошелька" } },
+        [
+          _c("li", [_c("a", { staticClass: "disabled" }, [_vm._v("Финансы")])]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { tag: "li", to: "/finance/qiwi" } }, [
+            _c("a", [_vm._v("Qiwi Visa Wallet")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { attrs: { tag: "li", to: "/finance/qiwi/dashboard" } },
+            [_c("a", [_vm._v("Панель управления")])]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("div", { staticClass: "panel panel-default" }, [
+              _c(
+                "div",
+                { staticClass: "panel-body" },
+                [
+                  _c("h3", { staticClass: "body-header" }, [
+                    _vm._v("Удаление QIWI кошелька")
+                  ]),
+                  _vm._v(" "),
+                  !_vm.success
+                    ? [
+                        _c("div", { staticClass: "body-content" }, [
+                          _vm._m(0),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-offset-4 col-sm-8" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.confirm,
+                                      expression: "confirm"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "checkbox",
+                                    id: "confirm",
+                                    name: "confirm"
+                                  },
+                                  domProps: {
+                                    checked: Array.isArray(_vm.confirm)
+                                      ? _vm._i(_vm.confirm, null) > -1
+                                      : _vm.confirm
+                                  },
+                                  on: {
+                                    __c: function($event) {
+                                      var $$a = _vm.confirm,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = null,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            (_vm.confirm = $$a.concat([$$v]))
+                                        } else {
+                                          $$i > -1 &&
+                                            (_vm.confirm = $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1)))
+                                        }
+                                      } else {
+                                        _vm.confirm = $$c
+                                      }
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("label", { attrs: { for: "confirm" } }, [
+                                  _vm._v(
+                                    "\n                                            Я подтверждаю, что хочу удалить кошелек " +
+                                      _vm._s(_vm.login) +
+                                      "\n                                        "
+                                  )
+                                ])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-offset-4 col-sm-8" },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary",
+                                    attrs: { disabled: !_vm.confirm },
+                                    on: { click: _vm.proceed }
+                                  },
+                                  [
+                                    _c("i", { staticClass: "fa fa-times" }),
+                                    _vm._v(
+                                      "\n                                            Удалить кошелек\n                                        "
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      ]
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.success
+                    ? [
+                        _c("div", { staticClass: "body-content" }, [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            [
+                              _vm._v(
+                                "\n                                    Вы можете перейти к\n                                    "
+                              ),
+                              _c(
+                                "router-link",
+                                { attrs: { to: "/finance/qiwi/dashboard" } },
+                                [_c("a", [_vm._v("списку")])]
+                              ),
+                              _vm._v(
+                                "\n                                    кошельков или\n                                    "
+                              ),
+                              _c(
+                                "router-link",
+                                { attrs: { to: "/finance/qiwi/add-wallet" } },
+                                [_c("a", [_vm._v("загеристрировать новый")])]
+                              ),
+                              _vm._v(
+                                "\n                                    кошелек\n                                "
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ]
+                    : _vm._e()
+                ],
+                2
+              )
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "alert-notification" }, [
+      _c("b", [_vm._v("Внимание!")]),
+      _vm._v(
+        " Вы собираетесь удалить QIWI кошелек из системы\n                                "
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "success-notification" }, [
+      _c("b", [_vm._v("Отлично!")]),
+      _vm._v(
+        " Qiwi кошелек успешно удален из системы\n                                "
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-57dac6e6", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-30017a8a", module.exports)
   }
 }
 
@@ -10229,19 +11834,25 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(215)
 }
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(217),
-  /* template */
-  __webpack_require__(218),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-0e93ec9e",
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(217)
+/* template */
+var __vue_template__ = __webpack_require__(218)
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-47302e42"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/qiwi/AddQiwiWalletSuccess.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\qiwi\\AddQiwiWalletSuccess.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AddQiwiWalletSuccess.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10252,9 +11863,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0e93ec9e", Component.options)
+    hotAPI.createRecord("data-v-47302e42", Component.options)
   } else {
-    hotAPI.reload("data-v-0e93ec9e", Component.options)
+    hotAPI.reload("data-v-47302e42", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -10275,13 +11886,13 @@ var content = __webpack_require__(216);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(128)("6bfecb8a", content, false);
+var update = __webpack_require__(128)("76bd1393", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0e93ec9e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddQiwiWalletSuccess.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0e93ec9e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddQiwiWalletSuccess.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47302e42\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddQiwiWalletSuccess.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47302e42\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddQiwiWalletSuccess.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -10299,7 +11910,7 @@ exports = module.exports = __webpack_require__(127)(undefined);
 
 
 // module
-exports.push([module.i, "\n.body-header[data-v-0e93ec9e] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-0e93ec9e] {\n    padding: 15px;\n}\n.success-notification[data-v-0e93ec9e] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.wallet-info[data-v-0e93ec9e] {\np {\n    margin-bottom: 0;\n}\n}\n", ""]);
+exports.push([module.i, "\n.body-header[data-v-47302e42] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-47302e42] {\n    padding: 15px;\n}\n.success-notification[data-v-47302e42] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.wallet-info[data-v-47302e42] {\np {\n    margin-bottom: 0;\n}\n}\n", ""]);
 
 // exports
 
@@ -10437,65 +12048,114 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Добавление кошелька"
-    }
-  }, [_c('li', [_c('a', {
-    staticClass: "disabled"
-  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi"
-    }
-  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Регистрация QIWI кошелька завершена")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('h3', {
-    staticClass: "body-header"
-  }, [_vm._v("Регистрация QIWI кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "body-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "wallet-info"
-  }, [_c('p', [_vm._v("Ваш кошелек "), _c('span', {
-    domProps: {
-      "textContent": _vm._s(this.login)
-    }
-  }), _vm._v("\n                                    успешно зарегистрирован в системе Dinero.")]), _vm._v(" "), _c('p', [_vm._v("Вы можете перейти к\n                                    "), _c('router-link', {
-    attrs: {
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("списку")])]), _vm._v("\n                                    кошельков или\n                                    "), _c('router-link', {
-    attrs: {
-      "to": "/finance/qiwi/add-wallet"
-    }
-  }, [_c('a', [_vm._v("зарегистрировать")])]), _vm._v("\n                                    новый кошелек.\n                                ")], 1)])])])])])])])], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "success-notification"
-  }, [_c('b', [_vm._v("Отлично!")]), _vm._v(" QIWI кошелек успешно зарегистрирован в Dinero\n                            ")])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "Добавление кошелька" } },
+        [
+          _c("li", [_c("a", { staticClass: "disabled" }, [_vm._v("Финансы")])]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { tag: "li", to: "/finance/qiwi" } }, [
+            _c("a", [_vm._v("Qiwi Visa Wallet")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { attrs: { tag: "li", to: "/finance/qiwi/dashboard" } },
+            [_c("a", [_vm._v("Панель управления")])]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("div", { staticClass: "panel panel-default" }, [
+              _c("div", { staticClass: "panel-heading" }, [
+                _vm._v("Регистрация QIWI кошелька завершена")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel-body" }, [
+                _c("h3", { staticClass: "body-header" }, [
+                  _vm._v("Регистрация QIWI кошелька")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "body-content" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "wallet-info" }, [
+                    _c("p", [
+                      _vm._v("Ваш кошелек "),
+                      _c("span", {
+                        domProps: { textContent: _vm._s(this.login) }
+                      }),
+                      _vm._v(
+                        "\n                                    успешно зарегистрирован в системе Dinero."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      [
+                        _vm._v(
+                          "Вы можете перейти к\n                                    "
+                        ),
+                        _c(
+                          "router-link",
+                          { attrs: { to: "/finance/qiwi/dashboard" } },
+                          [_c("a", [_vm._v("списку")])]
+                        ),
+                        _vm._v(
+                          "\n                                    кошельков или\n                                    "
+                        ),
+                        _c(
+                          "router-link",
+                          { attrs: { to: "/finance/qiwi/add-wallet" } },
+                          [_c("a", [_vm._v("зарегистрировать")])]
+                        ),
+                        _vm._v(
+                          "\n                                    новый кошелек.\n                                "
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "success-notification" }, [
+      _c("b", [_vm._v("Отлично!")]),
+      _vm._v(
+        " QIWI кошелек успешно зарегистрирован в Dinero\n                            "
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0e93ec9e", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-47302e42", module.exports)
   }
 }
 
@@ -10504,19 +12164,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(220),
-  /* template */
-  __webpack_require__(224),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(220)
+/* template */
+var __vue_template__ = __webpack_require__(224)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/qiwi/QiwiWalletHistory.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\qiwi\\QiwiWalletHistory.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] QiwiWalletHistory.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10527,9 +12193,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4e5b29e2", Component.options)
+    hotAPI.createRecord("data-v-7b0aeabe", Component.options)
   } else {
-    hotAPI.reload("data-v-4e5b29e2", Component.options)
+    hotAPI.reload("data-v-7b0aeabe", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -10868,185 +12534,296 @@ module.exports = identity;
 /* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "История транзакций"
-    }
-  }, [_c('li', [_c('a', {
-    staticClass: "disabled"
-  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi"
-    }
-  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row m-b-lg"
-  }, [_c('div', {
-    staticClass: "col-sm-4"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Показать записи по указанным датам:")]), _vm._v(" "), _c('div', {
-    staticClass: "input-group input-group-sm"
-  }, [_c('span', {
-    staticClass: "input-group-addon"
-  }, [_vm._v("с")]), _vm._v(" "), _c('masked-input', {
-    staticClass: "form-control",
-    attrs: {
-      "mask": "99.99.9999"
-    },
-    model: {
-      value: (_vm.dateRange.start),
-      callback: function($$v) {
-        _vm.dateRange.start = $$v
-      },
-      expression: "dateRange.start"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "input-group-addon"
-  }, [_vm._v("по")]), _vm._v(" "), _c('masked-input', {
-    staticClass: "form-control",
-    attrs: {
-      "mask": "99.99.9999"
-    },
-    model: {
-      value: (_vm.dateRange.end),
-      callback: function($$v) {
-        _vm.dateRange.end = $$v
-      },
-      expression: "dateRange.end"
-    }
-  })], 1)]), _vm._v(" "), _c('ul', {
-    staticClass: "list-inline"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    },
-    on: {
-      "click": function($event) {
-        _vm.setDateRange('today')
-      }
-    }
-  }, [_vm._v("За сегодня")])]), _vm._v(" "), _c('li', [_vm._v("•")]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    },
-    on: {
-      "click": function($event) {
-        _vm.setDateRange('yesterday')
-      }
-    }
-  }, [_vm._v("За вчера")])]), _vm._v(" "), _c('li', [_vm._v("•")]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "javascript:;"
-    },
-    on: {
-      "click": function($event) {
-        _vm.setDateRange('month')
-      }
-    }
-  }, [_vm._v("За текущий месяц")])])])])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('loading', {
-    attrs: {
-      "show": !_vm.isLoaded
-    }
-  }), _vm._v(" "), (_vm.isLoaded) ? _c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_c('div', {
-    staticClass: "form-inline"
-  }, [_c('div', {
-    staticClass: "pull-left"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('p', {
-    staticClass: "form-control-static"
-  }, [_vm._v("История транзакций "), _c('strong', {
-    domProps: {
-      "textContent": _vm._s(this.login)
-    }
-  }), _vm._v("\n                                (+ " + _vm._s(_vm.income) + " / - " + _vm._s(_vm.outcome) + ")")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [(!_vm.transactions.length) ? _c('div', [_vm._v("Нет отчетов за указанный период")]) : _c('div', {
-    staticClass: "table-responsive"
-  }, [_c('table', {
-    staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.transactions), function(t) {
-    return _c('tr', [_c('td', [_c('p', {
-      staticClass: "small m-b-none",
-      domProps: {
-        "textContent": _vm._s(t.date)
-      }
-    }), _vm._v(" "), _c('p', {
-      staticClass: "small m-b-none",
-      domProps: {
-        "textContent": _vm._s(t.time)
-      }
-    })]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(t.transaction)
-      }
-    }), _vm._v(" "), _c('td', {
-      domProps: {
-        "innerHTML": _vm._s(_vm.status(t))
-      }
-    }), _vm._v(" "), _c('td', [_c('p', {
-      staticClass: "small m-b-none",
-      domProps: {
-        "textContent": _vm._s(t.provider)
-      }
-    }), _vm._v(" "), _c('p', {
-      staticClass: "small m-b-none",
-      domProps: {
-        "textContent": _vm._s(t.opNumber)
-      }
-    })]), _vm._v(" "), _c('td', {
-      domProps: {
-        "innerHTML": _vm._s(_vm.comment(t))
-      }
-    }), _vm._v(" "), _c('td', [_vm._v(_vm._s(t.sign) + _vm._s(t.amount) + " " + _vm._s(t.currency))]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(t.commission)
-      }
-    })])
-  }))])])])]) : _vm._e()], 1)], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "pull-right"
-  }, [_c('label', {
-    staticClass: "control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Поиск:")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Дата и время")]), _vm._v(" "), _c('th', [_vm._v("Код")]), _vm._v(" "), _c('th', [_vm._v("Статус")]), _vm._v(" "), _c('th', [_vm._v("Реквизит")]), _vm._v(" "), _c('th', [_vm._v("Коментарий*")]), _vm._v(" "), _c('th', [_vm._v("Сумма")]), _vm._v(" "), _c('th', [_vm._v("Комиссия")])])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "История транзакций" } },
+        [
+          _c("li", [_c("a", { staticClass: "disabled" }, [_vm._v("Финансы")])]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { tag: "li", to: "/finance/qiwi" } }, [
+            _c("a", [_vm._v("Qiwi Visa Wallet")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { attrs: { tag: "li", to: "/finance/qiwi/dashboard" } },
+            [_c("a", [_vm._v("Панель управления")])]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "container-fluid" },
+        [
+          _c("div", { staticClass: "row m-b-lg" }, [
+            _c("div", { staticClass: "col-sm-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "" } },
+                  [_vm._v("Показать записи по указанным датам:")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "input-group input-group-sm" },
+                  [
+                    _c("span", { staticClass: "input-group-addon" }, [
+                      _vm._v("с")
+                    ]),
+                    _vm._v(" "),
+                    _c("masked-input", {
+                      staticClass: "form-control",
+                      attrs: { mask: "99.99.9999" },
+                      model: {
+                        value: _vm.dateRange.start,
+                        callback: function($$v) {
+                          _vm.dateRange.start = $$v
+                        },
+                        expression: "dateRange.start"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "input-group-addon" }, [
+                      _vm._v("по")
+                    ]),
+                    _vm._v(" "),
+                    _c("masked-input", {
+                      staticClass: "form-control",
+                      attrs: { mask: "99.99.9999" },
+                      model: {
+                        value: _vm.dateRange.end,
+                        callback: function($$v) {
+                          _vm.dateRange.end = $$v
+                        },
+                        expression: "dateRange.end"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("ul", { staticClass: "list-inline" }, [
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "javascript:;" },
+                      on: {
+                        click: function($event) {
+                          _vm.setDateRange("today")
+                        }
+                      }
+                    },
+                    [_vm._v("За сегодня")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [_vm._v("•")]),
+                _vm._v(" "),
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "javascript:;" },
+                      on: {
+                        click: function($event) {
+                          _vm.setDateRange("yesterday")
+                        }
+                      }
+                    },
+                    [_vm._v("За вчера")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [_vm._v("•")]),
+                _vm._v(" "),
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "javascript:;" },
+                      on: {
+                        click: function($event) {
+                          _vm.setDateRange("month")
+                        }
+                      }
+                    },
+                    [_vm._v("За текущий месяц")]
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("loading", { attrs: { show: !_vm.isLoaded } }),
+          _vm._v(" "),
+          _vm.isLoaded
+            ? _c("div", { staticClass: "panel panel-default" }, [
+                _c("div", { staticClass: "panel-heading" }, [
+                  _c("div", { staticClass: "form-inline" }, [
+                    _c("div", { staticClass: "pull-left" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("p", { staticClass: "form-control-static" }, [
+                          _vm._v("История транзакций "),
+                          _c("strong", {
+                            domProps: { textContent: _vm._s(this.login) }
+                          }),
+                          _vm._v(
+                            "\n                                (+ " +
+                              _vm._s(_vm.income) +
+                              " / - " +
+                              _vm._s(_vm.outcome) +
+                              ")"
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "clearfix" })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "panel-body" }, [
+                  !_vm.transactions.length
+                    ? _c("div", [_vm._v("Нет отчетов за указанный период")])
+                    : _c("div", { staticClass: "table-responsive" }, [
+                        _c("table", { staticClass: "table table-striped" }, [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.transactions, function(t) {
+                              return _c("tr", [
+                                _c("td", [
+                                  _c("p", {
+                                    staticClass: "small m-b-none",
+                                    domProps: { textContent: _vm._s(t.date) }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", {
+                                    staticClass: "small m-b-none",
+                                    domProps: { textContent: _vm._s(t.time) }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(t.transaction)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { innerHTML: _vm._s(_vm.status(t)) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c("p", {
+                                    staticClass: "small m-b-none",
+                                    domProps: {
+                                      textContent: _vm._s(t.provider)
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", {
+                                    staticClass: "small m-b-none",
+                                    domProps: {
+                                      textContent: _vm._s(t.opNumber)
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    innerHTML: _vm._s(_vm.comment(t))
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(t.sign) +
+                                      _vm._s(t.amount) +
+                                      " " +
+                                      _vm._s(t.currency)
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(t.commission)
+                                  }
+                                })
+                              ])
+                            })
+                          )
+                        ])
+                      ])
+                ])
+              ])
+            : _vm._e()
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "pull-right" }, [
+      _c("label", { staticClass: "control-label", attrs: { for: "" } }, [
+        _vm._v("Поиск:")
+      ]),
+      _vm._v(" "),
+      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Дата и время")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Код")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Статус")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Реквизит")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Коментарий*")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Сумма")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Комиссия")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4e5b29e2", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-7b0aeabe", module.exports)
   }
 }
 
@@ -11055,19 +12832,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(226),
-  /* template */
-  __webpack_require__(227),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(226)
+/* template */
+var __vue_template__ = __webpack_require__(227)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/qiwi/QiwiWalletSettings.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\qiwi\\QiwiWalletSettings.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] QiwiWalletSettings.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11078,9 +12861,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-14773f45", Component.options)
+    hotAPI.createRecord("data-v-7dbf99e9", Component.options)
   } else {
-    hotAPI.reload("data-v-14773f45", Component.options)
+    hotAPI.reload("data-v-7dbf99e9", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -11529,687 +13312,922 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Настройки кошелька Qiwi"
-    }
-  }, [_c('li', [_c('a', {
-    staticClass: "disabled"
-  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi"
-    }
-  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Настройки кошелька Qiwi (" + _vm._s(_vm.form.login) + ")")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Название кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.name),
-      expression: "form.name"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.name)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.name = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Комментарий к кошельку")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.comments),
-      expression: "form.comments"
-    }],
-    staticClass: "form-control",
-    domProps: {
-      "value": (_vm.form.comments)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.comments = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.useProxy),
-      expression: "form.useProxy"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.form.useProxy) ? _vm._i(_vm.form.useProxy, null) > -1 : (_vm.form.useProxy)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.form.useProxy,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.form.useProxy = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.form.useProxy = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.form.useProxy = $$c
-        }
-      }
-    }
-  }), _vm._v("\n                                            Использовать прокси\n                                        ")])])])]), _vm._v(" "), (_vm.form.useProxy) ? _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Прокси сервер")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.proxyServer),
-      expression: "proxyServer"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "host:port"
-    },
-    domProps: {
-      "value": (_vm.proxyServer)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.proxyServer = $event.target.value
-      }
-    }
-  })])]) : _vm._e(), _vm._v(" "), (_vm.form.useProxy) ? _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Авторизация прокси")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.proxyAuth),
-      expression: "proxyAuth"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "disabled": !_vm.form.useProxy,
-      "placeholder": "login:password"
-    },
-    domProps: {
-      "value": (_vm.proxyAuth)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.proxyAuth = $event.target.value
-      }
-    }
-  })])]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.walletActive),
-      expression: "form.walletActive"
-    }],
-    attrs: {
-      "type": "checkbox",
-      "checked": ""
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.form.walletActive) ? _vm._i(_vm.form.walletActive, null) > -1 : (_vm.form.walletActive)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.form.walletActive,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.form.walletActive = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.form.walletActive = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.form.walletActive = $$c
-        }
-      }
-    }
-  }), _vm._v("\n                                            Кошелек активен\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.alwaysOnline),
-      expression: "form.alwaysOnline"
-    }],
-    attrs: {
-      "type": "checkbox",
-      "checked": ""
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.form.alwaysOnline) ? _vm._i(_vm.form.alwaysOnline, null) > -1 : (_vm.form.alwaysOnline)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.form.alwaysOnline,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.form.alwaysOnline = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.form.alwaysOnline = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.form.alwaysOnline = $$c
-        }
-      }
-    }
-  }), _vm._v("\n                                            Режим «Всегда онлайн»\n                                        ")])]), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Поставьте галочку, если хотите чтобы сессия кошелька всегда поддерживалась в режиме\n                                    онлайн.")])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Частота проверки баланса, мин.")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.balanceRecheckTimeout),
-      expression: "form.balanceRecheckTimeout"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "number",
-      "min": "0"
-    },
-    domProps: {
-      "value": (_vm.form.balanceRecheckTimeout)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.balanceRecheckTimeout = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Укажите через какое количество минут система должна автоматически\n                                    обновлять баланс кошелька. Чтобы отключить функцию введите 0")])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Тип кошелька")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.walletType),
-      expression: "form.walletType"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.form.walletType = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.form.walletTypes), function(o) {
-    return _c('option', {
-      domProps: {
-        "value": o.value,
-        "textContent": _vm._s(o.text)
-      }
-    })
-  }))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Максимальный баланс")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.maximumBalance),
-      expression: "form.maximumBalance"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.maximumBalance)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.maximumBalance = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Максимальный баланс кошелька, при достижении которого\n                                        кошелек автоматически уходит в резервные")])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.autoWithdrawalActive),
-      expression: "form.autoWithdrawalActive"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.form.autoWithdrawalActive) ? _vm._i(_vm.form.autoWithdrawalActive, null) > -1 : (_vm.form.autoWithdrawalActive)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.form.autoWithdrawalActive,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.form.autoWithdrawalActive = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.form.autoWithdrawalActive = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.form.autoWithdrawalActive = $$c
-        }
-      }
-    }
-  }), _vm._v("\n                                            Автовывод включен\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Режим работы автовывода")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.autoWithdrawalType),
-      expression: "form.autoWithdrawalType"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "disabled": !_vm.form.autoWithdrawalActive
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.form.autoWithdrawalType = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.form.autoWithdrawalOptions), function(o) {
-    return _c('option', {
-      domProps: {
-        "value": o.value,
-        "textContent": _vm._s(o.text)
-      }
-    })
-  }))])]), _vm._v(" "), (_vm.form.autoWithdrawalType === 'every_x_minutes') ? _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    },
-    model: {
-      value: (_vm.form.autoWithdrawalType),
-      callback: function($$v) {
-        _vm.form.autoWithdrawalType = $$v
-      },
-      expression: "form.autoWithdrawalType"
-    }
-  }, [_vm._v("\n                                    Вызывать автовывод каждые X минут\n                                ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.autoWithdrawalTimeout),
-      expression: "form.autoWithdrawalTimeout"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.autoWithdrawalTimeout)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawalTimeout = $event.target.value
-      }
-    }
-  })])]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Минимальная сума для автовывода")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.minimumAutoWithdrawAmount),
-      expression: "form.minimumAutoWithdrawAmount"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "disabled": !_vm.form.autoWithdrawalActive
-    },
-    domProps: {
-      "value": (_vm.form.minimumAutoWithdrawAmount)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.minimumAutoWithdrawAmount = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Минимальный баланс кошелька при котором должен быть совершен вывод")])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.withdrawTarget),
-      expression: "form.withdrawTarget"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "wallet"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.form.withdrawTarget, "wallet")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.form.withdrawTarget = "wallet"
-      }
-    }
-  }), _vm._v("\n                                            Автовывод с помощью ваучеров\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Кошельки для автовывода")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.autoWithdrawalWallets),
-      expression: "form.autoWithdrawalWallets"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "+79123456789;+79111111111",
-      "disabled": _vm.form.withdrawTarget != 'wallet'
-    },
-    domProps: {
-      "value": (_vm.form.autoWithdrawalWallets)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawalWallets = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.withdrawTarget),
-      expression: "form.withdrawTarget"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "card"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.form.withdrawTarget, "card")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.form.withdrawTarget = "card"
-      }
-    }
-  }), _vm._v("\n                                            Автовывод на карту\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Карта для автовывода")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.cardNumber),
-      expression: "cardNumber"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "XXXX XXXX XXXX XXXX",
-      "disabled": _vm.form.withdrawTarget != 'card'
-    },
-    domProps: {
-      "value": (_vm.cardNumber)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.cardNumber = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Данные владельца карты")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-4"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.autoWithdrawalCardholderName),
-      expression: "form.autoWithdrawalCardholderName"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "disabled": _vm.form.withdrawTarget != 'card',
-      "placeholder": "Имя"
-    },
-    domProps: {
-      "value": (_vm.form.autoWithdrawalCardholderName)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawalCardholderName = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-4"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.autoWithdrawalCardholderSurname),
-      expression: "form.autoWithdrawalCardholderSurname"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "disabled": _vm.form.withdrawTarget != 'card',
-      "placeholder": "Фамилия"
-    },
-    domProps: {
-      "value": (_vm.form.autoWithdrawalCardholderSurname)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawalCardholderSurname = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
-    on: {
-      "click": _vm.saveSettings
-    }
-  }, [_vm._v("\n                                        Сохранить\n                                    ")])])])])])])])])])], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "Настройки кошелька Qiwi" } },
+        [
+          _c("li", [_c("a", { staticClass: "disabled" }, [_vm._v("Финансы")])]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { tag: "li", to: "/finance/qiwi" } }, [
+            _c("a", [_vm._v("Qiwi Visa Wallet")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { attrs: { tag: "li", to: "/finance/qiwi/dashboard" } },
+            [_c("a", [_vm._v("Панель управления")])]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("div", { staticClass: "panel panel-default" }, [
+              _c("div", { staticClass: "panel-heading" }, [
+                _vm._v(
+                  "Настройки кошелька Qiwi (" + _vm._s(_vm.form.login) + ")"
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel-body" }, [
+                _c("div", { staticClass: "form-horizontal" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "col-sm-4 control-label" }, [
+                      _vm._v("Название кошелька")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.name,
+                            expression: "form.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.form.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.name = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { staticClass: "col-sm-4 control-label" }, [
+                      _vm._v("Комментарий к кошельку")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.comments,
+                            expression: "form.comments"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        domProps: { value: _vm.form.comments },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.comments = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c("div", { staticClass: "checkbox" }, [
+                        _c("label", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.useProxy,
+                                expression: "form.useProxy"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(_vm.form.useProxy)
+                                ? _vm._i(_vm.form.useProxy, null) > -1
+                                : _vm.form.useProxy
+                            },
+                            on: {
+                              __c: function($event) {
+                                var $$a = _vm.form.useProxy,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.form.useProxy = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.form.useProxy = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.form.useProxy = $$c
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                                            Использовать прокси\n                                        "
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.form.useProxy
+                    ? _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-sm-4 control-label",
+                            attrs: { for: "" }
+                          },
+                          [_vm._v("Прокси сервер")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-8" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.proxyServer,
+                                expression: "proxyServer"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text", placeholder: "host:port" },
+                            domProps: { value: _vm.proxyServer },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.proxyServer = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.form.useProxy
+                    ? _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-sm-4 control-label",
+                            attrs: { for: "" }
+                          },
+                          [_vm._v("Авторизация прокси")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-8" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.proxyAuth,
+                                expression: "proxyAuth"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              disabled: !_vm.form.useProxy,
+                              placeholder: "login:password"
+                            },
+                            domProps: { value: _vm.proxyAuth },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.proxyAuth = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c("div", { staticClass: "checkbox" }, [
+                        _c("label", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.walletActive,
+                                expression: "form.walletActive"
+                              }
+                            ],
+                            attrs: { type: "checkbox", checked: "" },
+                            domProps: {
+                              checked: Array.isArray(_vm.form.walletActive)
+                                ? _vm._i(_vm.form.walletActive, null) > -1
+                                : _vm.form.walletActive
+                            },
+                            on: {
+                              __c: function($event) {
+                                var $$a = _vm.form.walletActive,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.form.walletActive = $$a.concat([
+                                        $$v
+                                      ]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.form.walletActive = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.form.walletActive = $$c
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                                            Кошелек активен\n                                        "
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c("div", { staticClass: "checkbox" }, [
+                        _c("label", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.alwaysOnline,
+                                expression: "form.alwaysOnline"
+                              }
+                            ],
+                            attrs: { type: "checkbox", checked: "" },
+                            domProps: {
+                              checked: Array.isArray(_vm.form.alwaysOnline)
+                                ? _vm._i(_vm.form.alwaysOnline, null) > -1
+                                : _vm.form.alwaysOnline
+                            },
+                            on: {
+                              __c: function($event) {
+                                var $$a = _vm.form.alwaysOnline,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.form.alwaysOnline = $$a.concat([
+                                        $$v
+                                      ]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.form.alwaysOnline = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.form.alwaysOnline = $$c
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                                            Режим «Всегда онлайн»\n                                        "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help-block" }, [
+                        _vm._v(
+                          "Поставьте галочку, если хотите чтобы сессия кошелька всегда поддерживалась в режиме\n                                    онлайн."
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-4 control-label",
+                        attrs: { for: "" }
+                      },
+                      [_vm._v("Частота проверки баланса, мин.")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.balanceRecheckTimeout,
+                            expression: "form.balanceRecheckTimeout"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", min: "0" },
+                        domProps: { value: _vm.form.balanceRecheckTimeout },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.balanceRecheckTimeout = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help-block" }, [
+                        _vm._v(
+                          "Укажите через какое количество минут система должна автоматически\n                                    обновлять баланс кошелька. Чтобы отключить функцию введите 0"
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-4 control-label",
+                        attrs: { for: "" }
+                      },
+                      [_vm._v("Тип кошелька")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.walletType,
+                              expression: "form.walletType"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.form.walletType = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.form.walletTypes, function(o) {
+                          return _c("option", {
+                            domProps: {
+                              value: o.value,
+                              textContent: _vm._s(o.text)
+                            }
+                          })
+                        })
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-4 control-label",
+                        attrs: { for: "" }
+                      },
+                      [_vm._v("Максимальный баланс")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.maximumBalance,
+                            expression: "form.maximumBalance"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.form.maximumBalance },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.maximumBalance = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help-block" }, [
+                        _vm._v(
+                          "Максимальный баланс кошелька, при достижении которого\n                                        кошелек автоматически уходит в резервные"
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c("div", { staticClass: "checkbox" }, [
+                        _c("label", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.autoWithdrawalActive,
+                                expression: "form.autoWithdrawalActive"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(
+                                _vm.form.autoWithdrawalActive
+                              )
+                                ? _vm._i(_vm.form.autoWithdrawalActive, null) >
+                                  -1
+                                : _vm.form.autoWithdrawalActive
+                            },
+                            on: {
+                              __c: function($event) {
+                                var $$a = _vm.form.autoWithdrawalActive,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.form.autoWithdrawalActive = $$a.concat(
+                                        [$$v]
+                                      ))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.form.autoWithdrawalActive = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.form.autoWithdrawalActive = $$c
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                                            Автовывод включен\n                                        "
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-4 control-label",
+                        attrs: { for: "" }
+                      },
+                      [_vm._v("Режим работы автовывода")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.autoWithdrawalType,
+                              expression: "form.autoWithdrawalType"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { disabled: !_vm.form.autoWithdrawalActive },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.form.autoWithdrawalType = $event.target
+                                .multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.form.autoWithdrawalOptions, function(o) {
+                          return _c("option", {
+                            domProps: {
+                              value: o.value,
+                              textContent: _vm._s(o.text)
+                            }
+                          })
+                        })
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.form.autoWithdrawalType === "every_x_minutes"
+                    ? _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-sm-4 control-label",
+                            attrs: { for: "" },
+                            model: {
+                              value: _vm.form.autoWithdrawalType,
+                              callback: function($$v) {
+                                _vm.form.autoWithdrawalType = $$v
+                              },
+                              expression: "form.autoWithdrawalType"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Вызывать автовывод каждые X минут\n                                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-8" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.autoWithdrawalTimeout,
+                                expression: "form.autoWithdrawalTimeout"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.form.autoWithdrawalTimeout },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.form.autoWithdrawalTimeout =
+                                  $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-4 control-label",
+                        attrs: { for: "" }
+                      },
+                      [_vm._v("Минимальная сума для автовывода")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.minimumAutoWithdrawAmount,
+                            expression: "form.minimumAutoWithdrawAmount"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          disabled: !_vm.form.autoWithdrawalActive
+                        },
+                        domProps: { value: _vm.form.minimumAutoWithdrawAmount },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.minimumAutoWithdrawAmount =
+                              $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help-block" }, [
+                        _vm._v(
+                          "Минимальный баланс кошелька при котором должен быть совершен вывод"
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c("div", { staticClass: "checkbox" }, [
+                        _c("label", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.withdrawTarget,
+                                expression: "form.withdrawTarget"
+                              }
+                            ],
+                            attrs: { type: "radio", value: "wallet" },
+                            domProps: {
+                              checked: _vm._q(_vm.form.withdrawTarget, "wallet")
+                            },
+                            on: {
+                              __c: function($event) {
+                                _vm.form.withdrawTarget = "wallet"
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                                            Автовывод с помощью ваучеров\n                                        "
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-4 control-label",
+                        attrs: { for: "" }
+                      },
+                      [_vm._v("Кошельки для автовывода")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.autoWithdrawalWallets,
+                            expression: "form.autoWithdrawalWallets"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          placeholder: "+79123456789;+79111111111",
+                          disabled: _vm.form.withdrawTarget != "wallet"
+                        },
+                        domProps: { value: _vm.form.autoWithdrawalWallets },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.autoWithdrawalWallets = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c("div", { staticClass: "checkbox" }, [
+                        _c("label", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.withdrawTarget,
+                                expression: "form.withdrawTarget"
+                              }
+                            ],
+                            attrs: { type: "radio", value: "card" },
+                            domProps: {
+                              checked: _vm._q(_vm.form.withdrawTarget, "card")
+                            },
+                            on: {
+                              __c: function($event) {
+                                _vm.form.withdrawTarget = "card"
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                                            Автовывод на карту\n                                        "
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-4 control-label",
+                        attrs: { for: "" }
+                      },
+                      [_vm._v("Карта для автовывода")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.cardNumber,
+                            expression: "cardNumber"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          placeholder: "XXXX XXXX XXXX XXXX",
+                          disabled: _vm.form.withdrawTarget != "card"
+                        },
+                        domProps: { value: _vm.cardNumber },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.cardNumber = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-4 control-label",
+                        attrs: { for: "" }
+                      },
+                      [_vm._v("Данные владельца карты")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.autoWithdrawalCardholderName,
+                            expression: "form.autoWithdrawalCardholderName"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          disabled: _vm.form.withdrawTarget != "card",
+                          placeholder: "Имя"
+                        },
+                        domProps: {
+                          value: _vm.form.autoWithdrawalCardholderName
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.autoWithdrawalCardholderName =
+                              $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.autoWithdrawalCardholderSurname,
+                            expression: "form.autoWithdrawalCardholderSurname"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          disabled: _vm.form.withdrawTarget != "card",
+                          placeholder: "Фамилия"
+                        },
+                        domProps: {
+                          value: _vm.form.autoWithdrawalCardholderSurname
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.form.autoWithdrawalCardholderSurname =
+                              $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          on: { click: _vm.saveSettings }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                        Сохранить\n                                    "
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-14773f45", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-7dbf99e9", module.exports)
   }
 }
 
@@ -12218,19 +14236,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(229),
-  /* template */
-  __webpack_require__(230),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(229)
+/* template */
+var __vue_template__ = __webpack_require__(230)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/qiwi/QiwiWalletWithdraw.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\qiwi\\QiwiWalletWithdraw.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] QiwiWalletWithdraw.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -12241,9 +14265,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-55c9c2ac", Component.options)
+    hotAPI.createRecord("data-v-81dbc560", Component.options)
   } else {
-    hotAPI.reload("data-v-55c9c2ac", Component.options)
+    hotAPI.reload("data-v-81dbc560", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -12508,266 +14532,374 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Вывод средств"
-    }
-  }, [_c('li', [_c('a', {
-    staticClass: "disabled"
-  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi"
-    }
-  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi/dashboard"
-    }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Вывод средств с Qiwi кошелька (" + _vm._s(_vm.form.login) + ")")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Сумма")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.sum),
-      expression: "form.sum"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.sum)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.sum = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Комментарий к переводу")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.comment),
-      expression: "form.comment"
-    }],
-    staticClass: "form-control",
-    domProps: {
-      "value": (_vm.form.comment)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.comment = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.switcher),
-      expression: "switcher"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "wallet",
-      "id": "withdraw.wallet"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.switcher, "wallet")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.switcher = "wallet"
-      }
-    }
-  }), _vm._v("\n                                            Перевод на Qiwi кошелек\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.switcher),
-      expression: "switcher"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "card",
-      "id": "withdraw.card"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.switcher, "card")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.switcher = "card"
-      }
-    }
-  }), _vm._v("\n                                            Перевод на банковскую карту\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.switcher),
-      expression: "switcher"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "voucher",
-      "id": "withdraw.voucher"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.switcher, "voucher")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.switcher = "voucher"
-      }
-    }
-  }), _vm._v("\n                                            Активировать/Купить ваучер\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v(_vm._s(_vm.label))]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.targetField),
-      expression: "form.targetField"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": _vm.placeholder
-    },
-    domProps: {
-      "value": (_vm.form.targetField)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.targetField = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v(_vm._s(_vm.underTip))]), _vm._v(" "), (this.responseText != '') ? [_c('div', {
-    staticClass: "alert alert-info"
-  }, [_c('strong', [_vm._v("\n                                                " + _vm._s(_vm.responseText) + "\n                                            ")])])] : _vm._e()], 2)]), _vm._v(" "), (_vm.form.withdrawType == 'card') ? [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Фамилия получателя")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.cardholderName),
-      expression: "form.cardholderName"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "SEMENOV"
-    },
-    domProps: {
-      "value": (_vm.form.cardholderName)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.cardholderName = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Имя получателя")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.cardholderSurname),
-      expression: "form.cardholderSurname"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "SEMEN"
-    },
-    domProps: {
-      "value": (_vm.form.cardholderSurname)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.cardholderSurname = $event.target.value
-      }
-    }
-  })])])] : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
-    on: {
-      "click": _vm.proceed
-    }
-  }, [_vm._v("\n                                        Продолжить\n                                    ")])])])], 2)])])])])])], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "Вывод средств" } },
+        [
+          _c("li", [_c("a", { staticClass: "disabled" }, [_vm._v("Финансы")])]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { tag: "li", to: "/finance/qiwi" } }, [
+            _c("a", [_vm._v("Qiwi Visa Wallet")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { attrs: { tag: "li", to: "/finance/qiwi/dashboard" } },
+            [_c("a", [_vm._v("Панель управления")])]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("div", { staticClass: "panel panel-default" }, [
+              _c("div", { staticClass: "panel-heading" }, [
+                _vm._v(
+                  "Вывод средств с Qiwi кошелька (" +
+                    _vm._s(_vm.form.login) +
+                    ")"
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-horizontal" },
+                  [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-sm-4 control-label" }, [
+                        _vm._v("Сумма")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.sum,
+                              expression: "form.sum"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.form.sum },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.sum = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-sm-4 control-label" }, [
+                        _vm._v("Комментарий к переводу")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.comment,
+                              expression: "form.comment"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          domProps: { value: _vm.form.comment },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.form.comment = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                        _c("div", { staticClass: "checkbox" }, [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.switcher,
+                                  expression: "switcher"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                value: "wallet",
+                                id: "withdraw.wallet"
+                              },
+                              domProps: {
+                                checked: _vm._q(_vm.switcher, "wallet")
+                              },
+                              on: {
+                                __c: function($event) {
+                                  _vm.switcher = "wallet"
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                                            Перевод на Qiwi кошелек\n                                        "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                        _c("div", { staticClass: "checkbox" }, [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.switcher,
+                                  expression: "switcher"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                value: "card",
+                                id: "withdraw.card"
+                              },
+                              domProps: {
+                                checked: _vm._q(_vm.switcher, "card")
+                              },
+                              on: {
+                                __c: function($event) {
+                                  _vm.switcher = "card"
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                                            Перевод на банковскую карту\n                                        "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                        _c("div", { staticClass: "checkbox" }, [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.switcher,
+                                  expression: "switcher"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                value: "voucher",
+                                id: "withdraw.voucher"
+                              },
+                              domProps: {
+                                checked: _vm._q(_vm.switcher, "voucher")
+                              },
+                              on: {
+                                __c: function($event) {
+                                  _vm.switcher = "voucher"
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                                            Активировать/Купить ваучер\n                                        "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-sm-4 control-label" }, [
+                        _vm._v(_vm._s(_vm.label))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-8" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.targetField,
+                                expression: "form.targetField"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              placeholder: _vm.placeholder
+                            },
+                            domProps: { value: _vm.form.targetField },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.form.targetField = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "help-block" }, [
+                            _vm._v(_vm._s(_vm.underTip))
+                          ]),
+                          _vm._v(" "),
+                          this.responseText != ""
+                            ? [
+                                _c("div", { staticClass: "alert alert-info" }, [
+                                  _c("strong", [
+                                    _vm._v(
+                                      "\n                                                " +
+                                        _vm._s(_vm.responseText) +
+                                        "\n                                            "
+                                    )
+                                  ])
+                                ])
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm.form.withdrawType == "card"
+                      ? [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { staticClass: "col-sm-4 control-label" },
+                              [_vm._v("Фамилия получателя")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-8" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.cardholderName,
+                                    expression: "form.cardholderName"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", placeholder: "SEMENOV" },
+                                domProps: { value: _vm.form.cardholderName },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.form.cardholderName =
+                                      $event.target.value
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { staticClass: "col-sm-4 control-label" },
+                              [_vm._v("Имя получателя")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-8" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.cardholderSurname,
+                                    expression: "form.cardholderSurname"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text", placeholder: "SEMEN" },
+                                domProps: { value: _vm.form.cardholderSurname },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.form.cardholderSurname =
+                                      $event.target.value
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ]
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: { click: _vm.proceed }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                        Продолжить\n                                    "
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ],
+                  2
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-55c9c2ac", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-81dbc560", module.exports)
   }
 }
 
@@ -12776,19 +14908,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(232),
-  /* template */
-  __webpack_require__(236),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(232)
+/* template */
+var __vue_template__ = __webpack_require__(236)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/FinanceQiwiDashboard.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\FinanceQiwiDashboard.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FinanceQiwiDashboard.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -12799,9 +14937,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5e772906", Component.options)
+    hotAPI.createRecord("data-v-0a9970e2", Component.options)
   } else {
-    hotAPI.reload("data-v-5e772906", Component.options)
+    hotAPI.reload("data-v-0a9970e2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -12817,10 +14955,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__mixins_table__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__qiwi_QiwiTypePanel_vue__ = __webpack_require__(233);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__qiwi_QiwiTypePanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__qiwi_QiwiTypePanel_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue__ = __webpack_require__(233);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue__);
 //
 //
 //
@@ -12890,12 +15026,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { QiwiTypePanel: __WEBPACK_IMPORTED_MODULE_1__qiwi_QiwiTypePanel_vue___default.a },
+    components: { QiwiTypePanel: __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue___default.a },
     mounted: function mounted() {
         this.fetchWallets();
     },
@@ -12908,13 +15043,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 moveToSpent: "Переместить в отработанные",
                 remove: "Удалить"
             },
-            massActionValue: "",
+            massAction: "",
 
             searchQuery: '',
             walletsIsLoaded: false,
             walletsTypes: null,
+            selected: []
 
-            hui: []
         };
     },
 
@@ -12922,8 +15057,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         filter: function filter() {}
     },
     methods: {
-        func: function func(arg) {
-            console.log(arg);
+        updateSelected: function updateSelected(selected) {
+            if (selected.length === 0) return;
+
+            var typeId = selected[0].type_id;
+            var walletsWithoutThisType = this.selected.filter(function (wallet) {
+                return wallet.type_id !== typeId;
+            });
+            this.selected = walletsWithoutThisType.concat(selected);
+
+            console.log("Selected : ", selected);
+            console.log("Top selected : ", this.selected);
         },
         fetchWallets: function fetchWallets() {
             var _this = this;
@@ -12963,10 +15107,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             });
         },
-        massAction: function massAction() {
-            console.log(this.massActionValue);
-            console.log(this.$children);
-            console.log(this.$children[0].$attrs);
+        executeMassAction: function executeMassAction() {
+            var postData = { action: this.massAction, wallets: this.selected };
+            axios.post('/api/qiwi-wallets/mass-action', postData).then(function (response) {
+                console.log(response);
+            });
         },
         removeFromType: function removeFromType(wallets, fromId) {}
     },
@@ -12992,19 +15137,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(234),
-  /* template */
-  __webpack_require__(235),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(234)
+/* template */
+var __vue_template__ = __webpack_require__(235)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/qiwi/QiwiTypePanel.vue"
+Component.options.__file = "resources\\assets\\js\\views\\finance\\qiwi\\QiwiTypePanel.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] QiwiTypePanel.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -13015,9 +15166,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b7cb2b1e", Component.options)
+    hotAPI.createRecord("data-v-48a4f94d", Component.options)
   } else {
-    hotAPI.reload("data-v-b7cb2b1e", Component.options)
+    hotAPI.reload("data-v-48a4f94d", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -13035,7 +15186,6 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__mixins_table__);
-//
 //
 //
 //
@@ -13171,10 +15321,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         selected: function selected(val) {
-            console.log(this.selected);
-            console.log(val);
-
-            //                Bus.$emit('func', data);
+            this.$emit('updateSelected', val);
         }
     },
     methods: {
@@ -13220,233 +15367,325 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_c('h3', {
-    staticClass: "panel-title",
-    domProps: {
-      "textContent": _vm._s(_vm.type.name)
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('div', {
-    staticClass: "responsive-table"
-  }, [_c('table', {
-    staticClass: "table table-striped table-hover"
-  }, [_c('thead', [_c('tr', [_c('th', {
-    attrs: {
-      "width": "20"
-    }
-  }, [_c('div', {
-    staticClass: "checkbox m-none"
-  }, [_c('label', {
-    staticClass: "p-t-xs"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.selectAll),
-      expression: "selectAll"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.selectAll) ? _vm._i(_vm.selectAll, null) > -1 : (_vm.selectAll)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.selectAll,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.selectAll = $$a.concat($$v))
-          } else {
-            $$i > -1 && (_vm.selectAll = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.selectAll = $$c
-        }
-      }
-    }
-  })])])]), _vm._v(" "), _c('th', [_vm._v("Имя кошелька ")]), _vm._v(" "), (!_vm.isInactive) ? _c('th', [_vm._v("Баланс")]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('th', [_vm._v("Принятые средства с "), _c('span', {
-    domProps: {
-      "textContent": _vm._s(this.firstDayOfTheMonth)
-    }
-  })]) : _vm._e(), _vm._v(" "), _c('th')])]), _vm._v(" "), _c('tbody', _vm._l((_vm.type.wallets), function(w) {
-    return (w.is_active || _vm.isInactive) ? _c('tr', [_c('td', [_c('div', {
-      staticClass: "checkbox m-none"
-    }, [_c('label', {
-      staticClass: "p -t-xs"
-    }, [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.selected),
-        expression: "selected"
-      }],
-      attrs: {
-        "type": "checkbox"
-      },
-      domProps: {
-        "value": w,
-        "checked": Array.isArray(_vm.selected) ? _vm._i(_vm.selected, w) > -1 : (_vm.selected)
-      },
-      on: {
-        "__c": function($event) {
-          var $$a = _vm.selected,
-            $$el = $event.target,
-            $$c = $$el.checked ? (true) : (false);
-          if (Array.isArray($$a)) {
-            var $$v = w,
-              $$i = _vm._i($$a, $$v);
-            if ($$el.checked) {
-              $$i < 0 && (_vm.selected = $$a.concat($$v))
-            } else {
-              $$i > -1 && (_vm.selected = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-            }
-          } else {
-            _vm.selected = $$c
-          }
-        }
-      }
-    })])])]), _vm._v(" "), _c('td', {
-      domProps: {
-        "textContent": _vm._s(w.name)
-      }
-    }), _vm._v(" "), (!_vm.isInactive) ? _c('td', [_c('span', {
-      attrs: {
-        "id": w.login
-      }
-    }, [_vm._v(_vm._s(_vm._f("currency")(w.balance)))]), _vm._v(" "), _c('a', {
-      attrs: {
-        "data-toggle": "tooltip",
-        "data-placement": "top",
-        "title": "Обновить"
-      }
-    }, [_c('i', {
-      staticClass: "fa fa-refresh fa-fw",
-      on: {
-        "click": function($event) {
-          $event.stopPropagation();
-          _vm.updateWallet(w.login)
-        }
-      }
-    })])]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('td', [_c('span', [_vm._v(_vm._s(_vm._f("currency")(w.month_income)))])]) : _vm._e(), _vm._v(" "), _c('td', {
-      staticClass: "text-right"
-    }, [_c('div', {
-      staticClass: "btn-group",
-      attrs: {
-        "role": "group"
-      }
-    }, [_c('router-link', {
-      staticClass: "btn btn-default",
-      attrs: {
-        "to": '/finance/qiwi/' + w.login + '/withdraw',
-        "data-toggle": "tooltip",
-        "data-placement": "top",
-        "title": "Ручной вывод"
-      }
-    }, [_c('i', {
-      staticClass: "fa fa-usd"
-    })]), _vm._v(" "), _c('router-link', {
-      staticClass: "btn btn-default",
-      attrs: {
-        "to": '/finance/qiwi/' + w.login + '/history',
-        "data-toggle": "tooltip",
-        "data-placement": "top",
-        "title": "История"
-      }
-    }, [_c('i', {
-      staticClass: "fa fa-history"
-    })]), _vm._v(" "), _c('router-link', {
-      staticClass: "btn btn-default",
-      attrs: {
-        "to": '/finance/qiwi/' + w.login + '/settings',
-        "data-toggle": "tooltip",
-        "data-placement": "top",
-        "title": "Настройки"
-      }
-    }, [_c('i', {
-      staticClass: "fa fa-cog"
-    })]), _vm._v(" "), _c('router-link', {
-      staticClass: "btn btn-default",
-      attrs: {
-        "to": '/finance/qiwi/remove/' + w.login,
-        "data-toggle": "tooltip",
-        "data-placement": "top",
-        "title": "Удалить кошелек"
-      }
-    }, [_c('i', {
-      staticClass: "fa fa-times"
-    })])], 1)])]) : _vm._e()
-  }))])])]), _vm._v(" "), _c('div', {
-    staticClass: "panel-footer"
-  }, [_c('div', {
-    staticClass: "form-inline"
-  }, [_c('label', {
-    staticClass: "control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Перенести отмеченные в:")]), _vm._v(" "), _c('div', {
-    staticClass: "form-group m-b-none"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.moveTo),
-      expression: "moveTo"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "name": "",
-      "id": ""
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.moveTo = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.types), function(t) {
-    return (t.id !== _vm.type.id && t.slug !== _vm.exclude) ? _c('option', {
-      domProps: {
-        "value": t.id
-      }
-    }, [_vm._v("\n                        " + _vm._s(t.name) + "\n                    ")]) : _vm._e()
-  }))]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "disabled": !_vm.selected.length
-    },
-    on: {
-      "click": function($event) {
-        _vm.moveWallets()
-      }
-    }
-  }, [_vm._v("\n                    Выполнить\n                ")])])]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  })])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [
+      _c("h3", {
+        staticClass: "panel-title",
+        domProps: { textContent: _vm._s(_vm.type.name) }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c("div", { staticClass: "responsive-table" }, [
+        _c("table", { staticClass: "table table-striped table-hover" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", { attrs: { width: "20" } }, [
+                _c("div", { staticClass: "checkbox m-none" }, [
+                  _c("label", { staticClass: "p-t-xs" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectAll,
+                          expression: "selectAll"
+                        }
+                      ],
+                      attrs: { type: "checkbox" },
+                      domProps: {
+                        checked: Array.isArray(_vm.selectAll)
+                          ? _vm._i(_vm.selectAll, null) > -1
+                          : _vm.selectAll
+                      },
+                      on: {
+                        __c: function($event) {
+                          var $$a = _vm.selectAll,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.selectAll = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.selectAll = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.selectAll = $$c
+                          }
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Имя кошелька ")]),
+              _vm._v(" "),
+              !_vm.isInactive ? _c("th", [_vm._v("Баланс")]) : _vm._e(),
+              _vm._v(" "),
+              !_vm.isInactive
+                ? _c("th", [
+                    _vm._v("Принятые средства с "),
+                    _c("span", {
+                      domProps: { textContent: _vm._s(this.firstDayOfTheMonth) }
+                    })
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("th")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.type.wallets, function(w) {
+              return w.is_active || _vm.isInactive
+                ? _c("tr", [
+                    _c("td", [
+                      _c("div", { staticClass: "checkbox m-none" }, [
+                        _c("label", { staticClass: "p -t-xs" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.selected,
+                                expression: "selected"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              value: w,
+                              checked: Array.isArray(_vm.selected)
+                                ? _vm._i(_vm.selected, w) > -1
+                                : _vm.selected
+                            },
+                            on: {
+                              __c: function($event) {
+                                var $$a = _vm.selected,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = w,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.selected = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.selected = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.selected = $$c
+                                }
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { domProps: { textContent: _vm._s(w.name) } }),
+                    _vm._v(" "),
+                    !_vm.isInactive
+                      ? _c("td", [
+                          _c("span", { attrs: { id: w.login } }, [
+                            _vm._v(_vm._s(_vm._f("currency")(w.balance)))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                "data-toggle": "tooltip",
+                                "data-placement": "top",
+                                title: "Обновить"
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fa fa-refresh fa-fw",
+                                on: {
+                                  click: function($event) {
+                                    $event.stopPropagation()
+                                    _vm.updateWallet(w.login)
+                                  }
+                                }
+                              })
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.isInactive
+                      ? _c("td", [
+                          _c("span", [
+                            _vm._v(_vm._s(_vm._f("currency")(w.month_income)))
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-right" }, [
+                      _c(
+                        "div",
+                        { staticClass: "btn-group", attrs: { role: "group" } },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-default",
+                              attrs: {
+                                to: "/finance/qiwi/" + w.login + "/withdraw",
+                                "data-toggle": "tooltip",
+                                "data-placement": "top",
+                                title: "Ручной вывод"
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-usd" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-default",
+                              attrs: {
+                                to: "/finance/qiwi/" + w.login + "/history",
+                                "data-toggle": "tooltip",
+                                "data-placement": "top",
+                                title: "История"
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-history" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-default",
+                              attrs: {
+                                to: "/finance/qiwi/" + w.login + "/settings",
+                                "data-toggle": "tooltip",
+                                "data-placement": "top",
+                                title: "Настройки"
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-cog" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-default",
+                              attrs: {
+                                to: "/finance/qiwi/remove/" + w.login,
+                                "data-toggle": "tooltip",
+                                "data-placement": "top",
+                                title: "Удалить кошелек"
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-times" })]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            })
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-footer" }, [
+      _c("div", { staticClass: "form-inline" }, [
+        _c("label", { staticClass: "control-label", attrs: { for: "" } }, [
+          _vm._v("Перенести отмеченные в:")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group m-b-none" }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.moveTo,
+                  expression: "moveTo"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { name: "", id: "" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.moveTo = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.types, function(t) {
+              return t.id !== _vm.type.id && t.slug !== _vm.exclude
+                ? _c("option", { domProps: { value: t.id } }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(t.name) +
+                        "\n                    "
+                    )
+                  ])
+                : _vm._e()
+            })
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-default",
+              attrs: { disabled: !_vm.selected.length },
+              on: {
+                click: function($event) {
+                  _vm.moveWallets()
+                }
+              }
+            },
+            [_vm._v("\n                    Выполнить\n                ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix" })
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-b7cb2b1e", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-48a4f94d", module.exports)
   }
 }
 
@@ -13454,137 +15693,191 @@ if (false) {
 /* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('page-header', {
-    attrs: {
-      "icon": "fa-money",
-      "title": "Панель управления"
-    }
-  }, [_c('li', [_c('a', {
-    staticClass: "disabled"
-  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi"
-    }
-  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])])], 1), _vm._v(" "), _c('loading', {
-    attrs: {
-      "show": !_vm.walletsIsLoaded
-    }
-  }), _vm._v(" "), (_vm.walletsIsLoaded) ? _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "form-inline"
-  }, [_c('h3', {
-    staticClass: "body-header"
-  }, [_vm._v("Управление кошельками")]), _vm._v(" "), _c('div', {
-    staticClass: "form-group m-b-none"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.massActionValue),
-      expression: "massActionValue"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "name": "",
-      "id": ""
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.massActionValue = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.actions), function(text, action) {
-    return _c('option', {
-      domProps: {
-        "value": action
-      }
-    }, [_vm._v("\n                        " + _vm._s(text) + "\n                    ")])
-  }))]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    on: {
-      "click": _vm.massAction
-    }
-  }, [_vm._v("\n                    Выполнить\n                ")])])]), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
-    staticClass: "m-b-lg"
-  }, [_c('router-link', {
-    staticClass: "btn btn-success",
-    attrs: {
-      "to": "/finance/qiwi/add-wallet"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-plus-square fa-btn"
-  }), _vm._v("Добавить кошелёк\n            ")])], 1), _vm._v(" "), _c('div', {
-    staticClass: "input-group m-b-lg"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.searchQuery),
-      expression: "searchQuery"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": ""
-    },
-    domProps: {
-      "value": (_vm.searchQuery)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.searchQuery = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _vm._l((_vm.walletsTypes), function(type) {
-    return _c('qiwi-type-panel', {
-      key: type.id,
-      attrs: {
-        "type": type,
-        "types": _vm.walletsTypes
-      },
-      on: {
-        "moveWallets": _vm.moveWallets
-      }
-    })
-  }), _vm._v(" "), _c('qiwi-type-panel', {
-    attrs: {
-      "type": _vm.inactive,
-      "types": _vm.walletsTypes,
-      "exclude": 'spent',
-      "is-inactive": true
-    },
-    on: {
-      "func": _vm.func,
-      "moveWallets": _vm.moveWallets
-    }
-  })], 2) : _vm._e()], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', {
-    staticClass: "input-group-btn"
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Поиск")])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "page-header",
+        { attrs: { icon: "fa-money", title: "Панель управления" } },
+        [
+          _c("li", [_c("a", { staticClass: "disabled" }, [_vm._v("Финансы")])]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { tag: "li", to: "/finance/qiwi" } }, [
+            _c("a", [_vm._v("Qiwi Visa Wallet")])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("loading", { attrs: { show: !_vm.walletsIsLoaded } }),
+      _vm._v(" "),
+      _vm.walletsIsLoaded
+        ? _c(
+            "div",
+            { staticClass: "container-fluid" },
+            [
+              _c("div", { staticClass: "form-inline" }, [
+                _c("h3", { staticClass: "body-header" }, [
+                  _vm._v("Управление кошельками")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group m-b-none" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.massAction,
+                          expression: "massAction"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { name: "", id: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.massAction = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    _vm._l(_vm.actions, function(text, action) {
+                      return _c("option", { domProps: { value: action } }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(text) +
+                            "\n                    "
+                        )
+                      ])
+                    })
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      on: { click: _vm.executeMassAction }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Выполнить\n                "
+                      )
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "m-b-lg" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { to: "/finance/qiwi/add-wallet" }
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-plus-square fa-btn" }),
+                      _vm._v("Добавить кошелёк\n            ")
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group m-b-lg" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.searchQuery,
+                      expression: "searchQuery"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "" },
+                  domProps: { value: _vm.searchQuery },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.searchQuery = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(0)
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.walletsTypes, function(type) {
+                return _c("qiwi-type-panel", {
+                  key: type.id,
+                  attrs: { type: type, types: _vm.walletsTypes },
+                  on: {
+                    updateSelected: _vm.updateSelected,
+                    moveWallets: _vm.moveWallets
+                  }
+                })
+              }),
+              _vm._v(" "),
+              _c("qiwi-type-panel", {
+                attrs: {
+                  type: _vm.inactive,
+                  types: _vm.walletsTypes,
+                  exclude: "spent",
+                  "is-inactive": true
+                },
+                on: { moveWallets: _vm.moveWallets }
+              })
+            ],
+            2
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-default", attrs: { type: "button" } },
+        [_vm._v("Поиск")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5e772906", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-0a9970e2", module.exports)
   }
 }
 
@@ -14068,51 +16361,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * Form helper class. Used to set common properties on all forms.
  */
 window.Form = function (data) {
-  var form = this;
+    var form = this;
 
-  __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.extend(this, data);
+    __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.extend(this, data);
 
-  /**
-   * Create the form error helper instance.
-   */
-  this.errors = new FormErrors();
+    /**
+     * Create the form error helper instance.
+     */
+    this.errors = new FormErrors();
 
-  this.busy = false;
-  this.successful = false;
+    this.busy = false;
+    this.successful = false;
 
-  /**
-   * Start processing the form.
-   */
-  this.startProcessing = function () {
-    form.errors.forget();
-    form.busy = true;
-    form.successful = false;
-  };
+    /**
+     * Start processing the form.
+     */
+    this.startProcessing = function () {
+        form.errors.forget();
+        form.busy = true;
+        form.successful = false;
+    };
 
-  /**
-   * Finish processing the form.
-   */
-  this.finishProcessing = function () {
-    form.busy = false;
-    form.successful = true;
-  };
+    /**
+     * Finish processing the form.
+     */
+    this.finishProcessing = function () {
+        form.busy = false;
+        form.successful = true;
+    };
 
-  /**
-   * Reset the errors and other state for the form.
-   */
-  this.resetStatus = function () {
-    form.errors.forget();
-    form.busy = false;
-    form.successful = false;
-  };
+    /**
+     * Reset the errors and other state for the form.
+     */
+    this.resetStatus = function () {
+        form.errors.forget();
+        form.busy = false;
+        form.successful = false;
+    };
 
-  /**
-   * Set the errors on the form.
-   */
-  this.setErrors = function (errors) {
-    form.busy = false;
-    form.errors.set(errors);
-  };
+    /**
+     * Set the errors on the form.
+     */
+    this.setErrors = function (errors) {
+        form.busy = false;
+        form.errors.set(errors);
+    };
 };
 
 /***/ }),
@@ -14292,19 +16585,25 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('masked-input', __webpack_
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(267),
-  /* template */
-  __webpack_require__(270),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(267)
+/* template */
+var __vue_template__ = __webpack_require__(270)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/components/sidebar/Sidebar.vue"
+Component.options.__file = "resources\\assets\\js\\components\\sidebar\\Sidebar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Sidebar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14315,9 +16614,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-152c7650", Component.options)
+    hotAPI.createRecord("data-v-5d125a2c", Component.options)
   } else {
-    hotAPI.reload("data-v-152c7650", Component.options)
+    hotAPI.reload("data-v-5d125a2c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -14469,116 +16768,167 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "nav",
-    class: _vm.navClass
-  }, [_vm._m(0), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/dashboard",
-      "exact": ""
-    }
-  }, [_c('a', [_c('i', {
-    staticClass: "fa fa-home fa-btn fa-fw"
-  }), _c('span', [_vm._v("Инфо. панель")])])]), _vm._v(" "), _c('li', [_vm._m(1), _vm._v(" "), _c('ul', {
-    staticClass: "nav nav-pills nav-stacked collapse",
-    attrs: {
-      "data-collapse": "true",
-      "id": "sidebar-admins"
-    }
-  }, [_c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/admins/rent"
-    }
-  }, [_c('a', [_c('span', {
-    staticClass: "fa-btn fa-fw hidden-xs"
-  }, [_vm._v("R")]), _c('span', [_vm._v("Rent")])])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/admins/own"
-    }
-  }, [_c('a', [_c('span', {
-    staticClass: "fa-btn fa-fw hidden-xs"
-  }, [_vm._v("O")]), _c('span', [_vm._v("Own")])])])], 1)]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/proxies"
-    }
-  }, [_c('a', [_c('i', {
-    staticClass: "fa fa-shield fa-btn fa-fw"
-  }), _c('span', [_vm._v("Прокси")])])]), _vm._v(" "), _c('li', [_vm._m(2), _vm._v(" "), _c('ul', {
-    staticClass: "nav nav-pills nav-stacked collapse",
-    attrs: {
-      "data-collapse": "true",
-      "id": "sidebar-finance"
-    }
-  }, [_c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/rent"
-    }
-  }, [_c('a', [_c('span', {
-    staticClass: "fa-btn fa-fw hidden-xs"
-  }, [_vm._v("С")]), _c('span', [_vm._v("Счета аренды")])])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/bitcoin"
-    }
-  }, [_c('a', [_c('span', {
-    staticClass: "fa-btn fa-fw hidden-xs"
-  }, [_vm._v("B")]), _c('span', [_vm._v("Bitcoin")])])]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/finance/qiwi"
-    }
-  }, [_c('a', [_c('span', {
-    staticClass: "fa-btn fa-fw hidden-xs"
-  }, [_vm._v("Q")]), _c('span', [_vm._v("Qiwi Visa Wallet")])])])], 1)]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "tag": "li",
-      "to": "/settings",
-      "exact": ""
-    }
-  }, [_c('a', [_c('i', {
-    staticClass: "fa fa-cogs fa-btn fa-fw"
-  }), _c('span', [_vm._v("Настройки системы")])])])], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
-    staticClass: "disabled"
-  }, [_c('a', {
-    staticClass: "text-uppercase",
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('span', [_vm._v("Управление")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "collapsed",
-    attrs: {
-      "href": "#sidebar-admins",
-      "data-toggle": "collapse"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-users fa-btn fa-fw"
-  }), _c('span', [_vm._v("Администраторы")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "collapsed",
-    attrs: {
-      "href": "#sidebar-finance",
-      "data-toggle": "collapse"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-money fa-btn fa-fw"
-  }), _c('span', [_vm._v("Финансы")])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "ul",
+    { staticClass: "nav", class: _vm.navClass },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("router-link", { attrs: { tag: "li", to: "/dashboard", exact: "" } }, [
+        _c("a", [
+          _c("i", { staticClass: "fa fa-home fa-btn fa-fw" }),
+          _c("span", [_vm._v("Инфо. панель")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "ul",
+          {
+            staticClass: "nav nav-pills nav-stacked collapse",
+            attrs: { "data-collapse": "true", id: "sidebar-admins" }
+          },
+          [
+            _c("router-link", { attrs: { tag: "li", to: "/admins/rent" } }, [
+              _c("a", [
+                _c("span", { staticClass: "fa-btn fa-fw hidden-xs" }, [
+                  _vm._v("R")
+                ]),
+                _c("span", [_vm._v("Rent")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("router-link", { attrs: { tag: "li", to: "/admins/own" } }, [
+              _c("a", [
+                _c("span", { staticClass: "fa-btn fa-fw hidden-xs" }, [
+                  _vm._v("O")
+                ]),
+                _c("span", [_vm._v("Own")])
+              ])
+            ])
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("router-link", { attrs: { tag: "li", to: "/proxies" } }, [
+        _c("a", [
+          _c("i", { staticClass: "fa fa-shield fa-btn fa-fw" }),
+          _c("span", [_vm._v("Прокси")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _vm._m(2),
+        _vm._v(" "),
+        _c(
+          "ul",
+          {
+            staticClass: "nav nav-pills nav-stacked collapse",
+            attrs: { "data-collapse": "true", id: "sidebar-finance" }
+          },
+          [
+            _c("router-link", { attrs: { tag: "li", to: "/finance/rent" } }, [
+              _c("a", [
+                _c("span", { staticClass: "fa-btn fa-fw hidden-xs" }, [
+                  _vm._v("С")
+                ]),
+                _c("span", [_vm._v("Счета аренды")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              { attrs: { tag: "li", to: "/finance/bitcoin" } },
+              [
+                _c("a", [
+                  _c("span", { staticClass: "fa-btn fa-fw hidden-xs" }, [
+                    _vm._v("B")
+                  ]),
+                  _c("span", [_vm._v("Bitcoin")])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("router-link", { attrs: { tag: "li", to: "/finance/qiwi" } }, [
+              _c("a", [
+                _c("span", { staticClass: "fa-btn fa-fw hidden-xs" }, [
+                  _vm._v("Q")
+                ]),
+                _c("span", [_vm._v("Qiwi Visa Wallet")])
+              ])
+            ])
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("router-link", { attrs: { tag: "li", to: "/settings", exact: "" } }, [
+        _c("a", [
+          _c("i", { staticClass: "fa fa-cogs fa-btn fa-fw" }),
+          _c("span", [_vm._v("Настройки системы")])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "disabled" }, [
+      _c("a", { staticClass: "text-uppercase", attrs: { href: "#" } }, [
+        _c("span", [_vm._v("Управление")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "collapsed",
+        attrs: { href: "#sidebar-admins", "data-toggle": "collapse" }
+      },
+      [
+        _c("i", { staticClass: "fa fa-users fa-btn fa-fw" }),
+        _c("span", [_vm._v("Администраторы")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "collapsed",
+        attrs: { href: "#sidebar-finance", "data-toggle": "collapse" }
+      },
+      [
+        _c("i", { staticClass: "fa fa-money fa-btn fa-fw" }),
+        _c("span", [_vm._v("Финансы")])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-07e84d6c", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-09a3a726", module.exports)
   }
 }
 
@@ -14586,26 +16936,40 @@ if (false) {
 /* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "page-sidebar hidden-xs"
-  }, [_c('div', {
-    staticClass: "sidebar-info"
-  }, [_c('ul', {
-    staticClass: "list-unstyled"
-  }, [_c('li', [_vm._v("Уровень доступа: " + _vm._s(_vm.role))]), _vm._v(" "), _c('li', [_vm._v("Версия админки: " + _vm._s(_vm.version))]), _vm._v(" "), _c('li', [_vm._v("Дата обновления: " + _vm._s(_vm.updatedAt))])])]), _vm._v(" "), _c('div', {
-    staticClass: "sidebar-menu"
-  }, [(_vm.windowWidth > 768) ? _c('main-nav', {
-    attrs: {
-      "nav-class": 'nav-pills nav-stacked'
-    }
-  }) : _vm._e()], 1)])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "page-sidebar hidden-xs" }, [
+    _c("div", { staticClass: "sidebar-info" }, [
+      _c("ul", { staticClass: "list-unstyled" }, [
+        _c("li", [_vm._v("Уровень доступа: " + _vm._s(_vm.role))]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Версия админки: " + _vm._s(_vm.version))]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Дата обновления: " + _vm._s(_vm.updatedAt))])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "sidebar-menu" },
+      [
+        _vm.windowWidth > 768
+          ? _c("main-nav", { attrs: { "nav-class": "nav-pills nav-stacked" } })
+          : _vm._e()
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-152c7650", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-5d125a2c", module.exports)
   }
 }
 
@@ -14614,19 +16978,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(272),
-  /* template */
-  __webpack_require__(276),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(272)
+/* template */
+var __vue_template__ = __webpack_require__(276)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/components/PageHeader.vue"
+Component.options.__file = "resources\\assets\\js\\components\\PageHeader.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PageHeader.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14637,9 +17007,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-38d218a5", Component.options)
+    hotAPI.createRecord("data-v-cc67896e", Component.options)
   } else {
-    hotAPI.reload("data-v-38d218a5", Component.options)
+    hotAPI.reload("data-v-cc67896e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -14702,19 +17072,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(274),
-  /* template */
-  __webpack_require__(275),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(274)
+/* template */
+var __vue_template__ = __webpack_require__(275)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/components/Notification.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Notification.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Notification.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14725,9 +17101,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-9710f058", Component.options)
+    hotAPI.createRecord("data-v-8118dd10", Component.options)
   } else {
-    hotAPI.reload("data-v-9710f058", Component.options)
+    hotAPI.reload("data-v-8118dd10", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -14800,48 +17176,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('transition', {
-    attrs: {
-      "name": "fade"
-    }
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isShown),
-      expression: "isShown"
-    }],
-    staticClass: "alert alert-dismissable notification",
-    class: _vm.alertClass,
-    attrs: {
-      "role": "alert"
-    }
-  }, [_c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.hideNotification()
-      }
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('span', {
-    domProps: {
-      "innerHTML": _vm._s(_vm.message)
-    }
-  })])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transition", { attrs: { name: "fade" } }, [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isShown,
+            expression: "isShown"
+          }
+        ],
+        staticClass: "alert alert-dismissable notification",
+        class: _vm.alertClass,
+        attrs: { role: "alert" }
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.hideNotification()
+              }
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        ),
+        _vm._v(" "),
+        _c("span", { domProps: { innerHTML: _vm._s(_vm.message) } })
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-9710f058", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-8118dd10", module.exports)
   }
 }
 
@@ -14849,47 +17230,72 @@ if (false) {
 /* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "jumbotron"
-  }, [_c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "media"
-  }, [_c('div', {
-    staticClass: "media-left"
-  }, [_c('span', {
-    staticClass: "fa-stack fa-2x"
-  }, [_c('i', {
-    staticClass: "fa fa-stack-1x fa-inverse",
-    class: _vm.icon
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "media-body"
-  }, [_c('ol', {
-    staticClass: "breadcrumb"
-  }, [_c('li', [_c('router-link', {
-    attrs: {
-      "to": "/dashboard"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-home"
-  })])], 1), _vm._v(" "), _vm._t("default"), _vm._v(" "), _c('li', [_c('span', {
-    staticClass: "active",
-    domProps: {
-      "textContent": _vm._s(_vm.title)
-    }
-  })])], 2), _vm._v(" "), _c('h3', {
-    staticClass: "media-heading",
-    domProps: {
-      "textContent": _vm._s(_vm.title)
-    }
-  })])])]), _vm._v(" "), _c('notification')], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "jumbotron" },
+    [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "media" }, [
+          _c("div", { staticClass: "media-left" }, [
+            _c("span", { staticClass: "fa-stack fa-2x" }, [
+              _c("i", {
+                staticClass: "fa fa-stack-1x fa-inverse",
+                class: _vm.icon
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "media-body" }, [
+            _c(
+              "ol",
+              { staticClass: "breadcrumb" },
+              [
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/dashboard" } }, [
+                      _c("i", { staticClass: "fa fa-home" })
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm._t("default"),
+                _vm._v(" "),
+                _c("li", [
+                  _c("span", {
+                    staticClass: "active",
+                    domProps: { textContent: _vm._s(_vm.title) }
+                  })
+                ])
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("h3", {
+              staticClass: "media-heading",
+              domProps: { textContent: _vm._s(_vm.title) }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("notification")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-38d218a5", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-cc67896e", module.exports)
   }
 }
 
@@ -14898,19 +17304,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(278),
-  /* template */
-  __webpack_require__(279),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(278)
+/* template */
+var __vue_template__ = __webpack_require__(279)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/components/Navbar.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Navbar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Navbar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14921,9 +17333,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-fcf01d8e", Component.options)
+    hotAPI.createRecord("data-v-562505dd", Component.options)
   } else {
-    hotAPI.reload("data-v-fcf01d8e", Component.options)
+    hotAPI.reload("data-v-562505dd", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -15033,132 +17445,195 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('nav', {
-    staticClass: "navbar navbar-default navbar-static-top"
-  }, [_c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "navbar-header"
-  }, [_vm._m(0), _vm._v(" "), (_vm.user) ? _c('div', {
-    staticClass: "sidebar-toggle-wrapper hidden-xs"
-  }, [_c('router-link', {
-    staticClass: "navbar-brand",
-    attrs: {
-      "to": _vm.user ? '/dashboard' : '/'
-    }
-  }, [_vm._v("Dinero")]), _vm._v(" "), _c('button', {
-    staticClass: "sidebar-toggle hidden-xs",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": _vm.toggleSidebar
-    }
-  }, [_c('span', {
-    staticClass: "icon-bar"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "icon-bar"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "icon-bar"
-  })])], 1) : _vm._e(), _vm._v(" "), _c('router-link', {
-    staticClass: "navbar-brand",
-    attrs: {
-      "to": _vm.user ? '/dashboard' : '/'
-    }
-  }, [_vm._v("Dinero")])], 1), _vm._v(" "), _c('div', {
-    staticClass: "collapse navbar-collapse",
-    attrs: {
-      "id": "app-navbar-collapse"
-    }
-  }, [(_vm.windowWidth <= 768) ? _c('main-nav', {
-    attrs: {
-      "nav-class": 'navbar-nav'
-    }
-  }) : _vm._e(), _vm._v(" "), (_vm.user) ? _c('ul', {
-    staticClass: "nav navbar-nav navbar-right"
-  }, [_vm._m(1), _vm._v(" "), _c('li', {
-    staticClass: "dropdown"
-  }, [_c('a', {
-    staticClass: "dropdown-toggle",
-    attrs: {
-      "href": "#",
-      "data-toggle": "dropdown"
-    }
-  }, [_c('span', {
-    domProps: {
-      "textContent": _vm._s(_vm.user.name)
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "caret"
-  })]), _vm._v(" "), _vm._m(2)])]) : _vm._e()], 1)])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "navbar-toggle collapsed",
-    attrs: {
-      "type": "button",
-      "data-toggle": "collapse",
-      "data-target": "#app-navbar-collapse"
-    }
-  }, [_c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Toggle Navigation")]), _vm._v(" "), _c('span', {
-    staticClass: "icon-bar"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "icon-bar"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "icon-bar"
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
-    staticClass: "dropdown"
-  }, [_c('a', {
-    staticClass: "dropdown-toggle",
-    attrs: {
-      "href": "#",
-      "data-toggle": "dropdown"
-    }
-  }, [_vm._v("\n                        1 BTC = 0 RUB\n                    ")]), _vm._v(" "), _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("1 BTC = 2 775.14 USD")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("1 USD = 59.86 RUB")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("1 ETH = 201.5 USD")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("1 ETH = 12 125.3 RUB")])])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "dropdown-menu"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-cog fa-btn fa-fw"
-  }), _vm._v("Настройки")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "/logout"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-sign-out fa-btn fa-fw"
-  }), _vm._v("Выход")])])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("nav", { staticClass: "navbar navbar-default navbar-static-top" }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _c(
+        "div",
+        { staticClass: "navbar-header" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm.user
+            ? _c(
+                "div",
+                { staticClass: "sidebar-toggle-wrapper hidden-xs" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "navbar-brand",
+                      attrs: { to: _vm.user ? "/dashboard" : "/" }
+                    },
+                    [_vm._v("Dinero")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "sidebar-toggle hidden-xs",
+                      attrs: { type: "button" },
+                      on: { click: _vm.toggleSidebar }
+                    },
+                    [
+                      _c("span", { staticClass: "icon-bar" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "icon-bar" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "icon-bar" })
+                    ]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "navbar-brand",
+              attrs: { to: _vm.user ? "/dashboard" : "/" }
+            },
+            [_vm._v("Dinero")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse",
+          attrs: { id: "app-navbar-collapse" }
+        },
+        [
+          _vm.windowWidth <= 768
+            ? _c("main-nav", { attrs: { "nav-class": "navbar-nav" } })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user
+            ? _c("ul", { staticClass: "nav navbar-nav navbar-right" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("li", { staticClass: "dropdown" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "dropdown-toggle",
+                      attrs: { href: "#", "data-toggle": "dropdown" }
+                    },
+                    [
+                      _c("span", {
+                        domProps: { textContent: _vm._s(_vm.user.name) }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "caret" })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ])
+              ])
+            : _vm._e()
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggle collapsed",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#app-navbar-collapse"
+        }
+      },
+      [
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Toggle Navigation")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "icon-bar" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "icon-bar" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "icon-bar" })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "dropdown" }, [
+      _c(
+        "a",
+        {
+          staticClass: "dropdown-toggle",
+          attrs: { href: "#", "data-toggle": "dropdown" }
+        },
+        [
+          _vm._v(
+            "\n                        1 BTC = 0 RUB\n                    "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("ul", { staticClass: "dropdown-menu" }, [
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("1 BTC = 2 775.14 USD")])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("1 USD = 59.86 RUB")])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("1 ETH = 201.5 USD")])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("1 ETH = 12 125.3 RUB")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "dropdown-menu" }, [
+      _c("li", [
+        _c("a", { attrs: { href: "#" } }, [
+          _c("i", { staticClass: "fa fa-cog fa-btn fa-fw" }),
+          _vm._v("Настройки")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { attrs: { href: "/logout" } }, [
+          _c("i", { staticClass: "fa fa-sign-out fa-btn fa-fw" }),
+          _vm._v("Выход")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-fcf01d8e", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-562505dd", module.exports)
   }
 }
 
@@ -15167,19 +17642,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(281),
-  /* template */
-  __webpack_require__(282),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(281)
+/* template */
+var __vue_template__ = __webpack_require__(282)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/components/Loading.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Loading.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Loading.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -15190,9 +17671,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2b373d63", Component.options)
+    hotAPI.createRecord("data-v-2b868582", Component.options)
   } else {
-    hotAPI.reload("data-v-2b373d63", Component.options)
+    hotAPI.reload("data-v-2b868582", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -15225,22 +17706,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('transition', {
-    attrs: {
-      "name": "fade"
-    }
-  }, [(_vm.show) ? _c('div', {
-    staticClass: "loading text-primary"
-  }, [_c('i', {
-    staticClass: "fa fa-circle-o-notch fa-spin fa-3x fa-fw"
-  })]) : _vm._e()])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transition", { attrs: { name: "fade" } }, [
+    _vm.show
+      ? _c("div", { staticClass: "loading text-primary" }, [
+          _c("i", { staticClass: "fa fa-circle-o-notch fa-spin fa-3x fa-fw" })
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-2b373d63", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-2b868582", module.exports)
   }
 }
 
@@ -15249,19 +17733,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(284),
-  /* template */
-  __webpack_require__(285),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(284)
+/* template */
+var __vue_template__ = __webpack_require__(285)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/components/Modal.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Modal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Modal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -15272,9 +17762,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3e9e63d8", Component.options)
+    hotAPI.createRecord("data-v-30e6d620", Component.options)
   } else {
-    hotAPI.reload("data-v-3e9e63d8", Component.options)
+    hotAPI.reload("data-v-30e6d620", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -15324,47 +17814,66 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal fade",
-    attrs: {
-      "id": _vm.id,
-      "tabindex": "-1",
-      "role": "dialog"
-    }
-  }, [_c('div', {
-    staticClass: "modal-dialog"
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_c('div', {
-    staticClass: "modal-header"
-  }, [_vm._m(0), _vm._v(" "), _c('h4', {
-    staticClass: "modal-title",
-    domProps: {
-      "textContent": _vm._s(_vm.title)
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "modal-body"
-  }, [_vm._t("modal-body")], 2), _vm._v(" "), _vm._t("modal-footer")], 2)])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "modal",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: { id: _vm.id, tabindex: "-1", role: "dialog" }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c(
+          "div",
+          { staticClass: "modal-content" },
+          [
+            _c("div", { staticClass: "modal-header" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("h4", {
+                staticClass: "modal-title",
+                domProps: { textContent: _vm._s(_vm.title) }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [_vm._t("modal-body")], 2),
+            _vm._v(" "),
+            _vm._t("modal-footer")
+          ],
+          2
+        )
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-3e9e63d8", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-30e6d620", module.exports)
   }
 }
 

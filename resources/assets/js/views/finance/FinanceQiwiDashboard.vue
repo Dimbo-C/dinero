@@ -18,7 +18,7 @@
 
                 <div class="form-group m-b-none">
                     <select name="" id="" class="form-control"
-                            v-model="massActionValue">
+                            v-model="massAction">
                         <option v-for="(text, action) in actions"
                                 :value=action>
                             {{ text }}
@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <button class="btn btn-default"
-                            @click="massAction">
+                            @click="executeMassAction">
                         Выполнить
                     </button>
                 </div>
@@ -53,13 +53,13 @@
                              :key="type.id"
                              :type="type"
                              :types="walletsTypes"
+                             @updateSelected="updateSelected"
                              @moveWallets="moveWallets"
             ></qiwi-type-panel>
 
             <qiwi-type-panel :type="inactive"
                              :types="walletsTypes"
                              :exclude="'spent'"
-                             @func="func"
                              :is-inactive="true"
                              @moveWallets="moveWallets">
             </qiwi-type-panel>
@@ -68,7 +68,6 @@
 </template>
 
 <script>
-    import Table from '../../mixins/table';
     import QiwiTypePanel from './qiwi/QiwiTypePanel.vue';
 
     export default {
@@ -85,13 +84,13 @@
                     moveToSpent: "Переместить в отработанные",
                     remove: "Удалить"
                 },
-                massActionValue: "",
+                massAction: "",
 
                 searchQuery: '',
                 walletsIsLoaded: false,
                 walletsTypes: null,
+                selected: [],
 
-                hui: []
             };
         },
         watch: {
@@ -100,45 +99,53 @@
             }
         },
         methods: {
+            updateSelected(selected){
+                if (selected.length === 0) return;
 
-            func(arg){
-                console.log(arg);
+                let typeId = selected[0].type_id;
+                let walletsWithoutThisType = this.selected.filter((wallet) => wallet.type_id !== typeId);
+                this.selected = walletsWithoutThisType.concat(selected);
 
+                console.log("Selected : ", selected);
+                console.log("Top selected : ", this.selected);
             },
             fetchWallets () {
                 axios.get('/api/qiwi-wallets')
-                    .then((response) => {
-                        this.walletsTypes = response.data;
-                        this.walletsIsLoaded = true;
+                        .then((response) => {
+                            this.walletsTypes = response.data;
+                            this.walletsIsLoaded = true;
 
-                        Bus.$emit('initTooltip');
-                    })
+                            Bus.$emit('initTooltip');
+                        })
             },
 
             moveWallets (wallets, fromId, toId) {
                 // convert array of wallets entities to array ids
                 let ids = wallets.map((wallet) => wallet.id);
                 axios.post('/api/qiwi-wallets/move', {wallets: ids, to: toId})
-                    .then(() => {
-                        let moveTo = this.walletsTypes.find(type => type.id === toId);
+                        .then(() => {
+                            let moveTo = this.walletsTypes.find(type => type.id === toId);
 
-                        let moveFrom = this.walletsTypes.find(type => type.id === fromId);
+                            let moveFrom = this.walletsTypes.find(type => type.id === fromId);
 
-                        moveFrom.wallets = moveFrom.wallets.filter((w) => {
-                            return !wallets.find(item => item.id === w.id);
+                            moveFrom.wallets = moveFrom.wallets.filter((w) => {
+                                return !wallets.find(item => item.id === w.id);
+                            });
+
+                            wallets.forEach((w) => {
+                                w.is_active = 1;
+                                moveTo.wallets.push(w)
+                            });
                         });
-
-                        wallets.forEach((w) => {
-                            w.is_active = 1;
-                            moveTo.wallets.push(w)
-                        });
-                    });
             },
 
-            massAction () {
-                console.log(this.massActionValue);
-                console.log(this.$children);
-                console.log(this.$children[0].$attrs);
+            executeMassAction () {
+                let postData = {action: this.massAction, wallets: this.selected};
+                axios.post('/api/qiwi-wallets/mass-action', postData)
+                        .then((response) => {
+                            console.log(response);
+
+                        });
             },
             removeFromType (wallets, fromId) {
 
