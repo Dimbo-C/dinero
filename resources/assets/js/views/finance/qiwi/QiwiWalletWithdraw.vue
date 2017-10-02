@@ -229,10 +229,9 @@
             },
             updateWallet(login) {
                 let auth = {"login": login};
-                Dinero.post('/api/qiwi-wallets/update', new Form(auth))
-                    .then((data) => {
-                        console.log(data);
-                        this.form.sum = data.balance;
+                Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
+                    .then((balance) => {
+                        this.form.sum = balance;
                     })
             },
         }

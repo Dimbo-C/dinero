@@ -12499,9 +12499,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             var auth = { "login": login };
-            Dinero.post('/api/qiwi-wallets/update', new Form(auth)).then(function (data) {
-                console.log(data);
-                _this3.form.sum = data.balance;
+            Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth)).then(function (balance) {
+                _this3.form.sum = balance;
             });
         }
     }

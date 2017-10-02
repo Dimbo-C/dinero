@@ -23,13 +23,6 @@ class Withdraw {
         return self::getNiceResult($qiwiControl);
     }
 
-    //    public static function viaVoucher($login, $targetField, $currency, $sum, $comment) {
-    //        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
-    //        $qiwiControl->sendVoucherViaEmail($targetField, $currency, $sum, $comment);
-    //
-    //        return self::getNiceResult($qiwiControl);
-    //    }
-
     public static function purchaseVoucher($login, $sum) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->purchaseVoucher($sum);
@@ -43,21 +36,6 @@ class Withdraw {
 
         return self::getNiceResult($qiwiControl);
     }
-
-    //    private static function getControlObject($login) {
-    //        $wallet = QiwiWallet::where("login", $login)->first();
-    //        $proxy = $wallet->use_proxy ? Proxy::find($wallet->proxy_id) : null;
-    //
-    //        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
-    //                $wallet->login,
-    //                $wallet->password,
-    //                $wallet->use_proxy,
-    //                $proxy);
-    //
-    //        $qiwiControl->login();
-    //
-    //        return $qiwiControl;
-    //    }
 
     /**
      * Create an object that has 'status' and 'resultText' fields
@@ -89,10 +67,6 @@ class Withdraw {
             }
         }
 
-
         return $result;
     }
-
-
-    //    private static function
 }
