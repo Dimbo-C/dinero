@@ -95,8 +95,16 @@ class QiwiWalletRepository implements Contract {
      */
     public function updateBalanceAndIncome($login) {
         $balance = QiwiGeneralHelper::getBalance($login);
-        //        $monthIncome = 0;
-        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
+                $monthIncome = $balance;
+
+
+
+
+
+
+
+
+//        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
 
         $this->staticWallet->updateBalanceAndIncome($login, $balance, $monthIncome);
 

@@ -146,7 +146,6 @@
                 Vue.ls.set('action', this.massAction);
 
                 this.$router.push({path: `/finance/qiwi/mass-action`});
-
             },
             removeFromType (wallets, fromId) {
 
