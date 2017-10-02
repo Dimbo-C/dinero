@@ -27,6 +27,8 @@ class MassActionProcessor {
      * @return bool
      */
     public function execute() {
+        if (count($this->wallets) == 0) return false;
+
         $method = $this->action;
 
         return $this->$method();
@@ -41,7 +43,7 @@ class MassActionProcessor {
     }
 
     private function moveToWithdraw() {
-        return $this->moveTo("withdraw");
+        return $this->moveTo("output");
     }
 
     private function moveToSpent() {
@@ -60,8 +62,6 @@ class MassActionProcessor {
     }
 
     private function remove() {
-        if (count($this->wallets) === 0) return 0;
-
         return (new QiwiWallet)->deleteByIds($this->ids);
     }
 }

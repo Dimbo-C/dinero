@@ -2,7 +2,11 @@ import Vue from 'vue';
 import axios from 'axios';
 import lodash from 'lodash';
 import moment from 'moment';
+import VueLocalStorage from 'vue-ls';
 import {Pagination, PaginationEvent} from 'vue-pagination-2';
+
+window.VueLocalStorage = VueLocalStorage;
+Vue.use(VueLocalStorage);
 
 window.Bus = new Vue();
 
@@ -26,7 +30,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
-} catch (e) {}
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

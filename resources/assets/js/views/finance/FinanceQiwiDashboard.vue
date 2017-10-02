@@ -28,6 +28,7 @@
 
                 <div class="form-group">
                     <button class="btn btn-default"
+                            :disabled="!selected.length"
                             @click="executeMassAction">
                         Выполнить
                     </button>
@@ -73,6 +74,7 @@
     export default {
         components: {QiwiTypePanel},
         mounted() {
+            Vue.ls.set('actions', this.actions);
             this.fetchWallets();
         },
         data() {
@@ -106,46 +108,45 @@
                 let walletsWithoutThisType = this.selected.filter((wallet) => wallet.type_id !== typeId);
                 this.selected = walletsWithoutThisType.concat(selected);
 
-                console.log("Selected : ", selected);
-                console.log("Top selected : ", this.selected);
+                console.log("New Selected : ", selected);
+                console.log("Total selected : ", this.selected);
             },
             fetchWallets () {
                 axios.get('/api/qiwi-wallets')
-                        .then((response) => {
-                            this.walletsTypes = response.data;
-                            this.walletsIsLoaded = true;
+                    .then((response) => {
+                        this.walletsTypes = response.data;
+                        this.walletsIsLoaded = true;
 
-                            Bus.$emit('initTooltip');
-                        })
+                        Bus.$emit('initTooltip');
+                    })
             },
 
             moveWallets (wallets, fromId, toId) {
                 // convert array of wallets entities to array ids
                 let ids = wallets.map((wallet) => wallet.id);
                 axios.post('/api/qiwi-wallets/move', {wallets: ids, to: toId})
-                        .then(() => {
-                            let moveTo = this.walletsTypes.find(type => type.id === toId);
+                    .then(() => {
+                        let moveTo = this.walletsTypes.find(type => type.id === toId);
 
-                            let moveFrom = this.walletsTypes.find(type => type.id === fromId);
+                        let moveFrom = this.walletsTypes.find(type => type.id === fromId);
 
-                            moveFrom.wallets = moveFrom.wallets.filter((w) => {
-                                return !wallets.find(item => item.id === w.id);
-                            });
-
-                            wallets.forEach((w) => {
-                                w.is_active = 1;
-                                moveTo.wallets.push(w)
-                            });
+                        moveFrom.wallets = moveFrom.wallets.filter((w) => {
+                            return !wallets.find(item => item.id === w.id);
                         });
+
+                        wallets.forEach((w) => {
+                            w.is_active = 1;
+                            moveTo.wallets.push(w)
+                        });
+                    });
             },
 
             executeMassAction () {
-                let postData = {action: this.massAction, wallets: this.selected};
-                axios.post('/api/qiwi-wallets/mass-action', postData)
-                        .then((response) => {
-                            console.log(response);
+                Vue.ls.set('wallets', this.selected);
+                Vue.ls.set('action', this.massAction);
 
-                        });
+                this.$router.push({path: `/finance/qiwi/mass-action`});
+
             },
             removeFromType (wallets, fromId) {
 

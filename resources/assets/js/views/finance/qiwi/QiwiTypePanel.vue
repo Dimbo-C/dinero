@@ -124,8 +124,6 @@
         },
         mounted () {
             this.items = this.type.wallets;
-            console.log(this.items);
-
         },
         watch: {
             selected(val){
@@ -136,8 +134,8 @@
             moveWallets () {
                 console.log(this.selected);
                 const moveFrom = this.isInactive
-                        ? this.selected[0].type_id
-                        : this.type.id;
+                    ? this.selected[0].type_id
+                    : this.type.id;
 
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
             },
@@ -147,16 +145,16 @@
             updateWallet(login) {
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update', new Form(auth))
-                        .then((data) => {
-                                    console.log(data);
-                                    this.items.map((item) => {
-                                        if (item.login === login) {
-                                            item.balance = data.balance;
-                                            item.month_income = data.monthIncome;
-                                        }
-                                    });
+                    .then((data) => {
+                            console.log(data);
+                            this.items.map((item) => {
+                                if (item.login === login) {
+                                    item.balance = data.balance;
+                                    item.month_income = data.monthIncome;
                                 }
-                        )
+                            });
+                        }
+                    )
             },
         },
         computed: {

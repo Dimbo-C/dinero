@@ -30,7 +30,6 @@ class QiwiWalletRepository implements Contract {
      * {@inheritdoc}
      */
     public function moveWalletsTo($ids, $to) {
-//        dd(QiwiWallet::whereIn('id', [5, 6, 7]));
         QiwiWallet::whereIn('id', $ids)->update(['type_id' => $to, 'is_active' => 1]);
     }
 
@@ -121,7 +120,6 @@ class QiwiWalletRepository implements Contract {
         ];
 
         return $report;
-        //        });
     }
 
     /**
@@ -191,8 +189,8 @@ class QiwiWalletRepository implements Contract {
      */
     public function massAction($action, $wallets) {
         $map = new MassActionProcessor($action, $wallets);
-return $wallets;
-        return strval($map->execute());
+
+        return $map->execute() === false ? "FAIL" : "OK";
     }
 
     private function findByLogin($login) {
