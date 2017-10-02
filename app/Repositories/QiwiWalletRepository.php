@@ -95,16 +95,9 @@ class QiwiWalletRepository implements Contract {
      */
     public function updateBalanceAndIncome($login) {
         $balance = QiwiGeneralHelper::getBalance($login);
-                $monthIncome = $balance;
+        $monthIncome = $balance;
 
-
-
-
-
-
-
-
-//        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
+        //        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
 
         $this->staticWallet->updateBalanceAndIncome($login, $balance, $monthIncome);
 
@@ -113,6 +106,20 @@ class QiwiWalletRepository implements Contract {
                 "balance" => $balance,
                 "options" => [],
         ];
+    }
+
+    public function updateBalance($login) {
+        $balance = QiwiGeneralHelper::getBalance($login);
+        $this->staticWallet->updateBalance($login, $balance);
+
+        return $balance;
+    }
+
+    public function updateIncome($login) {
+        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
+        $this->staticWallet->updateIncome($login, $monthIncome);
+
+        return $monthIncome;
     }
 
     /**

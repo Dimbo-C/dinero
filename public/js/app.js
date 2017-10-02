@@ -13198,12 +13198,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             var auth = { "login": login };
-            Dinero.post('/api/qiwi-wallets/update', new Form(auth)).then(function (data) {
-                console.log(data);
+            Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth)).then(function (balance) {
+                console.log(balance);
                 _this2.items.map(function (item) {
                     if (item.login === login) {
-                        item.balance = data.balance;
-                        item.month_income = data.monthIncome;
+                        item.balance = balance;
+                    }
+                });
+            });
+            Dinero.post('/api/qiwi-wallets/update-income', new Form(auth)).then(function (income) {
+                console.log(income);
+                _this2.items.map(function (item) {
+                    if (item.login === login) {
+                        item.month_income = income;
                     }
                 });
             });

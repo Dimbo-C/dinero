@@ -144,17 +144,24 @@
             },
             updateWallet(login) {
                 let auth = {"login": login};
-                Dinero.post('/api/qiwi-wallets/update', new Form(auth))
-                    .then((data) => {
-                            console.log(data);
-                            this.items.map((item) => {
-                                if (item.login === login) {
-                                    item.balance = data.balance;
-                                    item.month_income = data.monthIncome;
-                                }
-                            });
-                        }
-                    )
+                Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
+                    .then((balance) => {
+                        console.log(balance);
+                        this.items.map((item) => {
+                            if (item.login === login) {
+                                item.balance = balance;
+                            }
+                        });
+                    });
+                Dinero.post('/api/qiwi-wallets/update-income', new Form(auth))
+                    .then((income) => {
+                        console.log(income);
+                        this.items.map((item) => {
+                            if (item.login === login) {
+                                item.month_income = income;
+                            }
+                        });
+                    })
             },
         },
         computed: {

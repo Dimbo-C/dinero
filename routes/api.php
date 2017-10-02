@@ -14,17 +14,20 @@
 Route::get('/proxies', 'ProxiesController@get');
 Route::post('/proxies', 'ProxiesController@store');
 
-Route::get('/qiwi-wallets', 'QiwiWalletsController@all');
-Route::post('/qiwi-wallets', 'QiwiWalletsController@store');
-Route::post('/qiwi-wallets/update', 'QiwiWalletsController@updateBalanceAndIncome');
-Route::post('/qiwi-wallets/withdraw', 'QiwiWalletsController@withdraw');
+Route::prefix("qiwi-wallets")->group(function () {
+    Route::get('/', 'QiwiWalletsController@all');
+    Route::post('/', 'QiwiWalletsController@store');
+    Route::post('/update-balance', 'QiwiWalletsController@updateBalance');
+    Route::post('/update-income', 'QiwiWalletsController@updateIncome');
+    Route::post('/withdraw', 'QiwiWalletsController@withdraw');
 
 
-Route::post('/qiwi-wallets/move', 'QiwiWalletsController@move');
-Route::post('/qiwi-wallets/mass-action', 'QiwiWalletsController@massAction');
+    Route::post('/move', 'QiwiWalletsController@move');
+    Route::post('/mass-action', 'QiwiWalletsController@massAction');
 
-Route::get('/qiwi-wallets/{wallet}/report', 'Api\QiwiWalletsController@report');
-Route::get('/qiwi-wallets/{wallet}/settings', 'Api\QiwiWalletsController@settings');
-Route::post('/qiwi-wallets/{wallet}/settings', 'QiwiWalletsController@saveSettings');
-Route::post('/qiwi-wallets/{wallet}/withdraw', 'QiwiWalletsController@withdraw');
-Route::post('/qiwi-wallets/remove/{wallet}', 'QiwiWalletsController@remove');
+    Route::get('/{wallet}/report', 'Api\QiwiWalletsController@report');
+    Route::get('/{wallet}/settings', 'Api\QiwiWalletsController@settings');
+    Route::post('/{wallet}/settings', 'QiwiWalletsController@saveSettings');
+    Route::post('/{wallet}/withdraw', 'QiwiWalletsController@withdraw');
+    Route::post('/remove/{wallet}', 'QiwiWalletsController@remove');
+});
