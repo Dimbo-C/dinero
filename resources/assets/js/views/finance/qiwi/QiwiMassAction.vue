@@ -27,7 +27,11 @@
                                         <b>Вы выполните операцию над следующими кошельками:</b>
                                         <ul type="none">
                                             <li v-for="w in wallets" v-if="w.is_active || isInactive">
-                                                {{w.login}}
+                                                <div class="row">
+                                                    <div class="col-sm-2">{{ w.name }}</div>
+                                                    <div class="col-sm-2">{{ w.login }}</div>
+                                                </div>
+
                                             </li>
                                         </ul>
                                     </div>
