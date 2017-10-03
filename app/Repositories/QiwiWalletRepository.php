@@ -97,8 +97,6 @@ class QiwiWalletRepository implements Contract {
         $balance = QiwiGeneralHelper::getBalance($login);
         $monthIncome = $balance;
 
-        //        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
-
         $this->staticWallet->updateBalanceAndIncome($login, $balance, $monthIncome);
 
         return [
@@ -145,6 +143,21 @@ class QiwiWalletRepository implements Contract {
     }
 
     public function createWallet($data) {
+        if (QiwiWallet::walletExistsByName($data->name)) {
+            $wallet = QiwiWallet::findByName($data->name);
+            $result['status'] = "failure";
+            $result['message'] = "Кошелек с таким именем уже есть в системе. Привязан к номеру " . $wallet->login;
+
+            return $result;
+        }
+        if (QiwiWallet::walletExists($data->login)) {
+            $wallet = QiwiWallet::findByLogin($data->login);
+            $result['status'] = "failure";
+            $result['message'] = "Этот номер уже внесен в систему. Имеет имя " . $wallet->name;
+
+            return $result;
+        }
+
         $request = $data;
 
         // create new proxy

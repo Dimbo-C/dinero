@@ -17,8 +17,11 @@
                             </div>
                         </th>
                         <th>Имя кошелька </th>
+                        <th>Номер кошелька</th>
                         <th v-if="!isInactive">Баланс</th>
-                        <th v-if="!isInactive">Принятые средства с <span v-text="this.firstDayOfTheMonth"></span></th>
+                        <th v-if="!isInactive">
+                            Принятые средства с <span v-text="this.firstDayOfTheMonth"></span>
+                        </th>
                         <th></th>
                     </tr>
                     </thead>
@@ -32,12 +35,15 @@
                             </div>
                         </td>
                         <td v-text="w.name"></td>
+                        <td v-text="w.login"></td>
                         <td v-if="!isInactive">
                             <span :id="w.login">{{ w.balance | currency }}</span>
                             <a data-toggle="tooltip"
                                data-placement="top"
                                title="Обновить">
                                 <i class="fa fa-refresh fa-fw"
+
+                                   v-bind:id="w.login"
                                    v-on:click.stop="updateWallet(w.login)"></i>
                             </a>
                         </td>
@@ -82,30 +88,29 @@
             </div>
         </div>
 
-        <div class="panel-footer">
-            <div class="form-inline">
-                <label for="" class="control-label">Перенести отмеченные в:</label>
-                <div class="form-group m-b-none">
-                    <select name="" id="" class="form-control" v-model="moveTo">
-                        <option v-for="t in types"
-                                v-if="t.id !== type.id && t.slug !== exclude"
-                                :value="t.id"
-                        >
-                            {{ t.name }}
-                        </option>
-                    </select>
-                </div>
+        <!--<div class="panel-footer">-->
+        <!--<div class="form-inline">-->
+        <!--<label for="" class="control-label">Перенести отмеченные в:</label>-->
+        <!--<div class="form-group m-b-none">-->
+        <!--<select name="" id="" class="form-control" v-model="moveTo">-->
+        <!--<option v-for="t in types"-->
+        <!--v-if="t.id !== type.id && t.slug !== exclude"-->
+        <!--:value="t.id">-->
+        <!--{{ t.name }}-->
+        <!--</option>-->
+        <!--</select>-->
+        <!--</div>-->
 
-                <div class="form-group">
-                    <button class="btn btn-default"
-                            @click="moveWallets()"
-                            :disabled="!selected.length">
-                        Выполнить
-                    </button>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+        <!--<div class="form-group">-->
+        <!--<button class="btn btn-default"-->
+        <!--@click="moveWallets()"-->
+        <!--:disabled="!selected.length">-->
+        <!--Выполнить-->
+        <!--</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="clearfix"></div>-->
+        <!--</div>-->
     </div>
 </template>
 
@@ -119,7 +124,7 @@
             return {
                 moveTo: this.types.filter(t => t.id !== this.type.id)[0].id,
                 foo: '',
-                onChangeSelect: ""
+                onChangeSelect: ''
             };
         },
         mounted () {
@@ -142,7 +147,9 @@
             removeWallet(login){
                 this.$router.push({path: `/finance/qiwi/remove/${login}`});
             },
-            updateWallet(login) {
+
+            updateBalance(login){
+
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
                     .then((balance) => {
@@ -153,6 +160,10 @@
                             }
                         });
                     });
+            },
+
+            updateIncome(login){
+                let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-income', new Form(auth))
                     .then((income) => {
                         console.log(income);
@@ -162,6 +173,11 @@
                             }
                         });
                     })
+            },
+
+            updateWallet(login) {
+                this.updateBalance(login);
+                this.updateIncome(login);
             },
         },
         computed: {

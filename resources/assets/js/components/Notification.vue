@@ -4,48 +4,48 @@
             <button type="button" class="close" @click="hideNotification()">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <span v-html="message"></span>
+            <h4 v-html="message"></h4>
         </div>
     </transition>
 </template>
 
 <script>
     export default {
-      data() {
-        return {
-          isShown: false,
-          alertClass: 'alert-warning',
-          message: '',
-        }
-      },
-
-      created() {
-        const self = this;
-
-        Bus.$on('showNotification', function (alertClass, message) {
-          self.showNotification(alertClass, message);
-        });
-      },
-
-      methods: {
-        showNotification(alertClass, message) {
-          this.isShown = true;
-          this.alertClass = `alert-${alertClass}`;
-          this.message = message;
-
-          setTimeout(() => {
-            this.hideNotification()
-          }, 5000);
+        data() {
+            return {
+                isShown: false,
+                alertClass: 'alert-warning',
+                message: '',
+            }
         },
 
-        hideNotification() {
-          this.isShown = false;
+        created() {
+            const self = this;
 
-          setTimeout(() => {
-            this.message = '';
-          }, 1000);
+            Bus.$on('showNotification', function (alertClass, message) {
+                self.showNotification(alertClass, message);
+            });
+        },
 
+        methods: {
+            showNotification(alertClass, message) {
+                this.isShown = true;
+                this.alertClass = `alert-${alertClass}`;
+                this.message = message;
+
+                setTimeout(() => {
+                    this.hideNotification()
+                }, 20000);
+            },
+
+            hideNotification() {
+                this.isShown = false;
+
+                setTimeout(() => {
+                    this.message = '';
+                }, 1000);
+
+            }
         }
-      }
     }
 </script>

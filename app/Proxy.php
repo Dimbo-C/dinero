@@ -11,4 +11,8 @@ class Proxy extends Model {
             'password', 'country', 'status',
             'type', 'using_type', 'price'
     ];
+
+    public function deleteByIds($ids) {
+        return $this->destroy($ids);
+    }
 }

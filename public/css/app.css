@@ -8859,9 +8859,10 @@ body,
 
 .notification {
   max-width: 500px;
-  position: absolute;
+  position: fixed;
   right: 15px;
-  top: 50%;
+  bottom: 15px;
+  z-index: 999;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }

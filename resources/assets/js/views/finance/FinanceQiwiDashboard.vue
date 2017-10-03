@@ -12,7 +12,6 @@
         <loading :show="!walletsIsLoaded"></loading>
 
         <div v-if="walletsIsLoaded" class="container-fluid">
-
             <div class="form-inline">
                 <h3 class="body-header">Управление кошельками</h3>
 

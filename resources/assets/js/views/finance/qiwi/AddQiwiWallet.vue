@@ -12,7 +12,9 @@
             </router-link>
         </page-header>
 
-        <div class="container-fluid">
+        <loading :show="processed"></loading>
+
+        <div v-if="!processed" class="container-fluid">
             <div class="row">
                 <div class="col-sm-8">
                     <div class="panel panel-default">
@@ -22,7 +24,10 @@
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Номер кошелька</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" v-model="form.login">
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Например: 79123456789"
+                                               v-model="login">
                                     </div>
                                 </div>
 
@@ -144,7 +149,8 @@
                         description: 'На такой кошелек будут выводиться средства с кошельков, принимающих платежи.'
                     },
                 ],
-                isLoaded: false,
+                login: "",
+                processed: false,
 
                 proxyServer: '',
                 proxyAuth: '',
@@ -167,6 +173,11 @@
             };
         },
         watch: {
+            // add '+' before phone number in any case
+            login(val){
+                let newVal = val.replace(/\+/g, "");
+                this.form.login = "+" + newVal;
+            },
             watchedIframe(val){
                 console.log(val.contents());
             },
@@ -185,8 +196,8 @@
         },
         methods: {
             submitForm() {
-                Dinero.post('/api/qiwi-wallets', this.form)
-                    .then(this.processResult)
+                this.processed = true;
+                Dinero.post('/api/qiwi-wallets', this.form).then(this.processResult);
             },
             processResult(result){
                 console.log(result);
@@ -196,6 +207,7 @@
                 if (result.status === "success") {
                     this.$router.push({path: `/finance/qiwi/add-wallet-success/${this.form.login}`});
                 } else {
+                    this.processed = false;
                     Bus.$emit('showNotification', messageType, result.message);
                 }
             }

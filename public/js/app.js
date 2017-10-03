@@ -200,88 +200,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
+/* 7 */,
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9454,6 +9373,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -9471,7 +9395,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 text: 'Автовывод',
                 description: 'На такой кошелек будут выводиться средства с кошельков, принимающих платежи.'
             }],
-            isLoaded: false,
+            login: "",
+            processed: false,
 
             proxyServer: '',
             proxyAuth: '',
@@ -9495,6 +9420,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     watch: {
+        // add '+' before phone number in any case
+        login: function login(val) {
+            var newVal = val.replace(/\+/g, "");
+            this.form.login = "+" + newVal;
+        },
         watchedIframe: function watchedIframe(val) {
             console.log(val.contents());
         },
@@ -9513,6 +9443,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         submitForm: function submitForm() {
+            this.processed = true;
             Dinero.post('/api/qiwi-wallets', this.form).then(this.processResult);
         },
         processResult: function processResult(result) {
@@ -9523,6 +9454,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (result.status === "success") {
                 this.$router.push({ path: '/finance/qiwi/add-wallet-success/' + this.form.login });
             } else {
+                this.processed = false;
                 Bus.$emit('showNotification', messageType, result.message);
             }
         }
@@ -9560,7 +9492,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "tag": "li",
       "to": "/finance/qiwi/dashboard"
     }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
+  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('loading', {
+    attrs: {
+      "show": _vm.processed
+    }
+  }), _vm._v(" "), (!_vm.processed) ? _c('div', {
     staticClass: "container-fluid"
   }, [_c('div', {
     staticClass: "row"
@@ -9584,20 +9520,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.login),
-      expression: "form.login"
+      value: (_vm.login),
+      expression: "login"
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "text"
+      "type": "text",
+      "placeholder": "Например: 79123456789"
     },
     domProps: {
-      "value": (_vm.form.login)
+      "value": (_vm.login)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.login = $event.target.value
+        _vm.login = $event.target.value
       }
     }
   })])]), _vm._v(" "), _c('div', {
@@ -9871,7 +9808,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.submitForm
     }
-  }, [_vm._v("Добавить кошелек")])])])])])])])])])], 1)
+  }, [_vm._v("Добавить кошелек")])])])])])])])])]) : _vm._e()], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -9955,7 +9892,7 @@ if(false) {
 /* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(306)(undefined);
 // imports
 
 
@@ -10297,7 +10234,7 @@ if(false) {
 /* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(306)(undefined);
 // imports
 
 
@@ -12890,7 +12827,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -13157,6 +13093,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -13171,7 +13112,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return t.id !== _this.type.id;
             })[0].id,
             foo: '',
-            onChangeSelect: ""
+            onChangeSelect: ''
         };
     },
     mounted: function mounted() {
@@ -13193,7 +13134,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         removeWallet: function removeWallet(login) {
             this.$router.push({ path: '/finance/qiwi/remove/' + login });
         },
-        updateWallet: function updateWallet(login) {
+        updateBalance: function updateBalance(login) {
             var _this2 = this;
 
             var auth = { "login": login };
@@ -13205,14 +13146,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 });
             });
+        },
+        updateIncome: function updateIncome(login) {
+            var _this3 = this;
+
+            var auth = { "login": login };
             Dinero.post('/api/qiwi-wallets/update-income', new Form(auth)).then(function (income) {
                 console.log(income);
-                _this2.items.map(function (item) {
+                _this3.items.map(function (item) {
                     if (item.login === login) {
                         item.month_income = income;
                     }
                 });
             });
+        },
+        updateWallet: function updateWallet(login) {
+            this.updateBalance(login);
+            this.updateIncome(login);
         }
     },
     computed: {
@@ -13288,7 +13238,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  })])])]), _vm._v(" "), _c('th', [_vm._v("Имя кошелька ")]), _vm._v(" "), (!_vm.isInactive) ? _c('th', [_vm._v("Баланс")]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('th', [_vm._v("Принятые средства с "), _c('span', {
+  })])])]), _vm._v(" "), _c('th', [_vm._v("Имя кошелька ")]), _vm._v(" "), _c('th', [_vm._v("Номер кошелька")]), _vm._v(" "), (!_vm.isInactive) ? _c('th', [_vm._v("Баланс")]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('th', [_vm._v("\n                        Принятые средства с "), _c('span', {
     domProps: {
       "textContent": _vm._s(this.firstDayOfTheMonth)
     }
@@ -13333,6 +13283,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "textContent": _vm._s(w.name)
       }
+    }), _vm._v(" "), _c('td', {
+      domProps: {
+        "textContent": _vm._s(w.login)
+      }
     }), _vm._v(" "), (!_vm.isInactive) ? _c('td', [_c('span', {
       attrs: {
         "id": w.login
@@ -13345,6 +13299,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('i', {
       staticClass: "fa fa-refresh fa-fw",
+      attrs: {
+        "id": w.login
+      },
       on: {
         "click": function($event) {
           $event.stopPropagation();
@@ -13399,61 +13356,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('i', {
       staticClass: "fa fa-times"
     })])], 1)])]) : _vm._e()
-  }))])])]), _vm._v(" "), _c('div', {
-    staticClass: "panel-footer"
-  }, [_c('div', {
-    staticClass: "form-inline"
-  }, [_c('label', {
-    staticClass: "control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Перенести отмеченные в:")]), _vm._v(" "), _c('div', {
-    staticClass: "form-group m-b-none"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.moveTo),
-      expression: "moveTo"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "name": "",
-      "id": ""
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.moveTo = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.types), function(t) {
-    return (t.id !== _vm.type.id && t.slug !== _vm.exclude) ? _c('option', {
-      domProps: {
-        "value": t.id
-      }
-    }, [_vm._v("\n                        " + _vm._s(t.name) + "\n                    ")]) : _vm._e()
-  }))]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "disabled": !_vm.selected.length
-    },
-    on: {
-      "click": function($event) {
-        _vm.moveWallets()
-      }
-    }
-  }, [_vm._v("\n                    Выполнить\n                ")])])]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  })])])
+  }))])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -13678,7 +13581,7 @@ if(false) {
 /* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(306)(undefined);
 // imports
 
 
@@ -15612,44 +15515,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      isShown: false,
-      alertClass: 'alert-warning',
-      message: ''
-    };
-  },
-  created: function created() {
-    var self = this;
-
-    Bus.$on('showNotification', function (alertClass, message) {
-      self.showNotification(alertClass, message);
-    });
-  },
-
-
-  methods: {
-    showNotification: function showNotification(alertClass, message) {
-      var _this = this;
-
-      this.isShown = true;
-      this.alertClass = 'alert-' + alertClass;
-      this.message = message;
-
-      setTimeout(function () {
-        _this.hideNotification();
-      }, 5000);
+    data: function data() {
+        return {
+            isShown: false,
+            alertClass: 'alert-warning',
+            message: ''
+        };
     },
-    hideNotification: function hideNotification() {
-      var _this2 = this;
+    created: function created() {
+        var self = this;
 
-      this.isShown = false;
+        Bus.$on('showNotification', function (alertClass, message) {
+            self.showNotification(alertClass, message);
+        });
+    },
 
-      setTimeout(function () {
-        _this2.message = '';
-      }, 1000);
+
+    methods: {
+        showNotification: function showNotification(alertClass, message) {
+            var _this = this;
+
+            this.isShown = true;
+            this.alertClass = 'alert-' + alertClass;
+            this.message = message;
+
+            setTimeout(function () {
+                _this.hideNotification();
+            }, 20000);
+        },
+        hideNotification: function hideNotification() {
+            var _this2 = this;
+
+            this.isShown = false;
+
+            setTimeout(function () {
+                _this2.message = '';
+            }, 1000);
+        }
     }
-  }
 });
 
 /***/ }),
@@ -15687,7 +15590,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('span', {
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
     domProps: {
       "innerHTML": _vm._s(_vm.message)
     }
@@ -16717,6 +16620,99 @@ $.fn.extend({
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
 
 /***/ })
 ],[139]);

@@ -19,6 +19,15 @@ class QiwiWallet extends Model {
     }
 
     public function deleteByIds($ids) {
+        if (count($ids) == 0) return 0;
+
+        $wallets = $this->find($ids);
+        $proxyIds = [];
+        foreach ($wallets as $wallet) {
+            $proxyIds[] = $wallet['proxy_id'];
+        }
+        (new Proxy())->deleteByIds($proxyIds);
+
         return $this->destroy($ids);
     }
 
@@ -83,9 +92,22 @@ class QiwiWallet extends Model {
         $this->postUpdateRoutine($login);
     }
 
-    public function findByLogin($login) {
-        return $this->where("login", $login)->first();
+    public static function findByLogin($login) {
+        return (new QiwiWallet())->where("login", $login)->first();
     }
+
+    public static function findByName($name) {
+        return (new QiwiWallet())->where("name", $name)->first();
+    }
+
+    public static function walletExists($login) {
+        return (new QiwiWallet())->where('login', $login)->exists();
+    }
+
+    public static function walletExistsByName($name) {
+        return (new QiwiWallet())->where('name', $name)->exists();
+    }
+
 
     public function updateByLogin($login, $arguments = []) {
         $this->where("login", $login)->update($arguments);
@@ -114,4 +136,5 @@ class QiwiWallet extends Model {
         $settings->last_balance_recheck = Carbon::now()->format('Y-m-d H:i:s');
         $settings->save();
     }
+
 }
