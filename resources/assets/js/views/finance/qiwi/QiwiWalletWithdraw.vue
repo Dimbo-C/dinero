@@ -18,7 +18,18 @@
             <div class="row">
                 <div class="col-sm-10">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Вывод средств с Qiwi кошелька ({{ form.login }})</div>
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-10">
+                                    Вывод средств с Qiwi кошелька ({{ form.login }})
+                                </div>
+                                <div class="col-sm-12 col-md-2 text-center">
+                                    <router-link tag="span" to="/finance/qiwi/egg">
+                                        <a>Ваучеры</a>
+                                    </router-link>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="panel-body" v-if="!resultObtained">
                             <div class="form-horizontal">

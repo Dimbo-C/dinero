@@ -897,6 +897,9 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__views_finance_FinanceQiwiDashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__views_finance_FinanceQiwiDashboard_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__views_finance_qiwi_QiwiMassAction_vue__ = __webpack_require__(237);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__views_finance_qiwi_QiwiMassAction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__views_finance_qiwi_QiwiMassAction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__views_finance_qiwi_QiwiEggs_vue__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__views_finance_qiwi_QiwiEggs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__views_finance_qiwi_QiwiEggs_vue__);
+
 
 
 
@@ -927,7 +930,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
     linkActiveClass: 'active',
-    routes: [{ path: '*', component: __WEBPACK_IMPORTED_MODULE_2__views_NotFound_vue___default.a }, { path: '/dashboard', component: __WEBPACK_IMPORTED_MODULE_3__views_Dashboard_vue___default.a }, { path: '/admins/own', component: __WEBPACK_IMPORTED_MODULE_4__views_admins_own_Own_vue___default.a }, { path: '/admins/own/metrics', component: __WEBPACK_IMPORTED_MODULE_5__views_admins_own_Metrics_vue___default.a }, { path: '/admins/rent', component: __WEBPACK_IMPORTED_MODULE_6__views_admins_rent_Rent_vue___default.a }, { path: '/proxies', component: __WEBPACK_IMPORTED_MODULE_7__views_proxies_Proxies_vue___default.a }, { path: '/proxies/system', component: __WEBPACK_IMPORTED_MODULE_8__views_proxies_ProxiesSystem_vue___default.a }, { path: '/proxies/admin', component: __WEBPACK_IMPORTED_MODULE_9__views_proxies_ProxiesAdmin_vue___default.a }, { path: '/finance', component: __WEBPACK_IMPORTED_MODULE_10__views_finance_Finance_vue___default.a }, { path: '/finance/rent', component: __WEBPACK_IMPORTED_MODULE_11__views_finance_FinanceRent_vue___default.a }, { path: '/finance/bitcoin', component: __WEBPACK_IMPORTED_MODULE_12__views_finance_FinanceBitcoin_vue___default.a }, { path: '/finance/qiwi', component: __WEBPACK_IMPORTED_MODULE_14__views_finance_FinanceQiwiWallet_vue___default.a }, { path: '/finance/qiwi/add-wallet', component: __WEBPACK_IMPORTED_MODULE_15__views_finance_qiwi_AddQiwiWallet_vue___default.a }, { path: '/finance/qiwi/mass-action', component: __WEBPACK_IMPORTED_MODULE_22__views_finance_qiwi_QiwiMassAction_vue___default.a }, { path: '/finance/qiwi/add-wallet-success/:wallet', component: __WEBPACK_IMPORTED_MODULE_17__views_finance_qiwi_AddQiwiWalletSuccess_vue___default.a }, { path: '/finance/qiwi/remove/:wallet', component: __WEBPACK_IMPORTED_MODULE_16__views_finance_qiwi_RemoveQiwiWallet_vue___default.a }, { path: '/finance/qiwi/:wallet/history', component: __WEBPACK_IMPORTED_MODULE_18__views_finance_qiwi_QiwiWalletHistory_vue___default.a }, { path: '/finance/qiwi/:wallet/settings', component: __WEBPACK_IMPORTED_MODULE_19__views_finance_qiwi_QiwiWalletSettings_vue___default.a }, { path: '/finance/qiwi/:wallet/withdraw', component: __WEBPACK_IMPORTED_MODULE_20__views_finance_qiwi_QiwiWalletWithdraw_vue___default.a }, { path: '/finance/qiwi/dashboard', component: __WEBPACK_IMPORTED_MODULE_21__views_finance_FinanceQiwiDashboard_vue___default.a }, { path: '/finance/bitcoin/history', component: __WEBPACK_IMPORTED_MODULE_13__views_finance_FinanceBitcoinHistory_vue___default.a }]
+    routes: [{ path: '*', component: __WEBPACK_IMPORTED_MODULE_2__views_NotFound_vue___default.a }, { path: '/dashboard', component: __WEBPACK_IMPORTED_MODULE_3__views_Dashboard_vue___default.a }, { path: '/admins/own', component: __WEBPACK_IMPORTED_MODULE_4__views_admins_own_Own_vue___default.a }, { path: '/admins/own/metrics', component: __WEBPACK_IMPORTED_MODULE_5__views_admins_own_Metrics_vue___default.a }, { path: '/admins/rent', component: __WEBPACK_IMPORTED_MODULE_6__views_admins_rent_Rent_vue___default.a }, { path: '/proxies', component: __WEBPACK_IMPORTED_MODULE_7__views_proxies_Proxies_vue___default.a }, { path: '/proxies/system', component: __WEBPACK_IMPORTED_MODULE_8__views_proxies_ProxiesSystem_vue___default.a }, { path: '/proxies/admin', component: __WEBPACK_IMPORTED_MODULE_9__views_proxies_ProxiesAdmin_vue___default.a }, { path: '/finance', component: __WEBPACK_IMPORTED_MODULE_10__views_finance_Finance_vue___default.a }, { path: '/finance/rent', component: __WEBPACK_IMPORTED_MODULE_11__views_finance_FinanceRent_vue___default.a }, { path: '/finance/bitcoin', component: __WEBPACK_IMPORTED_MODULE_12__views_finance_FinanceBitcoin_vue___default.a }, { path: '/finance/qiwi', component: __WEBPACK_IMPORTED_MODULE_14__views_finance_FinanceQiwiWallet_vue___default.a }, { path: '/finance/qiwi/egg', component: __WEBPACK_IMPORTED_MODULE_23__views_finance_qiwi_QiwiEggs_vue___default.a }, { path: '/finance/qiwi/add-wallet', component: __WEBPACK_IMPORTED_MODULE_15__views_finance_qiwi_AddQiwiWallet_vue___default.a }, { path: '/finance/qiwi/mass-action', component: __WEBPACK_IMPORTED_MODULE_22__views_finance_qiwi_QiwiMassAction_vue___default.a }, { path: '/finance/qiwi/add-wallet-success/:wallet', component: __WEBPACK_IMPORTED_MODULE_17__views_finance_qiwi_AddQiwiWalletSuccess_vue___default.a }, { path: '/finance/qiwi/remove/:wallet', component: __WEBPACK_IMPORTED_MODULE_16__views_finance_qiwi_RemoveQiwiWallet_vue___default.a }, { path: '/finance/qiwi/:wallet/history', component: __WEBPACK_IMPORTED_MODULE_18__views_finance_qiwi_QiwiWalletHistory_vue___default.a }, { path: '/finance/qiwi/:wallet/settings', component: __WEBPACK_IMPORTED_MODULE_19__views_finance_qiwi_QiwiWalletSettings_vue___default.a }, { path: '/finance/qiwi/:wallet/withdraw', component: __WEBPACK_IMPORTED_MODULE_20__views_finance_qiwi_QiwiWalletWithdraw_vue___default.a }, { path: '/finance/qiwi/dashboard', component: __WEBPACK_IMPORTED_MODULE_21__views_finance_FinanceQiwiDashboard_vue___default.a }, { path: '/finance/bitcoin/history', component: __WEBPACK_IMPORTED_MODULE_13__views_finance_FinanceBitcoinHistory_vue___default.a }]
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
@@ -12432,6 +12435,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -12572,7 +12586,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("Вывод средств с Qiwi кошелька (" + _vm._s(_vm.form.login) + ")")]), _vm._v(" "), (!_vm.resultObtained) ? _c('div', {
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-12 col-md-10"
+  }, [_vm._v("\n                                Вывод средств с Qiwi кошелька (" + _vm._s(_vm.form.login) + ")\n                            ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-12 col-md-2 text-center"
+  }, [_c('router-link', {
+    attrs: {
+      "tag": "span",
+      "to": "/finance/qiwi/egg"
+    }
+  }, [_c('a', [_vm._v("Ваучеры")])])], 1)])]), _vm._v(" "), (!_vm.resultObtained) ? _c('div', {
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "form-horizontal"
@@ -16749,6 +16774,298 @@ $.fn.extend({
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(308),
+  /* template */
+  __webpack_require__(309),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/views/finance/qiwi/QiwiEggs.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] QiwiEggs.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-79cd7d57", Component.options)
+  } else {
+    hotAPI.reload("data-v-79cd7d57", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 308 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            login: "",
+            voucherCode: "",
+            voucherSum: 0
+
+        };
+    },
+
+    watch: {},
+    methods: {
+        activateVoucher: function activateVoucher() {
+            var data = { login: this.login, code: this.voucherCode };
+            //
+            //                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/activate-voucher`, new Form(data))
+            //                    .then((response) => {
+            //                        console.log(response);
+            //                    });
+            //                        let notificationType = data.status == 200 ? "success" : "danger";
+            //                        this.notificationClass = "alert-" + notificationType;
+            //                        this.resultObtained = true;
+            //                        this.responseText = data.resultText;
+            //                        this.processed = false;
+            //                        this.updateWallet(this.$route.params.wallet);
+            //                    });
+        },
+        createVoucher: function createVoucher() {}
+    },
+    computed: {
+        walletTypeDescription: function walletTypeDescription() {
+            var _this = this;
+
+            return this.walletTypes.find(function (t) {
+                return t.value === _this.form.type;
+            }).description;
+        }
+    }
+});
+
+/***/ }),
+/* 309 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('page-header', {
+    attrs: {
+      "icon": "fa-money",
+      "title": "Ваучеры"
+    }
+  }, [_c('li', [_c('a', {
+    staticClass: "disabled"
+  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "tag": "li",
+      "to": "/finance/qiwi"
+    }
+  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "tag": "li",
+      "to": "/finance/qiwi/dashboard"
+    }
+  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "container-fluid"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_vm._v("Активация ваучера Qiwi")]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_c('div', {
+    staticClass: "form-horizontal"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label"
+  }, [_vm._v("Код ваучера")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.voucherCode),
+      expression: "voucherCode"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD"
+    },
+    domProps: {
+      "value": (_vm.voucherCode)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.voucherCode = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.activateVoucher
+    }
+  }, [_vm._v("Активировать ваучер\n                                ")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_vm._v("Создание ваучера Qiwi")]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_c('div', {
+    staticClass: "form-horizontal"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label"
+  }, [_vm._v("Сумма")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.voucherSum),
+      expression: "voucherSum"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Например: 200"
+    },
+    domProps: {
+      "value": (_vm.voucherSum)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.voucherSum = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.createVoucher
+    }
+  }, [_vm._v("Создать ваучер\n                                ")])])])])])])])])], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-79cd7d57", module.exports)
+  }
+}
 
 /***/ })
 ],[139]);

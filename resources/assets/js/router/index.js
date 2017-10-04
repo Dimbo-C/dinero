@@ -22,6 +22,7 @@ import QiwiWalletSettings from './../views/finance/qiwi/QiwiWalletSettings.vue'
 import QiwiWalletWithdraw from './../views/finance/qiwi/QiwiWalletWithdraw.vue'
 import FinanceQiwiDashboard from './../views/finance/FinanceQiwiDashboard.vue'
 import QiwiMassAction from './../views/finance/qiwi/QiwiMassAction.vue'
+import QiwiEggs from './../views/finance/qiwi/QiwiEggs.vue'
 
 Vue.use(Router);
 
@@ -41,6 +42,7 @@ const router = new Router({
         {path: '/finance/rent', component: FinanceRent},
         {path: '/finance/bitcoin', component: FinanceBitcoin},
         {path: '/finance/qiwi', component: FinanceQiwiWallet},
+        {path: '/finance/qiwi/egg', component: QiwiEggs},
         {path: '/finance/qiwi/add-wallet', component: AddQiwiWallet},
         {path: '/finance/qiwi/mass-action', component: QiwiMassAction},
         {path: '/finance/qiwi/add-wallet-success/:wallet', component: AddQiwiWalletSuccess},
