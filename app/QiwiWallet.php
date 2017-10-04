@@ -21,14 +21,19 @@ class QiwiWallet extends Model {
     public function deleteByIds($ids) {
         if (count($ids) == 0) return 0;
 
-        $wallets = $this->find($ids);
+        $this->cleanProxies($ids);
+
+        return $this->destroy($ids);
+    }
+
+    // remove proxies of specific wallets
+    private function cleanProxies($walletIds) {
+        $wallets = $this->find($walletIds);
         $proxyIds = [];
         foreach ($wallets as $wallet) {
             $proxyIds[] = $wallet['proxy_id'];
         }
         (new Proxy())->deleteByIds($proxyIds);
-
-        return $this->destroy($ids);
     }
 
     /**
