@@ -11,13 +11,24 @@ class Withdraw {
     public static function toQiwiWallet($login, $to, $currency, $amount, $comment = false) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->transferMoney($to, $currency, $amount, $comment);
+        $result = new WithdrawResult();
 
-        return self::getNiceResult($qiwiControl);
+        $responseData = json_decode($qiwiControl->getResponseData())->data;
+        $result->customData = $responseData;
+
+        $result->status = trim($responseData->status);
+        $result->resultText = $responseData->status == 200
+                ? "<b>Отлично!</b> Вы успешно совершили перевод с Qiwi кошелька $login
+                 на сумму $amount RUB"
+                : "<b>Ошибка!</b> " . trim($responseData->body->message);
+        $result->debugData = $responseData;
+
+        //        return self::getNiceResult($qiwiControl);
+        return $result;
     }
 
     public static function toCreditCard($login, $cardNumber, $firstName, $lastName, $sum, $currency, $comment = "") {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
-        $qiwiControl->login();
         $qiwiControl->transferMoneyToCard($cardNumber, $firstName, $lastName, $sum, $currency, $comment);
 
         return self::getNiceResult($qiwiControl);
@@ -47,7 +58,7 @@ class Withdraw {
         $result = new WithdrawResult();
         $result->error = $qiwiControl->getLastError();
         $result->debugData = $qiwiControl->debugData;
-
+        dd($qiwiControl);
         $result->status = 200;
         if ($result->error != null) {
             $result->status = 400;

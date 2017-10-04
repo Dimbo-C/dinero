@@ -200,7 +200,88 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 7 */,
+/* 7 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9892,7 +9973,7 @@ if(false) {
 /* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(306)(undefined);
+exports = module.exports = __webpack_require__(7)(undefined);
 // imports
 
 
@@ -10234,12 +10315,12 @@ if(false) {
 /* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(306)(undefined);
+exports = module.exports = __webpack_require__(7)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "\n.body-header[data-v-0e93ec9e] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-0e93ec9e] {\n    padding: 15px;\n}\n.success-notification[data-v-0e93ec9e] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.wallet-info[data-v-0e93ec9e] {\np {\n    margin-bottom: 0;\n}\n}\n", ""]);
+exports.push([module.i, "\n.body-header[data-v-0e93ec9e] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-0e93ec9e] {\n    padding: 15px;\n}\n.success-notification[data-v-0e93ec9e] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n", ""]);
 
 // exports
 
@@ -12340,11 +12421,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    /*
-     * The component's data.
-     */
     data: function data() {
         return {
             types: {
@@ -12371,6 +12460,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             underTip: "",
             balance: 0,
             responseText: "",
+            processed: false,
+            resultObtained: false,
+            notificationClass: "alert-danger",
+            updatedBalance: 0,
 
             form: new Form({
                 sum: 0,
@@ -12396,18 +12489,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
 
-    /**
-     * Prepare the component.
-     */
     mounted: function mounted() {
         this.prepareComponent();
     },
 
 
     methods: {
-        /**
-         * Prepare the component.
-         */
+        back: function back() {
+            this.resultObtained = false;
+        },
         prepareComponent: function prepareComponent() {
             this.initBalance();
             this.switcher = "wallet";
@@ -12416,11 +12506,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             console.log(this.form);
+            this.processed = true;
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/withdraw", this.form).then(function (data) {
-                console.log(data);
                 var notificationType = data.status == 200 ? "success" : "danger";
-                Bus.$emit('showNotification', notificationType, data.resultText);
+                _this.notificationClass = "alert-" + notificationType;
+                _this.resultObtained = true;
                 _this.responseText = data.resultText;
+                _this.processed = false;
                 _this.updateWallet(_this.$route.params.wallet);
             });
         },
@@ -12438,6 +12530,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var auth = { "login": login };
             Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth)).then(function (balance) {
                 _this3.form.sum = balance;
+                _this3.updatedBalance = balance;
             });
         }
     }
@@ -12465,17 +12558,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "tag": "li",
       "to": "/finance/qiwi/dashboard"
     }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
+  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('loading', {
+    attrs: {
+      "show": _vm.processed
+    }
+  }), _vm._v(" "), (!_vm.processed) ? _c('div', {
     staticClass: "container-fluid"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-sm-8"
+    staticClass: "col-sm-10"
   }, [_c('div', {
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("Вывод средств с Qiwi кошелька (" + _vm._s(_vm.form.login) + ")")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Вывод средств с Qiwi кошелька (" + _vm._s(_vm.form.login) + ")")]), _vm._v(" "), (!_vm.resultObtained) ? _c('div', {
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "form-horizontal"
@@ -12635,9 +12732,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "help-block"
-  }, [_vm._v(_vm._s(_vm.underTip))]), _vm._v(" "), (this.responseText != '') ? [_c('div', {
-    staticClass: "alert alert-info"
-  }, [_c('strong', [_vm._v("\n                                                " + _vm._s(_vm.responseText) + "\n                                            ")])])] : _vm._e()], 2)]), _vm._v(" "), (_vm.form.withdrawType == 'card') ? [_c('div', {
+  }, [_vm._v(_vm._s(_vm.underTip))])])]), _vm._v(" "), (_vm.form.withdrawType == 'card') ? [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label"
@@ -12700,7 +12795,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.proceed
     }
-  }, [_vm._v("\n                                        Продолжить\n                                    ")])])])], 2)])])])])])], 1)
+  }, [_vm._v("\n                                        Продолжить\n                                    ")])])])], 2)]) : _vm._e(), _vm._v(" "), (_vm.resultObtained) ? _c('div', {
+    staticClass: "panel-body"
+  }, [_c('div', {
+    staticClass: "wallet-info"
+  }, [_c('div', {
+    staticClass: "alert",
+    class: _vm.notificationClass,
+    domProps: {
+      "innerHTML": _vm._s(_vm.responseText)
+    }
+  }), _vm._v(" "), _c('p', [_vm._v("\n                                Баланс: " + _vm._s(_vm.updatedBalance) + "\n                            ")]), _vm._v(" "), _c('p', [_vm._v("Вы можете перейти "), _c('a', {
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.back($event)
+      }
+    }
+  }, [_vm._v("назад")]), _vm._v("\n                                или к\n                                "), _c('router-link', {
+    attrs: {
+      "to": "/finance/qiwi/dashboard"
+    }
+  }, [_c('a', [_vm._v("списку")])]), _vm._v("\n                                кошельков.\n                            ")], 1)])]) : _vm._e()])])])]) : _vm._e()], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -13581,7 +13700,7 @@ if(false) {
 /* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(306)(undefined);
+exports = module.exports = __webpack_require__(7)(undefined);
 // imports
 
 
@@ -16630,99 +16749,6 @@ $.fn.extend({
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 295 */,
-/* 296 */,
-/* 297 */,
-/* 298 */,
-/* 299 */,
-/* 300 */,
-/* 301 */,
-/* 302 */,
-/* 303 */,
-/* 304 */,
-/* 305 */,
-/* 306 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
 
 /***/ })
 ],[139]);

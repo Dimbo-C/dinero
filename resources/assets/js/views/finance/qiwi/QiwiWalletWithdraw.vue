@@ -12,12 +12,15 @@
             </router-link>
         </page-header>
 
-        <div class="container-fluid">
+        <loading :show="processed"></loading>
+
+        <div v-if="!processed" class="container-fluid">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-10">
                     <div class="panel panel-default">
                         <div class="panel-heading">Вывод средств с Qiwi кошелька ({{ form.login }})</div>
-                        <div class="panel-body">
+
+                        <div class="panel-body" v-if="!resultObtained">
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Сумма</label>
@@ -86,14 +89,6 @@
                                                :placeholder="placeholder"
                                                v-model="form.targetField">
                                         <span class="help-block">{{ underTip}}</span>
-
-                                        <template v-if="this.responseText!=''">
-                                            <div class="alert alert-info">
-                                                <strong>
-                                                    {{ responseText }}
-                                                </strong>
-                                            </div>
-                                        </template>
                                     </div>
                                 </div>
 
@@ -132,6 +127,22 @@
 
                             </div>
                         </div>
+                        <div class="panel-body" v-if="resultObtained">
+                            <div class="wallet-info">
+                                <div class="alert"
+                                     :class="notificationClass"
+                                     v-html="responseText">
+                                </div>
+                                <p>
+                                    Баланс: {{updatedBalance}}
+                                </p>
+                                <p>Вы можете перейти <a href="#" v-on:click.stop="back">назад</a>
+                                    или к
+                                    <router-link to="/finance/qiwi/dashboard"><a>списку</a></router-link>
+                                    кошельков.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -141,9 +152,6 @@
 
 <script>
     export default {
-        /*
-         * The component's data.
-         */
         data() {
             return {
                 types: {
@@ -170,6 +178,10 @@
                 underTip: "",
                 balance: 0,
                 responseText: "",
+                processed: false,
+                resultObtained: false,
+                notificationClass: "alert-danger",
+                updatedBalance: 0,
 
                 form: new Form({
                     sum: 0,
@@ -194,29 +206,28 @@
             },
         },
 
-        /**
-         * Prepare the component.
-         */
         mounted() {
             this.prepareComponent();
         },
 
         methods: {
-            /**
-             * Prepare the component.
-             */
+            back(){
+                this.resultObtained = false;
+            },
             prepareComponent() {
                 this.initBalance();
                 this.switcher = "wallet";
             },
             proceed() {
                 console.log(this.form);
+                this.processed = true;
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/withdraw`, this.form)
                     .then((data) => {
-                        console.log(data);
                         let notificationType = data.status == 200 ? "success" : "danger";
-                        Bus.$emit('showNotification', notificationType, data.resultText);
+                        this.notificationClass = "alert-" + notificationType;
+                        this.resultObtained = true;
                         this.responseText = data.resultText;
+                        this.processed = false;
                         this.updateWallet(this.$route.params.wallet);
                     });
             },
@@ -232,6 +243,7 @@
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
                     .then((balance) => {
                         this.form.sum = balance;
+                        this.updatedBalance = balance;
                     })
             },
         }

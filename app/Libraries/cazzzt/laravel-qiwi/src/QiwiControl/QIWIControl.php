@@ -1031,8 +1031,6 @@ class QIWIControl {
                 'fields' => $fields
         );
 
-        Log::info("13: ");
-        Log::info($post_data);
         $post_data = json_encode($post_data);
         $content = $this->ua->request(USERAGENT_METHOD_POST, $validateProviderFieldsUrl, $ref, $post_data, [
                 "Accept" => "application/vnd.qiwi.v2+json",
@@ -1042,8 +1040,6 @@ class QIWIControl {
                 "X-Requested-With" => "XMLHttpRequest"
         ]);
 
-        Log::info("14: ");
-        Log::info($content);
         $this->responseData = $content;
 
         if ($this->ua->getStatus() !== 200 || !$content) {
@@ -1124,14 +1120,6 @@ class QIWIControl {
         return $this->payProvider(QIWI_PROVIDER_QIWI_WALLET, $currency, $amount, $fields, $comment);
     }
 
-
-    //    function purchaseVoucher($amount, $comment = false) {
-    //        $fields = array(
-    //                "account" => "708",
-    //                "to_account_type" => "undefined",
-    //        );
-    //        return $this->payProvider(QIWI_PROVIDER_EMAIL_VOUCHER, "RUB", $amount, $fields, $comment);
-    //    }
 
     /**
      * Приобрести ваучер
@@ -1882,6 +1870,10 @@ class QIWIControl {
         }
         $response = json_decode($response, true);
         return $response;
+    }
+
+    function captcha() {
+
     }
 
 

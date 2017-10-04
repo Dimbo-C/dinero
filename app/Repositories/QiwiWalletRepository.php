@@ -63,6 +63,7 @@ class QiwiWalletRepository implements Contract {
                              $targetField, $cardholderName,
                              $cardholderSurname) {
         switch ($withdrawType) {
+
             case "wallet":
                 $result = Withdraw::toQiwiWallet($login, $targetField, "RUB", $sum, $comment);
                 break;

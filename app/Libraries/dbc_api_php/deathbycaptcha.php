@@ -9,8 +9,8 @@
  * @package DBCAPI
  * @subpackage PHP
  */
-abstract class DeathByCaptcha_Exception extends Exception
-{}
+abstract class DeathByCaptcha_Exception extends Exception {
+}
 
 
 /**
@@ -19,8 +19,8 @@ abstract class DeathByCaptcha_Exception extends Exception
  * @package DBCAPI
  * @subpackage PHP
  */
-class DeathByCaptcha_RuntimeException extends DeathByCaptcha_Exception
-{}
+class DeathByCaptcha_RuntimeException extends DeathByCaptcha_Exception {
+}
 
 
 /**
@@ -29,8 +29,8 @@ class DeathByCaptcha_RuntimeException extends DeathByCaptcha_Exception
  * @package DBCAPI
  * @subpackage PHP
  */
-class DeathByCaptcha_IOException extends DeathByCaptcha_Exception
-{}
+class DeathByCaptcha_IOException extends DeathByCaptcha_Exception {
+}
 
 
 /**
@@ -39,8 +39,8 @@ class DeathByCaptcha_IOException extends DeathByCaptcha_Exception
  * @package DBCAPI
  * @subpackage PHP
  */
-class DeathByCaptcha_ClientException extends DeathByCaptcha_Exception
-{}
+class DeathByCaptcha_ClientException extends DeathByCaptcha_Exception {
+}
 
 
 /**
@@ -49,8 +49,8 @@ class DeathByCaptcha_ClientException extends DeathByCaptcha_Exception
  * @package DBCAPI
  * @subpackage PHP
  */
-class DeathByCaptcha_AccessDeniedException extends DeathByCaptcha_ClientException
-{}
+class DeathByCaptcha_AccessDeniedException extends DeathByCaptcha_ClientException {
+}
 
 
 /**
@@ -59,8 +59,8 @@ class DeathByCaptcha_AccessDeniedException extends DeathByCaptcha_ClientExceptio
  * @package DBCAPI
  * @subpackage PHP
  */
-class DeathByCaptcha_InvalidCaptchaException extends DeathByCaptcha_ClientException
-{}
+class DeathByCaptcha_InvalidCaptchaException extends DeathByCaptcha_ClientException {
+}
 
 
 /**
@@ -69,8 +69,8 @@ class DeathByCaptcha_InvalidCaptchaException extends DeathByCaptcha_ClientExcept
  * @package DBCAPI
  * @subpackage PHP
  */
-class DeathByCaptcha_ServerException extends DeathByCaptcha_Exception
-{}
+class DeathByCaptcha_ServerException extends DeathByCaptcha_Exception {
+}
 
 
 /**
@@ -79,8 +79,8 @@ class DeathByCaptcha_ServerException extends DeathByCaptcha_Exception
  * @package DBCAPI
  * @subpackage PHP
  */
-class DeathByCaptcha_ServiceOverloadException extends DeathByCaptcha_ServerException
-{}
+class DeathByCaptcha_ServiceOverloadException extends DeathByCaptcha_ServerException {
+}
 
 
 /**
@@ -92,8 +92,7 @@ class DeathByCaptcha_ServiceOverloadException extends DeathByCaptcha_ServerExcep
  * @package DBCAPI
  * @subpackage PHP
  */
-abstract class DeathByCaptcha_Client
-{
+abstract class DeathByCaptcha_Client {
     const API_VERSION = 'DBC/PHP v4.5';
 
     const DEFAULT_TIMEOUT = 60;
@@ -124,8 +123,7 @@ abstract class DeathByCaptcha_Client
      * @param string $s
      * @return array
      */
-    static public function parse_plain_response($s)
-    {
+    static public function parse_plain_response($s) {
         parse_str($s, $a);
         return $a;
     }
@@ -136,8 +134,7 @@ abstract class DeathByCaptcha_Client
      * @param string $s
      * @return array
      */
-    static public function parse_json_response($s)
-    {
+    static public function parse_json_response($s) {
         return json_decode(rtrim($s), true);
     }
 
@@ -148,19 +145,17 @@ abstract class DeathByCaptcha_Client
      * @param string $img Raw CAPTCHA image
      * @throws DeathByCaptcha_InvalidCaptchaException On invalid CAPTCHA images
      */
-    protected function _is_valid_captcha($img)
-    {
+    protected function _is_valid_captcha($img) {
         if (0 == strlen($img)) {
             throw new DeathByCaptcha_InvalidCaptchaException(
-                'CAPTCHA image file is empty'
+                    'CAPTCHA image file is empty'
             );
         } else {
             return true;
         }
     }
 
-    protected function _load_captcha($captcha)
-    {
+    protected function _load_captcha($captcha) {
         if (is_resource($captcha)) {
             $img = '';
             rewind($captcha);
@@ -198,8 +193,7 @@ abstract class DeathByCaptcha_Client
      * @uses DeathByCaptcha_Client::get_user()
      * @return float|null
      */
-    public function get_balance()
-    {
+    public function get_balance() {
         return ($user = $this->get_user()) ? $user['balance'] : null;
     }
 
@@ -218,8 +212,7 @@ abstract class DeathByCaptcha_Client
      * @param int $cid CAPTCHA ID
      * @return string|null
      */
-    public function get_text($cid)
-    {
+    public function get_text($cid) {
         return ($captcha = $this->get_captcha($cid)) ? $captcha['text'] : null;
     }
 
@@ -250,16 +243,12 @@ abstract class DeathByCaptcha_Client
      * @param int $timeout Optional solving timeout (in seconds)
      * @return array|null CAPTCHA details hash on success
      */
-    public function decode($captcha=null, $extra=[], $timeout=self::DEFAULT_TIMEOUT)
-    {
-        if (!$extra || !is_array($extra)){
+    public function decode($captcha = null, $extra = [], $timeout = self::DEFAULT_TIMEOUT) {
+        if (!$extra || !is_array($extra)) {
             $extra = [];
         }
         $deadline = time() + (0 < $timeout ? $timeout : self::DEFAULT_TIMEOUT);
-        if ($c = $this->upload(
-                $captcha,
-                $extra=$extra)
-            ) {
+        if ($c = $this->upload($captcha, $extra = $extra)) {
             $intvl_idx = 0; // POLLS_INTERVAL index
 
             while ($deadline > time() && $c && !$c['text']) {
@@ -280,12 +269,11 @@ abstract class DeathByCaptcha_Client
      * @throws DeathByCaptcha_RuntimeException On missing/empty DBC account credentials
      * @throws DeathByCaptcha_RuntimeException When required extensions/functions not found
      */
-    public function __construct($username, $password)
-    {
+    public function __construct($username, $password) {
         foreach (array('username', 'password') as $k) {
             if (!$$k) {
                 throw new DeathByCaptcha_RuntimeException(
-                    "Account {$k} is missing or empty"
+                        "Account {$k} is missing or empty"
                 );
             }
         }
@@ -295,21 +283,19 @@ abstract class DeathByCaptcha_Client
     /**
      * @ignore
      */
-    public function __destruct()
-    {
+    public function __destruct() {
         $this->close();
     }
 
     /**
      * @ignore
      */
-    public function __get($key)
-    {
+    public function __get($key) {
         switch ($key) {
-        case 'user':
-            return $this->get_user();
-        case 'balance':
-            return $this->get_balance();
+            case 'user':
+                return $this->get_user();
+            case 'balance':
+                return $this->get_balance();
         }
     }
 
@@ -317,17 +303,15 @@ abstract class DeathByCaptcha_Client
      * @param int $idx index of POLLS_INTERVAL to be accessed
      * @return array with interval and index
      */
-    protected function _get_poll_interval($idx)
-    {
-      if (count(self::POLLS_INTERVAL) > $idx) {
-        $intvl = self::POLLS_INTERVAL[$idx];
-      }
-      else {
-        $intvl = self::DFLT_POLL_INTERVAL;
-      }
-      $idx++;
+    protected function _get_poll_interval($idx) {
+        if (count(self::POLLS_INTERVAL) > $idx) {
+            $intvl = self::POLLS_INTERVAL[$idx];
+        } else {
+            $intvl = self::DFLT_POLL_INTERVAL;
+        }
+        $idx++;
 
-      return array($intvl, $idx);
+        return array($intvl, $idx);
     }
 
 }
@@ -340,8 +324,7 @@ abstract class DeathByCaptcha_Client
  * @package DBCAPI
  * @subpackage PHP
  */
-class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
-{
+class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client {
     const BASE_URL = 'http://api.dbcapi.me/api';
 
 
@@ -353,8 +336,7 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
     /**
      * Sets up CURL connection
      */
-    protected function _connect()
-    {
+    protected function _connect() {
         if (!is_resource($this->_conn)) {
             if ($this->is_verbose) {
                 fputs(STDERR, time() . " CONN\n");
@@ -362,24 +344,24 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
 
             if (!($this->_conn = curl_init())) {
                 throw new DeathByCaptcha_RuntimeException(
-                    'Failed initializing a CURL connection'
+                        'Failed initializing a CURL connection'
                 );
             }
 
             curl_setopt_array($this->_conn, array(
-                CURLOPT_TIMEOUT => self::DEFAULT_TIMEOUT,
-                CURLOPT_CONNECTTIMEOUT => (int)(self::DEFAULT_TIMEOUT / 4),
-                CURLOPT_HEADER => false,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_AUTOREFERER => false,
-                CURLOPT_HTTPHEADER => array(
-                    'Accept: ' . $this->_response_type,
-                    'Expect: ',
-                    'User-Agent: ' . self::API_VERSION
-                )
+                    CURLOPT_TIMEOUT => self::DEFAULT_TIMEOUT,
+                    CURLOPT_CONNECTTIMEOUT => (int) (self::DEFAULT_TIMEOUT / 4),
+                    CURLOPT_HEADER => false,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_AUTOREFERER => false,
+                    CURLOPT_HTTPHEADER => array(
+                            'Accept: ' . $this->_response_type,
+                            'Expect: ',
+                            'User-Agent: ' . self::API_VERSION
+                    )
             ));
-            
+
             if ((version_compare(PHP_VERSION, '5.5') == 0)) {
                 curl_setopt($this->_conn, CURLOPT_SAFE_UPLOAD, true);
             }
@@ -391,32 +373,31 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
     /**
      * Makes an API call
      *
-     * @param string $cmd     API command
-     * @param array  $payload API call payload, essentially HTTP POST fields
+     * @param string $cmd API command
+     * @param array $payload API call payload, essentially HTTP POST fields
      * @return array|null API response hash table on success
      * @throws DeathByCaptcha_IOException On network related errors
      * @throws DeathByCaptcha_AccessDeniedException On failed login attempt
      * @throws DeathByCaptcha_InvalidCaptchaException On invalid CAPTCHAs rejected by the service
      * @throws DeathByCaptcha_ServerException On API server errors
      */
-    protected function _call($cmd, $payload=null)
-    {
+    protected function _call($cmd, $payload = null) {
         if (null !== $payload) {
             $payload = array_merge($payload, array(
-                'username' => $this->_userpwd[0],
-                'password' => $this->_userpwd[1],
+                    'username' => $this->_userpwd[0],
+                    'password' => $this->_userpwd[1],
             ));
         }
 
         $this->_connect();
 
         $opts = array(CURLOPT_URL => self::BASE_URL . '/' . trim($cmd, '/'),
-                      CURLOPT_REFERER => '');
+                CURLOPT_REFERER => '');
         if (null !== $payload) {
             $opts[CURLOPT_POST] = true;
             $opts[CURLOPT_POSTFIELDS] = array_key_exists('captchafile', $payload)
-                ? $payload
-                : http_build_query($payload);
+                    ? $payload
+                    : http_build_query($payload);
         } else {
             $opts[CURLOPT_HTTPGET] = true;
         }
@@ -429,7 +410,7 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
         $response = curl_exec($this->_conn);
         if (0 < ($err = curl_errno($this->_conn))) {
             throw new DeathByCaptcha_IOException(
-                "API connection failed: [{$err}] " . curl_error($this->_conn)
+                    "API connection failed: [{$err}] " . curl_error($this->_conn)
             );
         }
 
@@ -440,19 +421,19 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
         $status_code = curl_getinfo($this->_conn, CURLINFO_HTTP_CODE);
         if (403 == $status_code) {
             throw new DeathByCaptcha_AccessDeniedException(
-                'Access denied, check your credentials and/or balance'
+                    'Access denied, check your credentials and/or balance'
             );
         } else if (400 == $status_code || 413 == $status_code) {
             throw new DeathByCaptcha_InvalidCaptchaException(
-                "CAPTCHA was rejected by the service, check if it's a valid image"
+                    "CAPTCHA was rejected by the service, check if it's a valid image"
             );
         } else if (503 == $status_code) {
             throw new DeathByCaptcha_ServiceOverloadException(
-                "CAPTCHA was rejected due to service overload, try again later"
+                    "CAPTCHA was rejected due to service overload, try again later"
             );
         } else if (!($response = call_user_func($this->_response_parser, $response))) {
             throw new DeathByCaptcha_ServerException(
-                'Invalid API response'
+                    'Invalid API response'
             );
         } else {
             return $response;
@@ -463,11 +444,10 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
     /**
      * @see DeathByCaptcha_Client::__construct()
      */
-    public function __construct($username, $password)
-    {
+    public function __construct($username, $password) {
         if (!extension_loaded('curl')) {
             throw new DeathByCaptcha_RuntimeException(
-                'CURL extension not found'
+                    'CURL extension not found'
             );
         }
         if (function_exists('json_decode')) {
@@ -483,8 +463,7 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
     /**
      * @see DeathByCaptcha_Client::close()
      */
-    public function close()
-    {
+    public function close() {
         if (is_resource($this->_conn)) {
             if ($this->is_verbose) {
                 fputs(STDERR, time() . " CLOSE\n");
@@ -498,31 +477,29 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
     /**
      * @see DeathByCaptcha_Client::get_user()
      */
-    public function get_user()
-    {
+    public function get_user() {
         $user = $this->_call('user', array());
-        return (0 < ($id = (int)@$user['user']))
-            ? array('user' => $id,
-                    'balance' => (float)@$user['balance'],
-                    'is_banned' => (bool)@$user['is_banned'])
-            : null;
+        return (0 < ($id = (int) @$user['user']))
+                ? array('user' => $id,
+                        'balance' => (float) @$user['balance'],
+                        'is_banned' => (bool) @$user['is_banned'])
+                : null;
     }
 
     /**
      * @see DeathByCaptcha_Client::upload()
      * @throws DeathByCaptcha_RuntimeException When failed to save CAPTCHA image to a temporary file
      */
-    public function upload($captcha=null, $extra=[])
-    {
-        if(null !== $captcha){
+    public function upload($captcha = null, $extra = []) {
+        if (null !== $captcha) {
             $img = $this->_load_captcha($captcha);
-            if($extra['banner']){
+            if ($extra['banner']) {
                 $banner = $this->_load_captcha($extra['banner']);
                 if ($this->_is_valid_captcha($banner)) {
                     $tmp_bn = tempnam(null, 'banner');
                     file_put_contents($tmp_bn, $banner);
-                    $extra['banner'] = '@'.$tmp_bn;
-                }else{
+                    $extra['banner'] = '@' . $tmp_bn;
+                } else {
                     $extra['banner'] = '';
                 }
             }
@@ -531,16 +508,16 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
                 file_put_contents($tmp_fn, $img);
                 try {
                     $captchafile = null;
-                    
+
                     if (version_compare(PHP_VERSION, '5.5') <= 0) {
-                        $captchafile = '@'. $tmp_fn;
+                        $captchafile = '@' . $tmp_fn;
                     } else {
                         $captchafile = new CURLFile($tmp_fn);
                     }
 
                     $captcha = $this->_call('captcha', array_merge(
-                        ['captchafile' => $captchafile],
-                        $extra
+                            ['captchafile' => $captchafile],
+                            $extra
                     ));
                 } catch (Exception $e) {
                     @unlink($tmp_fn);
@@ -548,16 +525,16 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
                 }
                 @unlink($tmp_fn);
             }
-        }else{
+        } else {
             $captcha = $this->_call('captcha', $extra);
         }
 
-        if(null !== $captcha){
-            if (0 < ($cid = (int)@$captcha['captcha'])) {
+        if (null !== $captcha) {
+            if (0 < ($cid = (int) @$captcha['captcha'])) {
                 return array(
-                    'captcha' => $cid,
-                    'text' => (!empty($captcha['text']) ? $captcha['text'] : null),
-                    'is_correct' => (bool)@$captcha['is_correct'],
+                        'captcha' => $cid,
+                        'text' => (!empty($captcha['text']) ? $captcha['text'] : null),
+                        'is_correct' => (bool) @$captcha['is_correct'],
                 );
             }
         }
@@ -567,23 +544,21 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
     /**
      * @see DeathByCaptcha_Client::get_captcha()
      */
-    public function get_captcha($cid)
-    {
-        $captcha = $this->_call('captcha/' . (int)$cid);
-        return (0 < ($cid = (int)@$captcha['captcha']))
-            ? array('captcha' => $cid,
-                    'text' => (!empty($captcha['text']) ? $captcha['text'] : null),
-                    'is_correct' => (bool)$captcha['is_correct'])
-            : null;
+    public function get_captcha($cid) {
+        $captcha = $this->_call('captcha/' . (int) $cid);
+        return (0 < ($cid = (int) @$captcha['captcha']))
+                ? array('captcha' => $cid,
+                        'text' => (!empty($captcha['text']) ? $captcha['text'] : null),
+                        'is_correct' => (bool) $captcha['is_correct'])
+                : null;
     }
 
     /**
      * @see DeathByCaptcha_Client::report()
      */
-    public function report($cid)
-    {
-        $captcha = $this->_call('captcha/' . (int)$cid . '/report', array());
-        return !(bool)@$captcha['is_correct'];
+    public function report($cid) {
+        $captcha = $this->_call('captcha/' . (int) $cid . '/report', array());
+        return !(bool) @$captcha['is_correct'];
     }
 }
 
@@ -595,8 +570,7 @@ class DeathByCaptcha_HttpClient extends DeathByCaptcha_Client
  * @package DBCAPI
  * @subpackage PHP
  */
-class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
-{
+class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client {
     const HOST = 'api.dbcapi.me';
     const FIRST_PORT = 8123;
     const LAST_PORT = 8130;
@@ -613,8 +587,7 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
      * @throws DeathByCaptcha_IOException When API connection fails
      * @throws DeathByCaptcha_RuntimeException When socket operations fail
      */
-    protected function _connect()
-    {
+    protected function _connect() {
         if (null === $this->_sock) {
             if ($this->is_verbose) {
                 fputs(STDERR, time() . " CONN\n");
@@ -627,12 +600,12 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
 
             if (!($sock = @fsockopen(self::HOST, $port, $errno, $error, self::DEFAULT_TIMEOUT))) {
                 throw new DeathByCaptcha_IOException(
-                    'Failed connecting to ' . self::HOST . ":{$port}: fsockopen(): [{$errno}] {$error}"
+                        'Failed connecting to ' . self::HOST . ":{$port}: fsockopen(): [{$errno}] {$error}"
                 );
             } else if (!@stream_set_timeout($sock, self::DEFAULT_TIMEOUT / 4)) {
                 fclose($sock);
                 throw new DeathByCaptcha_IOException(
-                    'Failed setting socket timeout'
+                        'Failed setting socket timeout'
                 );
             } else {
                 $this->_sock = $sock;
@@ -649,8 +622,7 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
      * @return string Raw API response on success
      * @throws DeathByCaptcha_IOException On network failures
      */
-    protected function _sendrecv($buf)
-    {
+    protected function _sendrecv($buf) {
         if ($this->is_verbose) {
             fputs(STDERR, time() . ' SEND: ' . strlen($buf) . ' ' . rtrim($buf) . "\n");
         }
@@ -661,7 +633,7 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
             if ($buf) {
                 if (!($n = fwrite($this->_sock, $buf))) {
                     throw new DeathByCaptcha_IOException(
-                        'Connection lost while sending API request'
+                            'Connection lost while sending API request'
                     );
                 } else {
                     $buf = substr($buf, $n);
@@ -670,7 +642,7 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
             if (!$buf) {
                 if (!($s = fread($this->_sock, 4096))) {
                     throw new DeathByCaptcha_IOException(
-                        'Connection lost while receiving API response'
+                            'Connection lost while receiving API response'
                     );
                 } else {
                     $response .= $s;
@@ -691,22 +663,21 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
     /**
      * Makes an API call
      *
-     * @param string $cmd     API command to call
-     * @param array  $payload API request payload
+     * @param string $cmd API command to call
+     * @param array $payload API request payload
      * @return array|null API response hash map on success
      * @throws DeathByCaptcha_IOException On network errors
      * @throws DeathByCaptcha_AccessDeniedException On failed login attempt
      * @throws DeathByCaptcha_InvalidCaptchaException On invalid CAPTCHAs rejected by the service
      * @throws DeathByCaptcha_ServerException On API server errors
      */
-    protected function _call($cmd, $payload=null)
-    {
+    protected function _call($cmd, $payload = null) {
         if (null === $payload) {
             $payload = array();
         }
         $payload = array_merge($payload, array(
-            'cmd' => $cmd,
-            'version' => self::API_VERSION,
+                'cmd' => $cmd,
+                'version' => self::API_VERSION,
         ));
         $payload = json_encode($payload);
 
@@ -714,8 +685,8 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
         for ($attempt = 2; 0 < $attempt && null === $response; $attempt--) {
             if (null === $this->_sock && 'login' != $cmd) {
                 $this->_call('login', array(
-                    'username' => $this->_userpwd[0],
-                    'password' => $this->_userpwd[1],
+                        'username' => $this->_userpwd[0],
+                        'password' => $this->_userpwd[1],
                 ));
             }
             $this->_connect();
@@ -729,40 +700,40 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
         try {
             if (null === $response) {
                 throw new DeathByCaptcha_IOException(
-                    'API connection lost or timed out'
+                        'API connection lost or timed out'
                 );
             } else if (!($response = $this->parse_json_response($response))) {
                 throw new DeathByCaptcha_ServerException(
-                    'Invalid API response'
+                        'Invalid API response'
                 );
             }
 
             if (!empty($response['error'])) {
                 switch ($response['error']) {
-                case 'not-logged-in':
-                    throw new DeathByCaptcha_AccessDeniedException(
-                        'Access denied, check your credentials'
-                    );
-                case 'banned':
-                    throw new DeathByCaptcha_AccessDeniedException(
-                        'Access denied, account suspended'
-                    );
-                case 'insufficient-funds':
-                    throw new DeathByCaptcha_AccessDeniedException(
-                        'Access denied, balance is too low'
-                    );
-                case 'invalid-captcha':
-                    throw new DeathByCaptcha_InvalidCaptchaException(
-                        "CAPTCHA was rejected by the service, check if it's a valid image"
-                    );
-                case 'service-overload':
-                    throw new DeathByCaptcha_ServiceOverloadException(
-                        'CAPTCHA was rejected due to service overload, try again later'
-                    );
-                default:
-                    throw new DeathByCaptcha_ServerException(
-                        'API server error occured: ' . $error
-                    );
+                    case 'not-logged-in':
+                        throw new DeathByCaptcha_AccessDeniedException(
+                                'Access denied, check your credentials'
+                        );
+                    case 'banned':
+                        throw new DeathByCaptcha_AccessDeniedException(
+                                'Access denied, account suspended'
+                        );
+                    case 'insufficient-funds':
+                        throw new DeathByCaptcha_AccessDeniedException(
+                                'Access denied, balance is too low'
+                        );
+                    case 'invalid-captcha':
+                        throw new DeathByCaptcha_InvalidCaptchaException(
+                                "CAPTCHA was rejected by the service, check if it's a valid image"
+                        );
+                    case 'service-overload':
+                        throw new DeathByCaptcha_ServiceOverloadException(
+                                'CAPTCHA was rejected due to service overload, try again later'
+                        );
+                    default:
+                        throw new DeathByCaptcha_ServerException(
+                                'API server error occured: ' . $error
+                        );
                 }
             } else {
                 return $response;
@@ -777,24 +748,23 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
     /**
      * @see DeathByCaptcha_Client::__construct()
      */
-    public function __construct($username, $password)
-    {
+    public function __construct($username, $password) {
         // PHP for Windows lacks EAGAIN errno constant
         if (!defined('SOCKET_EAGAIN')) {
             define('SOCKET_EAGAIN', 11);
         }
 
-        foreach (array('json', ) as $k) {
+        foreach (array('json',) as $k) {
             if (!extension_loaded($k)) {
                 throw new DeathByCaptcha_RuntimeException(
-                    "Required {$k} extension not found, check your PHP configuration"
+                        "Required {$k} extension not found, check your PHP configuration"
                 );
             }
         }
         foreach (array('json_encode', 'json_decode', 'base64_encode') as $k) {
             if (!function_exists($k)) {
                 throw new DeathByCaptcha_RuntimeException(
-                    "Required {$k}() function not found, check your PHP configuration"
+                        "Required {$k}() function not found, check your PHP configuration"
                 );
             }
         }
@@ -805,8 +775,7 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
     /**
      * @see DeathByCaptcha_Client::close()
      */
-    public function close()
-    {
+    public function close() {
         if (null !== $this->_sock) {
             if ($this->is_verbose) {
                 fputs(STDERR, time() . " CLOSE\n");
@@ -822,44 +791,42 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
     /**
      * @see DeathByCaptcha_Client::get_user()
      */
-    public function get_user()
-    {
+    public function get_user() {
         $user = $this->_call('user');
-        return (0 < ($id = (int)@$user['user']))
-            ? array('user' => $id,
-                    'balance' => (float)@$user['balance'],
-                    'is_banned' => (bool)@$user['is_banned'])
-            : null;
+        return (0 < ($id = (int) @$user['user']))
+                ? array('user' => $id,
+                        'balance' => (float) @$user['balance'],
+                        'is_banned' => (bool) @$user['is_banned'])
+                : null;
     }
 
     /**
      * @see DeathByCaptcha_Client::get_user()
      */
-    public function upload($captcha=null, $extra=[])
-    {
-        if(null!==$captcha){
+    public function upload($captcha = null, $extra = []) {
+        if (null !== $captcha) {
             $img = $this->_load_captcha($captcha);
             if ($this->_is_valid_captcha($img)) {
-                if ($extra['banner']){
+                if ($extra['banner']) {
                     $extra['banner'] = $this->_load_captcha($extra['banner']);
-                    if ($this->_is_valid_captcha($extra['banner'])){
+                    if ($this->_is_valid_captcha($extra['banner'])) {
                         $extra['banner'] = base64_encode($extra['banner']);
                     }
                 }
                 $captcha = $this->_call('upload', array_merge(
-                    ['captcha' => base64_encode($img)],
-                    $extra
+                        ['captcha' => base64_encode($img)],
+                        $extra
                 ));
             }
-        }elseif(sizeof($extra)>0){
+        } elseif (sizeof($extra) > 0) {
             $captcha = $this->_call('upload', $extra);
         }
-        if (null!== $captcha){
-            if (0 < ($cid = (int)@$captcha['captcha'])) {
+        if (null !== $captcha) {
+            if (0 < ($cid = (int) @$captcha['captcha'])) {
                 return array(
-                    'captcha' => $cid,
-                    'text' => (!empty($captcha['text']) ? $captcha['text'] : null),
-                    'is_correct' => (bool)@$captcha['is_correct'],
+                        'captcha' => $cid,
+                        'text' => (!empty($captcha['text']) ? $captcha['text'] : null),
+                        'is_correct' => (bool) @$captcha['is_correct'],
                 );
             }
         }
@@ -869,22 +836,20 @@ class DeathByCaptcha_SocketClient extends DeathByCaptcha_Client
     /**
      * @see DeathByCaptcha_Client::get_captcha()
      */
-    public function get_captcha($cid)
-    {
-        $captcha = $this->_call('captcha', array('captcha' => (int)$cid));
-        return (0 < ($cid = (int)@$captcha['captcha']))
-            ? array('captcha' => $cid,
-                    'text' => (!empty($captcha['text']) ? $captcha['text'] : null),
-                    'is_correct' => (bool)$captcha['is_correct'])
-            : null;
+    public function get_captcha($cid) {
+        $captcha = $this->_call('captcha', array('captcha' => (int) $cid));
+        return (0 < ($cid = (int) @$captcha['captcha']))
+                ? array('captcha' => $cid,
+                        'text' => (!empty($captcha['text']) ? $captcha['text'] : null),
+                        'is_correct' => (bool) $captcha['is_correct'])
+                : null;
     }
 
     /**
      * @see DeathByCaptcha_Client::report()
      */
-    public function report($cid)
-    {
-        $captcha = $this->_call('report', array('captcha' => (int)$cid));
+    public function report($cid) {
+        $captcha = $this->_call('report', array('captcha' => (int) $cid));
         return !@$captcha['is_correct'];
     }
 }

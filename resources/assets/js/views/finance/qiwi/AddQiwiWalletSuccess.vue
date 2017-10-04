@@ -144,12 +144,4 @@
         border-color: #d6e9c6;
         border-radius: 3px;
     }
-
-    .wallet-info {
-
-    p {
-        margin-bottom: 0;
-    }
-
-    }
 </style>
