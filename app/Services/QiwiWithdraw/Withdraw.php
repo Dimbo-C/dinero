@@ -11,19 +11,6 @@ class Withdraw {
     public static function toQiwiWallet($login, $to, $currency, $amount, $comment = false) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->transferMoney($to, $currency, $amount, $comment);
-        $result = new WithdrawResult();
-
-        //        $responseData = json_decode($qiwiControl->getResponseData())->data;
-        //        $result->customData = $responseData;
-        //
-        //
-        //        $result->status = trim($responseData->status);
-        //        $result->resultText = $responseData->status == 200
-        //                ? "<b>Отлично!</b> Вы успешно совершили перевод с Qiwi кошелька $login
-        //                 на сумму $amount RUB"
-        //                : "<b>Ошибка!</b> " . trim($responseData->body->message);
-        //        $result->debugData = $responseData;
-
 
         $result = new WithdrawResult();
         $result->error = $qiwiControl->getLastError();
@@ -59,8 +46,8 @@ class Withdraw {
             $result->status = 400;
             $result->resultText = "<b>Ошибка!</b> $responseText";;
         } else {
-            $result->resultText = "<b>Ваучер:</b>$responseText<br>
-                <b>Сумма:</b> $sum<br><b>Статус: </b>Создан";
+            $result->resultText = "<b>Ваучер: </b>$responseText<br>
+                <b>Сумма: </b>$sum RUB<br><b>Статус: </b>Создан";
         }
 
         return $result;
