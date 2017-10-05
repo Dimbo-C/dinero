@@ -95,6 +95,10 @@ class QiwiWalletRepository implements Contract {
         return json_encode(Withdraw::activateVoucher($login, $code));
     }
 
+    public function createVoucher($login, $amount) {
+        return json_encode(Withdraw::purchaseVoucher($login, $amount));
+    }
+
     /**
      * {@inheritdoc}
      */

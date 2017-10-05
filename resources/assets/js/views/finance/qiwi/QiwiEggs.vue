@@ -102,7 +102,7 @@
                 responseText: "",
                 notificationClass: "alert-danger",
                 code: "",
-                updatedBalance: "..."
+                updatedBalance: "(Загружается... )"
             };
         },
         mounted(){
@@ -110,12 +110,14 @@
         },
         watch: {},
         methods: {
+            back(){
+                this.responseObtained = false;
+            },
             activateVoucher(){
                 this.processed = true;
-                let data = {login: this.login, code: this.voucherCode};
-                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/activate-voucher`, new Form(data))
+                const form = new Form({login: this.login, code: this.voucherCode});
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/activate-voucher`, form)
                     .then((response) => {
-                        Vue.ls.set("response_egg_activation", response);
                         this.responseObtained = true;
                         this.notificationClass = response.status == 200 ? "alert-success" : "alert-danger";
                         this.responseText = response.resultText;
@@ -124,7 +126,18 @@
                     });
             },
             createVoucher(){
-
+                this.processed = true;
+                const form = new Form({login: this.login, amount: this.voucherSum});
+                console.log(form);
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/create-voucher`, form)
+                    .then((response) => {
+                        console.log(response);
+                        this.responseObtained = true;
+                        this.notificationClass = response.status == 200 ? "alert-success" : "alert-danger";
+                        this.responseText = response.resultText;
+                        this.processed = false;
+                        this.updateWallet(this.login);
+                    });
             },
 
             updateWallet(login) {

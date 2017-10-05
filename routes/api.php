@@ -30,5 +30,6 @@ Route::prefix("qiwi-wallets")->group(function () {
     Route::post('/{wallet}/settings', 'QiwiWalletsController@saveSettings');
     Route::post('/{wallet}/withdraw', 'QiwiWalletsController@withdraw');
     Route::post('/{wallet}/activate-voucher', 'QiwiWalletsController@activateVoucher');
+    Route::post('/{wallet}/create-voucher', 'QiwiWalletsController@createVoucher');
     Route::post('/remove/{wallet}', 'QiwiWalletsController@remove');
 });

@@ -14080,7 +14080,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             responseText: "",
             notificationClass: "alert-danger",
             code: "",
-            updatedBalance: "..."
+            updatedBalance: "(Загружается... )"
         };
     },
     mounted: function mounted() {
@@ -14089,13 +14089,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {},
     methods: {
+        back: function back() {
+            this.responseObtained = false;
+        },
         activateVoucher: function activateVoucher() {
             var _this = this;
 
             this.processed = true;
-            var data = { login: this.login, code: this.voucherCode };
-            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/activate-voucher", new Form(data)).then(function (response) {
-                Vue.ls.set("response_egg_activation", response);
+            var form = new Form({ login: this.login, code: this.voucherCode });
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/activate-voucher", form).then(function (response) {
                 _this.responseObtained = true;
                 _this.notificationClass = response.status == 200 ? "alert-success" : "alert-danger";
                 _this.responseText = response.resultText;
@@ -14103,23 +14105,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.updateWallet(_this.login);
             });
         },
-        createVoucher: function createVoucher() {},
-        updateWallet: function updateWallet(login) {
+        createVoucher: function createVoucher() {
             var _this2 = this;
+
+            this.processed = true;
+            var form = new Form({ login: this.login, amount: this.voucherSum });
+            console.log(form);
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/create-voucher", form).then(function (response) {
+                console.log(response);
+                _this2.responseObtained = true;
+                _this2.notificationClass = response.status == 200 ? "alert-success" : "alert-danger";
+                _this2.responseText = response.resultText;
+                _this2.processed = false;
+                _this2.updateWallet(_this2.login);
+            });
+        },
+        updateWallet: function updateWallet(login) {
+            var _this3 = this;
 
             var auth = { "login": login };
             Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth)).then(function (balance) {
-                _this2.updatedBalance = balance;
+                _this3.updatedBalance = balance;
             });
         }
     },
 
     computed: {
         walletTypeDescription: function walletTypeDescription() {
-            var _this3 = this;
+            var _this4 = this;
 
             return this.walletTypes.find(function (t) {
-                return t.value === _this3.form.type;
+                return t.value === _this4.form.type;
             }).description;
         }
     }

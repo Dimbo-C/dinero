@@ -1138,7 +1138,8 @@ class QIWIControl {
         // return if error (not nuff moneyz)
         $paymentResponse = json_decode($paymentResponseJson);
         if ($paymentResponse->data->status != 200) {
-            $this->responseData = $paymentResponseJson;
+            $this->lastErrorStr = $paymentResponse->data->body->message;
+            $this->responseData = $this->lastErrorStr;
             return false;
         }
 

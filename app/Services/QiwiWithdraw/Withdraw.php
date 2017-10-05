@@ -23,7 +23,6 @@ class Withdraw {
                 : "<b>Ошибка!</b> " . trim($responseData->body->message);
         $result->debugData = $responseData;
 
-        //        return self::getNiceResult($qiwiControl);
         return $result;
     }
 
@@ -38,7 +37,21 @@ class Withdraw {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->purchaseVoucher($sum);
 
-        return self::getNiceResult($qiwiControl);
+        $result = new WithdrawResult();
+        $result->error = $qiwiControl->getLastError();
+        $result->debugData = $qiwiControl->debugData;
+        $result->status = 200;
+        $responseText = $qiwiControl->getResponseData();
+        if ($result->error != null) {
+            $result->status = 400;
+            $result->resultText = "<b>Ошибка!</b> $responseText";;
+        } else {
+            $result->resultText = "<b>Ваучер:</b>$responseText<br>
+                <b>Сумма:</b> $sum<br><b>Статус: </b>Создан";
+        }
+
+        return $result;
+
     }
 
     public static function activateVoucher($login, $code) {
@@ -69,7 +82,7 @@ class Withdraw {
         $result = new WithdrawResult();
         $result->error = $qiwiControl->getLastError();
         $result->debugData = $qiwiControl->debugData;
-        dd($qiwiControl);
+
         $result->status = 200;
         if ($result->error != null) {
             $result->status = 400;
