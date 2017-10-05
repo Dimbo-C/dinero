@@ -12503,7 +12503,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             processed: false,
             resultObtained: false,
             notificationClass: "alert-danger",
-            updatedBalance: 0,
+            updatedBalance: "(Загружается... )",
 
             form: new Form({
                 sum: 0,

@@ -191,7 +191,7 @@
                 processed: false,
                 resultObtained: false,
                 notificationClass: "alert-danger",
-                updatedBalance: 0,
+                updatedBalance: "(Загружается... )",
 
                 form: new Form({
                     sum: 0,
