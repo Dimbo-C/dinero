@@ -795,6 +795,22 @@ window.Vue = __WEBPACK_IMPORTED_MODULE_0_vue___default.a;
 $('[data-toggle="tooltip"]').tooltip({
     container: 'body'
 });
+var test = {
+    "code": { "value": "0", "_name": "NORMAL" },
+    "data": {
+        "body": {
+            "id": "1507212997118",
+            "terms": "99",
+            "fields": { "account": "+380507308340" },
+            "sum": { "amount": 2, "currency": "643" },
+            "transaction": { "id": "11454372393", "state": { "code": "AwaitingSMSConfirmation" } },
+            "comment": "",
+            "source": "account_643"
+        }, "status": 200
+    },
+    "message": null,
+    "messages": null
+};
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
@@ -10025,7 +10041,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
+/* WEBPACK VAR INJECTION */(function($) {//
 //
 //
 //
@@ -10111,8 +10127,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         };
     },
+    mounted: function mounted() {
+        this.prepareComponent();
+    },
+
 
     methods: {
+        prepareComponent: function prepareComponent() {
+
+            this.$nextTick(function () {
+                $('.tooltip').removeClass('in');
+            });
+        },
         proceed: function proceed() {
             var _this = this;
 
@@ -10124,6 +10150,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
 
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
 /* 213 */
@@ -12283,8 +12310,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
+/* WEBPACK VAR INJECTION */(function($) {//
 //
 //
 //
@@ -12460,12 +12486,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     "label": "Номер кошелька",
                     "placeholder": "Например: +71234567890",
                     "underTip": "Номер кошелька, на который вы хотите перевести деньги"
-                },
-                voucher: {
-                    "label": "Код ваучера для активации",
-                    "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD",
-                    "underTip": "Оставьте поле пустым, чтобы создать ваучер на указанную сумму"
                 }
+                //                    voucher: {
+                //                        "label": "Код ваучера для активации",
+                //                        "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD",
+                //                        "underTip": "Оставьте поле пустым, чтобы создать ваучер на указанную сумму"
+                //                    },
             },
             switcher: "",
             proxyServer: "",
@@ -12515,6 +12541,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         prepareComponent: function prepareComponent() {
             this.initBalance();
             this.switcher = "wallet";
+
+            this.$nextTick(function () {
+                $('.tooltip').removeClass('in');
+            });
         },
         proceed: function proceed() {
             var _this = this;
@@ -12549,6 +12579,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     }
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
 /* 230 */
@@ -12572,17 +12603,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "tag": "li",
       "to": "/finance/qiwi/dashboard"
     }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('loading', {
+  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "container-fluid"
+  }, [_c('div', {
+    staticClass: "row m-b-lg"
+  }, [_c('div', {
+    staticClass: "col-sm-10"
+  }, [_c('loading', {
     attrs: {
       "show": _vm.processed
     }
   }), _vm._v(" "), (!_vm.processed) ? _c('div', {
-    staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-sm-10"
-  }, [_c('div', {
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
@@ -12704,32 +12735,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("\n                                            Перевод на банковскую карту\n                                        ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.switcher),
-      expression: "switcher"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "voucher",
-      "id": "withdraw.voucher"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.switcher, "voucher")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.switcher = "voucher"
-      }
-    }
-  }), _vm._v("\n                                            Активировать/Купить ваучер\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label"
   }, [_vm._v(_vm._s(_vm.label))]), _vm._v(" "), _c('div', {
@@ -12844,7 +12849,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "to": "/finance/qiwi/dashboard"
     }
-  }, [_c('a', [_vm._v("списку")])]), _vm._v("\n                                кошельков.\n                            ")], 1)])]) : _vm._e()])])])]) : _vm._e()], 1)
+  }, [_c('a', [_vm._v("списку")])]), _vm._v("\n                                кошельков.\n                            ")], 1)])]) : _vm._e()]) : _vm._e()], 1)])])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -13458,22 +13463,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "role": "group"
       }
     }, [_c('router-link', {
-      directives: [{
-        name: "tooltip",
-        rawName: "v-tooltip.top",
-        value: ({
-          content: 'Ручной вывод'
-        }),
-        expression: "{content: 'Ручной вывод'}",
-        modifiers: {
-          "top": true
-        }
-      }],
       staticClass: "btn btn-default",
       attrs: {
         "to": '/finance/qiwi/' + w.login + '/withdraw',
         "data-toggle": "tooltip",
-        "data-placement": "top"
+        "data-placement": "top",
+        "title": "Вывод"
       }
     }, [_c('i', {
       staticClass: "fa fa-usd"

@@ -13,15 +13,28 @@ class Withdraw {
         $qiwiControl->transferMoney($to, $currency, $amount, $comment);
         $result = new WithdrawResult();
 
-        $responseData = json_decode($qiwiControl->getResponseData())->data;
-        $result->customData = $responseData;
+        //        $responseData = json_decode($qiwiControl->getResponseData())->data;
+        //        $result->customData = $responseData;
+        //
+        //
+        //        $result->status = trim($responseData->status);
+        //        $result->resultText = $responseData->status == 200
+        //                ? "<b>Отлично!</b> Вы успешно совершили перевод с Qiwi кошелька $login
+        //                 на сумму $amount RUB"
+        //                : "<b>Ошибка!</b> " . trim($responseData->body->message);
+        //        $result->debugData = $responseData;
 
-        $result->status = trim($responseData->status);
-        $result->resultText = $responseData->status == 200
-                ? "<b>Отлично!</b> Вы успешно совершили перевод с Qiwi кошелька $login
-                 на сумму $amount RUB"
-                : "<b>Ошибка!</b> " . trim($responseData->body->message);
-        $result->debugData = $responseData;
+
+        $result = new WithdrawResult();
+        $result->error = $qiwiControl->getLastError();
+        $result->debugData = $qiwiControl->debugData;
+        $result->status = 200;
+        if ($result->error != null) {
+            $result->status = 400;
+            $result->resultText = "<b>Ошибка!</b> " . $result->error;
+        } else {
+            $result->resultText = "<b>Успех! </b>Перевод на сумму $amount совершен<br>";
+        }
 
         return $result;
     }

@@ -1040,7 +1040,25 @@ class QIWIControl {
                 "X-Requested-With" => "XMLHttpRequest"
         ]);
 
-        $this->responseData = $content;
+        $res = json_decode($content, true);
+        if ($res['data']['status'] == 200) {
+            if (isset($res['data']['body']['transaction']['state']['code'])
+                    && $res['data']['body']['transaction']['state']['code'] == "AwaitingSMSConfirmation"
+            ) {
+                $this->responseData = "Нужно подтверждение по телефону";
+                $this->lastErrorStr = $this->responseData;
+                return false;
+            }
+        }
+        if ($res['data']['status'] != 200) {
+            $this->lastErrorStr = ['data']['body']['message'];
+            return false;
+        }
+        if ($res['data']['status'] != 200) {
+            $this->responseData = $content;
+            return false;
+        }
+
 
         if ($this->ua->getStatus() !== 200 || !$content) {
             $this->trace("Failed to confirm payment");

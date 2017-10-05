@@ -9,6 +9,22 @@ import './components/bootstrap';
 $('[data-toggle="tooltip"]').tooltip({
     container: 'body',
 });
+let test = {
+    "code": {"value": "0", "_name": "NORMAL"},
+    "data": {
+        "body": {
+            "id": "1507212997118",
+            "terms": "99",
+            "fields": {"account": "+380507308340"},
+            "sum": {"amount": 2, "currency": "643"},
+            "transaction": {"id": "11454372393", "state": {"code": "AwaitingSMSConfirmation"}},
+            "comment": "",
+            "source": "account_643"
+        }, "status": 200
+    },
+    "message": null,
+    "messages": null
+};
 
 const app = new Vue({
     el: '#app',

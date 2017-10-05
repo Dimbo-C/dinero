@@ -12,12 +12,11 @@
             </router-link>
         </page-header>
 
-        <loading :show="processed"></loading>
-
-        <div v-if="!processed" class="container-fluid">
-            <div class="row">
+        <div class="container-fluid">
+            <div class="row m-b-lg">
                 <div class="col-sm-10">
-                    <div class="panel panel-default">
+                    <loading :show="processed"></loading>
+                    <div v-if="!processed" class="panel panel-default">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-sm-12 col-md-10">
@@ -78,19 +77,19 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-offset-4 col-sm-8">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="radio"
-                                                       value="voucher"
-                                                       id="withdraw.voucher"
-                                                       v-model="switcher">
-                                                Активировать/Купить ваучер
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!--<div class="form-group">-->
+                                <!--<div class="col-sm-offset-4 col-sm-8">-->
+                                <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                <!--<input type="radio"-->
+                                <!--value="voucher"-->
+                                <!--id="withdraw.voucher"-->
+                                <!--v-model="switcher">-->
+                                <!--Активировать/Купить ваучер-->
+                                <!--</label>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
 
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">{{ label }}</label>
@@ -176,11 +175,11 @@
                         "placeholder": "Например: +71234567890",
                         "underTip": "Номер кошелька, на который вы хотите перевести деньги"
                     },
-                    voucher: {
-                        "label": "Код ваучера для активации",
-                        "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD",
-                        "underTip": "Оставьте поле пустым, чтобы создать ваучер на указанную сумму"
-                    },
+//                    voucher: {
+//                        "label": "Код ваучера для активации",
+//                        "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD",
+//                        "underTip": "Оставьте поле пустым, чтобы создать ваучер на указанную сумму"
+//                    },
                 },
                 switcher: "",
                 proxyServer: "",
@@ -228,6 +227,10 @@
             prepareComponent() {
                 this.initBalance();
                 this.switcher = "wallet";
+
+                this.$nextTick(() => {
+                    $('.tooltip').removeClass('in');
+                });
             },
             proceed() {
                 console.log(this.form);

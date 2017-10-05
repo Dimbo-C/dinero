@@ -56,7 +56,7 @@
                                              class="btn btn-default"
                                              data-toggle="tooltip"
                                              data-placement="top"
-                                             v-tooltip.top="{content: 'Ручной вывод'}">
+                                             title="Вывод">
                                     <i class="fa fa-usd"></i>
                                 </router-link>
                                 <router-link :to="'/finance/qiwi/' + w.login + '/history'"

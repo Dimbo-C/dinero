@@ -84,7 +84,17 @@
 
             }
         },
+        mounted() {
+            this.prepareComponent();
+        },
+
         methods: {
+            prepareComponent() {
+
+                this.$nextTick(() => {
+                    $('.tooltip').removeClass('in');
+                });
+            },
             proceed() {
                 Dinero.post("/api/qiwi-wallets/remove/" + this.login, new Form())
                     .then((data) => {
