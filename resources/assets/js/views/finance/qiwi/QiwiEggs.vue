@@ -68,21 +68,19 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Информация по ваучеру {{voucherCode}}</div>
                         <div class="panel-body">
-                            <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Код ваучера</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control"
-                                               placeholder="Например: L5MQLT8PH8339M715NE6K1PKD"
-                                               v-model="voucherCode">
-                                    </div>
+                            <div class="wallet-info">
+                                <div class="alert"
+                                     :class="notificationClass"
+                                     v-html="responseText">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-4 col-sm-8">
-                                    <button class="btn btn-primary" @click="activateVoucher">Активировать ваучер
-                                    </button>
-                                </div>
+                                <p>
+                                    Баланс: {{updatedBalance}}
+                                </p>
+                                <p>Вы можете перейти <a href="#" v-on:click.stop="back">назад</a>
+                                    или к
+                                    <router-link to="/finance/qiwi/dashboard"><a>списку</a></router-link>
+                                    кошельков.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +99,10 @@
                 voucherSum: 0,
                 processed: false,
                 responseObtained: false,
-                code: ""
+                responseText: "",
+                notificationClass: "alert-danger",
+                code: "",
+                updatedBalance: "..."
             };
         },
         mounted(){
@@ -114,14 +115,24 @@
                 let data = {login: this.login, code: this.voucherCode};
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/activate-voucher`, new Form(data))
                     .then((response) => {
-                        Vue.ls.set('response_egg_activation', response);
+                        Vue.ls.set("response_egg_activation", response);
                         this.responseObtained = true;
-
+                        this.notificationClass = response.status == 200 ? "alert-success" : "alert-danger";
+                        this.responseText = response.resultText;
                         this.processed = false;
+                        this.updateWallet(this.login);
                     });
             },
             createVoucher(){
 
+            },
+
+            updateWallet(login) {
+                let auth = {"login": login};
+                Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
+                    .then((balance) => {
+                        this.updatedBalance = balance;
+                    })
             },
         },
 

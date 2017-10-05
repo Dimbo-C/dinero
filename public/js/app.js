@@ -14068,8 +14068,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -14079,7 +14077,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             voucherSum: 0,
             processed: false,
             responseObtained: false,
-            code: ""
+            responseText: "",
+            notificationClass: "alert-danger",
+            code: "",
+            updatedBalance: "..."
         };
     },
     mounted: function mounted() {
@@ -14094,21 +14095,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.processed = true;
             var data = { login: this.login, code: this.voucherCode };
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/activate-voucher", new Form(data)).then(function (response) {
-                Vue.ls.set('response_egg_activation', response);
+                Vue.ls.set("response_egg_activation", response);
                 _this.responseObtained = true;
-
+                _this.notificationClass = response.status == 200 ? "alert-success" : "alert-danger";
+                _this.responseText = response.resultText;
                 _this.processed = false;
+                _this.updateWallet(_this.login);
             });
         },
-        createVoucher: function createVoucher() {}
+        createVoucher: function createVoucher() {},
+        updateWallet: function updateWallet(login) {
+            var _this2 = this;
+
+            var auth = { "login": login };
+            Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth)).then(function (balance) {
+                _this2.updatedBalance = balance;
+            });
+        }
     },
 
     computed: {
         walletTypeDescription: function walletTypeDescription() {
-            var _this2 = this;
+            var _this3 = this;
 
             return this.walletTypes.find(function (t) {
-                return t.value === _this2.form.type;
+                return t.value === _this3.form.type;
             }).description;
         }
     }
@@ -14243,44 +14254,28 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Информация по ваучеру " + _vm._s(_vm.voucherCode))]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('div', {
-    staticClass: "form-horizontal"
+    staticClass: "wallet-info"
   }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label"
-  }, [_vm._v("Код ваучера")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.voucherCode),
-      expression: "voucherCode"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "Например: L5MQLT8PH8339M715NE6K1PKD"
-    },
+    staticClass: "alert",
+    class: _vm.notificationClass,
     domProps: {
-      "value": (_vm.voucherCode)
+      "innerHTML": _vm._s(_vm.responseText)
+    }
+  }), _vm._v(" "), _c('p', [_vm._v("\n                                Баланс: " + _vm._s(_vm.updatedBalance) + "\n                            ")]), _vm._v(" "), _c('p', [_vm._v("Вы можете перейти "), _c('a', {
+    attrs: {
+      "href": "#"
     },
     on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.voucherCode = $event.target.value
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.back($event)
       }
     }
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
-    on: {
-      "click": _vm.activateVoucher
+  }, [_vm._v("назад")]), _vm._v("\n                                или к\n                                "), _c('router-link', {
+    attrs: {
+      "to": "/finance/qiwi/dashboard"
     }
-  }, [_vm._v("Активировать ваучер\n                                ")])])])])])]) : _vm._e()])]) : _vm._e()], 1)
+  }, [_c('a', [_vm._v("списку")])]), _vm._v("\n                                кошельков.\n                            ")], 1)])])])]) : _vm._e()])]) : _vm._e()], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
