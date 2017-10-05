@@ -11,12 +11,12 @@
                 <a>Панель управления</a>
             </router-link>
         </page-header>
-
-        <div class="container-fluid">
+        <loading :show="processed"></loading>
+        <div v-if="!processed" class="container-fluid">
             <div class="row m-b-lg">
                 <div class="col-sm-10">
-                    <loading :show="processed"></loading>
-                    <div v-if="!processed" class="panel panel-default">
+
+                    <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-sm-12 col-md-10">

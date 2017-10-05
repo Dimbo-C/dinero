@@ -1051,6 +1051,7 @@ class QIWIControl {
             }
         }
         if ($res['data']['status'] != 200) {
+            dd($res);
             $this->lastErrorStr = ['data']['body']['message'];
             return false;
         }

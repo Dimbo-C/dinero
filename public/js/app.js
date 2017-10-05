@@ -9997,7 +9997,7 @@ exports = module.exports = __webpack_require__(7)(undefined);
 
 
 // module
-exports.push([module.i, "\n.body-header[data-v-57dac6e6] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-57dac6e6] {\n    padding: 15px;\n}\n.alert-notification[data-v-57dac6e6] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #8a6d3b;\n    font-size: 14px;\n    background-color: #fcf8e3;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.success-notification[data-v-57dac6e6] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n", ""]);
+exports.push([module.i, "\n.body-header[data-v-57dac6e6] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-57dac6e6] {\n    padding: 15px;\n}\n.alert-notification[data-v-57dac6e6] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #8a6d3b;\n    font-size: 14px;\n    background-color: #fcf8e3;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.success-notification[data-v-57dac6e6] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #fdeada;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n", ""]);
 
 // exports
 
@@ -12603,17 +12603,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "tag": "li",
       "to": "/finance/qiwi/dashboard"
     }
-  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
+  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('loading', {
+    attrs: {
+      "show": _vm.processed
+    }
+  }), _vm._v(" "), (!_vm.processed) ? _c('div', {
     staticClass: "container-fluid"
   }, [_c('div', {
     staticClass: "row m-b-lg"
   }, [_c('div', {
     staticClass: "col-sm-10"
-  }, [_c('loading', {
-    attrs: {
-      "show": _vm.processed
-    }
-  }), _vm._v(" "), (!_vm.processed) ? _c('div', {
+  }, [_c('div', {
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
@@ -12849,7 +12849,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "to": "/finance/qiwi/dashboard"
     }
-  }, [_c('a', [_vm._v("списку")])]), _vm._v("\n                                кошельков.\n                            ")], 1)])]) : _vm._e()]) : _vm._e()], 1)])])], 1)
+  }, [_c('a', [_vm._v("списку")])]), _vm._v("\n                                кошельков.\n                            ")], 1)])]) : _vm._e()])])])]) : _vm._e()], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
