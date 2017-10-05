@@ -21,12 +21,12 @@ Route::prefix("qiwi-wallets")->group(function () {
     Route::post('/update-income', 'QiwiWalletsController@updateIncome');
     Route::post('/withdraw', 'QiwiWalletsController@withdraw');
 
-
     Route::post('/move', 'QiwiWalletsController@move');
     Route::post('/mass-action', 'QiwiWalletsController@massAction');
 
     Route::get('/{wallet}/report', 'Api\QiwiWalletsController@report');
     Route::get('/{wallet}/settings', 'Api\QiwiWalletsController@settings');
+
     Route::post('/{wallet}/settings', 'QiwiWalletsController@saveSettings');
     Route::post('/{wallet}/withdraw', 'QiwiWalletsController@withdraw');
     Route::post('/{wallet}/activate-voucher', 'QiwiWalletsController@activateVoucher');

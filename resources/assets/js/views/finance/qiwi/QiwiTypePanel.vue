@@ -56,7 +56,7 @@
                                              class="btn btn-default"
                                              data-toggle="tooltip"
                                              data-placement="top"
-                                             title="Ручной вывод">
+                                             v-tooltip.top="{content: 'Ручной вывод'}">
                                     <i class="fa fa-usd"></i>
                                 </router-link>
                                 <router-link :to="'/finance/qiwi/' + w.login + '/history'"
@@ -149,7 +149,6 @@
             },
 
             updateBalance(login){
-
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
                     .then((balance) => {
@@ -168,9 +167,7 @@
                     .then((income) => {
                         console.log(income);
                         this.items.map((item) => {
-                            if (item.login === login) {
-                                item.month_income = income;
-                            }
+                            if (item.login === login) item.month_income = income;
                         });
                     })
             },

@@ -3,10 +3,12 @@ import axios from 'axios';
 import lodash from 'lodash';
 import moment from 'moment';
 import VueLocalStorage from 'vue-ls';
+import VTooltip from "v-tooltip";
 import {Pagination, PaginationEvent} from 'vue-pagination-2';
 
 window.VueLocalStorage = VueLocalStorage;
 Vue.use(VueLocalStorage);
+Vue.use(VTooltip);
 
 window.Bus = new Vue();
 

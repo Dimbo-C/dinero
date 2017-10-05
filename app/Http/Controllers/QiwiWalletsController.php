@@ -63,7 +63,7 @@ class QiwiWalletsController extends Controller {
     }
 
     public function createVoucher(Request $request) {
-        return $this->wallet->createVoucher($request->login, $request->code);
+        return $this->wallet->createVoucher($request->login, $request->amount);
     }
 
     public function saveSettings(Request $request) {

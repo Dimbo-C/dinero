@@ -45,7 +45,18 @@ class Withdraw {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->activateVoucher($code);
 
-        return self::getNiceResult($qiwiControl);
+        $result = new WithdrawResult();
+        $result->error = $qiwiControl->getLastError();
+        $result->debugData = $qiwiControl->debugData;
+        $result->status = 200;
+        if ($result->error != null) {
+            $result->status = 400;
+            $result->resultText = $result->error;
+        } else {
+            $result->resultText = $qiwiControl->getResponseData();
+        }
+
+        return $result;
     }
 
     /**

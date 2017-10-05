@@ -24,7 +24,7 @@
                                     Вывод средств с Qiwi кошелька ({{ form.login }})
                                 </div>
                                 <div class="col-sm-12 col-md-2 text-center">
-                                    <router-link tag="span" to="/finance/qiwi/egg">
+                                    <router-link tag="span" :to="'/finance/qiwi/'+form.login+'/egg'">
                                         <a>Ваучеры</a>
                                     </router-link>
                                 </div>
@@ -197,10 +197,10 @@
                 form: new Form({
                     sum: 0,
                     comment: "",
-                    targetField: "5168 7422 0767 3892",
+                    targetField: "",
                     withdrawType: "",
-                    cardholderName: "VLAD",
-                    cardholderSurname: "GORBATKO",
+                    cardholderName: "",
+                    cardholderSurname: "",
 
                     login: this.$route.params.wallet
 
@@ -245,8 +245,8 @@
             initBalance(){
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`)
                     .then((response) => {
-                        let data = response.data;
-                        this.form.sum = data.wallet.balance;
+                        const balance = response.data.wallet.balance;
+                        this.form.sum = balance > 0 ? 1 : 0;
                     })
             },
             updateWallet(login) {

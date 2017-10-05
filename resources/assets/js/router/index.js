@@ -42,7 +42,6 @@ const router = new Router({
         {path: '/finance/rent', component: FinanceRent},
         {path: '/finance/bitcoin', component: FinanceBitcoin},
         {path: '/finance/qiwi', component: FinanceQiwiWallet},
-        {path: '/finance/qiwi/egg', component: QiwiEggs},
         {path: '/finance/qiwi/add-wallet', component: AddQiwiWallet},
         {path: '/finance/qiwi/mass-action', component: QiwiMassAction},
         {path: '/finance/qiwi/add-wallet-success/:wallet', component: AddQiwiWalletSuccess},
@@ -50,6 +49,7 @@ const router = new Router({
         {path: '/finance/qiwi/:wallet/history', component: QiwiWalletHistory},
         {path: '/finance/qiwi/:wallet/settings', component: QiwiWalletSettings},
         {path: '/finance/qiwi/:wallet/withdraw', component: QiwiWalletWithdraw},
+        {path: '/finance/qiwi/:wallet/egg', component: QiwiEggs},
         {path: '/finance/qiwi/dashboard', component: FinanceQiwiDashboard},
         {path: '/finance/bitcoin/history', component: FinanceBitcoinHistory},
     ]
