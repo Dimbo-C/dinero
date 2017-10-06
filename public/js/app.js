@@ -13293,6 +13293,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(balance);
                 _this2.items.map(function (item) {
                     if (item.login === login) {
+
                         item.balance = balance;
                         _this2.spinners = _this2.spinners.filter(function (elem) {
                             return login !== elem;

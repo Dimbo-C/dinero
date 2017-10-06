@@ -157,6 +157,7 @@
                         console.log(balance);
                         this.items.map((item) => {
                             if (item.login === login) {
+
                                 item.balance = balance;
                                 this.spinners = this.spinners.filter((elem) => login !== elem);
                             }
