@@ -14073,6 +14073,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -14219,6 +14222,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-sm-offset-4 col-sm-8"
   }, [_c('button', {
     staticClass: "btn btn-primary",
+    attrs: {
+      "disabled": _vm.voucherCode == ''
+    },
     on: {
       "click": _vm.activateVoucher
     }
@@ -14263,6 +14269,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-sm-offset-4 col-sm-8"
   }, [_c('button', {
     staticClass: "btn btn-primary",
+    attrs: {
+      "disabled": _vm.voucherSum == 0
+    },
     on: {
       "click": _vm.createVoucher
     }
