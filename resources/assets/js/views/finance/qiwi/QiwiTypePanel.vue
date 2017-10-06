@@ -131,6 +131,7 @@
         mounted () {
             this.items = this.type.wallets;
         },
+
         watch: {
             selected(val){
                 this.$emit('updateSelected', val);

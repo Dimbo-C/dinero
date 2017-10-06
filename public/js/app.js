@@ -13269,6 +13269,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.items = this.type.wallets;
     },
 
+
     watch: {
         selected: function selected(val) {
             this.$emit('updateSelected', val);
