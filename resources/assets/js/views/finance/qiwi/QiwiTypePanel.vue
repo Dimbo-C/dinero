@@ -42,7 +42,7 @@
                                data-placement="top"
                                title="Обновить">
                                 <i class="fa fa-refresh fa-fw"
-
+                                   v-bind:class="{'fa-spin':spinners.includes(w.login)}"
                                    v-bind:id="w.login"
                                    v-on:click.stop="updateWallet(w.login)"></i>
                             </a>
@@ -124,7 +124,8 @@
             return {
                 moveTo: this.types.filter(t => t.id !== this.type.id)[0].id,
                 foo: '',
-                onChangeSelect: ''
+                onChangeSelect: '',
+                spinners: []
             };
         },
         mounted () {
@@ -149,6 +150,7 @@
             },
 
             updateBalance(login){
+                this.spinners.push(login);
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
                     .then((balance) => {
@@ -156,8 +158,10 @@
                         this.items.map((item) => {
                             if (item.login === login) {
                                 item.balance = balance;
+                                this.spinners = this.spinners.filter((elem) => login !== elem);
                             }
                         });
+
                     });
             },
 
