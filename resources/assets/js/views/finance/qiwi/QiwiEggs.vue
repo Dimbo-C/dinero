@@ -16,7 +16,6 @@
 
         <div v-if="!processed" class="container-fluid">
             <div class="row">
-
                 <div v-if="!responseObtained" class="col-sm-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">Активация ваучера Qiwi</div>

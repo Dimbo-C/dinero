@@ -15,6 +15,29 @@
         <div class="container-fluid">
             <div class="row m-b-lg">
                 <div class="col-sm-4">
+                    <!--<div class="form-group">-->
+                        <!--<label for="" class="control-label">Показать записи по указанным датам:</label>-->
+
+                        <!--<div class="row">-->
+                            <!--<div class="col-sm-10">-->
+                                <!--<div class="input-group input-group-sm">-->
+                                    <!--<span class="input-group-addon">с</span>-->
+                                    <!--<datepicker :format="customFormatter"-->
+                                                <!--:value="state.dateStart"-->
+                                                <!--v-model="state.dateStart"></datepicker>-->
+                                    <!--<span class="input-group-addon">по</span>-->
+                                    <!--<datepicker :format="customFormatter"-->
+                                                <!--:value="state.dateEnd"-->
+                                                <!--v-model="state.dateEnd"></datepicker>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-2">-->
+                                <!--<button class="btn btn-default" @click="fetchReport">-->
+                                    <!--Обновить-->
+                                <!--</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <div class="form-group">
                         <label for="" class="control-label">Показать записи по указанным датам:</label>
 
@@ -106,10 +129,16 @@
 
 <script>
     import _sum from 'lodash/sum';
+    import Datepicker from 'vuejs-datepicker';
 
     export default {
+        components: {datepicker: Datepicker},
         data() {
             return {
+                state: {
+                    dateStart: new Date(),
+                    dateEnd: new Date(),
+                },
                 isLoaded: false,
                 transactions: null,
                 income: 0,
@@ -140,7 +169,26 @@
         },
 
         methods: {
+            update(){
+                this.fetchReport();
+            },
             fetchReport() {
+//                console.log(this.state);
+//                let newStartDate = moment(this.state.dateStart).format("DD.MM.YYYY");
+//                console.log(newStartDate);
+//                let parts = newStartDate.split(".");
+//                newStartDate = parts[1] + "." + parts[0] + "." + parts[2];
+//                this.dateRange.start = newStartDate;
+//
+//                let newEndDate = moment(this.state.dateEnd).format("DD.MM.YYYY");
+//                console.log(newEndDate);
+//                parts = newEndDate.split(".");
+//                newEndDate = parts[1] + "." + parts[0] + "." + parts[2];
+//                this.dateRange.end = newEndDate;
+
+
+                console.log(this.state);
+                console.log(this.dateRange);
                 this.isLoaded = false;
                 axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
                     .then((response) => {
@@ -153,7 +201,7 @@
             },
 
             customFormatter (date) {
-                return moment(date).format('dd.MM.yyyy')
+                return moment(date).format('DD.MM.YYYY')
             },
 
             setDateRange (key) {

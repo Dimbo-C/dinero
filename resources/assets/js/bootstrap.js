@@ -4,6 +4,8 @@ import lodash from 'lodash';
 import moment from 'moment';
 import VueLocalStorage from 'vue-ls';
 import VTooltip from "v-tooltip";
+import Datepicker from 'vuejs-datepicker';
+
 import {Pagination, PaginationEvent} from 'vue-pagination-2';
 
 window.VueLocalStorage = VueLocalStorage;
