@@ -11515,6 +11515,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -11540,6 +11563,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 autoWithdrawalOptions: [],
                 autoWithdrawalTimeout: 0,
                 minimumAutoWithdrawAmount: 2500,
+                minimumBalance: 0,
                 autoWithdrawalCardNumber: "",
                 autoWithdrawalCardholderName: "",
                 autoWithdrawalCardholderSurname: "",
@@ -12026,6 +12050,68 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help-block"
   }, [_vm._v("Максимальный баланс кошелька, при достижении которого\n                                        кошелек автоматически уходит в резервные")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Минимальный баланс")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.minimumBalance),
+      expression: "form.minimumBalance"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.minimumBalance)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.minimumBalance = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Минимальный баланс кошелька.\n                                        Работает на автовыводе.\n                                        Оставляет сумму на балансе кошелька.\n                                        Для отключения введите 0.\n                                    ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Баланс для автовывода")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.minimumAutoWithdrawAmount),
+      expression: "form.minimumAutoWithdrawAmount"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.minimumAutoWithdrawAmount)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.minimumAutoWithdrawAmount = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Работает только если кошелек настроен на автовывод.\n                                        Автовывод срабатывает если баланс кошелька больше либо равен указанной сумме.\n                                        Для отключения введите 0.\n                                    ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-offset-4 col-sm-8"
   }, [_c('div', {
@@ -12078,9 +12164,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "form.autoWithdrawalType"
     }],
     staticClass: "form-control",
-    attrs: {
-      "disabled": !_vm.form.autoWithdrawalActive
-    },
     on: {
       "change": function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
@@ -12142,64 +12225,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Минимальная сума для автовывода")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.minimumAutoWithdrawAmount),
-      expression: "form.minimumAutoWithdrawAmount"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "disabled": !_vm.form.autoWithdrawalActive
-    },
-    domProps: {
-      "value": (_vm.form.minimumAutoWithdrawAmount)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.minimumAutoWithdrawAmount = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Минимальный баланс кошелька при котором должен быть совершен вывод")])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.withdrawTarget),
-      expression: "form.withdrawTarget"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "wallet"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.form.withdrawTarget, "wallet")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.form.withdrawTarget = "wallet"
-      }
-    }
-  }), _vm._v("\n                                            Автовывод с помощью ваучеров\n                                        ")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-4 control-label",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Кошельки для автовывода")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Кошелек для автовывода")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-8"
   }, [_c('input', {
     directives: [{
@@ -12211,8 +12237,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "+79123456789;+79111111111",
-      "disabled": _vm.form.withdrawTarget != 'wallet'
+      "placeholder": "+79123456789;+79111111111"
     },
     domProps: {
       "value": (_vm.form.autoWithdrawalWallets)
@@ -12224,31 +12249,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.withdrawTarget),
-      expression: "form.withdrawTarget"
-    }],
-    attrs: {
-      "type": "radio",
-      "value": "card"
-    },
-    domProps: {
-      "checked": _vm._q(_vm.form.withdrawTarget, "card")
-    },
-    on: {
-      "__c": function($event) {
-        _vm.form.withdrawTarget = "card"
-      }
-    }
-  }), _vm._v("\n                                            Автовывод на карту\n                                        ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -12267,8 +12267,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "XXXX XXXX XXXX XXXX",
-      "disabled": _vm.form.withdrawTarget != 'card'
+      "placeholder": "XXXX XXXX XXXX XXXX"
     },
     domProps: {
       "value": (_vm.cardNumber)
@@ -12298,7 +12297,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "disabled": _vm.form.withdrawTarget != 'card',
       "placeholder": "Имя"
     },
     domProps: {
@@ -12322,7 +12320,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "disabled": _vm.form.withdrawTarget != 'card',
       "placeholder": "Фамилия"
     },
     domProps: {

@@ -141,6 +141,33 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="" class="col-sm-4 control-label">Минимальный баланс</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="form.minimumBalance">
+                                        <span class="help-block">Минимальный баланс кошелька.
+                                            Работает на автовыводе.
+                                            Оставляет сумму на балансе кошелька.
+                                            Для отключения введите 0.
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="col-sm-4 control-label">Баланс для автовывода</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="form.minimumAutoWithdrawAmount">
+                                        <span class="help-block">Работает только если кошелек настроен на автовывод.
+                                            Автовывод срабатывает если баланс кошелька больше либо равен указанной сумме.
+                                            Для отключения введите 0.
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <div class="checkbox">
                                             <label>
@@ -154,9 +181,10 @@
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Режим работы автовывода</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" v-model="form.autoWithdrawalType"
-                                                :disabled="!form.autoWithdrawalActive">
-                                            <option v-for="o in form.autoWithdrawalOptions" :value="o.value"
+                                        <select class="form-control"
+                                                v-model="form.autoWithdrawalType">
+                                            <option v-for="o in form.autoWithdrawalOptions"
+                                                    :value="o.value"
                                                     v-text="o.text"></option>
                                         </select>
                                     </div>
@@ -175,16 +203,16 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="" class="col-sm-4 control-label">Минимальная сума для автовывода</label>
-                                    <div class="col-sm-8">
-                                        <input type="text"
-                                               class="form-control"
-                                               v-model="form.minimumAutoWithdrawAmount"
-                                               :disabled="!form.autoWithdrawalActive">
-                                        <span class="help-block">Минимальный баланс кошелька при котором должен быть совершен вывод</span>
-                                    </div>
-                                </div>
+                                <!--<div class="form-group">-->
+                                <!--<label for="" class="col-sm-4 control-label">Минимальная сума для автовывода</label>-->
+                                <!--<div class="col-sm-8">-->
+                                <!--<input type="text"-->
+                                <!--class="form-control"-->
+                                <!--v-model="form.minimumAutoWithdrawAmount"-->
+                                <!--:disabled="!form.autoWithdrawalActive">-->
+                                <!--<span class="help-block">Минимальный баланс кошелька при котором должен быть совершен вывод</span>-->
+                                <!--</div>-->
+                                <!--</div>-->
 
                                 <!--<div class="form-group">-->
                                 <!--<div class="col-sm-offset-4 col-sm-8">-->
@@ -197,42 +225,41 @@
                                 <!--</div>-->
                                 <!--</div>-->
 
-                                <div class="form-group">
-                                    <div class="col-sm-offset-4 col-sm-8">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="radio"
-                                                       value="wallet"
-                                                       v-model="form.withdrawTarget">
-                                                Автовывод с помощью ваучеров
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!--<div class="form-group">-->
+                                <!--<div class="col-sm-offset-4 col-sm-8">-->
+                                <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                <!--<input type="radio"-->
+                                <!--value="wallet"-->
+                                <!--v-model="form.withdrawTarget">-->
+                                <!--Автовывод с помощью ваучеров-->
+                                <!--</label>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
 
                                 <div class="form-group">
-                                    <label for="" class="col-sm-4 control-label">Кошельки для автовывода</label>
+                                    <label for="" class="col-sm-4 control-label">Кошелек для автовывода</label>
                                     <div class="col-sm-8">
                                         <input type="text"
                                                class="form-control"
                                                placeholder="+79123456789;+79111111111"
-                                               :disabled="form.withdrawTarget!='wallet'"
                                                v-model="form.autoWithdrawalWallets">
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-offset-4 col-sm-8">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="radio"
-                                                       value="card"
-                                                       v-model="form.withdrawTarget">
-                                                Автовывод на карту
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!--<div class="form-group">-->
+                                <!--<div class="col-sm-offset-4 col-sm-8">-->
+                                <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                <!--<input type="radio"-->
+                                <!--value="card"-->
+                                <!--v-model="form.withdrawTarget">-->
+                                <!--Автовывод на карту-->
+                                <!--</label>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
 
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Карта для автовывода</label>
@@ -240,8 +267,7 @@
                                         <input type="text"
                                                class="form-control"
                                                v-model="cardNumber"
-                                               placeholder="XXXX XXXX XXXX XXXX"
-                                               :disabled="form.withdrawTarget!='card'">
+                                               placeholder="XXXX XXXX XXXX XXXX">
                                     </div>
                                 </div>
 
@@ -250,17 +276,14 @@
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control"
                                                v-model="form.autoWithdrawalCardholderName"
-                                               :disabled="form.withdrawTarget!='card'"
                                                placeholder="Имя">
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control"
                                                v-model="form.autoWithdrawalCardholderSurname"
-                                               :disabled="form.withdrawTarget!='card'"
                                                placeholder="Фамилия">
                                     </div>
                                 </div>
-
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-8">
@@ -307,6 +330,7 @@
                     autoWithdrawalOptions: [],
                     autoWithdrawalTimeout: 0,
                     minimumAutoWithdrawAmount: 2500,
+                    minimumBalance: 0,
                     autoWithdrawalCardNumber: "",
                     autoWithdrawalCardholderName: "",
                     autoWithdrawalCardholderSurname: "",
@@ -317,7 +341,7 @@
                         host: "",
                         port: "",
                         login: "",
-                        password: "",
+                        password: ""
                     },
                     login: this.$route.params.wallet
                 }),

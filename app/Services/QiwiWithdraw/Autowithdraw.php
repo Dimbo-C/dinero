@@ -3,6 +3,7 @@
 use App\AutowithdrawTypes;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
+use App\Services\Withdraw;
 
 define("AUTOWITHDRAW_EVERY_X_MINUTES", 1);
 define("AUTOWITHDRAW_AFTER_BALANCE_UPDATE", 2);
@@ -22,15 +23,16 @@ class Autowithdraw {
      */
     private $autoWithdrawType;
 
-    /**
-     * @param $walletLogin string
-     */
+    private $login;
+
+
     function __construct($walletLogin) {
-        $this->init($walletLogin);
+        $this->login = $walletLogin;
+        $this->init();
     }
 
-    private function init($login) {
-        $this->wallet = QiwiWallet::where("login", $login)->first();
+    private function init() {
+        $this->wallet = QiwiWallet::where("login", $this->login)->first();
         $this->settings = QiwiWalletSettings::find($this->wallet->id);
         $this->autoWithdrawType = AutowithdrawTypes::find($this->settings->autoWithdrawal_type_id);
     }
@@ -38,11 +40,19 @@ class Autowithdraw {
     public function autoWithdraw($autowithdrawMode) {
         if (!$this->guards($autowithdrawMode)) return;
 
+        switch ($autowithdrawMode) {
+            case AUTOWITHDRAW_EVERY_X_MINUTES:
+                $this->everyXMin();
+                break;
 
+            default:
+                break;
+        }
     }
 
+    private function everyXMin() {
 
-    //    private function
+    }
 
     private function guards($mode) {
         if (!$this->isModeRight($mode)) return false;

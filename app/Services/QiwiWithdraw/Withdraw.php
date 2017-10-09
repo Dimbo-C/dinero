@@ -30,7 +30,19 @@ class Withdraw {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->transferMoneyToCard($cardNumber, $firstName, $lastName, $sum, $currency, $comment);
 
-        return self::getNiceResult($qiwiControl);
+        $result = new WithdrawResult();
+        $result->error = $qiwiControl->getLastError();
+        $result->debugData = $qiwiControl->debugData;
+        $result->status = 200;
+        if ($result->error != null) {
+            $result->status = 400;
+            $result->resultText = "<b>Ошибка!</b> " . $result->error;
+        } else {
+            $result->resultText = "<b>Отлично! </b>Вы успешно совершили перевод с QIWI кошелька "
+                    . str_replace("+", "", $login) . " на сумму $sum RUB<br>";
+        }
+
+        return $result;
     }
 
     public static function purchaseVoucher($login, $sum) {
