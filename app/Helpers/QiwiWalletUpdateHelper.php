@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class QiwiWalletUpdateHelper {
-
     public static function isTimeToUpdate($login) {
         $settings = (new QiwiWalletSettings)->findByLogin($login);
 
@@ -39,9 +38,10 @@ class QiwiWalletUpdateHelper {
 
         if ($settings->is_always_online) {
             $control = QiwiGeneralHelper::getQiwiControlObject($login, $wallet->password, $wallet->use_proxy, $proxy);
+            Log::info("Session updated " . $control->login());
             return $control->login();
+        } else {
+            return true;
         }
-
-        return false;
     }
 }

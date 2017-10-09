@@ -19,16 +19,15 @@
                         <label for="" class="control-label">Показать записи по указанным датам:</label>
 
                         <div class="input-group">
-                            <span class="input-group-addon">с</span>
                             <datepicker
-                                    :language="'ru'"
+                                    :language="state.language"
                                     :input-class="state.inputClass"
                                     :format="customFormatter"
                                     :value="state.dateStart"
                                     v-model="state.dateStart"></datepicker>
                             <span class="input-group-addon">по</span>
                             <datepicker
-                                    :language="'ru'"
+                                    :language="state.language"
                                     :format="customFormatter"
                                     :input-class="state.inputClass"
                                     :value="state.dateEnd"
@@ -80,8 +79,10 @@
                     <div class="form-inline">
                         <div class="pull-left">
                             <div class="form-group">
-                                <p class="form-control-static">История транзакций <strong v-text="this.login"></strong>
-                                    (+ {{income}} / - {{outcome}})</p>
+                                <p class="form-control-static">История транзакций <b v-text="this.login"></b>
+                                    c <b>{{dateRange.start}}</b> по <b>{{dateRange.end}}</b>
+                                    (+ {{income}} / - {{outcome}})
+                                </p>
                             </div>
                         </div>
                         <div class="pull-right">
@@ -143,7 +144,9 @@
                 state: {
                     dateStart: "",
                     dateEnd: "",
-                    inputClass: "form-control input-group-addon"
+                    inputClass: "form-control input-group-addon",
+                    language: "ru"
+
                 },
                 isLoaded: false,
                 transactions: null,

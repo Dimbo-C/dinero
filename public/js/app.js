@@ -10741,6 +10741,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -10752,7 +10753,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             state: {
                 dateStart: "",
                 dateEnd: "",
-                inputClass: "form-control input-group-addon"
+                inputClass: "form-control input-group-addon",
+                language: "ru"
+
             },
             isLoaded: false,
             transactions: null,
@@ -11022,11 +11025,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Показать записи по указанным датам:")]), _vm._v(" "), _c('div', {
     staticClass: "input-group"
-  }, [_c('span', {
-    staticClass: "input-group-addon"
-  }, [_vm._v("с")]), _vm._v(" "), _c('datepicker', {
+  }, [_c('datepicker', {
     attrs: {
-      "language": 'ru',
+      "language": _vm.state.language,
       "input-class": _vm.state.inputClass,
       "format": _vm.customFormatter,
       "value": _vm.state.dateStart
@@ -11042,7 +11043,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "input-group-addon"
   }, [_vm._v("по")]), _vm._v(" "), _c('datepicker', {
     attrs: {
-      "language": 'ru',
+      "language": _vm.state.language,
       "format": _vm.customFormatter,
       "input-class": _vm.state.inputClass,
       "value": _vm.state.dateEnd
@@ -11108,11 +11109,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('p', {
     staticClass: "form-control-static"
-  }, [_vm._v("История транзакций "), _c('strong', {
+  }, [_vm._v("История транзакций "), _c('b', {
     domProps: {
       "textContent": _vm._s(this.login)
     }
-  }), _vm._v("\n                                (+ " + _vm._s(_vm.income) + " / - " + _vm._s(_vm.outcome) + ")")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+  }), _vm._v("\n                                c "), _c('b', [_vm._v(_vm._s(_vm.dateRange.start))]), _vm._v(" по "), _c('b', [_vm._v(_vm._s(_vm.dateRange.end))]), _vm._v("\n                                (+ " + _vm._s(_vm.income) + " / - " + _vm._s(_vm.outcome) + ")\n                            ")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   })])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
@@ -11231,6 +11232,11 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function($) {//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11920,7 +11926,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("\n                                            Режим «Всегда онлайн»\n                                        ")])]), _vm._v(" "), _c('span', {
     staticClass: "help-block"
-  }, [_vm._v("Поставьте галочку, если хотите чтобы сессия кошелька всегда поддерживалась в режиме\n                                    онлайн.")])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Поставьте галочку,\n                                        если хотите чтобы сессия кошелька всегда поддерживалась в режиме\n                                        онлайн. Аналогично постоянному нахождению в браузере.\n                                        Если галочка не стоит - сессия будет слетать и кошелек будет перелогиниваться.\n                                        Не используйте для всех кошельков поголовно, только для автовыводных и приемных,\n                                        где своевременное снятие денег в приоритете.\n                                    ")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
