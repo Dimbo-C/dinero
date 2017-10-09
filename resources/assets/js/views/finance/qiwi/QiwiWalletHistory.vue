@@ -14,48 +14,53 @@
 
         <div class="container-fluid">
             <div class="row m-b-lg">
-                <div class="col-sm-4">
-                    <!--<div class="form-group">-->
-                        <!--<label for="" class="control-label">Показать записи по указанным датам:</label>-->
-
-                        <!--<div class="row">-->
-                            <!--<div class="col-sm-10">-->
-                                <!--<div class="input-group input-group-sm">-->
-                                    <!--<span class="input-group-addon">с</span>-->
-                                    <!--<datepicker :format="customFormatter"-->
-                                                <!--:value="state.dateStart"-->
-                                                <!--v-model="state.dateStart"></datepicker>-->
-                                    <!--<span class="input-group-addon">по</span>-->
-                                    <!--<datepicker :format="customFormatter"-->
-                                                <!--:value="state.dateEnd"-->
-                                                <!--v-model="state.dateEnd"></datepicker>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="col-sm-2">-->
-                                <!--<button class="btn btn-default" @click="fetchReport">-->
-                                    <!--Обновить-->
-                                <!--</button>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
+                <div class="col-sm-6">
                     <div class="form-group">
                         <label for="" class="control-label">Показать записи по указанным датам:</label>
 
-                        <div class="input-group input-group-sm">
+                        <div class="input-group">
                             <span class="input-group-addon">с</span>
-                            <masked-input
-                                    class="form-control"
-                                    v-model="dateRange.start"
-                                    mask="99.99.9999"
-                            ></masked-input>
+                            <datepicker
+                                    :language="'ru'"
+                                    :input-class="state.inputClass"
+                                    :format="customFormatter"
+                                    :value="state.dateStart"
+                                    v-model="state.dateStart"></datepicker>
                             <span class="input-group-addon">по</span>
-                            <masked-input
-                                    class="form-control"
-                                    v-model="dateRange.end"
-                                    mask="99.99.9999"
-                            ></masked-input>
+                            <datepicker
+                                    :language="'ru'"
+                                    :format="customFormatter"
+                                    :input-class="state.inputClass"
+                                    :value="state.dateEnd"
+                                    v-model="state.dateEnd"></datepicker>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6 col-lg-offset-3">
+                                <button class="btn btn-default col-xs-6 col-xs-offset-3 col-lg-6" @click="fetchReport">
+                                    Обновить
+                                </button>
+                            </div>
                         </div>
                     </div>
+                    <!--<div class="form-group">-->
+                    <!--<label for="" class="control-label">Показать записи по указанным датам:</label>-->
+
+                    <!--<div class="input-group input-group-sm">-->
+                    <!--<span class="input-group-addon">с</span>-->
+                    <!--<masked-input-->
+                    <!--class="form-control"-->
+                    <!--v-model="dateRange.start"-->
+                    <!--mask="99.99.9999"-->
+                    <!--&gt;</masked-input>-->
+                    <!--<span class="input-group-addon">по</span>-->
+                    <!--<masked-input-->
+                    <!--class="form-control"-->
+                    <!--v-model="dateRange.end"-->
+                    <!--mask="99.99.9999"-->
+                    <!--&gt;</masked-input>-->
+                    <!--</div>-->
+                    <!--</div>-->
                     <ul class="list-inline">
                         <li><a href="javascript:;" @click="setDateRange('today')">За сегодня</a></li>
                         <li>&bull;</li>
@@ -136,8 +141,9 @@
         data() {
             return {
                 state: {
-                    dateStart: new Date(),
-                    dateEnd: new Date(),
+                    dateStart: "",
+                    dateEnd: "",
+                    inputClass: "form-control input-group-addon"
                 },
                 isLoaded: false,
                 transactions: null,
@@ -152,12 +158,12 @@
 
         watch: {
             dateRange: {
-                handler (val) {
-                    if (val.start !== '' && val.end !== '') {
-                        this.fetchReport();
-                    }
-                },
-                deep: true,
+//                handler (val) {
+//                    if (val.start !== '' && val.end !== '') {
+//                        this.fetchReport();
+//                    }
+//                },
+//                deep: true,
             },
         },
 
@@ -172,23 +178,16 @@
             update(){
                 this.fetchReport();
             },
-            fetchReport() {
-//                console.log(this.state);
-//                let newStartDate = moment(this.state.dateStart).format("DD.MM.YYYY");
-//                console.log(newStartDate);
-//                let parts = newStartDate.split(".");
-//                newStartDate = parts[1] + "." + parts[0] + "." + parts[2];
-//                this.dateRange.start = newStartDate;
-//
-//                let newEndDate = moment(this.state.dateEnd).format("DD.MM.YYYY");
-//                console.log(newEndDate);
-//                parts = newEndDate.split(".");
-//                newEndDate = parts[1] + "." + parts[0] + "." + parts[2];
-//                this.dateRange.end = newEndDate;
 
+            fetchReport(){
+                let start = moment(this.state.dateStart).format("DD.MM.YYYY");
+                let end = moment(this.state.dateEnd).format("DD.MM.YYYY");
+                this.fetchReportByDate(start, end);
+            },
+            fetchReportByDate(start, end) {
+                this.dateRange.start = start;
+                this.dateRange.end = end;
 
-                console.log(this.state);
-                console.log(this.dateRange);
                 this.isLoaded = false;
                 axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
                     .then((response) => {
@@ -206,13 +205,27 @@
 
             setDateRange (key) {
                 if (key === 'today') {
-                    this.dateRange.start = this.dateRange.end = moment().format('L')
+                    this.state.dateStart = moment().toDate();
+                    let start = moment().format('DD.MM.YYYY');
+
+                    this.fetchReportByDate(start, start);
                 } else if (key === 'yesterday') {
-                    this.dateRange.start = moment().subtract(1, 'days').format('L');
-                    this.dateRange.end = moment().format('L')
+                    let startMoment = moment().subtract(1, 'days');
+                    let start = startMoment.format('L');
+                    this.state.dateStart = startMoment.toDate();
+
+                    let end = moment().format('L');
+                    this.state.dateEnd = moment().toDate();
+
+                    this.fetchReportByDate(start, end);
                 } else if (key === 'month') {
-                    this.dateRange.start = moment().startOf('month').format('L');
-                    this.dateRange.end = moment().format('L')
+                    let startMoment = moment().startOf("month");
+                    let start = startMoment.format('L');
+                    this.state.dateStart = startMoment.toDate();
+                    let end = moment().format('L');
+                    this.state.dateEnd = moment().toDate();
+
+                    this.fetchReportByDate(start, end);
                 }
             },
 
@@ -220,6 +233,8 @@
              * Prepare the component.
              */
             prepareComponent() {
+                this.state.dateStart = moment().toDate();
+                this.state.dateEnd = moment().toDate();
                 this.setDateRange('today');
 
                 this.$nextTick(() => {
