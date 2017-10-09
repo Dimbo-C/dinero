@@ -1654,7 +1654,8 @@ class QIWIControl {
         $response = json_decode($response, true);
 
         if ($this->getResponseType($response) != 'NORMAL') {
-            $this->lastErrorStr = "Error detecting card provider:" . $this->getResponseMessage($response);
+//            $this->lastErrorStr = "Error detecting card provider:" . $this->getResponseMessage($response);
+            $this->lastErrorStr = $this->getResponseMessage($response);
             return false;
         }
 
