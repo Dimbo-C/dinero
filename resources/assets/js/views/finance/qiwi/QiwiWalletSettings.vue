@@ -183,14 +183,26 @@
                                     <div class="col-sm-8">
                                         <select class="form-control"
                                                 v-model="form.autoWithdrawalType">
-                                            <option v-for="o in form.autoWithdrawalOptions"
+                                            <option v-for="o in form.autoWithdrawalTypes"
                                                     :value="o.value"
                                                     v-text="o.text"></option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="form.autoWithdrawalType === 'every_x_minutes'">
+                                <div class="form-group">
+                                    <label for="" class="col-sm-4 control-label">Тип автовывода</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control"
+                                                v-model="form.autoWithdrawalTarget">
+                                            <option v-for="o in form.autoWithdrawalTargets"
+                                                    :value="o.value"
+                                                    v-text="o.text"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for=""
                                            class="col-sm-4 control-label"
                                            v-model="form.autoWithdrawalType">
@@ -200,6 +212,10 @@
                                         <input type="text"
                                                class="form-control"
                                                v-model="form.autoWithdrawalTimeout">
+                                        <span class="help-block">Работает только когда кошелек настроен на автовывод.
+                                            Как только с момента последнего автовывода прошло указанное количество минут,
+                                            вызывается автовывод, если режим автовывода указан <b>Каждые Х минут</b>.
+                                            </span>
                                     </div>
                                 </div>
 
@@ -244,7 +260,7 @@
                                         <input type="text"
                                                class="form-control"
                                                placeholder="+79123456789;+79111111111"
-                                               v-model="form.autoWithdrawalWallets">
+                                               v-model="form.autoWithdrawalWallet">
                                     </div>
                                 </div>
 
@@ -327,13 +343,20 @@
                     maximumBalance: 100,
                     autoWithdrawalActive: true,
                     autoWithdrawalType: "",
-                    autoWithdrawalOptions: [],
+                    autoWithdrawalTypes: [],
+                    autoWithdrawalTarget: "",
+                    autoWithdrawalTargets: [
+                        {value: "card", text: "На банковскую карту VISA/MASTERCARD"},
+                        {value: "wallet", text: "На Qiwi кошелек"}
+                    ],
+
                     autoWithdrawalTimeout: 0,
                     minimumAutoWithdrawAmount: 2500,
                     minimumBalance: 0,
                     autoWithdrawalCardNumber: "",
                     autoWithdrawalCardholderName: "",
                     autoWithdrawalCardholderSurname: "",
+                    autoWithdrawalWallet: "",
                     usingVouchers: false,
                     withdrawTarget: "card",
 
@@ -382,26 +405,31 @@
                     $('.tooltip').removeClass('in');
                 });
 
+                this.loadData();
+            },
+
+            loadData(){
                 // get settings of this wallet
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`)
                     .then((response) => {
                         let data = response.data;
-                        console.log(data);
-                        this.loadAutoWithdrawalOptions(data.autoWithdrawTypes);
+                        this.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
                         this.loadWalletTypes(data.walletTypes);
                         let settings = Object.assign(data.walletSettings, data.wallet);
                         settings.proxy = data.proxy;
                         this.loadSettings(settings);
+
+                        console.log(data);
                         console.log(settings);
                     })
             },
 
-            loadAutoWithdrawalOptions(options){
+            loadAutoWithdrawalTypes(options){
                 options.map((option) => {
-                    this.form.autoWithdrawalOptions.push({value: option.slug, text: option.type})
+                    this.form.autoWithdrawalTypes.push({value: option.slug, text: option.type})
                 });
 
-                this.form.autoWithdrawalType = this.form.autoWithdrawalOptions[1].value;
+                this.form.autoWithdrawalType = this.form.autoWithdrawalTypes[1].value;
             },
 
             loadWalletTypes(types){
@@ -437,6 +465,7 @@
                 form.usingVouchers = settings.using_vouchers;
                 form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
                 form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
+                form.autoWithdrawalWallet = settings.autoWithdrawal_wallet_number;
 
                 if (settings.autoWithdrawal_card_number !== null) {
                     let results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
@@ -446,9 +475,12 @@
 
                 // selects
                 let optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
-                form.autoWithdrawalType = form.autoWithdrawalOptions[optionId - 1].value;
+                form.autoWithdrawalType = form.autoWithdrawalTypes[optionId - 1].value;
 
                 form.walletType = this.form.walletTypes[settings.type_id - 1].value;
+
+                this.form.autoWithdrawalTarget = this.form.autoWithdrawalTargets[0].value;
+                this.form.autoWithdrawalTarget = settings.autoWithdrawal_target;
             },
 
             saveSettings(){

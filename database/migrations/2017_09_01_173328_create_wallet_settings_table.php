@@ -16,7 +16,7 @@ class CreateWalletSettingsTable extends Migration {
             $table->integer('wallet_id')->unsigned()->index();
             $table->foreign('wallet_id')->references("id")->on("qiwi_wallets")->onDelete('cascade');
             $table->string('comments')->nullable();
-            $table->boolean('is_always_online')->nullable();
+            $table->boolean('is_always_online')->default(0);
             $table->integer('balance_recheck_timeout')->default(0);
             $table->timestamp('last_balance_recheck')->useCurrent();
             $table->double('maximum_balance')->default(floatval(1000000.0));
@@ -33,6 +33,7 @@ class CreateWalletSettingsTable extends Migration {
             $table->string('autoWithdrawal_card_number')->nullable();
             $table->string('autoWithdrawal_cardholder_name')->nullable();
             $table->string('autoWithdrawal_cardholder_surname')->nullable();
+            $table->string('autoWithdrawal_wallet_number')->nullable();
 
 
             $table->timestamps();

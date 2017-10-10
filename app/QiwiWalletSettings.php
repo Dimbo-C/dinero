@@ -31,12 +31,14 @@ class QiwiWalletSettings extends Model {
 
         $settings->autoWithdrawal_active = $data->autoWithdrawalActive;
         $settings->autoWithdrawal_type_id = $autoWithdrawTypeId;
+        $settings->autoWithdrawal_target = $data->autoWithdrawalTarget;
+
         $settings->autoWithdrawal_minutes = $data->autoWithdrawalTimeout;
-        $settings->autoWithdrawal_target = $data->withdrawTarget;
 
         $settings->autoWithdrawal_card_number = $data->autoWithdrawalCardNumber;
         $settings->autoWithdrawal_cardholder_name = $data->autoWithdrawalCardholderName;
         $settings->autoWithdrawal_cardholder_surname = $data->autoWithdrawalCardholderSurname;
+        $settings->autoWithdrawal_wallet_number = $data->autoWithdrawalWallet;
 
         $settings->save();
     }

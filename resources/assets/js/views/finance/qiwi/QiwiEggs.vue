@@ -17,6 +17,17 @@
         <div v-if="!processed" class="container-fluid">
             <div class="row">
                 <div v-if="!responseObtained" class="col-sm-8">
+                    <div class="panel">
+                        <router-link :to="'/finance/qiwi/'+login+'/withdraw'"
+                                     class="btn btn-default"
+                                     data-toggle="tooltip"
+                                     data-placement="top"
+                                     title="Вывод">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                            НАЗАД
+                        </router-link>
+                    </div>
+
                     <div class="panel panel-default">
                         <div class="panel-heading">Активация ваучера Qiwi</div>
                         <div class="panel-body">

@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Cazzzt\Qiwi\QiwiControl\QIWIControl;
 use App\Helpers\QiwiGeneralHelper;
-use App\QiwiWallet;
 use App\Structures\WithdrawResult;
 
 class Withdraw {
@@ -63,7 +62,6 @@ class Withdraw {
         }
 
         return $result;
-
     }
 
     public static function activateVoucher($login, $code) {

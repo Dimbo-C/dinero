@@ -55,7 +55,8 @@ class QiwiWalletsController extends Controller {
                 $request->comment,
                 $request->targetField,
                 $request->cardholderName,
-                $request->cardholderSurname);
+                $request->cardholderSurname
+        );
     }
 
     public function activateVoucher(Request $request) {

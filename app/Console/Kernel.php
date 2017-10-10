@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Helpers\QiwiWalletUpdateHelper;
 use App\QiwiWallet;
+use App\Services\Autowithdraw;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Log;
@@ -25,10 +26,10 @@ class Kernel extends ConsoleKernel {
      * @return void
      */
     protected function schedule(Schedule $schedule) {
-
         $schedule->call(function () {
-            $this->updateBalances();
             $this->refreshSessions();
+            $this->updateBalances();
+//            $this->autoWithdraw();
         })->everyMinute();
     }
 
@@ -41,6 +42,14 @@ class Kernel extends ConsoleKernel {
     private function refreshSessions() {
         foreach (QiwiWallet::all() as $wallet) {
             QiwiWalletUpdateHelper::restoreSession($wallet->login);
+        }
+    }
+
+    private function autoWithdraw() {
+        foreach (QiwiWallet::all() as $wallet) {
+            Log::info("Autowithdraw attempt for " . $wallet->login);
+            $aw = new Autowithdraw($wallet->login);
+            $aw->autoWithdraw(AUTOWITHDRAW_EVERY_X_MINUTES);
         }
     }
 

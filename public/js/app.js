@@ -11538,6 +11538,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -11560,13 +11576,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 maximumBalance: 100,
                 autoWithdrawalActive: true,
                 autoWithdrawalType: "",
-                autoWithdrawalOptions: [],
+                autoWithdrawalTypes: [],
+                autoWithdrawalTarget: "",
+                autoWithdrawalTargets: [{ value: "card", text: "На банковскую карту VISA/MASTERCARD" }, { value: "wallet", text: "На Qiwi кошелек" }],
+
                 autoWithdrawalTimeout: 0,
                 minimumAutoWithdrawAmount: 2500,
                 minimumBalance: 0,
                 autoWithdrawalCardNumber: "",
                 autoWithdrawalCardholderName: "",
                 autoWithdrawalCardholderSurname: "",
+                autoWithdrawalWallet: "",
                 usingVouchers: false,
                 withdrawTarget: "card",
 
@@ -11612,32 +11632,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Prepare the component.
          */
         prepareComponent: function prepareComponent() {
-            var _this = this;
-
             this.$nextTick(function () {
                 $('.tooltip').removeClass('in');
             });
 
+            this.loadData();
+        },
+        loadData: function loadData() {
+            var _this = this;
+
             // get settings of this wallet
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/settings").then(function (response) {
                 var data = response.data;
-                console.log(data);
-                _this.loadAutoWithdrawalOptions(data.autoWithdrawTypes);
+                _this.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
                 _this.loadWalletTypes(data.walletTypes);
                 var settings = Object.assign(data.walletSettings, data.wallet);
                 settings.proxy = data.proxy;
                 _this.loadSettings(settings);
+
+                console.log(data);
                 console.log(settings);
             });
         },
-        loadAutoWithdrawalOptions: function loadAutoWithdrawalOptions(options) {
+        loadAutoWithdrawalTypes: function loadAutoWithdrawalTypes(options) {
             var _this2 = this;
 
             options.map(function (option) {
-                _this2.form.autoWithdrawalOptions.push({ value: option.slug, text: option.type });
+                _this2.form.autoWithdrawalTypes.push({ value: option.slug, text: option.type });
             });
 
-            this.form.autoWithdrawalType = this.form.autoWithdrawalOptions[1].value;
+            this.form.autoWithdrawalType = this.form.autoWithdrawalTypes[1].value;
         },
         loadWalletTypes: function loadWalletTypes(types) {
             var form = this.form;
@@ -11666,6 +11690,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             form.usingVouchers = settings.using_vouchers;
             form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
             form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
+            form.autoWithdrawalWallet = settings.autoWithdrawal_wallet_number;
 
             if (settings.autoWithdrawal_card_number !== null) {
                 var results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
@@ -11674,9 +11699,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             // selects
             var optionId = settings.autoWithdrawal_type_id === null ? 1 : settings.autoWithdrawal_type_id;
-            form.autoWithdrawalType = form.autoWithdrawalOptions[optionId - 1].value;
+            form.autoWithdrawalType = form.autoWithdrawalTypes[optionId - 1].value;
 
             form.walletType = this.form.walletTypes[settings.type_id - 1].value;
+
+            this.form.autoWithdrawalTarget = this.form.autoWithdrawalTargets[0].value;
+            this.form.autoWithdrawalTarget = settings.autoWithdrawal_target;
         },
         saveSettings: function saveSettings() {
             console.log(this.form);
@@ -12175,14 +12203,49 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.autoWithdrawalType = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, _vm._l((_vm.form.autoWithdrawalOptions), function(o) {
+  }, _vm._l((_vm.form.autoWithdrawalTypes), function(o) {
     return _c('option', {
       domProps: {
         "value": o.value,
         "textContent": _vm._s(o.text)
       }
     })
-  }))])]), _vm._v(" "), (_vm.form.autoWithdrawalType === 'every_x_minutes') ? _c('div', {
+  }))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Тип автовывода")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.autoWithdrawalTarget),
+      expression: "form.autoWithdrawalTarget"
+    }],
+    staticClass: "form-control",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.form.autoWithdrawalTarget = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((_vm.form.autoWithdrawalTargets), function(o) {
+    return _c('option', {
+      domProps: {
+        "value": o.value,
+        "textContent": _vm._s(o.text)
+      }
+    })
+  }))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -12218,7 +12281,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.autoWithdrawalTimeout = $event.target.value
       }
     }
-  })])]) : _vm._e(), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _vm._m(0)])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
@@ -12231,8 +12294,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.autoWithdrawalWallets),
-      expression: "form.autoWithdrawalWallets"
+      value: (_vm.form.autoWithdrawalWallet),
+      expression: "form.autoWithdrawalWallet"
     }],
     staticClass: "form-control",
     attrs: {
@@ -12240,12 +12303,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "+79123456789;+79111111111"
     },
     domProps: {
-      "value": (_vm.form.autoWithdrawalWallets)
+      "value": (_vm.form.autoWithdrawalWallet)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawalWallets = $event.target.value
+        _vm.form.autoWithdrawalWallet = $event.target.value
       }
     }
   })])]), _vm._v(" "), _c('div', {
@@ -12341,7 +12404,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": _vm.saveSettings
     }
   }, [_vm._v("\n                                        Сохранить\n                                    ")])])])])])])])])])], 1)
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Работает только когда кошелек настроен на автовывод.\n                                        Как только с момента последнего автовывода прошло указанное количество минут,\n                                        вызывается автовывод, если режим автовывода указан "), _c('b', [_vm._v("Каждые Х минут")]), _vm._v(".\n                                        ")])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -14161,6 +14228,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -14267,6 +14345,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [(!_vm.responseObtained) ? _c('div', {
     staticClass: "col-sm-8"
   }, [_c('div', {
+    staticClass: "panel"
+  }, [_c('router-link', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "to": '/finance/qiwi/' + _vm.login + '/withdraw',
+      "data-toggle": "tooltip",
+      "data-placement": "top",
+      "title": "Вывод"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-arrow-left",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("\n                        НАЗАД\n                    ")])], 1), _vm._v(" "), _c('div', {
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
