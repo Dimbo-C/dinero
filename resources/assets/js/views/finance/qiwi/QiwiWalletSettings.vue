@@ -259,7 +259,7 @@
                                     <div class="col-sm-8">
                                         <input type="text"
                                                class="form-control"
-                                               placeholder="+79123456789;+79111111111"
+                                               placeholder="Например: +79123456789"
                                                v-model="form.autoWithdrawalWallet">
                                     </div>
                                 </div>
