@@ -27,8 +27,16 @@ class Autowithdraw {
      */
     private $autoWithdrawType;
 
+    /**
+     * @var string
+     */
     private $login;
 
+    /**
+     * @var double
+     */
+
+    private $withdrawAmount;
 
     function __construct($walletLogin) {
         $this->login = $walletLogin;
@@ -40,6 +48,20 @@ class Autowithdraw {
         $this->wallet = QiwiWallet::where("login", $this->login)->first();
         $this->settings = QiwiWalletSettings::find($this->wallet->id);
         $this->autoWithdrawType = AutowithdrawTypes::find($this->settings->autoWithdrawal_type_id);
+        $this->withdrawAmount = $this->withdrawAmount();
+    }
+
+    private function withdrawAmount() {
+        $balance = $this->wallet->balance;
+        $limit = $this->settings->autoWithdrawal_limit;
+        if ($limit == 0) return $balance;
+
+        $amount = $balance > $limit ? $limit : $balance;
+
+        //        // TODO: TEST STATE remove in production
+        //        $amount = 1;
+
+        return $amount;
     }
 
     /**
@@ -48,29 +70,20 @@ class Autowithdraw {
      * @return bool
      */
     public function autoWithdraw($autowithdrawMode) {
-        Log::info("Before guards " . $this->login);
         if (!$this->guards($autowithdrawMode)) return false;
-        Log::info("Guards passed " . $this->login);
-        switch ($autowithdrawMode) {
-            case AUTOWITHDRAW_EVERY_X_MINUTES:
-                Log::info("In every x minutes " . $this->login);
-                $this->everyXMin();
-                break;
 
-            default:
-                return false;
-        }
-
-        return true;
+        return $this->withdrawRoutine();
     }
 
-    private function everyXMin() {
+    /**
+     * @return bool success
+     */
+    private function withdrawRoutine() {
         $target = $this->settings->autoWithdrawal_target;
         switch ($target) {
             case "wallet":
                 return $this->toWallet();
             case "card":
-                Log::info("Shit is rad: " . $this->login);
                 return $this->toCard();
             default:
                 return false;
@@ -83,29 +96,40 @@ class Autowithdraw {
             $cardnum = $this->settings->autoWithdrawal_card_number;
             $fname = $this->settings->autoWithdrawal_cardholder_name;
             $lname = $this->settings->autoWithdrawal_cardholder_surname;
-            $sum = 1;
+            $sum = $this->withdrawAmount;
             $currency = "RUB";
-            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y");
-            Log::info("Before send action");
-            Withdraw::toCreditCard($login, $cardnum, $fname, $lname, $sum, $currency, $comment);
-            Log::info("send action success");
-            return true;
+            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
+            $result = Withdraw::toCreditCard(
+                    $login, $cardnum, $fname,
+                    $lname, $sum, $currency, $comment);
+
+            return ($result->error == null);
         } catch (\Exception $ex) {
+            Log::info("Error in 'AutoWithdraw#toCard()'");
+
             return false;
         }
     }
 
     private function toWallet() {
-        return true;
+        try {
+            $to = $this->settings->autoWithdrawal_wallet_number;
+            $amount = $this->withdrawAmount;
+            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
+            $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $amount, $comment);
+
+            return ($result->error == null);
+        } catch (\Exception $ex) {
+            Log::info("Error in 'AutoWithdraw#toWallet()'");
+            return false;
+        }
     }
 
     // all necessary checks before proceeding to executing auto withdraw
     private function guards($mode) {
-        Log::info("Before mode right");
         if (!$this->isModeRight($mode)) return false;
-        Log::info("mode is right");
         if (!$this->settings->isAutoWidthdrawalActive()) return false;
-        Log::info("autowithdraw active");
+        if (!$this->isEnoughMoney()) return false;
 
         return true;
     }
@@ -113,9 +137,6 @@ class Autowithdraw {
     private function isModeRight($mode) {
         switch ($mode) {
             case AUTOWITHDRAW_EVERY_X_MINUTES:
-                Log::info("Inside mode checker: ");
-                Log::info("Every x minutes : " . ($this->autoWithdrawType->isEveryXMinutes() ? "true" : "false"));
-                Log::info("Is time to withdraw : " . ($this->settings->isTimeToWithdraw() ? "true" : "false"));
                 if ($this->autoWithdrawType->isEveryXMinutes() && $this->settings->isTimeToWithdraw()) {
                     return true;
                 }
@@ -133,5 +154,14 @@ class Autowithdraw {
         }
 
         return false;
+    }
+
+    private function isEnoughMoney() {
+        if (!$this->wallet->balance < $this->settings->autoWithdrawal_minimum_withdraw_amount) {
+            Log::info("Not enough money for auto withdraw");
+            return false;
+        }
+
+        return true;
     }
 }

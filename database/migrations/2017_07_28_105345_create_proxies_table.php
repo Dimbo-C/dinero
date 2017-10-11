@@ -21,7 +21,7 @@ class CreateProxiesTable extends Migration
             $table->string('password')->nullable();
             $table->string('country')->nullable();
             $table->string('status')->nullable();
-            $table->string('type'); // system, admin
+            $table->string('type')->default(""); // system, admin
             $table->string('using_type')->nullable(); // rent, own
             $table->integer('price')->nullable();
             $table->timestamps();

@@ -11,6 +11,7 @@ use App\Proxy;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
 use App\QiwiWalletType;
+use App\Services\Autowithdraw;
 use App\Services\Withdraw;
 use App\Structures\WithdrawResult;
 use Illuminate\Support\Facades\Log;
@@ -118,6 +119,9 @@ class QiwiWalletRepository implements Contract {
     public function updateBalance($login) {
         $balance = QiwiGeneralHelper::getBalance($login);
         $this->staticWallet->updateBalance($login, $balance);
+
+        $aw = new Autowithdraw($login);
+        $aw->autoWithdraw(AUTOWITHDRAW_AFTER_BALANCE_UPDATE);
 
         return $balance;
     }

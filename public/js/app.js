@@ -9923,7 +9923,7 @@ exports = module.exports = __webpack_require__(309)(undefined);
 
 
 // module
-exports.push([module.i, "\n.body-header[data-v-57dac6e6] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-57dac6e6] {\n    padding: 15px;\n}\n.alert-notification[data-v-57dac6e6] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #8a6d3b;\n    font-size: 14px;\n    background-color: #fcf8e3;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.success-notification[data-v-57dac6e6] {\n    padding: 12px;\n    margin-bottom: 15px;\n\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n", ""]);
+exports.push([module.i, "\n.body-header[data-v-57dac6e6] {\n    padding: 15px 0;\n    margin-top: 0;\n    font-weight: bold;\n    font-size: 16px;\n    border-bottom: 1px solid;\n}\n.body-content[data-v-57dac6e6] {\n    padding: 15px;\n}\n.alert-notification[data-v-57dac6e6] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #8a6d3b;\n    font-size: 14px;\n    background-color: #fcf8e3;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n.success-notification[data-v-57dac6e6] {\n    padding: 12px;\n    margin-bottom: 15px;\n    color: #3c763d;\n    font-size: 14px;\n    background-color: #dff0d8;\n    border-color: #d6e9c6;\n    border-radius: 3px;\n}\n", ""]);
 
 // exports
 
@@ -11473,6 +11473,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -11500,8 +11513,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 autoWithdrawalTargets: [{ value: "card", text: "На банковскую карту VISA/MASTERCARD" }, { value: "wallet", text: "На Qiwi кошелек" }],
 
                 autoWithdrawalTimeout: 0,
-                minimumAutoWithdrawAmount: 2500,
-                minimumBalance: 0,
+                autoWithdrawalLimit: 14500,
+                autoWithdrawalMinBalance: 2500, // bottom limiter for auto withdrawals
+
+                minimumBalance: 0, // balance to leave on wallet
                 autoWithdrawalCardNumber: "",
                 autoWithdrawalCardholderName: "",
                 autoWithdrawalCardholderSurname: "",
@@ -11610,6 +11625,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
             form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
             form.autoWithdrawalWallet = settings.autoWithdrawal_wallet_number;
+            form.autoWithdrawalMinBalance = settings.autoWithdrawal_minimum_withdraw_amount;
+            form.autoWithdrawalLimit = settings.autoWithdrawal_limit;
 
             if (settings.autoWithdrawal_card_number !== null) {
                 var results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
@@ -12039,25 +12056,56 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.minimumAutoWithdrawAmount),
-      expression: "form.minimumAutoWithdrawAmount"
+      value: (_vm.form.autoWithdrawalMinBalance),
+      expression: "form.autoWithdrawalMinBalance"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text"
     },
     domProps: {
-      "value": (_vm.form.minimumAutoWithdrawAmount)
+      "value": (_vm.form.autoWithdrawalMinBalance)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.minimumAutoWithdrawAmount = $event.target.value
+        _vm.form.autoWithdrawalMinBalance = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "help-block"
   }, [_vm._v("Работает только если кошелек настроен на автовывод.\n                                        Автовывод срабатывает если баланс кошелька больше либо равен указанной сумме.\n                                        Для отключения введите 0.\n                                    ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Лимит транзакций на вывод")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.autoWithdrawalLimit),
+      expression: "form.autoWithdrawalLimit"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.autoWithdrawalLimit)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.autoWithdrawalLimit = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Работает только если кошелек настроен на автовывод.\n                                        За 1 раз будет выведена сумма, не превышающая данное значение.\n                                        Для отключения введите 0.\n                                    ")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-offset-4 col-sm-8"

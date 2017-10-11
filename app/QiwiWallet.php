@@ -6,6 +6,36 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 
+/**
+ * App\QiwiWallet
+ *
+ * @property int $id
+ * @property int $type_id
+ * @property int $use_proxy
+ * @property int|null $proxy_id
+ * @property string $name
+ * @property string $login
+ * @property string $password
+ * @property string|null $balance
+ * @property string|null $month_income
+ * @property int $is_active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\QiwiWalletType $type
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereBalance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereLogin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereMonthIncome($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereProxyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereUseProxy($value)
+ * @mixin \Eloquent
+ */
 class QiwiWallet extends Model {
     protected $table = "qiwi_wallets";
     protected $fillable = ['login', 'password', 'name', 'balance', 'month_income', 'is_active', 'type_id'];

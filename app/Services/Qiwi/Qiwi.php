@@ -30,8 +30,6 @@ class Qiwi {
                 ? "tcp://$proxyAuth@$proxy"
                 : $proxy;
 
-        Log::info("Proxy: " . $proxyString);
-
         $this->client = new Client([
                 'cookies' => $this->cookieJar,
                 'proxy' => $proxyString,

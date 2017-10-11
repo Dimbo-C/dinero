@@ -133,7 +133,6 @@
     .success-notification {
         padding: 12px;
         margin-bottom: 15px;
-
         color: #3c763d;
         font-size: 14px;
         background-color: #dff0d8;

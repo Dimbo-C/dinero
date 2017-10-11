@@ -9,15 +9,19 @@ use Carbon\Carbon;
  */
 class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
     public function run() {
+        for ($i = 0; $i < 3; $i++) {
+            DB::table('proxies')->insert([
+                    "type"=>""
+            ]);
+        }
+
         DB::table('proxies')->insert([
-                "type" => ""
+                "host" => "5.8.66.122",
+                "port" => "8239",
+                "login" => "user6760",
+                "password" => "0ajq7n",
         ]);
-        DB::table('proxies')->insert([
-                "type" => ""
-        ]);
-        DB::table('proxies')->insert([
-                "type" => ""
-        ]);
+
 
         DB::table('qiwi_wallets')->insert([
                 "type_id" => 1,
@@ -52,10 +56,22 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
+        DB::table('qiwi_wallets')->insert([
+                "type_id" => 1,
+                "name" => "Wallet under proxy",
+                "login" => "+79068369184",
+                "password" => "EtvtiL4EDO",
+                "use_proxy" => 1,
+                "is_active" => 1,
+                "proxy_id" => 4,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
         DB::table('qiwi_wallet_settings')->insert([
                 "wallet_id" => 1,
                 "balance_recheck_timeout" => 0,
-                "autoWithdrawal_type_id" => 2
+                "autoWithdrawal_type_id" => 2,
         ]);
         DB::table('qiwi_wallet_settings')->insert([
                 "wallet_id" => 2,
@@ -64,6 +80,11 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
         ]);
         DB::table('qiwi_wallet_settings')->insert([
                 "wallet_id" => 3,
+                "balance_recheck_timeout" => 0,
+                "autoWithdrawal_type_id" => 2
+        ]);
+        DB::table('qiwi_wallet_settings')->insert([
+                "wallet_id" => 4,
                 "balance_recheck_timeout" => 0,
                 "autoWithdrawal_type_id" => 2
         ]);

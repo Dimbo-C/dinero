@@ -28,7 +28,10 @@ class QiwiWalletUpdateHelper {
 
         $repository = new QiwiWalletRepository();
 
-        return $repository->updateBalanceAndIncome($login);
+        return [
+                "balance" => $repository->updateBalance($login),
+                "monthIncome" => $repository->updateIncome($login)
+        ];
     }
 
     public static function restoreSession($login) {
@@ -38,7 +41,7 @@ class QiwiWalletUpdateHelper {
 
         if ($settings->is_always_online) {
             $control = QiwiGeneralHelper::getQiwiControlObject($login, $wallet->password, $wallet->use_proxy, $proxy);
-//            Log::info("Session updated " . $control->login());
+            //            Log::info("Session updated " . $control->login());
             return $control->login();
         } else {
             return true;

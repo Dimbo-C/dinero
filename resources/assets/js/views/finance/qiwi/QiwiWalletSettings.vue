@@ -159,9 +159,22 @@
                                     <div class="col-sm-8">
                                         <input type="text"
                                                class="form-control"
-                                               v-model="form.minimumAutoWithdrawAmount">
+                                               v-model="form.autoWithdrawalMinBalance">
                                         <span class="help-block">Работает только если кошелек настроен на автовывод.
                                             Автовывод срабатывает если баланс кошелька больше либо равен указанной сумме.
+                                            Для отключения введите 0.
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="col-sm-4 control-label">Лимит транзакций на вывод</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="form.autoWithdrawalLimit">
+                                        <span class="help-block">Работает только если кошелек настроен на автовывод.
+                                            За 1 раз будет выведена сумма, не превышающая данное значение.
                                             Для отключения введите 0.
                                         </span>
                                     </div>
@@ -351,8 +364,10 @@
                     ],
 
                     autoWithdrawalTimeout: 0,
-                    minimumAutoWithdrawAmount: 2500,
-                    minimumBalance: 0,
+                    autoWithdrawalLimit: 14500,
+                    autoWithdrawalMinBalance: 2500, // bottom limiter for auto withdrawals
+
+                    minimumBalance: 0,  // balance to leave on wallet
                     autoWithdrawalCardNumber: "",
                     autoWithdrawalCardholderName: "",
                     autoWithdrawalCardholderSurname: "",
@@ -466,6 +481,8 @@
                 form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
                 form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
                 form.autoWithdrawalWallet = settings.autoWithdrawal_wallet_number;
+                form.autoWithdrawalMinBalance = settings.autoWithdrawal_minimum_withdraw_amount;
+                form.autoWithdrawalLimit = settings.autoWithdrawal_limit;
 
                 if (settings.autoWithdrawal_card_number !== null) {
                     let results = settings.autoWithdrawal_card_number.match(/\d{4}/g);

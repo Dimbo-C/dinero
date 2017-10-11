@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel {
         $schedule->call(function () {
             $this->refreshSessions();
             $this->updateBalances();
-//            $this->autoWithdraw();
+            $this->autoWithdraw();
         })->everyMinute();
     }
 
