@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 /**
  * App\QiwiWalletSettings
@@ -103,13 +104,21 @@ class QiwiWalletSettings extends Model {
     }
 
     public function isTimeToWithdraw() {
-//        if ($this->autoWithdrawal_minutes == 0) return false;
-
+        //        if ($this->autoWithdrawal_minutes == 0) return false;
         $now = Carbon::now();
-        $end = Carbon::parse($this->last_withdraw_time);
-        $len = $end->diffInMinutes($now);
+        $end = Carbon::parse($this->last_withdrawal_time);
+        $diff = $end->diffInMinutes($now);
+        $isTime = (intval($diff) >= intval($this->autoWithdrawal_minutes));
 
-        return $len >= $this->autoWithdrawal_minutes;
+        if ($isTime) $this->updateWithdrawalTimer();
+
+        return $isTime;
+    }
+
+    public function updateWithdrawalTimer() {
+        $this->last_withdrawal_time = Carbon::now();
+
+        $this->save();
     }
 
     public function autoWithdrawData() {

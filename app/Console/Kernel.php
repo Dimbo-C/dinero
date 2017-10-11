@@ -47,7 +47,6 @@ class Kernel extends ConsoleKernel {
 
     private function autoWithdraw() {
         foreach (QiwiWallet::all() as $wallet) {
-            Log::info("Autowithdraw attempt for " . $wallet->login);
             $aw = new Autowithdraw($wallet->login);
             $aw->autoWithdraw(AUTOWITHDRAW_EVERY_X_MINUTES);
         }

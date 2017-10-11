@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\Autowithdraw;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -152,6 +153,10 @@ class QiwiWallet extends Model {
     private function postUpdateRoutine($login) {
         $this->updateRecheckTime($login);
         $this->recheckMaximumBalance($login);
+
+        // auto withdraw attempt
+        $aw = new Autowithdraw($login);
+        $aw->autoWithdraw(AUTOWITHDRAW_AFTER_BALANCE_UPDATE);
     }
 
     // put wallet to reserve if it's maximum balance is more that current balance

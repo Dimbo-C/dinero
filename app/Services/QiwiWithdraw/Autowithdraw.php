@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Log;
 define("AUTOWITHDRAW_EVERY_X_MINUTES", 1);
 define("AUTOWITHDRAW_AFTER_BALANCE_UPDATE", 2);
 define("AUTOWITHDRAW_MANUALLY", 3);
-define("AUTOWITHDRAW_TARGET_CARD", "card");
-define("AUTOWITHDRAW_TARGET_WALLET", "wallet");
 
 class Autowithdraw {
     /**
@@ -70,9 +68,13 @@ class Autowithdraw {
      * @return bool
      */
     public function autoWithdraw($autowithdrawMode) {
+        Log::info("Before guards: " . $this->login);
         if (!$this->guards($autowithdrawMode)) return false;
+        Log::info("Guards passed: " . $this->login);
+        $result = $this->withdrawRoutine();
+        Log::info("Autowithdraw from " . $this->login . " is " . ($result ? "success" : "fail"));
 
-        return $this->withdrawRoutine();
+        return $result;
     }
 
     /**

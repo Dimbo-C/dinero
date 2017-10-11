@@ -120,8 +120,7 @@ class QiwiWalletRepository implements Contract {
         $balance = QiwiGeneralHelper::getBalance($login);
         $this->staticWallet->updateBalance($login, $balance);
 
-        $aw = new Autowithdraw($login);
-        $aw->autoWithdraw(AUTOWITHDRAW_AFTER_BALANCE_UPDATE);
+
 
         return $balance;
     }
