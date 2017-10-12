@@ -26,6 +26,7 @@ class AutowithdrawTypes extends Model {
         return $this->where('slug', $slug)->first();
     }
 
+
     public function isEveryXMinutes() {
         return $this->slug == "every_x_minutes";
     }
