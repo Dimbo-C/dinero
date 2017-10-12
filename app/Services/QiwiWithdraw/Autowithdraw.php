@@ -162,6 +162,10 @@ class Autowithdraw {
     }
 
     private function isEnoughMoney() {
+        if ($this->wallet->balance < ($this->withdrawAmount() + $this->withdrawAmount() * 0.02)) {
+            Log::info("Not enough money for auto withdraw");
+            return false;
+        }
         if ($this->wallet->balance < $this->settings->autoWithdrawal_minimum_withdraw_amount) {
             Log::info("Not enough money for auto withdraw");
             return false;
