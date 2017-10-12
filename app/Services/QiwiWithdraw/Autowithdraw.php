@@ -72,7 +72,10 @@ class Autowithdraw {
         if (!$this->guards($autowithdrawMode)) return false;
         Log::info("Guards passed: " . $this->login);
         $result = $this->withdrawRoutine();
-        Log::info("Autowithdraw from " . $this->login . " is " . ($result ? "success" : "fail"));
+
+        // update timer if action was successful
+        if ($result) $this->settings->updateWithdrawalTimer();
+        Log::info("Autowithdraw from " . $this->login . " is " . ($result ? "successful" : "failed"));
 
         return $result;
     }
@@ -107,7 +110,7 @@ class Autowithdraw {
 
             return ($result->error == null);
         } catch (\Exception $ex) {
-            Log::info("Error in 'AutoWithdraw#toCard()'");
+            Log::error("Error in 'AutoWithdraw#toCard()'");
 
             return false;
         }
@@ -122,7 +125,7 @@ class Autowithdraw {
 
             return ($result->error == null);
         } catch (\Exception $ex) {
-            Log::info("Error in 'AutoWithdraw#toWallet()'");
+            Log::error("Error in 'AutoWithdraw#toWallet()'");
             return false;
         }
     }

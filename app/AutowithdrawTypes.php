@@ -27,14 +27,14 @@ class AutowithdrawTypes extends Model {
     }
 
     public function isEveryXMinutes() {
-        return $this->slug = "every_x_minutes";
+        return $this->slug == "every_x_minutes";
     }
 
     public function isAfterBalanceUpdate() {
-        return $this->slug = "after_balance_update";
+        return $this->slug == "after_balance_update";
     }
 
     public function isManually() {
-        return $this->slug = "manually";
+        return $this->slug == "manually";
     }
 }
