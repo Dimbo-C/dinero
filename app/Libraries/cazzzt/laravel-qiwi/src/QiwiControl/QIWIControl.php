@@ -1559,6 +1559,7 @@ class QIWIControl {
                 'Origin' => QIWI_URL_MAIN,
                 'X-Requested-With' => 'XMLHttpRequest'
         ]);
+
         if ($this->ua->getStatus() !== 200) {
             $this->lastErrorStr = "Failed to send security ticket set request. Status=" . $this->ua->getStatus();
             return false;
@@ -1579,6 +1580,8 @@ class QIWIControl {
                 'Origin' => QIWI_URL_MAIN,
                 'X-Requested-With' => 'XMLHttpRequest'
         ]);
+
+        $this->debugData = $response;
         if ($this->ua->getStatus() !== 200) {
             $this->lastErrorStr = "Failed to send security ticket update request. Status=" . $this->ua->getStatus();
             return false;
@@ -1654,7 +1657,7 @@ class QIWIControl {
         $response = json_decode($response, true);
 
         if ($this->getResponseType($response) != 'NORMAL') {
-//            $this->lastErrorStr = "Error detecting card provider:" . $this->getResponseMessage($response);
+            //            $this->lastErrorStr = "Error detecting card provider:" . $this->getResponseMessage($response);
             $this->lastErrorStr = $this->getResponseMessage($response);
             return false;
         }

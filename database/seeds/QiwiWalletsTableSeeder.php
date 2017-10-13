@@ -1,4 +1,5 @@
 <?php
+use App\QiwiWalletSecuritySettings;
 use Carbon\Carbon;
 
 /**
@@ -11,7 +12,7 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
     public function run() {
         for ($i = 0; $i < 3; $i++) {
             DB::table('proxies')->insert([
-                    "type"=>""
+                    "type" => ""
             ]);
         }
 
@@ -55,7 +56,6 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
-
         DB::table('qiwi_wallets')->insert([
                 "type_id" => 1,
                 "name" => "Wallet under proxy",
@@ -88,5 +88,13 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
                 "balance_recheck_timeout" => 0,
                 "autoWithdrawal_type_id" => 2
         ]);
+
+        for ($i = 1; $i <= 4; $i++) {
+            QiwiWalletSecuritySettings::insert([
+                    'wallet_id' => $i,
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+        }
     }
 }

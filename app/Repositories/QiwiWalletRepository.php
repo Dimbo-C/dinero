@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\AutowithdrawTypes;
 use App\Cazzzt\Qiwi\QiwiControl\QIWIControl;
 use App\Contracts\Repositories\QiwiWalletRepository as Contract;
 use App\Helpers\QiwiGeneralHelper;
@@ -9,6 +10,7 @@ use App\Processors\MassActionProcessor;
 use App\Processors\TransactionProcessor;
 use App\Proxy;
 use App\QiwiWallet;
+use App\QiwiWalletSecuritySettings;
 use App\QiwiWalletSettings;
 use App\QiwiWalletType;
 use App\Services\Autowithdraw;
@@ -121,7 +123,6 @@ class QiwiWalletRepository implements Contract {
         $this->staticWallet->updateBalance($login, $balance);
 
 
-
         return $balance;
     }
 
@@ -151,21 +152,30 @@ class QiwiWalletRepository implements Contract {
      * {@inheritdoc}
      */
     public function settings($login) {
-        return $this->staticWallet->getSettings($login);
+        $wallet = QiwiWallet::findByLogin($login);
+
+        $settings['wallet'] = $wallet;
+        $settings['walletSettings'] = $wallet->settings;
+        $settings['walletTypes'] = QiwiWalletType::all();
+        $settings['autoWithdrawTypes'] = AutowithdrawTypes::all();
+        $settings['id'] = $wallet->id;
+        $settings['proxy'] = Proxy::find($wallet->proxy_id);
+
+        return $settings;
     }
 
     public function createWallet($data) {
         if (QiwiWallet::walletExistsByName($data->name)) {
-            $wallet = QiwiWallet::findByName($data->name);
+            $tmpWallet = QiwiWallet::findByName($data->name);
             $result['status'] = "failure";
-            $result['message'] = "Кошелек с таким именем уже есть в системе. Привязан к номеру " . $wallet->login;
+            $result['message'] = "Кошелек с таким именем уже есть в системе. Привязан к номеру " . $tmpWallet->login;
 
             return $result;
         }
         if (QiwiWallet::walletExists($data->login)) {
-            $wallet = QiwiWallet::findByLogin($data->login);
+            $tmpWallet = QiwiWallet::findByLogin($data->login);
             $result['status'] = "failure";
-            $result['message'] = "Этот номер уже внесен в систему. Имеет имя " . $wallet->name;
+            $result['message'] = "Этот номер уже внесен в систему. Имеет имя " . $tmpWallet->name;
 
             return $result;
         }
@@ -177,17 +187,19 @@ class QiwiWalletRepository implements Contract {
         $proxyRepository->create($request['proxy']);
         $proxy = $proxyRepository->getLast();
 
+        // try to login to new wallet
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
                 $request->login, $request->password,
                 $request->useProxy, $request['proxy']);
-
         if (!$qiwiControl->login()) {
             $result['status'] = "failure";
             $result['message'] = "Кошелек не найден в системе Qiwi " . $qiwiControl->getLastError();
 
             return $result;
         };
+        //        dd($proxy->id);
 
+        // fetch balance from qiwi with library
         $request->typeId = (new QiwiWalletType())->findByType($request->type)->id;
         $request->balance = $qiwiControl->loadBalance()['RUB'];
 
@@ -195,13 +207,23 @@ class QiwiWalletRepository implements Contract {
         $request->monthIncome = $request->balance;
 
         // add new wallet to DB with proxy or not
-        $walletId = $this->staticWallet->insertWallet(
-                $request,
-                is_object($proxy) ? $proxy->id : null
-        );
+        $wallet = new Qiwiwallet();
+        $wallet->name = $data->name;
+        $wallet->login = $data->login;
+        $wallet->password = $data->password;
+        $wallet->is_active = $data->isActive;
+        $wallet->type_id = $data->typeId;
+        $wallet->balance = $data->balance;
+        $wallet->month_income = $data->monthIncome;
+        $wallet->use_proxy = $data->useProxy;
+        $wallet->proxy_id = $proxy->id;
+        $wallet->save();
 
-        // create a settings row in DB
-        (new QiwiWalletSettings())->bindToWallet($walletId);
+        // create a general settings and security settings in DB
+        $settings = new QiwiWalletSettings(['wallet_id' => $wallet->id]);
+        $securitySettings = new QiwiWalletSecuritySettings(['wallet_id' => $wallet->id]);
+        $wallet->settings()->save($settings);
+        $wallet->securitySettings()->save($securitySettings);
 
         $result['status'] = "success";
         $result['message'] = "Кошелек успешно добавлен.";
@@ -220,6 +242,36 @@ class QiwiWalletRepository implements Contract {
 
         // update settings in settings table
         $this->updateWalletSettings($data, $data->login);
+    }
+
+    public function updateSecurity($data) {
+        $login = $data->login;
+        $action = $data->action;
+        $options = $data->options;
+        $value = $options['value'];
+
+        $result = null;
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+
+        switch ($action) {
+            case "SMS_CONFIRMATION":
+                if ($value == false) {
+                    if (isset($options['code'])) {
+                        $qiwiControl->userConfirmBySMS('SMS_CONFIRMATION');
+
+                    } else {
+                        $result = $qiwiControl->setQIWISecuritySetting($action, $options['value']);
+                        $token=$qiwiControl->getResponseData();
+                    }
+
+                } else {
+                }
+
+
+                break;
+        }
+
+        return json_encode(["status" => $result]);
     }
 
     /**

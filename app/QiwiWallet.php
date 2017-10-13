@@ -49,6 +49,17 @@ class QiwiWallet extends Model {
         return $this->belongsTo(QiwiWalletType::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|QiwiWalletSettings
+     */
+    public function settings() {
+        return $this->hasOne('App\QiwiWalletSettings', 'wallet_id');
+    }
+
+    public function securitySettings() {
+        return $this->hasOne('App\QiwiWalletSecuritySettings', 'wallet_id');
+    }
+
     public function deleteByIds($ids) {
         if (count($ids) == 0) return 0;
 
@@ -70,9 +81,9 @@ class QiwiWallet extends Model {
     /**
      * @param $data
      * @param null $proxyId
-     * @return integer id if new wallet
+     * @return QiwiWallet new wallet
      */
-    public function insertWallet($data, $proxyId = null) {
+    public static function insertWallet($data, $proxyId = null) {
         $newWallet = new QiwiWallet();
         $newWallet->name = $data->name;
         $newWallet->login = $data->login;
@@ -85,28 +96,14 @@ class QiwiWallet extends Model {
         $newWallet->proxy_id = $proxyId;
         $newWallet->save();
 
-        return $newWallet->id;
+        return $newWallet;
     }
 
-    public function getSettings($login) {
-        $tmpWallet = $this->findByLogin($login);
-
-        $settings['wallet'] = $tmpWallet;
-        $settings['walletSettings'] = QiwiWalletSettings::find($tmpWallet->id);
-        $settings['walletTypes'] = QiwiWalletType::all();
-        $settings['autoWithdrawTypes'] = AutowithdrawTypes::all();
-        $settings['id'] = $tmpWallet->id;
-        $settings['proxy'] = Proxy::find($tmpWallet->proxy_id);
-
-        return $settings;
-    }
-
+    // not sure if it should be used ever again but, meh
     public function updateBalanceAndIncome($login, $balance, $monthIncome) {
         $wallet = $this->findByLogin($login);
-
         $wallet->balance = $balance;
         $wallet->month_income = $monthIncome;
-
         $wallet->save();
 
         $this->postUpdateRoutine($login);

@@ -28,6 +28,7 @@ Route::prefix("qiwi-wallets")->group(function () {
     Route::get('/{wallet}/settings', 'Api\QiwiWalletsController@settings');
 
     Route::post('/{wallet}/settings', 'QiwiWalletsController@saveSettings');
+    Route::post('/{wallet}/security', 'QiwiWalletsController@security');
     Route::post('/{wallet}/withdraw', 'QiwiWalletsController@withdraw');
     Route::post('/{wallet}/activate-voucher', 'QiwiWalletsController@activateVoucher');
     Route::post('/{wallet}/create-voucher', 'QiwiWalletsController@createVoucher');

@@ -52,6 +52,7 @@ use Illuminate\Support\Facades\Log;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWalletSettings whereAutoWithdrawalLimit($value)
  */
 class QiwiWalletSettings extends Model {
+    protected $fillable = array('wallet_id');
     protected $table = "qiwi_wallet_settings";
     protected $primaryKey = "wallet_id";
     public $incrementing = false;
@@ -107,7 +108,7 @@ class QiwiWalletSettings extends Model {
         $now = Carbon::now();
         $end = Carbon::parse($this->last_withdrawal_time);
         $diff = $end->diffInMinutes($now);
-        $isTime = (intval($diff) >= intval($this->autoWithdrawal_minutes));
+        $isTime = $diff >= $this->autoWithdrawal_minutes;
 
         return $isTime;
     }

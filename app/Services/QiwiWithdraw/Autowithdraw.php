@@ -5,6 +5,7 @@ namespace App\Services;
 use App\AutowithdrawTypes;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
+use App\Repositories\QiwiWalletRepository;
 use Illuminate\Support\Facades\Log;
 
 define("AUTOWITHDRAW_EVERY_X_MINUTES", 1);
@@ -74,7 +75,11 @@ class Autowithdraw {
         $result = $this->withdrawRoutine();
 
         // update timer if action was successful
-        if ($result) $this->settings->updateWithdrawalTimer();
+        if ($result) {
+            $this->settings->updateWithdrawalTimer();
+            $repo = new QiwiWalletRepository();
+            $repo->updateIncome($this->login);
+        }
         Log::info("Autowithdraw from " . $this->login . " is " . ($result ? "successful" : "failed"));
 
         return $result;
@@ -122,7 +127,7 @@ class Autowithdraw {
             $amount = $this->withdrawAmount;
             $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
             $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $amount, $comment);
-
+            Log::error("Error: " . $result->error);
             return ($result->error == null);
         } catch (\Exception $ex) {
             Log::error("Error in 'AutoWithdraw#toWallet()'");

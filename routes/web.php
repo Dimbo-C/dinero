@@ -1,5 +1,6 @@
 <?php
 
+use App\QiwiWallet;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WelcomeController@show');
@@ -12,11 +13,7 @@ Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 Route::get("/test-qiwi", "QiwiWalletsController@");
 
 Route::get("/test", function () {
-
-    $client = new DeathByCaptcha_SocketClient(env("DBC_USERNAME"), env("DBC_PASSWORD"));
-    $client->decode();
-    dd($client->get_user());
-    dd($client->get_balance());
+    dd(QiwiWallet::find(1)->settings);
 });
 
 Route::get('/{all}', 'HomeController@show')

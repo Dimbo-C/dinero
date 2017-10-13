@@ -71,6 +71,10 @@ class QiwiWalletsController extends Controller {
         return $this->wallet->updateSettings($request);
     }
 
+    public function security(Request $request) {
+        return $this->wallet->updateSecurity($request);
+    }
+
     public function updateWalletSettings(Request $request) {
         return $this->wallet->withdrawMoneys($request);
     }

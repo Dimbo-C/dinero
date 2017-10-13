@@ -1,14 +1,15 @@
-import Vue from 'vue';
-import axios from 'axios';
-import lodash from 'lodash';
-import moment from 'moment';
-import VueLocalStorage from 'vue-ls';
+import Vue from "vue";
+import axios from "axios";
+import lodash from "lodash";
+import moment from "moment";
+import VueLocalStorage from "vue-ls";
 import VTooltip from "v-tooltip";
-import Datepicker from 'vuejs-datepicker';
+import BootstrapVue from "bootstrap-vue"
 
-import {Pagination, PaginationEvent} from 'vue-pagination-2';
+import {Pagination} from "vue-pagination-2";
 
 window.VueLocalStorage = VueLocalStorage;
+Vue.use(BootstrapVue);
 Vue.use(VueLocalStorage);
 Vue.use(VTooltip);
 
