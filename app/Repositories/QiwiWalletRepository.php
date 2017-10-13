@@ -256,13 +256,12 @@ class QiwiWalletRepository implements Contract {
         switch ($action) {
             case "SMS_CONFIRMATION":
                 if ($value == false) {
-                    if (isset($options['code'])) {
-                        $qiwiControl->userConfirmBySMS('SMS_CONFIRMATION');
 
-                    } else {
-                        $result = $qiwiControl->setQIWISecuritySetting($action, $options['value']);
-                        $token=$qiwiControl->getResponseData();
-                    }
+                    //                        $qiwiControl->userConfirmBySMS('SMS_CONFIRMATION');
+
+                    $result = $qiwiControl->setQIWISecuritySetting($action, $options['value']);
+                    $token = $qiwiControl->getResponseData();
+
 
                 } else {
                 }
