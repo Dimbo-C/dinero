@@ -248,30 +248,27 @@ class QiwiWalletRepository implements Contract {
         $login = $data->login;
         $action = $data->action;
         $options = $data->options;
-        $value = $options['value'];
 
         $result = null;
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
 
         switch ($action) {
             case "SMS_CONFIRMATION":
-                if ($value == false) {
-
-                    //                        $qiwiControl->userConfirmBySMS('SMS_CONFIRMATION');
-
-                    $result = $qiwiControl->setQIWISecuritySetting($action, $options['value']);
-                    $token = $qiwiControl->getResponseData();
-
-
+                if (isset($options['code'])) {
+                    $result = QiwiGeneralHelper::userConfirmBySMS($login, $options['token'], $options['code']);
                 } else {
+
+                    $result = QiwiGeneralHelper::smsConfirmation($login, $options['value']);
                 }
-
-
                 break;
         }
 
-        return json_encode(["status" => $result]);
+        return json_encode($result);
     }
+
+    public function fetchSecurity($login) {
+        return QiwiGeneralHelper::getSecuritySettings($login);
+    }
+
 
     /**
      * @param $action string

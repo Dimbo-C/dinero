@@ -41,21 +41,6 @@ class QiwiGeneralHelper {
         return $control;
     }
 
-
-    public static function getBalance($login) {
-        $control = QiwiGeneralHelper::getQiwiControlObject($login);
-
-        return $control->loadBalance()['RUB'];
-    }
-
-    public static function getMonthIncome($login) {
-        $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
-        $tp = new TransactionProcessor($qiwi->reportForDateRange(date("01.m.Y"), date("d.m.Y")));
-
-        return $tp->getIncome();
-    }
-
-
     /**
      *  Get qiwi service object
      * @param $login
@@ -74,5 +59,49 @@ class QiwiGeneralHelper {
         $qiwi->login();
 
         return $qiwi;
+    }
+
+    public static function getBalance($login) {
+        $control = QiwiGeneralHelper::getQiwiControlObject($login);
+
+        return $control->loadBalance()['RUB'];
+    }
+
+    public static function getMonthIncome($login) {
+        $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
+        $tp = new TransactionProcessor($qiwi->reportForDateRange(date("01.m.Y"), date("d.m.Y")));
+
+        return $tp->getIncome();
+    }
+
+    /**
+     * @param $login
+     * @param $enabled bool change setting to this state
+     * @return array result
+     *
+     */
+    public static function smsConfirmation($login, $enabled) {
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $success = $qiwiControl->setQIWISecuritySetting("SMS_CONFIRMATION", $enabled);
+        $token = $qiwiControl->getResponseData();
+
+        return [
+                'success' => $success,
+                'token' => $token
+        ];
+    }
+
+    public static function userConfirmBySMS($login, $token, $code) {
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $success = $qiwiControl->userConfirmBySMS("SMS_CONFIRMATION", $token, $code);
+
+        return ['success' => $success];
+    }
+
+    public static function getSecuritySettings($login) {
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $settings = $qiwiControl->getQIWISecuritySettings();
+
+        return $settings;
     }
 }

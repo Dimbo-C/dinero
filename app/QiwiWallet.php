@@ -36,6 +36,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereUseProxy($value)
  * @mixin \Eloquent
+ * @property-read \App\QiwiWalletSecuritySettings $securitySettings
+ * @property-read \App\QiwiWalletSettings $settings
  */
 class QiwiWallet extends Model {
     protected $table = "qiwi_wallets";

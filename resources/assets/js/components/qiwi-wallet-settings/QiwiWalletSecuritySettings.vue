@@ -11,6 +11,7 @@
                 <a>Панель управления</a>
             </router-link>
         </page-header>
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-8">
@@ -29,9 +30,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body">
+                        <loading :show="!isLoaded"></loading>
+                        <div v-if="isLoaded" class="panel-body">
                             <div class="form-horizontal">
-                                <div class="form-group">
+                                <div v-if="!smsConfirmationBlock" class="form-group">
                                     <div class="col-sm-offset-1 col-sm-8">
                                         <div class="checkbox">
                                             <label>
@@ -147,58 +149,78 @@
 </template>
 
 <script>
-    export default{
-        data(){
+    export default {
+        data() {
             return {
                 smsConfirmation: false,
                 smsConfirmationBlock: false,
                 smsConfirmCode: "",
+                smsToken: "",
 
                 emailBinding: false,
                 useToken: false,
                 usePinCode: false,
                 smsPayments: false,
                 callConfirm: false,
-                login: this.$route.params.wallet
+                login: this.$route.params.wallet,
+                isLoaded: false,
             }
         },
+        mounted() {
+            this.fetchSettings();
+        },
         methods: {
-            smsConfirmationCheckbox(){
+            smsConfirmationCheckbox() {
                 console.log(this.smsConfirmation);
-                const check = this.smsConfirmation;
-                if (check) {
+                const check = !this.smsConfirmation;
 
-                } else { // turn off
-                    const data = {
-                        'login': this.login,
-                        'action': "SMS_CONFIRMATION",
-                        'options': {
-                            'value': false
-                        }
-                    };
-                    Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
+                const data = {
+                    'login': this.login,
+                    'action': "SMS_CONFIRMATION",
+                    'options': {
+                        'value': check,
+                        'token': this.smsToken
+                    }
+                };
+
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
                         .then((data) => {
                             console.log(data);
-                            this.smsConfirmationBlock = true;
+                            this.smsToken = data.token;
+                            if (!check) {
+                                this.smsConfirmationBlock = true;
+                            }
                         });
-                }
             },
-            confirmSms(){
+
+            confirmSms() {
                 const data = {
                     'login': this.login,
                     'action': "SMS_CONFIRMATION",
                     'options': {
                         'code': this.smsConfirmCode,
-                        'value': false
+                        'token': this.smsToken
                     }
                 };
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
-                    .then((data) => {
-                        console.log(data);
-                        this.smsConfirmationBlock = false;
-                    });
+                        .then((data) => {
+                            console.log(data);
+                            this.smsConfirmation = false;
+                            this.smsConfirmationBlock = false;
+                        });
             },
-            showGeneralSettings(){
+            fetchSettings() {
+                axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, {})
+                        .then((response) => {
+                            const data = response.data;
+                            console.log(data);
+                            this.smsConfirmation = response.data.SMS_CONFIRMATION;
+                            this.emailBinding = data.EMAIL;
+                            this.useToken = data.TOKEN;
+                            this.isLoaded = true;
+                        });
+            },
+            showGeneralSettings() {
                 this.$parent.tab = 'main';
             }
         }

@@ -1581,6 +1581,7 @@ class QIWIControl {
                 'X-Requested-With' => 'XMLHttpRequest'
         ]);
 
+
         $this->debugData = $response;
         if ($this->ua->getStatus() !== 200) {
             $this->lastErrorStr = "Failed to send security ticket update request. Status=" . $this->ua->getStatus();
@@ -1589,6 +1590,7 @@ class QIWIControl {
         $response = json_decode($response, true);
         $this->trace("[SQSS] done.");
         if ($this->getResponseType($response) == 'CONFIRM') {
+            $this->responseData = $response['identifier'];
             return array(
                     'status' => 'CONFIRM',
                     'data' => $response['identifier']
