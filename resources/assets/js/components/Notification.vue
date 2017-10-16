@@ -35,7 +35,7 @@
 
                 setTimeout(() => {
                     this.hideNotification()
-                }, 1000);
+                }, 1500);
             },
 
             hideNotification() {
