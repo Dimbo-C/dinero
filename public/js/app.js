@@ -32193,7 +32193,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             setTimeout(function () {
                 _this.hideNotification();
-            }, 20000);
+            }, 1000);
         },
         hideNotification: function hideNotification() {
             var _this2 = this;
