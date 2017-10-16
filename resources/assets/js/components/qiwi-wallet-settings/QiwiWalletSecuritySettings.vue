@@ -184,13 +184,13 @@
                 };
 
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
-                        .then((data) => {
-                            console.log(data);
-                            this.smsToken = data.token;
-                            if (!check) {
-                                this.smsConfirmationBlock = true;
-                            }
-                        });
+                    .then((data) => {
+                        console.log(data);
+                        this.smsToken = data.token;
+                        if (!check) {
+                            this.smsConfirmationBlock = true;
+                        }
+                    });
             },
 
             confirmSms() {
@@ -203,22 +203,26 @@
                     }
                 };
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
-                        .then((data) => {
-                            console.log(data);
-                            this.smsConfirmation = false;
-                            this.smsConfirmationBlock = false;
-                        });
+                    .then((data) => {
+                        console.log(data);
+                        this.smsConfirmation = false;
+                        this.smsConfirmationBlock = false;
+                    });
             },
             fetchSettings() {
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, {})
-                        .then((response) => {
-                            const data = response.data;
-                            console.log(data);
-                            this.smsConfirmation = response.data.SMS_CONFIRMATION;
-                            this.emailBinding = data.EMAIL;
-                            this.useToken = data.TOKEN;
-                            this.isLoaded = true;
-                        });
+                    .then((response) => {
+                        const data = response.data;
+                        console.log(data);
+                        this.callConfirm = data.CALL_CONFIRMATION;
+                        this.emailBinding = data.EMAIL;
+                        this.usePinCode = data.PIN;
+                        this.smsConfirmation = data.SMS_CONFIRMATION;
+                        this.smsPayments = data.SMS_PAYMENT;
+                        this.useToken = data.TOKEN;
+
+                        this.isLoaded = true;
+                    });
             },
             showGeneralSettings() {
                 this.$parent.tab = 'main';

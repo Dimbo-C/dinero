@@ -69,9 +69,9 @@ class QiwiGeneralHelper {
 
     public static function getMonthIncome($login) {
         $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
-        $tp = new TransactionProcessor($qiwi->reportForDateRange(date("01.m.Y"), date("d.m.Y")));
+        $income = $qiwi->getTotals(date("01.m.Y"), date("d.m.Y"))['income'];
 
-        return $tp->getIncome();
+        return $income;
     }
 
     /**

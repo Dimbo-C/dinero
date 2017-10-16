@@ -2,6 +2,7 @@
 
 namespace App\Services\Qiwi;
 
+use App\Helpers\MoneyHelper;
 use App\Structures\Transaction;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -25,19 +26,26 @@ trait QiwiReports {
 
     /**
      * @param array $query
+     * @param int $start
+     * @param int $size
      * @return array
      */
-    protected function fetchReport(array $query) {
+    protected function fetchReport(array $query, $start = 0, $size = 15) {
         $this->login();
 
         $response = $this->client->get('https://qiwi.com/report/list.action', [
                 'query' => $query,
         ]);
 
-        $crawler = new Crawler($response->getBody()->getContents());
+        $html = $response->getBody()->getContents();
+        $crawler = new Crawler($html);
+        $items = $crawler
+                ->filter('.reportsLine[data-container-name="item"]')
+                ->each(function (Crawler $node, $i) use ($start, $size) {
 
-        $items = $crawler->filter('.reportsLine[data-container-name="item"]')
-                ->each(function (Crawler $node, $i) {
+                    // 'ignore' unnecessary nodes
+                    if ($i < $start || $i >= $size + $start) return null;
+
                     $transaction = new Transaction();
                     $transaction->date = trim($node->filter('.date')->first()->text());
                     $transaction->time = trim($node->filter('.time')->first()->text());
@@ -57,8 +65,68 @@ trait QiwiReports {
                     return $transaction;
                 });
 
+        //remove nulls
+        $items = array_filter($items, function ($item) {
+            return $item !== null;
+        });
+
         return $items;
     }
+
+    /**
+     * @param $start
+     * @param $end
+     * @return array
+     */
+    public function getTotals($start, $end) {
+        $query = [
+                'daterange' => 'true',
+                'start' => $start,
+                'finish' => $end,
+        ];
+        $this->login();
+
+        $response = $this->client->get('https://qiwi.com/report/list.action', [
+                'query' => $query,
+        ]);
+
+        $html = $response->getBody()->getContents();
+        $crawler = new Crawler($html);
+
+        try {
+            $moneyText = $crawler->filter('.SuccessWithFail.expenditure .success')->first()->text();
+            $expenditure = MoneyHelper::moneyToFloat($moneyText);
+        } catch (\Exception $exception) {
+            $expenditure = 0;
+        }
+
+        try {
+            $moneyText = $crawler->filter('.SuccessWithFail.income .success')->first()->text();
+            $income = MoneyHelper::moneyToFloat($moneyText);
+        } catch (\Exception $exception) {
+            $income = 0;
+        }
+
+        return [
+                'income' => $income,
+                'expenditure' => $expenditure,
+        ];
+    }
+
+    //    public function getIncome(array $query) {
+    //        $this->login();
+    //
+    //        $response = $this->client->get('https://qiwi.com/report/list.action', [
+    //                'query' => $query,
+    //        ]);
+    //
+    //        $html = $response->getBody()->getContents();
+    //        $crawler = new Crawler($html);
+    //        $moneyText = $crawler->filter('.SuccessWithFail.expenditure .success')->first()->text();
+    //        $items = MoneyHelper::moneyToFloat($moneyText);
+    //
+    //        return $items;
+    //    }
 
     protected function setAmountSign($class) {
         $class = str_replace('IncomeWithExpend', '', $class);

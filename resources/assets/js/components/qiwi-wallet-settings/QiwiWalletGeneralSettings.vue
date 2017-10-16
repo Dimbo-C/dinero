@@ -472,6 +472,8 @@
             },
 
             loadSettings(settings){
+                console.log("settings:");
+                console.log(settings);
                 let form = this.form;
 
                 this.proxyServer = settings.proxy.host === null
@@ -480,7 +482,6 @@
                 this.proxyAuth = settings.proxy.login === null
                     ? ""
                     : settings.proxy.login + "" + ":" + settings.proxy.password;
-
 
                 form.name = settings.name;
                 form.comments = settings.comments;
@@ -500,8 +501,10 @@
                 form.autoWithdrawalLimit = settings.autoWithdrawal_limit;
 
                 if (settings.autoWithdrawal_card_number !== null) {
-                    let results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
-                    this.cardNumber = results.join(" ");
+//                    let results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
+
+//                    this.cardNumber = results.join(" ");
+                    this.cardNumber = settings.autoWithdrawal_card_number;
                 } else this.cardNumber = "";
 
 

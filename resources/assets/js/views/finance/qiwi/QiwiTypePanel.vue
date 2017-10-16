@@ -164,7 +164,6 @@
                                 this.spinners = this.spinners.filter((elem) => login !== elem);
                             }
                         });
-
                     });
             },
 
@@ -186,9 +185,9 @@
         },
         computed: {
             firstDayOfTheMonth () {
-                var today = new Date();
-                var mm = today.getMonth() + 1; //January is 0!
-                var yyyy = today.getFullYear();
+                const today = new Date();
+                let mm = today.getMonth() + 1; //January is 0!
+                const yyyy = today.getFullYear();
                 if (mm < 10) {
                     mm = '0' + mm;
                 }

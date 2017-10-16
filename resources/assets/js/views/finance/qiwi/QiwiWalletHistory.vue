@@ -149,7 +149,7 @@
 
                 },
                 isLoaded: false,
-                transactions: null,
+                transactions: [],
                 income: 0,
                 outcome: 0,
                 dateRange: {
