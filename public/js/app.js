@@ -33173,6 +33173,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -33340,6 +33345,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/settings", this.form).then(function (data) {
                 console.log(data);
                 Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
+            });
+        },
+        triggerAutoWithdraw: function triggerAutoWithdraw() {
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/auto-withdraw", this.form).then(function (data) {
+                console.log(data);
+                if (data) {
+                    Bus.$emit('showNotification', "success", "Выведено");
+                } else {
+                    Bus.$emit('showNotification', "danger", "Неудача, проверьте баланс и настройки безопасности");
+                }
             });
         },
         showSecurity: function showSecurity() {
@@ -34071,13 +34086,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
-    staticClass: "col-sm-offset-4 col-sm-8"
+    staticClass: "col-xs-4 col-xs-offset-1 col-lg-2 col-lg-offset-4"
   }, [_c('button', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.saveSettings
     }
-  }, [_vm._v("\n                                        Сохранить\n                                    ")])])])])])])])])])], 1)
+  }, [_vm._v("Сохранить\n                                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-4 col-xs-offset-2 col-lg-2 col-lg-offset-2"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.triggerAutoWithdraw
+    }
+  }, [_vm._v("\n                                        Автовывод\n                                    ")])])])])])])])])])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('span', {
     staticClass: "help-block"

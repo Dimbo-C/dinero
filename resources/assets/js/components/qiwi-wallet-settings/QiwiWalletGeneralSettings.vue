@@ -328,14 +328,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-offset-4 col-sm-8">
+                                    <div class="col-xs-4 col-xs-offset-1 col-lg-2 col-lg-offset-4">
                                         <button class="btn btn-primary"
-                                                @click="saveSettings">
-                                            Сохранить
+                                                @click="saveSettings">Сохранить
+                                        </button>
+                                    </div>
+
+                                    <div class="col-xs-4 col-xs-offset-2 col-lg-2 col-lg-offset-2">
+                                        <button class="btn btn-primary"
+                                                @click="triggerAutoWithdraw">
+                                            Автовывод
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
@@ -524,6 +529,20 @@
                     .then((data) => {
                         console.log(data);
                         Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
+                    });
+            },
+
+            triggerAutoWithdraw(){
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/auto-withdraw`, this.form)
+                    .then((data) => {
+                        console.log(data);
+                        if (data) {
+                            Bus.$emit('showNotification', "success", "Выведено");
+                        } else {
+                            Bus.$emit('showNotification',
+                                "danger",
+                                "Неудача, проверьте баланс и настройки безопасности");
+                        }
                     });
             },
 

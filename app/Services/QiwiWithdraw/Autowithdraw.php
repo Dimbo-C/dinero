@@ -50,29 +50,17 @@ class Autowithdraw {
         $this->withdrawAmount = $this->withdrawAmount();
     }
 
-    private function withdrawAmount() {
-        $balance = $this->wallet->balance;
-        $limit = $this->settings->autoWithdrawal_limit;
-        if ($limit == 0) return $balance;
-
-        $amount = $balance > $limit ? $limit : $balance;
-
-        //        // TODO: TEST STATE remove in production
-        //        $amount = 1;
-
-        return $amount;
-    }
-
     /**
-     * Run the shit
-     * @param $autowithdrawMode int one of constants
+     * @param $autowithdrawMode
+     * @param bool $force
      * @return bool
      */
-    public function autoWithdraw($autowithdrawMode) {
+    public function autoWithdraw($autowithdrawMode, $force = false) {
         Log::info("Before guards: " . $this->login);
-        if (!$this->guards($autowithdrawMode)) return false;
-        Log::info("Guards passed: " . $this->login);
+        if (!$force && !$this->guards($autowithdrawMode)) return false;
+        Log::info("After guards: " . $this->login);
         $result = $this->withdrawRoutine();
+        Log::info("After withdraw: " . $this->login . " " . $result);
 
         // update timer if action was successful
         if ($result) {
@@ -90,6 +78,7 @@ class Autowithdraw {
      */
     private function withdrawRoutine() {
         $target = $this->settings->autoWithdrawal_target;
+        Log::info("Routine: ".$target);
         switch ($target) {
             case "wallet":
                 return $this->toWallet();
@@ -160,7 +149,7 @@ class Autowithdraw {
                 if ($this->autoWithdrawType->isManually()) return true;
                 break;
             default:
-                return false;
+                return true;
         }
 
         return false;
@@ -177,5 +166,18 @@ class Autowithdraw {
         }
 
         return true;
+    }
+
+    private function withdrawAmount() {
+        $balance = $this->wallet->balance;
+        $limit = $this->settings->autoWithdrawal_limit;
+        if ($limit == 0) return $balance;
+
+        $amount = $balance > $limit ? $limit : $balance;
+
+        //        // TODO: TEST STATE remove in production
+        //        $amount = 1;
+
+        return $amount;
     }
 }

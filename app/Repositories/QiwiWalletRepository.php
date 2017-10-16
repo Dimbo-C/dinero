@@ -94,6 +94,12 @@ class QiwiWalletRepository implements Contract {
 
     }
 
+    public function autoWithdraw($login) {
+        $aw = new Autowithdraw($login);
+
+        return ($aw->autoWithdraw(1, true)) ? 1 : 0;
+    }
+
     public function activateVoucher($login, $code) {
         return json_encode(Withdraw::activateVoucher($login, $code));
     }
@@ -121,7 +127,6 @@ class QiwiWalletRepository implements Contract {
     public function updateBalance($login) {
         $balance = QiwiGeneralHelper::getBalance($login);
         $this->staticWallet->updateBalance($login, $balance);
-
 
         return $balance;
     }
