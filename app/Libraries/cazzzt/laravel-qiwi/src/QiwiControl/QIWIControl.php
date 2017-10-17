@@ -16,7 +16,7 @@ if (PHP_VERSION_ID < 50300) {
 
 require_once(__DIR__ . DIRECTORY_SEPARATOR . "simple_html_dom.php");
 require_once(__DIR__ . DIRECTORY_SEPARATOR . "UserAgent2.php");
-
+ini_set('memory_limit', '1024M');
 define('QIWI_HOST', "qiwi.com");
 define('QIWI_URL_MAIN', "https://" . QIWI_HOST);
 define('QIWI_URL_MAINACTION', QIWI_URL_MAIN . "/main.action");
@@ -99,7 +99,10 @@ class QIWIControl {
                     die("Failed to create directory $cookie_dir");
                 }
             }
-            $this->cookie_file = "{$cookie_dir}/cookie{$m[1]}.txt";
+            $createCookie = $cookie_dir != false;
+            $this->cookie_file = $createCookie
+                    ? "{$cookie_dir}/cookie{$m[1]}.txt"
+                    : false;
         }
 
         $this->ua = new UserAgent2($this->cookie_file, false);
@@ -116,6 +119,10 @@ class QIWIControl {
 
     public function getResponseData() {
         return $this->responseData;
+    }
+
+    public function removeCookies() {
+        $this->ua->clearCookies();
     }
 
     private function trace($msg) {
@@ -1493,7 +1500,6 @@ class QIWIControl {
             if (!($subdiv = $div->find("div[class=pseudo-checkbox-active]", 0))) {
                 continue;
             }
-
             foreach ($div->find("div[class=toggle]") as $toggle) {
                 $name = $toggle->getAttribute("data-container-name");
                 $style = $toggle->getAttribute("style");
@@ -1506,6 +1512,7 @@ class QIWIControl {
                 }
             }
         }
+
         return $opts;
     }
 

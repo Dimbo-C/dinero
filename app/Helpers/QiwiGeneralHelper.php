@@ -99,8 +99,9 @@ class QiwiGeneralHelper {
     }
 
     public static function getSecuritySettings($login) {
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login, null, false, []);
         $settings = $qiwiControl->getQIWISecuritySettings();
+        $qiwiControl->removeCookies();
 
         return $settings;
     }

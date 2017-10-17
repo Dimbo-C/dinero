@@ -21,6 +21,8 @@ class UserAgent2 {
     private $ch;
     private $lastStatus;
     private $lastHeaders;
+    public $cookie_file;
+    private $cookie_file_path;
 
     function __construct($cookie_file, $debug = false) {
         $this->setDebug($debug);
@@ -29,14 +31,22 @@ class UserAgent2 {
     }
 
     function clearCookies() {
+        //        \Log::info("File exists: " . (file_exists($this->cookie_file_path) ? "yes" : "no"));
         if ($this->cookie_file && file_exists($this->cookie_file)) {
+            \Log::error("THERE IS COOKIE. Path " . public_path() . "/" . $this->cookie_file);
+            //            \Log::info("Before chmod: " . $this->cookie_file_path);
+            //
+            //            chmod($this->cookie_file_path, 0777);
             unlink($this->cookie_file);
         }
+        $obliterated = !file_exists($this->cookie_file);
+        \Log::info("File obliterated: " . ($obliterated ? "Yes" : "No"));
     }
 
     function getStatus() {
         return $this->lastStatus;
     }
+
 
     function getHeader($name = false) {
         if ($name) {
@@ -47,6 +57,7 @@ class UserAgent2 {
 
     function curlSetCookie($cookie_file) {
         $this->cookie_file = $cookie_file;
+        $this->cookie_file_path = public_path() . "/" . $this->cookie_file;
     }
 
     function getMyIP() {
@@ -67,8 +78,8 @@ class UserAgent2 {
         curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($this->ch, CURLOPT_ENCODING, '');
         curl_setopt($this->ch, CURLOPT_HEADER, 1);
-//        curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT ,0);
-//        curl_setopt($this->ch, CURLOPT_TIMEOUT, 400); //timeout in seconds
+        //        curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT ,0);
+        //        curl_setopt($this->ch, CURLOPT_TIMEOUT, 400); //timeout in seconds
     }
 
     function closeCurl() {
@@ -77,6 +88,7 @@ class UserAgent2 {
 
     function __destruct() {
         $this->closeCurl();
+        $this->clearCookies();
     }
 
     /**
