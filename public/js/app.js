@@ -12438,7 +12438,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "id": w.login
       }
-    }, [_vm._v(_vm._s(_vm._f("currency")(w.balance)))]), _vm._v(" "), _c('a', {
+    }, [_vm._v(_vm._s(_vm._f("currency")(_vm.tidySum(w.balance))))]), _vm._v(" "), _c('a', {
       attrs: {
         "data-toggle": "tooltip",
         "data-placement": "top",
@@ -12458,7 +12458,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.updateWallet(w.login)
         }
       }
-    })])]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('td', [_c('span', [_vm._v(_vm._s(_vm._f("currency")(w.month_income)))])]) : _vm._e(), _vm._v(" "), _c('td', {
+    })])]) : _vm._e(), _vm._v(" "), (!_vm.isInactive) ? _c('td', [_c('span', [_vm._v(_vm._s(_vm._f("currency")(_vm.tidySum(w.month_income))))])]) : _vm._e(), _vm._v(" "), _c('td', {
       staticClass: "text-right"
     }, [_c('div', {
       staticClass: "btn-group",

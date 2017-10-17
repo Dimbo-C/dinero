@@ -37,7 +37,7 @@
                         <td v-text="w.name"></td>
                         <td v-text="w.login"></td>
                         <td v-if="!isInactive">
-                            <span :id="w.login">{{ w.balance | currency }}</span>
+                            <span :id="w.login">{{ tidySum(w.balance) | currency }}</span>
                             <a data-toggle="tooltip"
                                data-placement="top"
                                title="Обновить">
@@ -48,7 +48,7 @@
                             </a>
                         </td>
                         <td v-if="!isInactive">
-                            <span>{{ w.month_income | currency }}</span>
+                            <span>{{ tidySum(w.month_income) | currency }}</span>
                         </td>
                         <td class="text-right">
                             <div class="btn-group" role="group">
