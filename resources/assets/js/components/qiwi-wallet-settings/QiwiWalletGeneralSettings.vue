@@ -448,14 +448,13 @@
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`)
                     .then((response) => {
                         let data = response.data;
-                        this.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
-                        this.loadWalletTypes(data.walletTypes);
                         let settings = Object.assign(data.walletSettings, data.wallet);
                         settings.proxy = data.proxy;
+
+                        this.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
+                        this.loadWalletTypes(data.walletTypes);
                         this.loadSettings(settings);
 
-                        console.log(data);
-                        console.log(settings);
                     })
             },
 
@@ -539,9 +538,7 @@
                         if (data) {
                             Bus.$emit('showNotification', "success", "Выведено");
                         } else {
-                            Bus.$emit('showNotification',
-                                "danger",
-                                "Неудача, проверьте баланс и настройки безопасности");
+                            Bus.$emit('showNotification', "danger", "Неудача, проверьте баланс и настройки безопасности");
                         }
                     });
             },

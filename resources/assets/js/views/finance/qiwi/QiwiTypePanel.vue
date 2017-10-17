@@ -156,11 +156,12 @@
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
                     .then((balance) => {
-                        console.log(balance);
+                        console.log("Balance: " + balance);
                         this.items.map((item) => {
                             if (item.login === login) {
+                                item.balance = this.tidySum(balance);
 
-                                item.balance = balance;
+                                // stop spinner
                                 this.spinners = this.spinners.filter((elem) => login !== elem);
                             }
                         });
@@ -171,9 +172,11 @@
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-income', new Form(auth))
                     .then((income) => {
-                        console.log(income);
+                        console.log("Income: " + income);
                         this.items.map((item) => {
-                            if (item.login === login) item.month_income = income;
+                            if (item.login === login) {
+                                item.month_income = this.tidySum(income);
+                            }
                         });
                     })
             },
@@ -182,6 +185,14 @@
                 this.updateBalance(login);
                 this.updateIncome(login);
             },
+
+            tidySum(sum){
+                sum += "";
+                let str = sum.replace(/,/g, "");
+                parseInt(str, 10);
+
+                return str;
+            }
         },
         computed: {
             firstDayOfTheMonth () {

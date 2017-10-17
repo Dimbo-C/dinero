@@ -12274,11 +12274,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.spinners.push(login);
             var auth = { "login": login };
             Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth)).then(function (balance) {
-                console.log(balance);
+                console.log("Balance: " + balance);
                 _this2.items.map(function (item) {
                     if (item.login === login) {
+                        item.balance = _this2.tidySum(balance);
 
-                        item.balance = balance;
+                        // stop spinner
                         _this2.spinners = _this2.spinners.filter(function (elem) {
                             return login !== elem;
                         });
@@ -12291,15 +12292,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var auth = { "login": login };
             Dinero.post('/api/qiwi-wallets/update-income', new Form(auth)).then(function (income) {
-                console.log(income);
+                console.log("Income: " + income);
                 _this3.items.map(function (item) {
-                    if (item.login === login) item.month_income = income;
+                    if (item.login === login) {
+                        item.month_income = _this3.tidySum(income);
+                    }
                 });
             });
         },
         updateWallet: function updateWallet(login) {
             this.updateBalance(login);
             this.updateIncome(login);
+        },
+        tidySum: function tidySum(sum) {
+            sum += "";
+            var str = sum.replace(/,/g, "");
+            parseInt(str, 10);
+
+            return str;
         }
     },
     computed: {
@@ -33272,14 +33282,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // get settings of this wallet
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/settings").then(function (response) {
                 var data = response.data;
-                _this.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
-                _this.loadWalletTypes(data.walletTypes);
                 var settings = Object.assign(data.walletSettings, data.wallet);
                 settings.proxy = data.proxy;
-                _this.loadSettings(settings);
 
-                console.log(data);
-                console.log(settings);
+                _this.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
+                _this.loadWalletTypes(data.walletTypes);
+                _this.loadSettings(settings);
             });
         },
         loadAutoWithdrawalTypes: function loadAutoWithdrawalTypes(options) {
@@ -34336,7 +34344,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             console.log(this.smsConfirmation);
-            var check = !this.smsConfirmation;
+            var check = this.smsConfirmation;
 
             var data = {
                 'login': this.login,
@@ -34376,8 +34384,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", {}).then(function (response) {
+                console.log(response);
                 var data = response.data;
-                console.log(data);
                 _this3.callConfirm = data.CALL_CONFIRMATION;
                 _this3.emailBinding = data.EMAIL;
                 _this3.usePinCode = data.PIN;

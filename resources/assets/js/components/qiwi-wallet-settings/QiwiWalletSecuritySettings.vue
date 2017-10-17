@@ -172,7 +172,7 @@
         methods: {
             smsConfirmationCheckbox() {
                 console.log(this.smsConfirmation);
-                const check = !this.smsConfirmation;
+                const check = this.smsConfirmation;
 
                 const data = {
                     'login': this.login,
@@ -212,8 +212,8 @@
             fetchSettings() {
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, {})
                     .then((response) => {
+                        console.log(response);
                         const data = response.data;
-                        console.log(data);
                         this.callConfirm = data.CALL_CONFIRMATION;
                         this.emailBinding = data.EMAIL;
                         this.usePinCode = data.PIN;
