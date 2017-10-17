@@ -24,7 +24,6 @@
                                 <div class="col-sm-12 col-md-2 text-center">
                                     <button class="btn btn-primary"
                                             @click="showGeneralSettings">
-
                                         Настройки
                                     </button>
                                 </div>
@@ -83,7 +82,8 @@
                                             <label>
                                                 <input type="checkbox"
                                                        v-model="useToken"
-                                                       checked>
+                                                       checked
+                                                       @click="tokenCheckbox">
                                                 Защита операций с помощью токена
                                             </label>
                                         </div>
@@ -96,7 +96,8 @@
                                             <label>
                                                 <input type="checkbox"
                                                        v-model="usePinCode"
-                                                       checked>
+                                                       checked
+                                                       @click="pinCodeCheckbox">
                                                 Пин-код
                                             </label>
                                         </div>
@@ -109,7 +110,8 @@
                                             <label>
                                                 <input type="checkbox"
                                                        v-model="smsPayments"
-                                                       checked>
+                                                       checked
+                                                       @click="smsPaymentCheckbox">
                                                 Смс-платежи
                                             </label>
                                         </div>
@@ -184,16 +186,52 @@
                 };
 
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
-                    .then((data) => {
-                        console.log(data);
-                        this.smsToken = data.token;
-                        if (!check) {
-                            this.smsConfirmationBlock = true;
-                        }
-                    });
+                        .then((data) => {
+                            console.log(data);
+                            this.smsToken = data.token;
+                            if (!check) {
+                                this.smsConfirmationBlock = true;
+                            }
+                        });
             },
 
-            confirmSms() {
+            pinCodeCheckbox(){
+                const func = (data) => {
+                    console.log(data);
+                };
+                this.switcherBase(this.usePinCode, "PIN", func);
+            },
+
+            tokenCheckbox(){
+                const func = (data) => {
+                    console.log(data);
+                };
+                this.switcherBase(this.useToken, "TOKEN", func);
+            },
+
+            smsPaymentCheckbox(){
+                const func = (data) => {
+                    console.log(data);
+                };
+                this.switcherBase(this.smsPayments, "SMS_PAYMENT", func);
+            },
+
+            switcherBase(field, action, func){
+                const data = {
+                    'login': this.login,
+                    'action': action,
+                    'options': {
+                        'value': field,
+                    }
+                };
+
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
+                        .then((data) => {
+                            func(data);
+                        });
+            },
+
+            confirmSms(){
                 const data = {
                     'login': this.login,
                     'action': "SMS_CONFIRMATION",
@@ -203,26 +241,26 @@
                     }
                 };
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
-                    .then((data) => {
-                        console.log(data);
-                        this.smsConfirmation = false;
-                        this.smsConfirmationBlock = false;
-                    });
+                        .then((data) => {
+                            console.log(data);
+                            this.smsConfirmation = false;
+                            this.smsConfirmationBlock = false;
+                        });
             },
             fetchSettings() {
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, {})
-                    .then((response) => {
-                        console.log(response);
-                        const data = response.data;
-                        this.callConfirm = data.CALL_CONFIRMATION;
-                        this.emailBinding = data.EMAIL;
-                        this.usePinCode = data.PIN;
-                        this.smsConfirmation = data.SMS_CONFIRMATION;
-                        this.smsPayments = data.SMS_PAYMENT;
-                        this.useToken = data.TOKEN;
+                        .then((response) => {
+                            console.log(response);
+                            const data = response.data;
+                            this.callConfirm = data.CALL_CONFIRMATION;
+                            this.emailBinding = data.EMAIL;
+                            this.usePinCode = data.PIN;
+                            this.smsConfirmation = data.SMS_CONFIRMATION;
+                            this.smsPayments = data.SMS_PAYMENT;
+                            this.useToken = data.TOKEN;
 
-                        this.isLoaded = true;
-                    });
+                            this.isLoaded = true;
+                        });
             },
             showGeneralSettings() {
                 this.$parent.tab = 'main';

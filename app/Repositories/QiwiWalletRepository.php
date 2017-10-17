@@ -265,9 +265,14 @@ class QiwiWalletRepository implements Contract {
                 if (isset($options['code'])) {
                     $result = QiwiGeneralHelper::userConfirmBySMS($login, $options['token'], $options['code']);
                 } else {
-
                     $result = QiwiGeneralHelper::smsConfirmation($login, $options['value']);
                 }
+                break;
+
+            case "TOKEN":
+            case "PIN":
+            case "SMS_PAYMENT":
+                $result = QiwiGeneralHelper::setSecurityAttribute($login, $action, $options['value']);
                 break;
         }
 

@@ -34317,6 +34317,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -34361,6 +34363,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (!check) {
                     _this.smsConfirmationBlock = true;
                 }
+            });
+        },
+        pinCodeCheckbox: function pinCodeCheckbox() {
+            var func = function func(data) {
+                console.log(data);
+            };
+            this.switcherBase(this.usePinCode, "PIN", func);
+        },
+        tokenCheckbox: function tokenCheckbox() {
+            var func = function func(data) {
+                console.log(data);
+            };
+            this.switcherBase(this.useToken, "TOKEN", func);
+        },
+        smsPaymentCheckbox: function smsPaymentCheckbox() {
+            var func = function func(data) {
+                console.log(data);
+            };
+            this.switcherBase(this.smsPayments, "SMS_PAYMENT", func);
+        },
+        switcherBase: function switcherBase(field, action, func) {
+            var data = {
+                'login': this.login,
+                'action': action,
+                'options': {
+                    'value': field
+                }
+            };
+
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
+                func(data);
             });
         },
         confirmSms: function confirmSms() {
@@ -34445,7 +34478,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.showGeneralSettings
     }
-  }, [_vm._v("\n\n                                    Настройки\n                                ")])])])]), _vm._v(" "), _c('loading', {
+  }, [_vm._v("\n                                    Настройки\n                                ")])])])]), _vm._v(" "), _c('loading', {
     attrs: {
       "show": !_vm.isLoaded
     }
@@ -34588,6 +34621,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "checked": Array.isArray(_vm.useToken) ? _vm._i(_vm.useToken, null) > -1 : (_vm.useToken)
     },
     on: {
+      "click": _vm.tokenCheckbox,
       "__c": function($event) {
         var $$a = _vm.useToken,
           $$el = $event.target,
@@ -34626,6 +34660,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "checked": Array.isArray(_vm.usePinCode) ? _vm._i(_vm.usePinCode, null) > -1 : (_vm.usePinCode)
     },
     on: {
+      "click": _vm.pinCodeCheckbox,
       "__c": function($event) {
         var $$a = _vm.usePinCode,
           $$el = $event.target,
@@ -34664,6 +34699,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "checked": Array.isArray(_vm.smsPayments) ? _vm._i(_vm.smsPayments, null) > -1 : (_vm.smsPayments)
     },
     on: {
+      "click": _vm.smsPaymentCheckbox,
       "__c": function($event) {
         var $$a = _vm.smsPayments,
           $$el = $event.target,

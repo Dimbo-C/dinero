@@ -74,6 +74,17 @@ class QiwiGeneralHelper {
         return $income;
     }
 
+    public static function setSecurityAttribute($login, $attribute, $enabled) {
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $success = $qiwiControl->setQIWISecuritySetting($attribute, $enabled);
+        $token = $qiwiControl->getResponseData();
+
+        return [
+                'success' => $success,
+                'token' => $token
+        ];
+    }
+
     /**
      * @param $login
      * @param $enabled bool change setting to this state
