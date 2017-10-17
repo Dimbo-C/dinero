@@ -11227,7 +11227,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            tab: true ? "security" : "main" //switcher for testing purposes
+            tab: false ? "security" : "main" //switcher for testing purposes
         };
     }
 });
