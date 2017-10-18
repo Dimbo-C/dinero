@@ -69,7 +69,8 @@
                                             <label>
                                                 <input type="checkbox"
                                                        v-model="emailBinding"
-                                                       checked>
+                                                       checked
+                                                       @click="emailCheckbox">
                                                 Привязка email
                                             </label>
                                         </div>
@@ -194,40 +195,46 @@
                             }
                         });
             },
+            
+            emailCheckbox(){
+                this.switcherRoutine("emailBinding", "EMAIL", "Привязка email");
+            },
 
             pinCodeCheckbox(){
-                const func = (data) => {
-                    console.log(data);
-                };
-                this.switcherBase(this.usePinCode, "PIN", func);
+                this.switcherRoutine("usePinCode", "PIN", "Пин код");
             },
 
             tokenCheckbox(){
-                const func = (data) => {
-                    console.log(data);
-                };
-                this.switcherBase(this.useToken, "TOKEN", func);
+                this.switcherRoutine("useToken", "TOKEN", "Защита операций с помощью токена");
             },
 
             smsPaymentCheckbox(){
-                const func = (data) => {
-                    console.log(data);
-                };
-                this.switcherBase(this.smsPayments, "SMS_PAYMENT", func);
+                this.switcherRoutine("smsPayments", "SMS_PAYMENT", "Смс-платежи");
             },
 
-            switcherBase(field, action, func){
+            switcherRoutine(fieldName, action, fieldNameText){
+                console.log(this[fieldName]);
                 const data = {
                     'login': this.login,
                     'action': action,
                     'options': {
-                        'value': field,
+                        'value': this[fieldName],
                     }
                 };
 
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
                         .then((data) => {
-                            func(data);
+                            console.log(data);
+                            if (data.hasOwnProperty('success') && data.success.status === "NORMAL") {
+                                const notificationText =
+                                        `'${fieldNameText}' теперь в позиции ${this[fieldName] ? "вкл" : "выкл"}`;
+                                Bus.$emit('showNotification', "success", notificationText);
+                            } else {
+                                const notificationText =
+                                        `'${fieldNameText}' не удалось установить в позицию '${this[fieldName] ? "вкл" : "выкл"}'`;
+                                Bus.$emit('showNotification', "danger", notificationText);
+                                this[fieldName] = !this[fieldName];
+                            }
                         });
             },
 
@@ -247,6 +254,7 @@
                             this.smsConfirmationBlock = false;
                         });
             },
+
             fetchSettings() {
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, {})
                         .then((response) => {
@@ -262,6 +270,7 @@
                             this.isLoaded = true;
                         });
             },
+
             showGeneralSettings() {
                 this.$parent.tab = 'main';
             }

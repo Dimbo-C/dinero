@@ -11227,7 +11227,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            tab: false ? "security" : "main" //switcher for testing purposes
+            tab: true ? "security" : "main" //switcher for testing purposes
         };
     }
 });
@@ -34319,6 +34319,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -34365,39 +34366,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
         },
+        emailCheckbox: function emailCheckbox() {
+            this.switcherRoutine("emailBinding", "EMAIL", "Привязка email");
+        },
         pinCodeCheckbox: function pinCodeCheckbox() {
-            var func = function func(data) {
-                console.log(data);
-            };
-            this.switcherBase(this.usePinCode, "PIN", func);
+            this.switcherRoutine("usePinCode", "PIN", "Пин код");
         },
         tokenCheckbox: function tokenCheckbox() {
-            var func = function func(data) {
-                console.log(data);
-            };
-            this.switcherBase(this.useToken, "TOKEN", func);
+            this.switcherRoutine("useToken", "TOKEN", "Защита операций с помощью токена");
         },
         smsPaymentCheckbox: function smsPaymentCheckbox() {
-            var func = function func(data) {
-                console.log(data);
-            };
-            this.switcherBase(this.smsPayments, "SMS_PAYMENT", func);
+            this.switcherRoutine("smsPayments", "SMS_PAYMENT", "Смс-платежи");
         },
-        switcherBase: function switcherBase(field, action, func) {
+        switcherRoutine: function switcherRoutine(fieldName, action, fieldNameText) {
+            var _this2 = this;
+
+            console.log(this[fieldName]);
             var data = {
                 'login': this.login,
                 'action': action,
                 'options': {
-                    'value': field
+                    'value': this[fieldName]
                 }
             };
 
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
-                func(data);
+                console.log(data);
+                if (data.hasOwnProperty('success') && data.success.status === "NORMAL") {
+                    var notificationText = "'" + fieldNameText + "' \u0442\u0435\u043F\u0435\u0440\u044C \u0432 \u043F\u043E\u0437\u0438\u0446\u0438\u0438 " + (_this2[fieldName] ? "вкл" : "выкл");
+                    Bus.$emit('showNotification', "success", notificationText);
+                } else {
+                    var _notificationText = "'" + fieldNameText + "' \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0432 \u043F\u043E\u0437\u0438\u0446\u0438\u044E '" + (_this2[fieldName] ? "вкл" : "выкл") + "'";
+                    Bus.$emit('showNotification', "danger", _notificationText);
+                    _this2[fieldName] = !_this2[fieldName];
+                }
             });
         },
         confirmSms: function confirmSms() {
-            var _this2 = this;
+            var _this3 = this;
 
             var data = {
                 'login': this.login,
@@ -34409,24 +34415,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
                 console.log(data);
-                _this2.smsConfirmation = false;
-                _this2.smsConfirmationBlock = false;
+                _this3.smsConfirmation = false;
+                _this3.smsConfirmationBlock = false;
             });
         },
         fetchSettings: function fetchSettings() {
-            var _this3 = this;
+            var _this4 = this;
 
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", {}).then(function (response) {
                 console.log(response);
                 var data = response.data;
-                _this3.callConfirm = data.CALL_CONFIRMATION;
-                _this3.emailBinding = data.EMAIL;
-                _this3.usePinCode = data.PIN;
-                _this3.smsConfirmation = data.SMS_CONFIRMATION;
-                _this3.smsPayments = data.SMS_PAYMENT;
-                _this3.useToken = data.TOKEN;
+                _this4.callConfirm = data.CALL_CONFIRMATION;
+                _this4.emailBinding = data.EMAIL;
+                _this4.usePinCode = data.PIN;
+                _this4.smsConfirmation = data.SMS_CONFIRMATION;
+                _this4.smsPayments = data.SMS_PAYMENT;
+                _this4.useToken = data.TOKEN;
 
-                _this3.isLoaded = true;
+                _this4.isLoaded = true;
             });
         },
         showGeneralSettings: function showGeneralSettings() {
@@ -34583,6 +34589,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "checked": Array.isArray(_vm.emailBinding) ? _vm._i(_vm.emailBinding, null) > -1 : (_vm.emailBinding)
     },
     on: {
+      "click": _vm.emailCheckbox,
       "__c": function($event) {
         var $$a = _vm.emailBinding,
           $$el = $event.target,

@@ -1145,6 +1145,10 @@ class QIWIControl {
         return $this->payProvider(QIWI_PROVIDER_QIWI_WALLET, $currency, $amount, $fields, $comment);
     }
 
+    function bindEmail($login, $mail) {
+
+    }
+
 
     /**
      * Приобрести ваучер

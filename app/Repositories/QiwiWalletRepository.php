@@ -269,6 +269,9 @@ class QiwiWalletRepository implements Contract {
                 }
                 break;
 
+            case "EMAIL":
+                $result = QiwiGeneralHelper::emailSet($login, $action, $options['value']);
+                break;
             case "TOKEN":
             case "PIN":
             case "SMS_PAYMENT":

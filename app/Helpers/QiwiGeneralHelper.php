@@ -74,6 +74,17 @@ class QiwiGeneralHelper {
         return $income;
     }
 
+    public static function emailSet($login, $attribute, $enabled) {
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $success = $qiwiControl->setQIWISecuritySetting($attribute, $enabled);
+        $token = $qiwiControl->getResponseData();
+        dd($qiwiControl->debugData);
+        return [
+                'success' => $success,
+                'token' => $token
+        ];
+    }
+
     public static function setSecurityAttribute($login, $attribute, $enabled) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $success = $qiwiControl->setQIWISecuritySetting($attribute, $enabled);
