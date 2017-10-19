@@ -199,7 +199,7 @@
                 emailSmsBlock: false,
                 emailSmsCode: "",
                 emailSmsToken: "",
-                email: "dimon22.95@mail.ru",
+                email: "",
 
                 useToken: false,
                 usePinCode: false,
@@ -298,7 +298,6 @@
                             this.emailSmsBlock = false;
                         });
             },
-
 
             pinCodeCheckbox(){
                 this.switcherRoutine("usePinCode", "PIN", "Пин код");

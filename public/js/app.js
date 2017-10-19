@@ -34368,7 +34368,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             emailSmsBlock: false,
             emailSmsCode: "",
             emailSmsToken: "",
-            email: "dimon22.95@mail.ru",
+            email: "",
 
             useToken: false,
             usePinCode: false,
