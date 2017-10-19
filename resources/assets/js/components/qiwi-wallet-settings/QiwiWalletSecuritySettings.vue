@@ -77,6 +77,40 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group" v-if="emailInputBlock">
+                                    <label for="" class="col-sm-12 col-md-3 control-label">email для привязки</label>
+                                    <div class="col-sm-12 col-md-3">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="email"
+                                               placeholder="email@org.com">
+                                    </div>
+                                    <div class="col-sm-12 col-md-3">
+                                        <button class="btn btn-primary"
+                                                @click="emailSendConfirm">
+                                            Подтвердить
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group" v-if="emailSmsBlock">
+                                    <label for="" class="col-sm-12 col-md-3 control-label">Код из смс</label>
+                                    <div class="col-sm-12 col-md-3">
+                                        <input type="text"
+                                               class="form-control"
+                                               v-model="emailSmsCode"
+                                               placeholder="123456">
+                                    </div>
+                                    <div class="col-sm-12 col-md-3">
+                                        <button class="btn btn-primary"
+                                                @click="emailSmsConfirm">
+                                            Подтвердить
+                                        </button>
+
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <div class="col-sm-offset-1 col-sm-8">
                                         <div class="checkbox">
@@ -161,6 +195,12 @@
                 smsToken: "",
 
                 emailBinding: false,
+                emailInputBlock: false,
+                emailSmsBlock: false,
+                emailSmsCode: "",
+                emailSmsToken: "",
+                email: "dimon22.95@mail.ru",
+
                 useToken: false,
                 usePinCode: false,
                 smsPayments: false,
@@ -175,13 +215,11 @@
         methods: {
             smsConfirmationCheckbox() {
                 console.log(this.smsConfirmation);
-                const check = this.smsConfirmation;
-
                 const data = {
                     'login': this.login,
                     'action': "SMS_CONFIRMATION",
                     'options': {
-                        'value': check,
+                        'value': this.smsConfirmation,
                         'token': this.smsToken
                     }
                 };
@@ -190,15 +228,77 @@
                         .then((data) => {
                             console.log(data);
                             this.smsToken = data.token;
-                            if (!check) {
+                            if (!this.smsConfirmation) {
                                 this.smsConfirmationBlock = true;
                             }
                         });
             },
-            
+
             emailCheckbox(){
-                this.switcherRoutine("emailBinding", "EMAIL", "Привязка email");
+                if (this.emailBinding) {
+                    this.emailInputBlock = true;
+                } else {
+                    this.emailFetchUnbindToken();
+                }
             },
+
+            emailSendConfirm(){
+                const data = {
+                    'login': this.login,
+                    'action': "EMAIL",
+                    'options': {
+                        'email': this.email,
+                    }
+                };
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
+                        .then((data) => {
+                            console.log(data);
+                            if (data.success) {
+                                Bus.$emit('showNotification', "success", "Письмо для подтверждения отправлено на почту");
+                                this.emailInputBlock = false;
+                            } else {
+                                Bus.$emit('showNotification', "danger", "Ошибка, проверьте введенный email");
+                            }
+                        });
+            },
+
+            emailFetchUnbindToken(){
+                this.emailSmsBlock = true;
+                const data = {
+                    'login': this.login,
+                    'action': "EMAIL",
+                    'options': {}
+                };
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
+                        .then((data) => {
+                            console.log(data);
+                            this.emailSmsToken = data.token;
+
+                        });
+            },
+
+            emailSmsConfirm(){
+                const data = {
+                    'login': this.login,
+                    'action': "EMAIL",
+                    'options': {
+                        'code': this.emailSmsCode,
+                        'token': this.emailSmsToken
+                    }
+                };
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
+                        .then((data) => {
+                            console.log(data);
+                            if (data.success) {
+                                Bus.$emit('showNotification', "success", `Почта ${this.email} отвязана от этого кошелька`);
+                            } else {
+                                Bus.$emit('showNotification', "danger", "Ошибка, введенный код неверен");
+                                this.emailBinding = true;
+                            }
+                            this.emailSmsBlock = false;
+                        });
+            },
+
 
             pinCodeCheckbox(){
                 this.switcherRoutine("usePinCode", "PIN", "Пин код");

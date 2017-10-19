@@ -74,14 +74,72 @@ class QiwiGeneralHelper {
         return $income;
     }
 
-    public static function emailSet($login, $attribute, $enabled) {
+    public static function emailBinding($login, $mail) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
-        $success = $qiwiControl->setQIWISecuritySetting($attribute, $enabled);
-        $token = $qiwiControl->getResponseData();
-        dd($qiwiControl->debugData);
+        $response = $qiwiControl->bindEmail($mail);
+        //        dump($response);
+
+        $success = false;
+        if ($response) {
+            $success = (intval(json_decode($response)->code->value) == 0);
+        }
+
+
+        $token[] = $qiwiControl->getLastError();
+        $token[] = $qiwiControl->getResponseData();
+
+        //        $success = $qiwiControl->setQIWIWalletOwnerData(
+        //                "Semenov",
+        //                "Maksim",
+        //                "Viktorovych",
+        //                "1992-02-02",
+        //                "4400111222",
+        //                "",
+        //                "440100732259",
+        //                ""
+        //        );
+
         return [
                 'success' => $success,
                 'token' => $token
+        ];
+    }
+
+    public static function emailFetchToken($login) {
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $response = $qiwiControl->emailUnbindingToken();
+        //        dd($response);
+        $response = json_decode($response);
+
+        $success = $response->code->_name == "CONFIRM";
+        $token = $success ? $response->identifier : "null";
+
+        $args[] = $qiwiControl->getLastError();
+        $args[] = $qiwiControl->getResponseData();
+
+        return [
+                'success' => $success,
+                'token' => $token,
+                'args' => $args
+        ];
+    }
+
+    public static function emailUnbinding($login, $code, $token) {
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $response = $qiwiControl->unbindEmail($code, $token);
+        if ($response) {
+            $success = (intval(json_decode($response)->code->value) == 0);
+        } else {
+            $success = false;
+        }
+
+        $args[] = $qiwiControl->getLastError();
+        $args[] = $qiwiControl->getResponseData();
+
+        return [
+                'success' => $success,
+                'token' => $token,
+                'args' => $args
         ];
     }
 

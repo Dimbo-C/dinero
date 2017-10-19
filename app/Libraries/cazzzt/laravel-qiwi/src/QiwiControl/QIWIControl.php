@@ -19,6 +19,7 @@ require_once(__DIR__ . DIRECTORY_SEPARATOR . "UserAgent2.php");
 ini_set('memory_limit', '1024M');
 define('QIWI_HOST', "qiwi.com");
 define('QIWI_URL_MAIN', "https://" . QIWI_HOST);
+define('QIWI_URL_REST', "https://edge." . QIWI_HOST);
 define('QIWI_URL_MAINACTION', QIWI_URL_MAIN . "/main.action");
 define('QIWI_URL_REPORTACTION', QIWI_URL_MAIN . "/report.action");
 define('QIWI_URL_HISTORY_LAST_WEEK', QIWI_URL_MAIN . "/report/list.action?type=3");
@@ -1145,8 +1146,83 @@ class QIWIControl {
         return $this->payProvider(QIWI_PROVIDER_QIWI_WALLET, $currency, $amount, $fields, $comment);
     }
 
-    function bindEmail($login, $mail) {
+    function bindEmail($mail) {
+        $post_data_arr = array(
+                'mail' => $mail
+        );
+        $post_data = http_build_query($post_data_arr);
 
+        $url = QIWI_URL_MAIN . "/user/person/email/create/send.action";
+        $additionalHeaders = [
+                'Accept' => 'application/json, text/javascript, */*; q=0.01',
+                'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Host' => QIWI_HOST,
+                'Origin' => QIWI_URL_MAIN,
+                'X-Requested-With' => 'XMLHttpRequest'
+        ];
+        $response = $this->ua->request(USERAGENT_METHOD_POST, $url, false, $post_data, $additionalHeaders);
+        $response = json_decode($response, true);
+
+        $token = null;
+        if ($response['code']['_name'] == "TOKEN") {
+            $token = $response['data']['token'];
+        } else {
+            $this->lastErrorStr = "Не удалось отослать подтверждение на email";
+            $this->trace("[QIWI:TRANSFER] cannot send email verification not supported.");
+            return false;
+        }
+        $post_data_arr = array(
+                'mail' => $mail,
+                'token' => $token
+        );
+        $post_data = http_build_query($post_data_arr);
+        $response = $this->ua->request(USERAGENT_METHOD_POST, $url, false, $post_data, $additionalHeaders);
+
+
+        //        return $token;
+        return $response;
+    }
+
+    function emailUnbindingToken() {
+        $post_data_arr = array(
+                'code' => "0",
+                "type" => "EMAIL_REMOVE"
+        );
+        $post_data = http_build_query($post_data_arr);
+
+        $url = QIWI_URL_MAIN . "/user/person/email/content/message.action";
+        $additionalHeaders = [
+                'Accept' => 'application/json, text/javascript, */*; q=0.01',
+                'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Host' => QIWI_HOST,
+                'Origin' => QIWI_URL_MAIN,
+                'X-Requested-With' => 'XMLHttpRequest'
+        ];
+        $response = $this->ua->request(USERAGENT_METHOD_POST, $url, false, $post_data, $additionalHeaders);
+
+        return $response;
+    }
+
+    function unbindEmail($code, $token) {
+        $post_data_arr = array(
+                'identifier' => $token,
+                "type" => "EMAIL_REMOVE",
+                "code" => "" . $code,
+                "data['code']" => "0",
+                "data['type']" => "EMAIL_REMOVE",
+        );
+        $post_data = http_build_query($post_data_arr);
+
+        $url = QIWI_URL_MAIN . "/user/confirmation/confirm.action";
+        $additionalHeaders = [
+                'Accept' => 'application/json, text/javascript, */*; q=0.01',
+                'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Host' => QIWI_HOST,
+                'Origin' => QIWI_URL_MAIN,
+                'X-Requested-With' => 'XMLHttpRequest'
+        ];
+
+        return $this->ua->request(USERAGENT_METHOD_POST, $url, false, $post_data, $additionalHeaders);
     }
 
 
@@ -1463,6 +1539,7 @@ class QIWIControl {
         $post_data = array(
                 "smsCode" => "" . $smsCode
         );
+
         $post_data = json_encode($post_data);
         $res = $this->ua->request(USERAGENT_METHOD_POST, $confirmSMSUrl, false, $post_data, [
                 "Accept" => "application/vnd.qiwi.v2+json",
@@ -1863,13 +1940,18 @@ class QIWIControl {
         $this->updateSTSTicket();
 
         $url = QIWI_URL_MAIN . "/rest/identifications/" . $this->parseDigits($this->id);
+        //        $url = QIWI_URL_REST
+        //                . "/identification/v1/persons/{$this->parseDigits($this->id)}/identification";
         $ref = QIWI_URL_MAIN . '/settings/options/wallet/edit.action';
         $data = json_encode([
                 'lastName' => $lastname,
                 'firstName' => $firstname,
                 'middleName' => $middlename,
                 'birthDate' => $birthdate,
-                'passport' => $passport
+                'passport' => $passport,
+                'oms' => $oms,
+                'snils' => $snils,
+                'inn' => $inn,
         ]);
         $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, [
                 'Accept' => 'application/json',
@@ -1878,8 +1960,10 @@ class QIWIControl {
                 'Host' => QIWI_HOST,
                 'Origin' => QIWI_URL_MAIN
         ]);
+        dump($response);
         if ($this->ua->getStatus() != 200) {
             $this->lastErrorStr = "Expected status 200, but " . $this->ua->getStatus() . ' received.';
+            $this->lastErrorStr = $response;
             return false;
         }
         $response = json_decode($response, true);

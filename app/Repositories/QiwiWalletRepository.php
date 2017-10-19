@@ -270,7 +270,13 @@ class QiwiWalletRepository implements Contract {
                 break;
 
             case "EMAIL":
-                $result = QiwiGeneralHelper::emailSet($login, $action, $options['value']);
+                if (isset($options['email'])) {
+                    $result = QiwiGeneralHelper::emailBinding($login, $options['email']);
+                } else if (count($options) == 0) {
+                    $result = QiwiGeneralHelper::emailFetchToken($login);
+                } else {
+                    $result = QiwiGeneralHelper::emailUnbinding($login, $options['code'], $options['token']);
+                }
                 break;
             case "TOKEN":
             case "PIN":

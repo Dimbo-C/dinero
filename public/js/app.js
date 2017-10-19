@@ -34320,6 +34320,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -34330,6 +34364,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             smsToken: "",
 
             emailBinding: false,
+            emailInputBlock: false,
+            emailSmsBlock: false,
+            emailSmsCode: "",
+            emailSmsToken: "",
+            email: "dimon22.95@mail.ru",
+
             useToken: false,
             usePinCode: false,
             smsPayments: false,
@@ -34347,13 +34387,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             console.log(this.smsConfirmation);
-            var check = this.smsConfirmation;
-
             var data = {
                 'login': this.login,
                 'action': "SMS_CONFIRMATION",
                 'options': {
-                    'value': check,
+                    'value': this.smsConfirmation,
                     'token': this.smsToken
                 }
             };
@@ -34361,13 +34399,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
                 console.log(data);
                 _this.smsToken = data.token;
-                if (!check) {
+                if (!_this.smsConfirmation) {
                     _this.smsConfirmationBlock = true;
                 }
             });
         },
         emailCheckbox: function emailCheckbox() {
-            this.switcherRoutine("emailBinding", "EMAIL", "Привязка email");
+            if (this.emailBinding) {
+                this.emailInputBlock = true;
+            } else {
+                this.emailFetchUnbindToken();
+            }
+        },
+        emailSendConfirm: function emailSendConfirm() {
+            var _this2 = this;
+
+            var data = {
+                'login': this.login,
+                'action': "EMAIL",
+                'options': {
+                    'email': this.email
+                }
+            };
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
+                console.log(data);
+                if (data.success) {
+                    Bus.$emit('showNotification', "success", "Письмо для подтверждения отправлено на почту");
+                    _this2.emailInputBlock = false;
+                } else {
+                    Bus.$emit('showNotification', "danger", "Ошибка, проверьте введенный email");
+                }
+            });
+        },
+        emailFetchUnbindToken: function emailFetchUnbindToken() {
+            var _this3 = this;
+
+            this.emailSmsBlock = true;
+            var data = {
+                'login': this.login,
+                'action': "EMAIL",
+                'options': {}
+            };
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
+                console.log(data);
+                _this3.emailSmsToken = data.token;
+            });
+        },
+        emailSmsConfirm: function emailSmsConfirm() {
+            var _this4 = this;
+
+            var data = {
+                'login': this.login,
+                'action': "EMAIL",
+                'options': {
+                    'code': this.emailSmsCode,
+                    'token': this.emailSmsToken
+                }
+            };
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
+                console.log(data);
+                if (data.success) {
+                    Bus.$emit('showNotification', "success", "\u041F\u043E\u0447\u0442\u0430 " + _this4.email + " \u043E\u0442\u0432\u044F\u0437\u0430\u043D\u0430 \u043E\u0442 \u044D\u0442\u043E\u0433\u043E \u043A\u043E\u0448\u0435\u043B\u044C\u043A\u0430");
+                } else {
+                    Bus.$emit('showNotification', "danger", "Ошибка, введенный код неверен");
+                    _this4.emailBinding = true;
+                }
+                _this4.emailSmsBlock = false;
+            });
         },
         pinCodeCheckbox: function pinCodeCheckbox() {
             this.switcherRoutine("usePinCode", "PIN", "Пин код");
@@ -34379,7 +34477,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.switcherRoutine("smsPayments", "SMS_PAYMENT", "Смс-платежи");
         },
         switcherRoutine: function switcherRoutine(fieldName, action, fieldNameText) {
-            var _this2 = this;
+            var _this5 = this;
 
             console.log(this[fieldName]);
             var data = {
@@ -34393,17 +34491,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
                 console.log(data);
                 if (data.hasOwnProperty('success') && data.success.status === "NORMAL") {
-                    var notificationText = "'" + fieldNameText + "' \u0442\u0435\u043F\u0435\u0440\u044C \u0432 \u043F\u043E\u0437\u0438\u0446\u0438\u0438 " + (_this2[fieldName] ? "вкл" : "выкл");
+                    var notificationText = "'" + fieldNameText + "' \u0442\u0435\u043F\u0435\u0440\u044C \u0432 \u043F\u043E\u0437\u0438\u0446\u0438\u0438 " + (_this5[fieldName] ? "вкл" : "выкл");
                     Bus.$emit('showNotification', "success", notificationText);
                 } else {
-                    var _notificationText = "'" + fieldNameText + "' \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0432 \u043F\u043E\u0437\u0438\u0446\u0438\u044E '" + (_this2[fieldName] ? "вкл" : "выкл") + "'";
+                    var _notificationText = "'" + fieldNameText + "' \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0432 \u043F\u043E\u0437\u0438\u0446\u0438\u044E '" + (_this5[fieldName] ? "вкл" : "выкл") + "'";
                     Bus.$emit('showNotification', "danger", _notificationText);
-                    _this2[fieldName] = !_this2[fieldName];
+                    _this5[fieldName] = !_this5[fieldName];
                 }
             });
         },
         confirmSms: function confirmSms() {
-            var _this3 = this;
+            var _this6 = this;
 
             var data = {
                 'login': this.login,
@@ -34415,24 +34513,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
                 console.log(data);
-                _this3.smsConfirmation = false;
-                _this3.smsConfirmationBlock = false;
+                _this6.smsConfirmation = false;
+                _this6.smsConfirmationBlock = false;
             });
         },
         fetchSettings: function fetchSettings() {
-            var _this4 = this;
+            var _this7 = this;
 
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", {}).then(function (response) {
                 console.log(response);
                 var data = response.data;
-                _this4.callConfirm = data.CALL_CONFIRMATION;
-                _this4.emailBinding = data.EMAIL;
-                _this4.usePinCode = data.PIN;
-                _this4.smsConfirmation = data.SMS_CONFIRMATION;
-                _this4.smsPayments = data.SMS_PAYMENT;
-                _this4.useToken = data.TOKEN;
+                _this7.callConfirm = data.CALL_CONFIRMATION;
+                _this7.emailBinding = data.EMAIL;
+                _this7.usePinCode = data.PIN;
+                _this7.smsConfirmation = data.SMS_CONFIRMATION;
+                _this7.smsPayments = data.SMS_PAYMENT;
+                _this7.useToken = data.TOKEN;
 
-                _this4.isLoaded = true;
+                _this7.isLoaded = true;
             });
         },
         showGeneralSettings: function showGeneralSettings() {
@@ -34607,7 +34705,81 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  }), _vm._v("\n                                            Привязка email\n                                        ")])])])]), _vm._v(" "), _c('div', {
+  }), _vm._v("\n                                            Привязка email\n                                        ")])])])]), _vm._v(" "), (_vm.emailInputBlock) ? _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-12 col-md-3 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("email для привязки")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-12 col-md-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.email),
+      expression: "email"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "email@org.com"
+    },
+    domProps: {
+      "value": (_vm.email)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.email = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-12 col-md-3"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.emailSendConfirm
+    }
+  }, [_vm._v("\n                                        Подтвердить\n                                    ")])])]) : _vm._e(), _vm._v(" "), (_vm.emailSmsBlock) ? _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-12 col-md-3 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Код из смс")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-12 col-md-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.emailSmsCode),
+      expression: "emailSmsCode"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "123456"
+    },
+    domProps: {
+      "value": (_vm.emailSmsCode)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.emailSmsCode = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-12 col-md-3"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.emailSmsConfirm
+    }
+  }, [_vm._v("\n                                        Подтвердить\n                                    ")])])]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-offset-1 col-sm-8"
