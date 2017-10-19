@@ -59,7 +59,6 @@
                                                 @click="confirmSms">
                                             Подтвердить
                                         </button>
-
                                     </div>
                                 </div>
 

@@ -10,7 +10,8 @@
     export default{
         data(){
             return {
-                tab: true ? "security" : "main" //switcher for testing purposes
+//                tab: "security",
+                tab: "main",
             }
         }
     }
