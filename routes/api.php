@@ -27,13 +27,17 @@ Route::prefix("qiwi-wallets")->group(function () {
     Route::get('/{wallet}/report', 'Api\QiwiWalletsController@report');
     Route::get('/{wallet}/settings', 'Api\QiwiWalletsController@settings');
 
+    Route::get('/{wallet}/identification', 'QiwiWalletsController@getIdentification');
+
     Route::post('/{wallet}/settings', 'QiwiWalletsController@saveSettings');
     Route::post('/{wallet}/security', 'QiwiWalletsController@security');
     Route::get('/{wallet}/security', 'QiwiWalletsController@fetchSecurity');
+
     Route::post('/{wallet}/withdraw', 'QiwiWalletsController@withdraw');
     Route::post('/{wallet}/auto-withdraw', 'QiwiWalletsController@autoWithdraw');
 
     Route::post('/{wallet}/activate-voucher', 'QiwiWalletsController@activateVoucher');
     Route::post('/{wallet}/create-voucher', 'QiwiWalletsController@createVoucher');
+
     Route::post('/remove/{wallet}', 'QiwiWalletsController@remove');
 });

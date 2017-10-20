@@ -172,16 +172,23 @@ class QiwiGeneralHelper {
     }
 
     public static function userConfirmBySMS($login, $token, $code) {
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $qiwiControl = self::getQiwiControlObject($login);
         $success = $qiwiControl->userConfirmBySMS("SMS_CONFIRMATION", $token, $code);
 
         return ['success' => $success];
     }
 
     public static function getSecuritySettings($login) {
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login, null, false, []);
+        $qiwiControl = self::getQiwiControlObject($login, null, false, []);
         $settings = $qiwiControl->getQIWISecuritySettings();
         $qiwiControl->removeCookies();
+
+        return $settings;
+    }
+
+    public static function getIdentification($login) {
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $settings = $qiwiControl->getQIWIWalletOwnerData();
 
         return $settings;
     }

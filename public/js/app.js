@@ -11174,13 +11174,17 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(321)
+}
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(227),
   /* template */
   __webpack_require__(228),
   /* styles */
-  null,
+  injectStyle,
   /* scopeId */
   null,
   /* moduleIdentifier (server only) */
@@ -11215,6 +11219,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {//
+//
+//
 //
 //
 //
@@ -11228,17 +11235,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             //                tab: "security",
-            tab: "main"
+            //                tab: "main",
+            tab: "identification"
         };
+    },
+    mounted: function mounted() {
+        this.$nextTick(function () {
+            $('.tooltip').removeClass('in');
+        });
     }
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
 /* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.tab == 'main') ? _c('div', [_c('qiwi-wallet-general-settings')], 1) : (_vm.tab == 'security') ? _c('div', [_c('qiwi-wallet-security-settings')], 1) : _vm._e()
+  return (_vm.tab == 'main') ? _c('div', [_c('qiwi-wallet-general-settings')], 1) : (_vm.tab == 'security') ? _c('div', [_c('qiwi-wallet-security-settings')], 1) : (_vm.tab == 'identification') ? _c('div', [_c('qiwi-wallet-identification')], 1) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -31688,6 +31702,9 @@ module.exports = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__qiwi_wallet_settings_QiwiWalletGeneralSettings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__qiwi_wallet_settings_QiwiWalletGeneralSettings_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__qiwi_wallet_settings_QiwiWalletSecuritySettings_vue__ = __webpack_require__(301);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__qiwi_wallet_settings_QiwiWalletSecuritySettings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__qiwi_wallet_settings_QiwiWalletSecuritySettings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__qiwi_wallet_settings_QiwiWalletIdentification_vue__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__qiwi_wallet_settings_QiwiWalletIdentification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__qiwi_wallet_settings_QiwiWalletIdentification_vue__);
+
 
 
 
@@ -31705,6 +31722,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('loading', __WEBPACK_IMPOR
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('modal', __WEBPACK_IMPORTED_MODULE_5__Modal_vue___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('qiwi-wallet-general-settings', __WEBPACK_IMPORTED_MODULE_6__qiwi_wallet_settings_QiwiWalletGeneralSettings_vue___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('qiwi-wallet-security-settings', __WEBPACK_IMPORTED_MODULE_7__qiwi_wallet_settings_QiwiWalletSecuritySettings_vue___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('qiwi-wallet-identification', __WEBPACK_IMPORTED_MODULE_8__qiwi_wallet_settings_QiwiWalletIdentification_vue___default.a);
 
 // Third Party Components...
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('masked-input', __webpack_require__(304));
@@ -32836,7 +32854,11 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function($) {//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -33271,9 +33293,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Prepare the component.
          */
         prepareComponent: function prepareComponent() {
-            this.$nextTick(function () {
-                $('.tooltip').removeClass('in');
-            });
+            //                this.$nextTick(() => {
+            //                    $('.tooltip').removeClass('in');
+            //                });
 
             this.loadData();
         },
@@ -33366,12 +33388,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
         },
-        showSecurity: function showSecurity() {
-            this.$parent.tab = "security";
+        showSetting: function showSetting(tabName) {
+            this.$parent.tab = tabName;
         }
     }
 });
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
 /* 300 */
@@ -33408,15 +33429,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-sm-12 col-md-10"
+    staticClass: "col-sm-12 col-md-8"
   }, [_vm._v("\n                                Настройки кошелька Qiwi (" + _vm._s(_vm.form.login) + ")\n                            ")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-12 col-md-2 text-center"
   }, [_c('button', {
-    staticClass: "btn btn-primary",
+    staticClass: "btn btn-primary full-width",
     on: {
-      "click": _vm.showSecurity
+      "click": function($event) {
+        _vm.showSetting('security')
+      }
     }
-  }, [_vm._v("\n                                    Безопасность\n                                ")])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Безопасность\n                                ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-12 col-md-2 text-center"
+  }, [_c('button', {
+    staticClass: "btn btn-primary full-width marginless paddingless",
+    on: {
+      "click": function($event) {
+        _vm.showSetting('identification')
+      }
+    }
+  }, [_vm._v("Идентификация\n                                ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "form-horizontal"
@@ -34354,6 +34386,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -34533,8 +34570,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this7.isLoaded = true;
             });
         },
-        showGeneralSettings: function showGeneralSettings() {
-            this.$parent.tab = 'main';
+        showSetting: function showSetting(tabName) {
+            this.$parent.tab = tabName;
         }
     }
 });
@@ -34574,15 +34611,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-sm-12 col-md-10"
+    staticClass: "col-sm-12 col-md-8"
   }, [_vm._v("\n                                Настройки безопасности кошелька Qiwi (" + _vm._s(_vm.login) + ")\n                            ")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-12 col-md-2 text-center"
   }, [_c('button', {
-    staticClass: "btn btn-primary",
+    staticClass: "btn btn-primary full-width",
     on: {
-      "click": _vm.showGeneralSettings
+      "click": function($event) {
+        _vm.showSetting('main')
+      }
     }
-  }, [_vm._v("\n                                    Настройки\n                                ")])])])]), _vm._v(" "), _c('loading', {
+  }, [_vm._v("Настройки\n                                ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-12 col-md-2 text-center"
+  }, [_c('button', {
+    staticClass: "btn btn-primary full-width marginless paddingless",
+    on: {
+      "click": function($event) {
+        _vm.showSetting('identification')
+      }
+    }
+  }, [_vm._v("\n                                    Идентификация\n                                ")])])])]), _vm._v(" "), _c('loading', {
     attrs: {
       "show": !_vm.isLoaded
     }
@@ -35437,6 +35485,489 @@ $.fn.extend({
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(322);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("c7da05ba", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14773f45\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./QiwiWalletSettings.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14773f45\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./QiwiWalletSettings.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 322 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.full-width {\n    width: 100%\n}\n.marginless {\n    margin: 0 auto;\n}\n.paddingless {\n    padding-left: 0;\n    padding-right: 0;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 323 */,
+/* 324 */,
+/* 325 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(326),
+  /* template */
+  __webpack_require__(327),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/var/www/dinero/public_html/resources/assets/js/components/qiwi-wallet-settings/QiwiWalletIdentification.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] QiwiWalletIdentification.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ec5305da", Component.options)
+  } else {
+    hotAPI.reload("data-v-ec5305da", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 326 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            form: new Form({
+                name: "",
+                lastName: "",
+                middleName: "",
+                birthDate: "",
+                passport: ""
+            }),
+            login: this.$route.params.wallet,
+            isLoaded: false
+        };
+    },
+    mounted: function mounted() {
+        this.fetchOwnerData();
+    },
+
+    methods: {
+        fetchOwnerData: function fetchOwnerData() {
+            var _this = this;
+
+            axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/identification").then(function (response) {
+                console.log(response);
+                var data = response.data;
+                _this.form.name = data.firstName;
+                _this.form.lastName = data.lastName;
+                _this.form.middleName = data.middleName;
+                _this.form.birthDate = data.birthDate;
+                _this.form.passport = data.passport;
+                _this.isLoaded = true;
+            });
+        },
+        updateIdentification: function updateIdentification() {
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/identification", this.form).then(function (data) {
+                console.log(data);
+            });
+        },
+        showSetting: function showSetting(tabName) {
+            this.$parent.tab = tabName;
+        }
+    }
+});
+
+/***/ }),
+/* 327 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('page-header', {
+    attrs: {
+      "icon": "fa-money",
+      "title": "Вывод средств"
+    }
+  }, [_c('li', [_c('a', {
+    staticClass: "disabled"
+  }, [_vm._v("Финансы")])]), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "tag": "li",
+      "to": "/finance/qiwi"
+    }
+  }, [_c('a', [_vm._v("Qiwi Visa Wallet")])]), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "tag": "li",
+      "to": "/finance/qiwi/dashboard"
+    }
+  }, [_c('a', [_vm._v("Панель управления")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "container-fluid"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-12 col-md-8"
+  }, [_vm._v("\n                                Идентификация кошелька Qiwi (" + _vm._s(_vm.login) + ")\n                            ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-12 col-md-2 text-center"
+  }, [_c('button', {
+    staticClass: "btn btn-primary full-width marginless paddingless",
+    on: {
+      "click": function($event) {
+        _vm.showSetting('main')
+      }
+    }
+  }, [_vm._v("\n                                    Настройки\n                                ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-12 col-md-2 text-center"
+  }, [_c('button', {
+    staticClass: "btn btn-primary full-width marginless paddingless",
+    on: {
+      "click": function($event) {
+        _vm.showSetting('security')
+      }
+    }
+  }, [_vm._v("\n                                    Безопасность\n                                ")])])])]), _vm._v(" "), _c('loading', {
+    attrs: {
+      "show": !_vm.isLoaded
+    }
+  }), _vm._v(" "), (_vm.isLoaded) ? _c('div', {
+    staticClass: "panel-body"
+  }, [_c('div', {
+    staticClass: "form-horizontal"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Имя")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.name),
+      expression: "form.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Например: Иван"
+    },
+    domProps: {
+      "value": (_vm.form.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.name = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Фамилия")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.lastName),
+      expression: "form.lastName"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Например: Иванов"
+    },
+    domProps: {
+      "value": (_vm.form.lastName)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.lastName = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Отчество")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.middleName),
+      expression: "form.middleName"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Например: Иванович"
+    },
+    domProps: {
+      "value": (_vm.form.middleName)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.middleName = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Дата рождения")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.birthDate),
+      expression: "form.birthDate"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Например: 31.12.1999"
+    },
+    domProps: {
+      "value": (_vm.form.birthDate)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.birthDate = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-4 control-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Серия и номер паспорта")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.passport),
+      expression: "form.passport"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Например: 4400 111222"
+    },
+    domProps: {
+      "value": (_vm.form.passport)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.passport = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-offset-4 col-sm-8"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.updateIdentification
+    }
+  }, [_vm._v("\n                                        Сохранить\n                                    ")])])])])]) : _vm._e()], 1)])])])], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-ec5305da", module.exports)
+  }
+}
 
 /***/ })
 ],[139]);

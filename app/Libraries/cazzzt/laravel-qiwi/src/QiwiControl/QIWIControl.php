@@ -85,7 +85,7 @@ class QIWIControl {
      * @param bool|false $debug_mode
      */
     function __construct($id, $password, $cookie_dir = "cookie_data", $proxy = false, $proxyAuth = false, $debug_mode = false) {
-        $this->id = $id;
+        $this->id = (strpos($id, "+") === false) ? "+$id" : $id;
         $this->password = $password;
         $this->auth_ticket = false;
         $this->sts_auth_ticket = false;
@@ -1940,9 +1940,10 @@ class QIWIControl {
         $this->updateSTSTicket();
 
         $url = QIWI_URL_MAIN . "/rest/identifications/" . $this->parseDigits($this->id);
-        //        $url = QIWI_URL_REST
-        //                . "/identification/v1/persons/{$this->parseDigits($this->id)}/identification";
-        $ref = QIWI_URL_MAIN . '/settings/options/wallet/edit.action';
+        //        $url = QIWI_URL_REST . "/identification/v1/persons/{$this->parseDigits($this->id)}/identification";
+        dump($url);
+        $ref = QIWI_URL_MAIN . '/settings/identification/form';
+        //        $ref = false;
         $data = json_encode([
                 'lastName' => $lastname,
                 'firstName' => $firstname,
@@ -1953,13 +1954,19 @@ class QIWIControl {
                 'snils' => $snils,
                 'inn' => $inn,
         ]);
-        $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, [
+
+        dump($this->auth_ticket);
+        dump($this->sts_auth_ticket);
+        $headers = [
                 'Accept' => 'application/json',
                 'Authorization' => "Token {$this->sts_auth_ticket}",
                 'Content-Type' => 'application/json',
-                'Host' => QIWI_HOST,
-                'Origin' => QIWI_URL_MAIN
-        ]);
+                "Host" => QIWI_HOST
+        ];
+        //        $headers = json_encode($headers);
+        dump($headers);
+        //        $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, [
+        $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, $headers);
         dump($response);
         if ($this->ua->getStatus() != 200) {
             $this->lastErrorStr = "Expected status 200, but " . $this->ua->getStatus() . ' received.';
@@ -1995,6 +2002,4 @@ class QIWIControl {
     function captcha() {
 
     }
-
-
 }
