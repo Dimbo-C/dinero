@@ -35698,13 +35698,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             form: new Form({
-                name: "",
+                firstName: "",
                 lastName: "",
                 middleName: "",
                 birthDate: "",
-                passport: ""
+                passport: "",
+                login: this.$route.params.wallet
             }),
-            login: this.$route.params.wallet,
             isLoaded: false
         };
     },
@@ -35719,7 +35719,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/identification").then(function (response) {
                 console.log(response);
                 var data = response.data;
-                _this.form.name = data.firstName;
+                _this.form.firstName = data.firstName;
                 _this.form.lastName = data.lastName;
                 _this.form.middleName = data.middleName;
                 _this.form.birthDate = data.birthDate;
@@ -35730,6 +35730,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         updateIdentification: function updateIdentification() {
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/identification", this.form).then(function (data) {
                 console.log(data);
+
+                var string = data.code;
+                var result = string.match(/error/i);
+                if (result) {
+                    Bus.$emit('showNotification', "danger", "Не удалось обновить идентификационные данные, ошибка сервера");
+                }
             });
         },
         showSetting: function showSetting(tabName) {
@@ -35774,7 +35780,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-sm-12 col-md-8"
-  }, [_vm._v("\n                                Идентификация кошелька Qiwi (" + _vm._s(_vm.login) + ")\n                            ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                                Идентификация кошелька Qiwi (" + _vm._s(_vm.form.login) + ")\n                            ")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-12 col-md-2 text-center"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width marginless paddingless",
@@ -35813,8 +35819,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.name),
-      expression: "form.name"
+      value: (_vm.form.firstName),
+      expression: "form.firstName"
     }],
     staticClass: "form-control",
     attrs: {
@@ -35822,12 +35828,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Например: Иван"
     },
     domProps: {
-      "value": (_vm.form.name)
+      "value": (_vm.form.firstName)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.name = $event.target.value
+        _vm.form.firstName = $event.target.value
       }
     }
   })])]), _vm._v(" "), _c('div', {
@@ -35959,7 +35965,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.updateIdentification
     }
-  }, [_vm._v("\n                                        Сохранить\n                                    ")])])])])]) : _vm._e()], 1)])])])], 1)
+  }, [_vm._v("\n                                        Обновить\n                                    ")])])])])]) : _vm._e()], 1)])])])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

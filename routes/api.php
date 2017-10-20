@@ -28,6 +28,7 @@ Route::prefix("qiwi-wallets")->group(function () {
     Route::get('/{wallet}/settings', 'Api\QiwiWalletsController@settings');
 
     Route::get('/{wallet}/identification', 'QiwiWalletsController@getIdentification');
+    Route::post('/{wallet}/identification', 'QiwiWalletsController@updateIdentification');
 
     Route::post('/{wallet}/settings', 'QiwiWalletsController@saveSettings');
     Route::post('/{wallet}/security', 'QiwiWalletsController@security');

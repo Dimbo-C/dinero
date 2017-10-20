@@ -95,6 +95,10 @@ class QiwiWalletsController extends Controller {
         return $this->wallet->getIdentification($login);
     }
 
+    public function updateIdentification(Request $request) {
+        return $this->wallet->updateIdentification($request);
+    }
+
     public function test(Request $request) {
 
     }

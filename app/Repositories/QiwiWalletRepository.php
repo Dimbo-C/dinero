@@ -296,6 +296,10 @@ class QiwiWalletRepository implements Contract {
         return QiwiGeneralHelper::getIdentification($login);
     }
 
+    public function updateIdentification($data) {
+        return QiwiGeneralHelper::updateIdentification($data);
+    }
+
 
     /**
      * @param $action string

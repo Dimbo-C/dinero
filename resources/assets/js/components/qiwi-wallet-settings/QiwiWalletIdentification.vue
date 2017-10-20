@@ -19,7 +19,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-sm-12 col-md-8">
-                                    Идентификация кошелька Qiwi ({{ login}})
+                                    Идентификация кошелька Qiwi ({{ form.login}})
                                 </div>
                                 <div class="col-sm-12 col-md-2 text-center">
                                     <button class="btn btn-primary full-width marginless paddingless"
@@ -45,7 +45,7 @@
                                         <input type="text"
                                                class="form-control"
                                                placeholder="Например: Иван"
-                                               v-model="form.name">
+                                               v-model="form.firstName">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -89,7 +89,7 @@
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <button class="btn btn-primary"
                                                 @click="updateIdentification">
-                                            Сохранить
+                                            Обновить
                                         </button>
                                     </div>
                                 </div>
@@ -108,13 +108,13 @@
         data() {
             return {
                 form: new Form({
-                    name: "",
+                    firstName: "",
                     lastName: "",
                     middleName: "",
                     birthDate: "",
                     passport: "",
+                    login: this.$route.params.wallet,
                 }),
-                login: this.$route.params.wallet,
                 isLoaded: false,
             }
         },
@@ -127,7 +127,7 @@
                         .then((response) => {
                             console.log(response);
                             const data = response.data;
-                            this.form.name = data.firstName;
+                            this.form.firstName = data.firstName;
                             this.form.lastName = data.lastName;
                             this.form.middleName = data.middleName;
                             this.form.birthDate = data.birthDate;
@@ -140,6 +140,13 @@
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/identification`, this.form)
                         .then((data) => {
                             console.log(data);
+
+                            const string = data.code;
+                            const result = string.match(/error/i);
+                            if (result) {
+                                Bus.$emit('showNotification', "danger", "Не удалось обновить идентификационные данные, ошибка сервера");
+                            }
+
                         });
             },
 

@@ -1941,7 +1941,7 @@ class QIWIControl {
 
         $url = QIWI_URL_MAIN . "/rest/identifications/" . $this->parseDigits($this->id);
         //        $url = QIWI_URL_REST . "/identification/v1/persons/{$this->parseDigits($this->id)}/identification";
-        dump($url);
+//        dump($url);
         $ref = QIWI_URL_MAIN . '/settings/identification/form';
         //        $ref = false;
         $data = json_encode([
@@ -1955,8 +1955,8 @@ class QIWIControl {
                 'inn' => $inn,
         ]);
 
-        dump($this->auth_ticket);
-        dump($this->sts_auth_ticket);
+//        dump($this->auth_ticket);
+//        dump($this->sts_auth_ticket);
         $headers = [
                 'Accept' => 'application/json',
                 'Authorization' => "Token {$this->sts_auth_ticket}",
@@ -1964,10 +1964,11 @@ class QIWIControl {
                 "Host" => QIWI_HOST
         ];
         //        $headers = json_encode($headers);
-        dump($headers);
+
         //        $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, [
         $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, $headers);
-        dump($response);
+        return $response;
+
         if ($this->ua->getStatus() != 200) {
             $this->lastErrorStr = "Expected status 200, but " . $this->ua->getStatus() . ' received.';
             $this->lastErrorStr = $response;

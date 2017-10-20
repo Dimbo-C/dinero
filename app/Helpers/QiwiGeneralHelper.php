@@ -188,7 +188,23 @@ class QiwiGeneralHelper {
 
     public static function getIdentification($login) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
-        $settings = $qiwiControl->getQIWIWalletOwnerData();
+        $identification = $qiwiControl->getQIWIWalletOwnerData();
+
+        return $identification;
+    }
+
+    public static function updateIdentification($data) {
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($data->login);
+        $settings = $qiwiControl->setQIWIWalletOwnerData(
+                $data->lastName,
+                $data->firstName,
+                $data->middleName,
+                $data->birthdate,
+                $data->passport,
+                "",
+                "",
+                ""
+        );
 
         return $settings;
     }
