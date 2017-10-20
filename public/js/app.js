@@ -11235,8 +11235,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             //                tab: "security",
-            //                tab: "main",
-            tab: "identification"
+            tab: "main"
+            //                tab: "identification",
         };
     },
     mounted: function mounted() {
