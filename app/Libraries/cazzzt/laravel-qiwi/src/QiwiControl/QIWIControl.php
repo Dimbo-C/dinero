@@ -18,8 +18,9 @@ require_once(__DIR__ . DIRECTORY_SEPARATOR . "simple_html_dom.php");
 require_once(__DIR__ . DIRECTORY_SEPARATOR . "UserAgent2.php");
 ini_set('memory_limit', '1024M');
 define('QIWI_HOST', "qiwi.com");
+define('QIWI_HOST_REST', "edge.qiwi.com");
 define('QIWI_URL_MAIN', "https://" . QIWI_HOST);
-define('QIWI_URL_REST', "https://edge." . QIWI_HOST);
+define('QIWI_URL_REST', "https://" . QIWI_HOST_REST);
 define('QIWI_URL_MAINACTION', QIWI_URL_MAIN . "/main.action");
 define('QIWI_URL_REPORTACTION', QIWI_URL_MAIN . "/report.action");
 define('QIWI_URL_HISTORY_LAST_WEEK', QIWI_URL_MAIN . "/report/list.action?type=3");
@@ -1905,23 +1906,70 @@ class QIWIControl {
         $this->updateSTSTicket();
 
         $url = QIWI_URL_MAIN . "/rest/identifications/" . $this->parseDigits($this->id);
-        //Log::info("Before request: Url: " . $url);
         $response = $this->ua->request(USERAGENT_METHOD_GET, $url, false, false, [
                 'Accept' => 'application/json',
                 'Authorization' => 'Token ' . $this->sts_auth_ticket,
                 'Content-Type' => 'application/json',
                 'Host' => QIWI_HOST
         ]);
-        //Log::info("After request: ");
-        //Log::info($response);
+
         if ($this->ua->getStatus() != 200) {
             $this->lastErrorStr = "Expected status 200, but " . $this->ua->getStatus() . ' received.';
             return false;
         }
         $response = json_decode($response, true);
+
         return $response;
     }
 
+    function lsetQIWIWalletOwnerData($lastname, $firstname, $middlename, $birthdate, $passport, $snils, $inn, $oms) {
+        $this->updateTGTSTicket();
+        $this->updateSTSTicket();
+        $url = QIWI_URL_MAIN . "/rest/identifications/" . $this->parseDigits($this->id);
+        $ref = QIWI_URL_MAIN . '/settings/options/wallet/edit.action';
+        $data = json_encode([
+                'lastName' => $lastname,
+                'firstName' => $firstname,
+                'middleName' => $middlename,
+                'birthDate' => $birthdate,
+                'passport' => $passport
+        ]);
+        $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, [
+                'Accept' => 'application/json',
+                'Authorization' => "Token {$this->sts_auth_ticket}",
+                'Content-Type' => 'application/json',
+                'Host' => QIWI_HOST,
+                'Origin' => QIWI_URL_MAIN
+        ]);
+        dump($response);
+        if ($this->ua->getStatus() != 200) {
+            $this->lastErrorStr = "Expected status 200, but " . $this->ua->getStatus() . ' received.';
+            return false;
+        }
+        $response = json_decode($response, true);
+        $this->updateTGTSTicket();
+        $this->updateSTSTicket();
+        $url = QIWI_URL_MAIN . "/rest/identifications/{$this->parseDigits($this->id)}/docs";
+        $data = json_encode([
+                'inn' => $inn,
+                'snils' => $snils,
+                'oms' => $oms,
+        ]);
+        $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, [
+                'Accept' => 'application/json',
+                'Authorization' => "Token {$this->sts_auth_ticket}",
+                'Content-Type' => 'application/json',
+                'Host' => QIWI_HOST,
+                'Origin' => QIWI_URL_MAIN
+        ]);
+        if ($this->ua->getStatus() != 200) {
+            $this->lastErrorStr = "Expected status 200, but " . $this->ua->getStatus() . ' received.';
+            return false;
+        }
+        $response = json_decode($response, true);
+
+        return $response;
+    }
 
     /**
      * Установить персональные данные владельца кошелька
@@ -1939,9 +1987,10 @@ class QIWIControl {
         $this->updateTGTSTicket();
         $this->updateSTSTicket();
 
+        //        $this->login();
         $url = QIWI_URL_MAIN . "/rest/identifications/" . $this->parseDigits($this->id);
         //        $url = QIWI_URL_REST . "/identification/v1/persons/{$this->parseDigits($this->id)}/identification";
-//        dump($url);
+        //        dump($url);
         $ref = QIWI_URL_MAIN . '/settings/identification/form';
         //        $ref = false;
         $data = json_encode([
@@ -1955,19 +2004,14 @@ class QIWIControl {
                 'inn' => $inn,
         ]);
 
-//        dump($this->auth_ticket);
-//        dump($this->sts_auth_ticket);
         $headers = [
                 'Accept' => 'application/json',
-                'Authorization' => "Token {$this->sts_auth_ticket}",
+                'Authorization' => "Token " . $this->sts_auth_ticket,
                 'Content-Type' => 'application/json',
-                "Host" => QIWI_HOST
         ];
-        //        $headers = json_encode($headers);
+        $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, $headers, true);
 
-        //        $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, [
-        $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, $headers);
-        return $response;
+//        return $response;
 
         if ($this->ua->getStatus() != 200) {
             $this->lastErrorStr = "Expected status 200, but " . $this->ua->getStatus() . ' received.';

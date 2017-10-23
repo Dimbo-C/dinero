@@ -14,7 +14,7 @@ Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
     $login = "+79096127856";
-    $control = \App\Helpers\QiwiGeneralHelper::getQiwiControlObject($login);
+    $control = \App\Helpers\self::getQiwiControlObject($login);
     $control->setQIWIWalletOwnerData(
             "Иванович",
             "Иван",

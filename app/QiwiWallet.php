@@ -127,6 +127,10 @@ class QiwiWallet extends Model {
         $this->postUpdateRoutine($login);
     }
 
+    /**
+     * @param $login
+     * @return QiwiWallet|Model
+     */
     public static function findByLogin($login) {
         return (new QiwiWallet())->where("login", $login)->first();
     }

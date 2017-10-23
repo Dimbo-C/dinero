@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\AutowithdrawTypes;
-use App\Cazzzt\Qiwi\QiwiControl\QIWIControl;
 use App\Contracts\Repositories\QiwiWalletRepository as Contract;
 use App\Helpers\QiwiGeneralHelper;
 use App\Processors\MassActionProcessor;
@@ -16,13 +15,10 @@ use App\QiwiWalletType;
 use App\Services\Autowithdraw;
 use App\Services\Withdraw;
 use App\Structures\WithdrawResult;
-use Illuminate\Support\Facades\Log;
 
 class QiwiWalletRepository implements Contract {
-    private $staticWallet;
 
     function __construct() {
-        $this->staticWallet = new QiwiWallet();
     }
 
     public function all() {
@@ -115,7 +111,8 @@ class QiwiWalletRepository implements Contract {
         $balance = QiwiGeneralHelper::getBalance($login);
         $monthIncome = $balance;
 
-        $this->staticWallet->updateBalanceAndIncome($login, $balance, $monthIncome);
+        $wallet = QiwiWallet::findByLogin($login);
+        $wallet->updateBalanceAndIncome($login, $balance, $monthIncome);
 
         return [
                 "monthIncome" => $monthIncome,
@@ -128,14 +125,15 @@ class QiwiWalletRepository implements Contract {
         $balance = QiwiGeneralHelper::getBalance($login);
         $wallet = QiwiWallet::findByLogin($login);
 
-        $this->staticWallet->updateBalance($login, $balance);
+        $wallet->updateBalance($login, $balance);
 
         return $balance;
     }
 
     public function updateIncome($login) {
         $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
-        $this->staticWallet->updateIncome($login, $monthIncome);
+        $wallet = QiwiWallet::findByLogin($login);
+        $wallet->updateIncome($login, $monthIncome);
 
         return $monthIncome;
     }
@@ -319,7 +317,7 @@ class QiwiWalletRepository implements Contract {
     }
 
     private function updateWalletSettings($data, $login) {
-        $wallet = $this->staticWallet->findByLogin($login);
+        $wallet = QiwiWallet::findByLogin($login);
         (new QiwiWalletSettings)->updateWithData($data, $wallet->id);
     }
 

@@ -5,7 +5,7 @@ namespace App\Services;
 use App\AutowithdrawTypes;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
-use App\Repositories\QiwiWalletRepository;
+use App\Repositories\QiwiGeneralHelper;
 use Illuminate\Support\Facades\Log;
 
 define("AUTOWITHDRAW_EVERY_X_MINUTES", 1);
@@ -65,7 +65,7 @@ class Autowithdraw {
         // update timer if action was successful
         if ($result) {
             $this->settings->updateWithdrawalTimer();
-            $repo = new QiwiWalletRepository();
+            $repo = new QiwiGeneralHelper();
             $repo->updateIncome($this->login);
         }
         Log::info("Autowithdraw from " . $this->login . " is " . ($result ? "successful" : "failed"));

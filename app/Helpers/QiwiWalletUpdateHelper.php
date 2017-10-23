@@ -5,7 +5,7 @@ namespace App\Helpers;
 use App\Proxy;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
-use App\Repositories\QiwiWalletRepository;
+use App\Repositories\QiwiGeneralHelper;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
@@ -26,7 +26,7 @@ class QiwiWalletUpdateHelper {
     public static function updateWallet($login) {
         if (!self::isTimeToUpdate($login)) return false;
 
-        $repository = new QiwiWalletRepository();
+        $repository = new QiwiGeneralHelper();
 
         return [
                 "balance" => $repository->updateBalance($login),
@@ -40,7 +40,7 @@ class QiwiWalletUpdateHelper {
         $proxy = Proxy::find($wallet->proxy_id);
 
         if ($settings->is_always_online) {
-            $control = QiwiGeneralHelper::getQiwiControlObject($login, $wallet->password, $wallet->use_proxy, $proxy);
+            $control = self::getQiwiControlObject($login, $wallet->password, $wallet->use_proxy, $proxy);
             //            Log::info("Session updated " . $control->login());
             return $control->login();
         } else {

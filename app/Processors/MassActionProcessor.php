@@ -5,7 +5,7 @@ namespace App\Processors;
 
 use App\QiwiWallet;
 use App\QiwiWalletType;
-use App\Repositories\QiwiWalletRepository;
+use App\Repositories\QiwiGeneralHelper;
 
 class MassActionProcessor {
     private $action;
@@ -54,7 +54,7 @@ class MassActionProcessor {
         $typeId = (new QiwiWalletType())->findByType($type)['id'];
 
         try {
-            (new QiwiWalletRepository())->moveWalletsTo($this->ids, $typeId);
+            (new QiwiGeneralHelper())->moveWalletsTo($this->ids, $typeId);
             return true;
         } catch (\Exception $e) {
             return false;

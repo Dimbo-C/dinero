@@ -86,6 +86,47 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="" class="col-sm-4 control-label">ИНН</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Например: 7710000001"
+                                               v-model="form.inn">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="col-sm-4 control-label">ОМС</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Например: 00000000178"
+                                               v-model="form.oms">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="col-sm-4 control-label">СНИЛС</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Например: 12345678901"
+                                               v-model="form.snils">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="col-sm-4 control-label">Тип идентификации</label>
+                                    <div class="col-sm-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Например: SIMPLE"
+                                               disabled
+                                               v-model="type">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <button class="btn btn-primary"
                                                 @click="updateIdentification">
@@ -104,6 +145,7 @@
 </template>
 
 <script>
+    import * as _ from "lodash";
     export default {
         data() {
             return {
@@ -113,8 +155,12 @@
                     middleName: "",
                     birthDate: "",
                     passport: "",
+                    inn: "",
+                    oms: "",
+                    snils: "",
                     login: this.$route.params.wallet,
                 }),
+                type: "",
                 isLoaded: false,
             }
         },
@@ -127,11 +173,25 @@
                         .then((response) => {
                             console.log(response);
                             const data = response.data;
+//                            this.form = data;
+//                            console.log("before assign");
+//                            console.log(this.form);
+//                            console.log(data);
+//
+////                            _.merge(this.form, data);
+//                            console.log("after assign");
+//                            console.log(this.form);
+//                            console.log(data);
                             this.form.firstName = data.firstName;
                             this.form.lastName = data.lastName;
                             this.form.middleName = data.middleName;
                             this.form.birthDate = data.birthDate;
                             this.form.passport = data.passport;
+                            this.form.inn = data.inn;
+                            this.form.oms = data.oms;
+                            this.form.snils = data.snils;
+                            this.type = data.type;
+
                             this.isLoaded = true;
                         })
             },
@@ -141,12 +201,15 @@
                         .then((data) => {
                             console.log(data);
 
-                            const string = data.code;
-                            const result = string.match(/error/i);
-                            if (result) {
+                            if ("code" in data) {
+//                                const string = data.code;
+//                                const result = string.match(/error/i);
+//                                if (result) {
                                 Bus.$emit('showNotification', "danger", "Не удалось обновить идентификационные данные, ошибка сервера");
+//                                }
+                            } else {
+                                Bus.$emit('showNotification', "success", "Персональные данные обновлены");
                             }
-
                         });
             },
 

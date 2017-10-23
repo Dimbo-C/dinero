@@ -62,20 +62,20 @@ class QiwiGeneralHelper {
     }
 
     public static function getBalance($login) {
-        $control = QiwiGeneralHelper::getQiwiControlObject($login);
+        $control = self::getQiwiControlObject($login);
 
         return $control->loadBalance()['RUB'];
     }
 
     public static function getMonthIncome($login) {
-        $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
+        $qiwi = self::getQiwiInstance($login);
         $income = $qiwi->getTotals(date("01.m.Y"), date("d.m.Y"))['income'];
 
         return $income;
     }
 
     public static function emailBinding($login, $mail) {
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $qiwiControl = self::getQiwiControlObject($login);
         $response = $qiwiControl->bindEmail($mail);
         //        dump($response);
 
@@ -106,7 +106,7 @@ class QiwiGeneralHelper {
     }
 
     public static function emailFetchToken($login) {
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $qiwiControl = self::getQiwiControlObject($login);
         $response = $qiwiControl->emailUnbindingToken();
         //        dd($response);
         $response = json_decode($response);
@@ -125,7 +125,7 @@ class QiwiGeneralHelper {
     }
 
     public static function emailUnbinding($login, $code, $token) {
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $qiwiControl = self::getQiwiControlObject($login);
         $response = $qiwiControl->unbindEmail($code, $token);
         if ($response) {
             $success = (intval(json_decode($response)->code->value) == 0);
@@ -144,7 +144,7 @@ class QiwiGeneralHelper {
     }
 
     public static function setSecurityAttribute($login, $attribute, $enabled) {
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $qiwiControl = self::getQiwiControlObject($login);
         $success = $qiwiControl->setQIWISecuritySetting($attribute, $enabled);
         $token = $qiwiControl->getResponseData();
 
@@ -161,7 +161,7 @@ class QiwiGeneralHelper {
      *
      */
     public static function smsConfirmation($login, $enabled) {
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $qiwiControl = self::getQiwiControlObject($login);
         $success = $qiwiControl->setQIWISecuritySetting("SMS_CONFIRMATION", $enabled);
         $token = $qiwiControl->getResponseData();
 
@@ -187,23 +187,25 @@ class QiwiGeneralHelper {
     }
 
     public static function getIdentification($login) {
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $qiwiControl = self::getQiwiControlObject($login);
         $identification = $qiwiControl->getQIWIWalletOwnerData();
 
         return $identification;
     }
 
     public static function updateIdentification($data) {
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($data->login);
+        $qiwiControl = self::getQiwiControlObject($data->login);
+//        $qiwiControl->login();
+
         $settings = $qiwiControl->setQIWIWalletOwnerData(
                 $data->lastName,
                 $data->firstName,
                 $data->middleName,
-                $data->birthdate,
+                $data->birthDate,
                 $data->passport,
-                "",
-                "",
-                ""
+                $data->snils,
+                $data->inn,
+                $data->oms
         );
 
         return $settings;
