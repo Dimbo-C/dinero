@@ -12285,6 +12285,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -12295,6 +12298,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         return {
+            noSum: "...",
             moveTo: this.types.filter(function (t) {
                 return t.id !== _this.type.id;
             })[0].id,
@@ -12314,6 +12318,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
+        moneys: function moneys(balance, login) {
+            if (this.spinners.includes(login)) {
+                return "...";
+            } else {
+                return this.tidySum(balance) + " руб.";
+            }
+        },
         moveWallets: function moveWallets() {
             console.log(this.selected);
             var moveFrom = this.isInactive ? this.selected[0].type_id : this.type.id;
@@ -12493,7 +12504,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "id": w.login
       }
-    }, [_vm._v(_vm._s(_vm._f("currency")(_vm.tidySum(w.balance))))]), _vm._v(" "), _c('a', {
+    }, [_vm._v("\n                            " + _vm._s(_vm.moneys(w.balance, w.login)) + "\n                        ")]), _vm._v(" "), _c('a', {
       attrs: {
         "data-toggle": "tooltip",
         "data-placement": "top",

@@ -112,7 +112,7 @@ class QiwiWalletRepository implements Contract {
         $monthIncome = $balance;
 
         $wallet = QiwiWallet::findByLogin($login);
-        $wallet->updateBalanceAndIncome($login, $balance, $monthIncome);
+        $wallet->updateBalanceAndIncome($balance, $monthIncome);
 
         return [
                 "monthIncome" => $monthIncome,
@@ -125,7 +125,7 @@ class QiwiWalletRepository implements Contract {
         $balance = QiwiGeneralHelper::getBalance($login);
         $wallet = QiwiWallet::findByLogin($login);
 
-        $wallet->updateBalance($login, $balance);
+        $wallet->updateBalance($balance);
 
         return $balance;
     }
@@ -133,7 +133,7 @@ class QiwiWalletRepository implements Contract {
     public function updateIncome($login) {
         $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
         $wallet = QiwiWallet::findByLogin($login);
-        $wallet->updateIncome($login, $monthIncome);
+        $wallet->updateIncome($monthIncome);
 
         return $monthIncome;
     }
@@ -317,8 +317,7 @@ class QiwiWalletRepository implements Contract {
     }
 
     private function updateWalletSettings($data, $login) {
-        $wallet = QiwiWallet::findByLogin($login);
-        (new QiwiWalletSettings)->updateWithData($data, $wallet->id);
+        (new QiwiWalletSettings)->updateSettings($data, $login);
     }
 
     private function updateWallet($login, $name, $isActive, $walletType, $useProxy) {

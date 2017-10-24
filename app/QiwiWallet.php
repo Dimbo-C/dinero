@@ -102,29 +102,30 @@ class QiwiWallet extends Model {
     }
 
     // not sure if it should be used ever again but, meh
-    public function updateBalanceAndIncome($login, $balance, $monthIncome) {
-        $wallet = $this->findByLogin($login);
-        $wallet->balance = $balance;
-        $wallet->month_income = $monthIncome;
-        $wallet->save();
+    public function updateBalanceAndIncome($balance, $monthIncome) {
+        $this->balance = $balance;
+        $this->month_income = $monthIncome;
+        $this->save();
 
-        $this->postUpdateRoutine($login);
+        $this->postUpdateRoutine();
     }
 
-    public function updateBalance($login, $balance) {
-        $wallet = $this->findByLogin($login);
-        $wallet->balance = $balance;
-        $wallet->save();
+    public function updateBalance($balance) {
+        $this->balance = $balance;
+        $this->save();
 
-        $this->postUpdateRoutine($login);
+        $this->postUpdateRoutine();
+
+        return $this;
     }
 
-    public function updateIncome($login, $income) {
-        $wallet = $this->findByLogin($login);
-        $wallet->month_income = $income;
-        $wallet->save();
+    public function updateIncome($income) {
+        $this->month_income = $income;
+        $this->save();
 
-        $this->postUpdateRoutine($login);
+        $this->postUpdateRoutine();
+
+        return $this;
     }
 
     /**
@@ -147,37 +148,29 @@ class QiwiWallet extends Model {
         return (new QiwiWallet())->where('name', $name)->exists();
     }
 
-
-    public function updateByLogin($login, $arguments = []) {
-        $this->where("login", $login)->update($arguments);
-        $this->postUpdateRoutine($login);
-    }
-
-    private function postUpdateRoutine($login) {
-        $this->updateRecheckTime($login);
-        $this->recheckMaximumBalance($login);
+    private function postUpdateRoutine() {
+        $this->updateRecheckTime();
+        $this->recheckMaximumBalance();
 
         // auto withdraw attempt
-        $aw = new Autowithdraw($login);
+        $aw = new Autowithdraw($this->login);
         $aw->autoWithdraw(AUTOWITHDRAW_AFTER_BALANCE_UPDATE);
     }
 
     // put wallet to reserve if it's maximum balance is more that current balance
-    private function recheckMaximumBalance($login) {
-        $wallet = $this->findByLogin($login);
-        $settings = (new QiwiWalletSettings())->findByLogin($login);
-        if ($wallet->balance >= $settings->maximum_balance) {
+    private function recheckMaximumBalance() {
+        if ($this->balance >= $this->settings->maximum_balance) {
             $walletTypeId = (new QiwiWalletType())->findByType("reserve")->id;
 
-            $wallet->type_id = $walletTypeId;
-            $wallet->save();
+            $this->type_id = $walletTypeId;
+
+            $this->save();
         }
     }
 
-    private function updateRecheckTime($login) {
-        $settings = (new QiwiWalletSettings())->findByLogin($login);
-        $settings->last_balance_recheck = Carbon::now()->format('Y-m-d H:i:s');
-        $settings->save();
+    private function updateRecheckTime() {
+        //        $settings = (new QiwiWalletSettings())->findByLogin($login);
+        $this->settings->last_balance_recheck = Carbon::now()->format('Y-m-d H:i:s');
+        $this->settings->save();
     }
-
 }

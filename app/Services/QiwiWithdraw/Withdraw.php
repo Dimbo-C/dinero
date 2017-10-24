@@ -3,12 +3,12 @@
 namespace App\Services;
 
 use App\Cazzzt\Qiwi\QiwiControl\QIWIControl;
-use App\Helpers\self;
+use App\Helpers\QiwiGeneralHelper;
 use App\Structures\WithdrawResult;
 
 class Withdraw {
     public static function toQiwiWallet($login, $to, $currency, $amount, $comment = false) {
-        $qiwiControl = self::getQiwiControlObject($login);
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->transferMoney($to, $currency, $amount, $comment);
 
         $result = new WithdrawResult();
@@ -26,7 +26,7 @@ class Withdraw {
     }
 
     public static function toCreditCard($login, $cardNumber, $firstName, $lastName, $sum, $currency, $comment = "") {
-        $qiwiControl = self::getQiwiControlObject($login);
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->transferMoneyToCard($cardNumber, $firstName, $lastName, $sum, $currency, $comment);
 
         $result = new WithdrawResult();
@@ -45,7 +45,7 @@ class Withdraw {
     }
 
     public static function purchaseVoucher($login, $sum) {
-        $qiwiControl = self::getQiwiControlObject($login);
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->purchaseVoucher($sum);
 
         $result = new WithdrawResult();
@@ -65,7 +65,7 @@ class Withdraw {
     }
 
     public static function activateVoucher($login, $code) {
-        $qiwiControl = self::getQiwiControlObject($login);
+        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->activateVoucher($code);
 
         $result = new WithdrawResult();

@@ -10,7 +10,8 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
         $wallets = [
                 ["Main", "+380960968460", "Crixalis2204", 0],
                 ["Anna", "+380507308340", "1956Ujl", 0],
-//                ["Russ 1", "+79068369184", "EtvtiL4EDO", 1],
+                ["Eugene", "+380639720273", "!%)@!((%Jack/15", 0],
+                ["Russ 1", "+79068369184", "EtvtiL4EDO", 1],
                 ["Russ 2", "+79096127856", "F3Eu7F2iaK", 1],
                 ["Russ 3", "+79619377629", "gIDMS1Aa08", 1],
                 ["Russ 4", "+79619386097", "PY1x7aPPnL", 1],
@@ -18,12 +19,14 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
         $proxies = [
                 ["", "", "", ""],
                 ["", "", "", ""],
-//                ["5.8.66.122", "8239", "user6760", "0ajq7n"],
+                ["", "", "", ""],
+                ["5.8.66.122", "8239", "user6760", "0ajq7n"],
                 ["5.8.61.107", "8239", "user6760", "0ajq7n"],
                 ["5.8.61.109", "8239", "user6760", "0ajq7n"],
                 ["5.8.61.145", "8239", "user6760", "0ajq7n"],
         ];
-        for ($i = 0; $i < 5; $i++) {
+
+        for ($i = 0; $i < count($wallets); $i++) {
             // proxies
             Proxy::insert([
                     "host" => $proxies[$i][0],

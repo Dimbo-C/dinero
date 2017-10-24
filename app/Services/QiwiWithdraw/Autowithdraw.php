@@ -5,7 +5,7 @@ namespace App\Services;
 use App\AutowithdrawTypes;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
-use App\Repositories\QiwiGeneralHelper;
+use App\Repositories\QiwiWalletRepository;
 use Illuminate\Support\Facades\Log;
 
 define("AUTOWITHDRAW_EVERY_X_MINUTES", 1);
@@ -25,16 +25,7 @@ class Autowithdraw {
      * @var AutowithdrawTypes
      */
     private $autoWithdrawType;
-
-    /**
-     * @var string
-     */
     private $login;
-
-    /**
-     * @var double
-     */
-
     private $withdrawAmount;
 
     function __construct($walletLogin) {
@@ -44,7 +35,7 @@ class Autowithdraw {
 
     // fetch some data
     private function init() {
-        $this->wallet = QiwiWallet::where("login", $this->login)->first();
+        $this->wallet = QiwiWallet::findByLogin($this->login);
         $this->settings = QiwiWalletSettings::find($this->wallet->id);
         $this->autoWithdrawType = AutowithdrawTypes::find($this->settings->autoWithdrawal_type_id);
         $this->withdrawAmount = $this->withdrawAmount();
@@ -56,19 +47,20 @@ class Autowithdraw {
      * @return bool
      */
     public function autoWithdraw($autowithdrawMode, $force = false) {
-        Log::info("Before guards: " . $this->login);
+        Log::info("Autowithdraw start for " . $this->login);
         if (!$force && !$this->guards($autowithdrawMode)) return false;
-        Log::info("After guards: " . $this->login);
+
+        Log::info("Autowithdraw routine for " . $this->login);
         $result = $this->withdrawRoutine();
-        Log::info("After withdraw: " . $this->login . " " . $result);
 
         // update timer if action was successful
         if ($result) {
+            Log::info("Autowithdraw for {$this->login} was a success");
             $this->settings->updateWithdrawalTimer();
-            $repo = new QiwiGeneralHelper();
+            $repo = new QiwiWalletRepository();
             $repo->updateIncome($this->login);
         }
-        Log::info("Autowithdraw from " . $this->login . " is " . ($result ? "successful" : "failed"));
+        Log::info("Autowithdraw from {$this->login} " . ($result ? "successful" : "failed"));
 
         return $result;
     }
@@ -78,7 +70,7 @@ class Autowithdraw {
      */
     private function withdrawRoutine() {
         $target = $this->settings->autoWithdrawal_target;
-        Log::info("Routine: ".$target);
+        Log::info("Routine: " . $target);
         switch ($target) {
             case "wallet":
                 return $this->toWallet();
@@ -86,41 +78,6 @@ class Autowithdraw {
                 return $this->toCard();
             default:
                 return false;
-        }
-    }
-
-    private function toCard() {
-        try {
-            $login = $this->login;
-            $cardnum = $this->settings->autoWithdrawal_card_number;
-            $fname = $this->settings->autoWithdrawal_cardholder_name;
-            $lname = $this->settings->autoWithdrawal_cardholder_surname;
-            $sum = $this->withdrawAmount;
-            $currency = "RUB";
-            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
-            $result = Withdraw::toCreditCard(
-                    $login, $cardnum, $fname,
-                    $lname, $sum, $currency, $comment);
-
-            return ($result->error == null);
-        } catch (\Exception $ex) {
-            Log::error("Error in 'AutoWithdraw#toCard()'");
-
-            return false;
-        }
-    }
-
-    private function toWallet() {
-        try {
-            $to = $this->settings->autoWithdrawal_wallet_number;
-            $amount = $this->withdrawAmount;
-            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
-            $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $amount, $comment);
-            Log::error("Error: " . $result->error);
-            return ($result->error == null);
-        } catch (\Exception $ex) {
-            Log::error("Error in 'AutoWithdraw#toWallet()'");
-            return false;
         }
     }
 
@@ -166,6 +123,41 @@ class Autowithdraw {
         }
 
         return true;
+    }
+
+    private function toCard() {
+        try {
+            $login = $this->login;
+            $cardnum = $this->settings->autoWithdrawal_card_number;
+            $fname = $this->settings->autoWithdrawal_cardholder_name;
+            $lname = $this->settings->autoWithdrawal_cardholder_surname;
+            $sum = $this->withdrawAmount;
+            $currency = "RUB";
+            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
+            $result = Withdraw::toCreditCard(
+                    $login, $cardnum, $fname,
+                    $lname, $sum, $currency, $comment);
+
+            return ($result->error == null);
+        } catch (\Exception $ex) {
+            Log::error("Error in 'AutoWithdraw#toCard()'");
+
+            return false;
+        }
+    }
+
+    private function toWallet() {
+        try {
+            $to = $this->settings->autoWithdrawal_wallet_number;
+            $amount = $this->withdrawAmount;
+            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
+            $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $amount, $comment);
+            Log::error("Error: " . $result->error);
+            return ($result->error == null);
+        } catch (\Exception $ex) {
+            Log::error("Error in 'AutoWithdraw#toWallet()'");
+            return false;
+        }
     }
 
     private function withdrawAmount() {

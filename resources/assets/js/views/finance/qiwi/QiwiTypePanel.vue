@@ -37,7 +37,10 @@
                         <td v-text="w.name"></td>
                         <td v-text="w.login"></td>
                         <td v-if="!isInactive">
-                            <span :id="w.login">{{ tidySum(w.balance) | currency }}</span>
+                            <span :id="w.login">
+                                <!--{{ spinners.includes(w.login) ? noSum : tidySum(w.balance) | currency }}-->
+                                {{ moneys(w.balance, w.login)}}
+                            </span>
                             <a data-toggle="tooltip"
                                data-placement="top"
                                title="Обновить">
@@ -122,6 +125,7 @@
         props: ['type', 'types', 'exclude', 'is-inactive'],
         data () {
             return {
+                noSum: "...",
                 moveTo: this.types.filter(t => t.id !== this.type.id)[0].id,
                 foo: '',
                 onChangeSelect: '',
@@ -136,13 +140,21 @@
             selected(val){
                 this.$emit('updateSelected', val);
             },
+
         },
         methods: {
+            moneys(balance, login){
+                if (this.spinners.includes(login)) {
+                    return "...";
+                } else {
+                    return this.tidySum(balance)+" руб.";
+                }
+            },
             moveWallets () {
                 console.log(this.selected);
                 const moveFrom = this.isInactive
-                    ? this.selected[0].type_id
-                    : this.type.id;
+                        ? this.selected[0].type_id
+                        : this.type.id;
 
 
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
@@ -155,30 +167,30 @@
                 this.spinners.push(login);
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
-                    .then((balance) => {
-                        console.log("Balance: " + balance);
-                        this.items.map((item) => {
-                            if (item.login === login) {
-                                item.balance = this.tidySum(balance);
+                        .then((balance) => {
+                            console.log("Balance: " + balance);
+                            this.items.map((item) => {
+                                if (item.login === login) {
+                                    item.balance = this.tidySum(balance);
 
-                                // stop spinner
-                                this.spinners = this.spinners.filter((elem) => login !== elem);
-                            }
+                                    // stop spinner
+                                    this.spinners = this.spinners.filter((elem) => login !== elem);
+                                }
+                            });
                         });
-                    });
             },
 
             updateIncome(login){
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-income', new Form(auth))
-                    .then((income) => {
-                        console.log("Income: " + income);
-                        this.items.map((item) => {
-                            if (item.login === login) {
-                                item.month_income = this.tidySum(income);
-                            }
-                        });
-                    })
+                        .then((income) => {
+                            console.log("Income: " + income);
+                            this.items.map((item) => {
+                                if (item.login === login) {
+                                    item.month_income = this.tidySum(income);
+                                }
+                            });
+                        })
             },
 
             updateWallet(login) {

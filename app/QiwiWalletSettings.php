@@ -64,10 +64,10 @@ class QiwiWalletSettings extends Model {
         return $settings;
     }
 
-    public function updateWithData($data, $id) {
+    public function updateSettings($data, $login) {
         $autoWithdrawTypeId = (new AutowithdrawTypes())->findBySlug($data->autoWithdrawalType)->id;
 
-        $settings = $this->find($id);
+        $settings = $this->findByLogin($login);
 
         $settings->comments = $data->comments;
         $settings->is_always_online = $data->alwaysOnline;
@@ -117,19 +117,5 @@ class QiwiWalletSettings extends Model {
         $this->last_withdrawal_time = Carbon::now();
 
         $this->save();
-    }
-
-    public function autoWithdrawData() {
-        $data = new \stdClass();
-        $data->active = $this->autoWithdrawal_active;
-        $data->typeId = $this->autoWithdrawal_type_id;
-        $data->target = $this->autoWithdrawal_target;
-        $data->minutes = $this->autoWithdrawal_minutes;
-        $data->cardNumber = $this->autoWithdrawal_card_number;
-        $data->cardName = $this->autoWithdrawal_cardholder_name;
-        $data->cardSurname = $this->autoWithdrawal_cardholder_surname;
-        $data->walletNumber = $this->autoWithdrawal_wallet_number;
-
-        return $data;
     }
 }
