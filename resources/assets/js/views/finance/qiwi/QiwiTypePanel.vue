@@ -140,14 +140,13 @@
             selected(val){
                 this.$emit('updateSelected', val);
             },
-
         },
         methods: {
             moneys(balance, login){
                 if (this.spinners.includes(login)) {
                     return "...";
                 } else {
-                    return this.tidySum(balance)+" руб.";
+                    return this.tidySum(balance) + " руб.";
                 }
             },
             moveWallets () {
@@ -159,6 +158,7 @@
 
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
             },
+
             removeWallet(login){
                 this.$router.push({path: `/finance/qiwi/remove/${login}`});
             },
@@ -199,9 +199,10 @@
             },
 
             tidySum(sum){
-                sum += "";
-                let str = sum.replace(/,/g, "");
-                parseInt(str, 10);
+                let str = (typeof sum === "object") ? "0.00" : (sum + "");
+
+                str = str.replace(/,/g, "");
+                str = parseFloat(str).toFixed(2);
 
                 return str;
             }
