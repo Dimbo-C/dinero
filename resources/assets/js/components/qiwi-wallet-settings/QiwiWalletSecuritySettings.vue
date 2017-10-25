@@ -157,7 +157,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="!callConfirmSmsBlock">
+                                <div class="form-group" v-if="!callConfirm.smsBlock">
                                     <div class="col-sm-offset-1 col-sm-8">
                                         <div class="checkbox">
                                             <label>
@@ -171,7 +171,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="callConfirmSmsBlock">
+                                <div class="form-group" v-if="callConfirm.smsBlock">
                                     <label for="" class="col-sm-12 col-md-3 control-label">Код из смс</label>
                                     <div class="col-sm-12 col-md-3">
                                         <input type="text"

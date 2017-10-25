@@ -35100,7 +35100,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  }), _vm._v("\n                                            Смс-платежи\n                                        ")])])])]), _vm._v(" "), (!_vm.callConfirmSmsBlock) ? _c('div', {
+  }), _vm._v("\n                                            Смс-платежи\n                                        ")])])])]), _vm._v(" "), (!_vm.callConfirm.smsBlock) ? _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-offset-1 col-sm-8"
@@ -35139,7 +35139,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  }), _vm._v("\n                                            Кол-конфирм\n                                        ")])])])]) : _vm._e(), _vm._v(" "), (_vm.callConfirmSmsBlock) ? _c('div', {
+  }), _vm._v("\n                                            Кол-конфирм\n                                        ")])])])]) : _vm._e(), _vm._v(" "), (_vm.callConfirm.smsBlock) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-12 col-md-3 control-label",
