@@ -34679,25 +34679,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.callConfirmBlock = false;
         },
         uncheckCallConfirm: function uncheckCallConfirm() {
-            var _this8 = this;
-
             console.log(this.callConfirm.checkbox);
-            var data = {
-                'login': this.login,
-                'action': "CALL_CONFIRMATION",
-                'options': {
-                    'value': this.callConfirm.checkbox,
-                    'token': this.smsToken
-                }
-            };
-
-            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
-                console.log(data);
-                _this8.smsToken = data.token;
-                //                            if (!this.smsConfirmation) {
-                //                                this.smsConfirmationBlock = true;
-                //                            }
-            });
+            //                const data = {
+            //                    'login': this.login,
+            //                    'action': "CALL_CONFIRMATION",
+            //                    'options': {
+            //                        'value': this.callConfirm.checkbox,
+            //                    }
+            //                };
+            //
+            //                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
+            //                        .then((data) => {
+            //                            console.log(data);
+            //                            this.smsToken = data.token;
+            //                        });
         },
 
 
