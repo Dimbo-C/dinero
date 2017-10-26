@@ -155,7 +155,6 @@
                         ? this.selected[0].type_id
                         : this.type.id;
 
-
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
             },
 
@@ -200,6 +199,7 @@
 
             tidySum(sum){
                 let str = (typeof sum === "object") ? "0.00" : (sum + "");
+                if (str === "") str = "0.00";
 
                 str = str.replace(/,/g, "");
                 str = parseFloat(str).toFixed(2);

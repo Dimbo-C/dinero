@@ -12374,6 +12374,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
         tidySum: function tidySum(sum) {
             var str = (typeof sum === 'undefined' ? 'undefined' : _typeof(sum)) === "object" ? "0.00" : sum + "";
+            if (str === "") str = "0.00";
 
             str = str.replace(/,/g, "");
             str = parseFloat(str).toFixed(2);

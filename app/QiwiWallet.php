@@ -114,16 +114,12 @@ class QiwiWallet extends Model {
         $this->balance = $balance;
         $this->save();
 
-        $this->postUpdateRoutine();
-
         return $this;
     }
 
     public function updateIncome($income) {
         $this->month_income = $income;
         $this->save();
-
-        $this->postUpdateRoutine();
 
         return $this;
     }
@@ -148,7 +144,7 @@ class QiwiWallet extends Model {
         return QiwiWallet::where('name', $name)->exists();
     }
 
-    private function postUpdateRoutine() {
+    public function postUpdateRoutine() {
         $this->updateRecheckTime();
         $this->recheckMaximumBalance();
 

@@ -132,10 +132,11 @@ class QiwiWalletRepository implements Contract {
         return $balance;
     }
 
-    public function updateIncome($login) {
+    public function updateIncome($login, $postAction = true) {
         $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
         $wallet = QiwiWallet::findByLogin($login);
         $wallet->updateIncome($monthIncome);
+        if ($postAction) $wallet->postUpdateRoutine();
 
         return $monthIncome;
     }
@@ -217,19 +218,12 @@ class QiwiWalletRepository implements Contract {
         // add new wallet to DB with proxy or not
 
         $wallet = (new Qiwiwallet())::insertWallet($data, $proxy->id);
-        //        $wallet->name = $data->name;
-        //        $wallet->login = $data->login;
-        //        $wallet->password = $data->password;
-        //        $wallet->is_active = $data->isActive;
-        //        $wallet->type_id = $data->typeId;
-        //        $wallet->balance = $data->balance;
-        //        $wallet->month_income = $data->monthIncome;
-        //        $wallet->use_proxy = $data->useProxy;
-        //        $wallet->proxy_id = $proxy->id;
-        //        $wallet->save();
 
         // create a general settings and security settings in DB
-        $settings = new QiwiWalletSettings(['wallet_id' => $wallet->id]);
+        $settings = new QiwiWalletSettings([
+                'wallet_id' => $wallet->id,
+                "autoWithdrawal_type_id" => 1
+        ]);
         $securitySettings = new QiwiWalletSecuritySettings(['wallet_id' => $wallet->id]);
         $wallet->settings()->save($settings);
         $wallet->securitySettings()->save($securitySettings);

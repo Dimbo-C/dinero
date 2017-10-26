@@ -58,7 +58,7 @@ class Autowithdraw {
             Log::info("Autowithdraw for {$this->login} was a success");
             $this->settings->updateWithdrawalTimer();
             $repo = new QiwiWalletRepository();
-            $repo->updateIncome($this->login);
+            $repo->updateIncome($this->login, false);
         }
         Log::info("Autowithdraw from {$this->login} " . ($result ? "successful" : "failed"));
 
