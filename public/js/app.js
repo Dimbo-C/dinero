@@ -34459,38 +34459,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            smsConfirmation: false,
-            smsConfirmationBlock: false,
-            smsConfirmCode: "",
-            smsToken: "",
+            smsConfirmation: {
+                checkbox: false,
+                smsBlock: false,
+                smsCode: "",
+                token: ""
+            },
 
-            emailBinding: false,
-            emailInputBlock: false,
-            emailSmsBlock: false,
-            emailSmsCode: "",
-            emailSmsToken: "",
-            email: "",
-
-            useToken: false,
-            usePinCode: false,
-            smsPayments: false,
+            email: {
+                email: "",
+                checkbox: false,
+                inputBlock: false,
+                smsBlock: false,
+                smsCode: "",
+                smsToken: ""
+            },
 
             callConfirm: {
                 checkbox: false,
                 smsBlock: false,
-                smsCode: ""
+                smsCode: "",
+                token: ""
             },
-            //                callConfirm: false,
-            //                callConfirmSmsBlock: false,
-            //                callConfirmSmsCode: "",
+
+            useToken: false,
+            usePinCode: false,
+            smsPayments: false,
 
             login: this.$route.params.wallet,
             isLoaded: false
@@ -34502,34 +34500,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
 
-        // handler for un-checking sms confirmation checkbox
+        // handler for checking and un-checking sms confirmation checkbox
         smsConfirmationCheckbox: function smsConfirmationCheckbox() {
             var _this = this;
 
-            console.log(this.smsConfirmation);
+            console.log(this.smsConfirmation.checkbox);
             var data = {
                 'login': this.login,
                 'action': "SMS_CONFIRMATION",
                 'options': {
-                    'value': this.smsConfirmation,
-                    'token': this.smsToken
+                    'value': this.smsConfirmation.checkbox,
+                    'token': this.smsConfirmation.token
                 }
             };
-
+            if (!this.smsConfirmation.checkbox) {
+                this.smsConfirmation.smsBlock = true;
+            }
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
                 console.log(data);
-                _this.smsToken = data.token;
-                if (!_this.smsConfirmation) {
-                    _this.smsConfirmationBlock = true;
+                _this.smsConfirmation.token = data.token;
+            });
+        },
+
+
+        // submit sms code for disabling "SMS_CONFIRMATION" feature
+        confirmSms: function confirmSms() {
+            var _this2 = this;
+
+            var data = {
+                'login': this.login,
+                'action': "SMS_CONFIRMATION",
+                'options': {
+                    'code': this.smsConfirmation.code,
+                    'token': this.smsConfirmation.token
                 }
+            };
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
+                console.log(data);
+                _this2.smsConfirmation.checkbox = false;
+                _this2.smsConfirmation.smsBlock = false;
             });
         },
 
 
         // handler for email checkbox switching
         emailCheckbox: function emailCheckbox() {
-            if (this.emailBinding) {
-                this.emailInputBlock = true;
+            if (this.email.checkbox) {
+                this.email.inputBlock = true;
             } else {
                 this.emailFetchUnbindToken();
             }
@@ -34538,20 +34555,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // sent confirmation letter to email in input block
         emailSendConfirm: function emailSendConfirm() {
-            var _this2 = this;
+            var _this3 = this;
 
             var data = {
                 'login': this.login,
                 'action': "EMAIL",
                 'options': {
-                    'email': this.email
+                    'email': this.email.email
                 }
             };
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
                 console.log(data);
                 if (data.success) {
                     Bus.$emit('showNotification', "success", "Письмо для подтверждения отправлено на почту");
-                    _this2.emailInputBlock = false;
+                    _this3.email.inputBlock = false;
                 } else {
                     Bus.$emit('showNotification', "danger", "Ошибка, проверьте введенный email");
                 }
@@ -34561,9 +34578,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // get token for unbinding email from wallet (sms is sent to mobile)
         emailFetchUnbindToken: function emailFetchUnbindToken() {
-            var _this3 = this;
+            var _this4 = this;
 
-            this.emailSmsBlock = true;
+            this.email.smsBlock = true;
             var data = {
                 'login': this.login,
                 'action': "EMAIL",
@@ -34571,32 +34588,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
                 console.log(data);
-                _this3.emailSmsToken = data.token;
+                _this4.email.smsToken = data.token;
             });
         },
 
 
         // submit code from sms for email
         emailSmsConfirm: function emailSmsConfirm() {
-            var _this4 = this;
+            var _this5 = this;
 
             var data = {
                 'login': this.login,
                 'action': "EMAIL",
                 'options': {
-                    'code': this.emailSmsCode,
-                    'token': this.emailSmsToken
+                    'code': this.email.smsCode,
+                    'token': this.email.smsToken
                 }
             };
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
                 console.log(data);
                 if (data.success) {
-                    Bus.$emit('showNotification', "success", "\u041F\u043E\u0447\u0442\u0430 " + _this4.email + " \u043E\u0442\u0432\u044F\u0437\u0430\u043D\u0430 \u043E\u0442 \u044D\u0442\u043E\u0433\u043E \u043A\u043E\u0448\u0435\u043B\u044C\u043A\u0430");
+                    Bus.$emit('showNotification', "success", "\u041F\u043E\u0447\u0442\u0430 \u043E\u0442\u0432\u044F\u0437\u0430\u043D\u0430 \u043E\u0442 \u044D\u0442\u043E\u0433\u043E \u043A\u043E\u0448\u0435\u043B\u044C\u043A\u0430");
                 } else {
                     Bus.$emit('showNotification', "danger", "Ошибка, введенный код неверен");
-                    _this4.emailBinding = true;
+                    _this5.email.checkbox = true;
                 }
-                _this4.emailSmsBlock = false;
+                _this5.email.smsBlock = false;
             });
         },
 
@@ -34612,7 +34629,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.switcherRoutine("smsPayments", "SMS_PAYMENT", "Смс-платежи");
         },
         switcherRoutine: function switcherRoutine(fieldName, action, fieldNameText) {
-            var _this5 = this;
+            var _this6 = this;
 
             console.log(this[fieldName]);
             var data = {
@@ -34626,33 +34643,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
                 console.log(data);
                 if (data.hasOwnProperty('success') && data.success.status === "NORMAL") {
-                    var notificationText = "'" + fieldNameText + "' \u0442\u0435\u043F\u0435\u0440\u044C \u0432 \u043F\u043E\u0437\u0438\u0446\u0438\u0438 " + (_this5[fieldName] ? "вкл" : "выкл");
+                    var notificationText = "'" + fieldNameText + "' \u0442\u0435\u043F\u0435\u0440\u044C \u0432 \u043F\u043E\u0437\u0438\u0446\u0438\u0438 " + (_this6[fieldName] ? "вкл" : "выкл");
                     Bus.$emit('showNotification', "success", notificationText);
                 } else {
-                    var _notificationText = "'" + fieldNameText + "' \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0432 \u043F\u043E\u0437\u0438\u0446\u0438\u044E '" + (_this5[fieldName] ? "вкл" : "выкл") + "'";
+                    var _notificationText = "'" + fieldNameText + "' \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0432 \u043F\u043E\u0437\u0438\u0446\u0438\u044E '" + (_this6[fieldName] ? "вкл" : "выкл") + "'";
                     Bus.$emit('showNotification', "danger", _notificationText);
-                    _this5[fieldName] = !_this5[fieldName];
+                    _this6[fieldName] = !_this6[fieldName];
                 }
-            });
-        },
-
-
-        // submit sms code for disabling "SMS_CONFIRMATION" feature
-        confirmSms: function confirmSms() {
-            var _this6 = this;
-
-            var data = {
-                'login': this.login,
-                'action': "SMS_CONFIRMATION",
-                'options': {
-                    'code': this.smsConfirmCode,
-                    'token': this.smsToken
-                }
-            };
-            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
-                console.log(data);
-                _this6.smsConfirmation = false;
-                _this6.smsConfirmationBlock = false;
             });
         },
 
@@ -34665,34 +34662,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(response);
                 var data = response.data;
 
-                _this7.callConfirm = data.CALL_CONFIRMATION;
-                _this7.emailBinding = data.EMAIL;
+                _this7.callConfirm.checkbox = data.CALL_CONFIRMATION;
+                _this7.email.checkbox = data.EMAIL;
+                _this7.smsConfirmation.checkbox = data.SMS_CONFIRMATION;
                 _this7.usePinCode = data.PIN;
-                _this7.smsConfirmation = data.SMS_CONFIRMATION;
                 _this7.smsPayments = data.SMS_PAYMENT;
                 _this7.useToken = data.TOKEN;
 
                 _this7.isLoaded = true;
             });
         },
+
+
+        // set 'call confirm' to true
         checkCallConfirm: function checkCallConfirm() {
-            this.callConfirmBlock = false;
+            var data = {
+                'login': this.login,
+                'action': "CALL_CONFIRMATION",
+                'options': {
+                    'value': this.callConfirm.checkbox
+                }
+            };
+
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
+                console.log(data);
+                //                            if (data.hasOwnProperty('status') && data.status === "NORMAL") {
+                //                                const notificationText = "'Колл конфирм' включен";
+                //                                Bus.$emit('showNotification', "success", notificationText);
+                //                            } else {
+                //                                const notificationText = "Ошибка при переключении";
+                //                                Bus.$emit('showNotification', "danger", notificationText);
+                //                                this.callConfirm.checkbox = !this.callConfirm.checkbox;
+                //                            }
+            });
         },
+
+
+        // action on un-checking the 'call confirm' checkbox
         uncheckCallConfirm: function uncheckCallConfirm() {
+            var _this8 = this;
+
             console.log(this.callConfirm.checkbox);
-            //                const data = {
-            //                    'login': this.login,
-            //                    'action': "CALL_CONFIRMATION",
-            //                    'options': {
-            //                        'value': this.callConfirm.checkbox,
-            //                    }
-            //                };
-            //
-            //                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
-            //                        .then((data) => {
-            //                            console.log(data);
-            //                            this.smsToken = data.token;
-            //                        });
+            var data = {
+                'login': this.login,
+                'action': "CALL_CONFIRMATION",
+                'options': {
+                    'value': this.callConfirm.checkbox
+                }
+            };
+
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
+                console.log(data);
+                _this8.callConfirm.token = data.token;
+            });
+        },
+
+
+        // submit code from sms for 'call confirm'
+        callConfirmSmsConfirm: function callConfirmSmsConfirm() {
+            var _this9 = this;
+
+            console.log("call confirm");
+            var data = {
+                'login': this.login,
+                'action': "CALL_CONFIRMATION",
+                'options': {
+                    'code': this.callConfirm.smsCode,
+                    'token': this.callConfirm.token
+                }
+            };
+            console.log(data);
+            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/security", new Form(data)).then(function (data) {
+                console.log(data);
+                if (data.success) {
+                    Bus.$emit('showNotification', "success", "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u0438\u0435 \u043F\u043E \u0441\u043C\u0441 \u043E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u043E");
+                } else {
+                    Bus.$emit('showNotification', "danger", "Ошибка, введенный код неверен");
+                    _this9.email.checkbox = true;
+                }
+                _this9.callConfirm.smsBlock = false;
+            });
         },
 
 
@@ -34700,17 +34749,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //                    'login': this.login,
         //                    'action': "SMS_CONFIRMATION",
         //                    'options': {
-        //                        'value': this.smsConfirmation,
-        //                        'token': this.smsToken
+        //                        'value': this.smsConfirmation.checkbox,
+        //                        'token': this.smsConfirmation.token
         //                    }
         //                };
         //
         //                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
         //                        .then((data) => {
         //                            console.log(data);
-        //                            this.smsToken = data.token;
-        //                            if (!this.smsConfirmation) {
-        //                                this.smsConfirmationBlock = true;
+        //                            this.smsConfirmation.token = data.token;
+        //                            if (!this.smsConfirmation.checkbox) {
+        //                                this.smsConfirmation.checkboxBlock = true;
         //                            }
         //                        });
         //            },
@@ -34718,9 +34767,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(this.callConfirm);
             this.callConfirm.smsBlock = !this.callConfirm.checkbox;
             if (this.callConfirm.smsBlock) {
-                uncheckCallConfirm();
+                this.uncheckCallConfirm();
             } else {
-                checkCallConfirm();
+                this.checkCallConfirm();
             }
         },
 
@@ -34794,7 +34843,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "form-horizontal"
-  }, [(!_vm.smsConfirmationBlock) ? _c('div', {
+  }, [(!_vm.smsConfirmation.smsBlock) ? _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-offset-1 col-sm-8"
@@ -34804,36 +34853,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.smsConfirmation),
-      expression: "smsConfirmation"
+      value: (_vm.smsConfirmation.checkbox),
+      expression: "smsConfirmation.checkbox"
     }],
     attrs: {
       "type": "checkbox",
       "checked": ""
     },
     domProps: {
-      "checked": Array.isArray(_vm.smsConfirmation) ? _vm._i(_vm.smsConfirmation, null) > -1 : (_vm.smsConfirmation)
+      "checked": Array.isArray(_vm.smsConfirmation.checkbox) ? _vm._i(_vm.smsConfirmation.checkbox, null) > -1 : (_vm.smsConfirmation.checkbox)
     },
     on: {
       "click": _vm.smsConfirmationCheckbox,
       "__c": function($event) {
-        var $$a = _vm.smsConfirmation,
+        var $$a = _vm.smsConfirmation.checkbox,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.smsConfirmation = $$a.concat($$v))
+            $$i < 0 && (_vm.smsConfirmation.checkbox = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.smsConfirmation = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.smsConfirmation.checkbox = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.smsConfirmation = $$c
+          _vm.smsConfirmation.checkbox = $$c
         }
       }
     }
-  }), _vm._v("\n                                            Подтверждение платежей по СМС\n                                        ")])])])]) : _vm._e(), _vm._v(" "), (_vm.smsConfirmationBlock) ? _c('div', {
+  }), _vm._v("\n                                            Подтверждение платежей по СМС\n                                        ")])])])]) : _vm._e(), _vm._v(" "), (_vm.smsConfirmation.smsBlock) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-12 col-md-3 control-label",
@@ -34846,8 +34895,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.smsConfirmCode),
-      expression: "smsConfirmCode"
+      value: (_vm.smsConfirmation.code),
+      expression: "smsConfirmation.code"
     }],
     staticClass: "form-control",
     attrs: {
@@ -34855,12 +34904,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "123456"
     },
     domProps: {
-      "value": (_vm.smsConfirmCode)
+      "value": (_vm.smsConfirmation.code)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.smsConfirmCode = $event.target.value
+        _vm.smsConfirmation.code = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -34880,36 +34929,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.emailBinding),
-      expression: "emailBinding"
+      value: (_vm.email.checkbox),
+      expression: "email.checkbox"
     }],
     attrs: {
       "type": "checkbox",
       "checked": ""
     },
     domProps: {
-      "checked": Array.isArray(_vm.emailBinding) ? _vm._i(_vm.emailBinding, null) > -1 : (_vm.emailBinding)
+      "checked": Array.isArray(_vm.email.checkbox) ? _vm._i(_vm.email.checkbox, null) > -1 : (_vm.email.checkbox)
     },
     on: {
       "click": _vm.emailCheckbox,
       "__c": function($event) {
-        var $$a = _vm.emailBinding,
+        var $$a = _vm.email.checkbox,
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.emailBinding = $$a.concat($$v))
+            $$i < 0 && (_vm.email.checkbox = $$a.concat($$v))
           } else {
-            $$i > -1 && (_vm.emailBinding = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            $$i > -1 && (_vm.email.checkbox = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
         } else {
-          _vm.emailBinding = $$c
+          _vm.email.checkbox = $$c
         }
       }
     }
-  }), _vm._v("\n                                            Привязка email\n                                        ")])])])]), _vm._v(" "), (_vm.emailInputBlock) ? _c('div', {
+  }), _vm._v("\n                                            Привязка email\n                                        ")])])])]), _vm._v(" "), (_vm.email.inputBlock) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-12 col-md-3 control-label",
@@ -34922,8 +34971,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.email),
-      expression: "email"
+      value: (_vm.email.email),
+      expression: "email.email"
     }],
     staticClass: "form-control",
     attrs: {
@@ -34931,12 +34980,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "email@org.com"
     },
     domProps: {
-      "value": (_vm.email)
+      "value": (_vm.email.email)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.email = $event.target.value
+        _vm.email.email = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -34946,7 +34995,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.emailSendConfirm
     }
-  }, [_vm._v("\n                                        Подтвердить\n                                    ")])])]) : _vm._e(), _vm._v(" "), (_vm.emailSmsBlock) ? _c('div', {
+  }, [_vm._v("\n                                        Подтвердить\n                                    ")])])]) : _vm._e(), _vm._v(" "), (_vm.email.smsBlock) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-12 col-md-3 control-label",
@@ -34959,8 +35008,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.emailSmsCode),
-      expression: "emailSmsCode"
+      value: (_vm.email.smsCode),
+      expression: "email.smsCode"
     }],
     staticClass: "form-control",
     attrs: {
@@ -34968,12 +35017,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "123456"
     },
     domProps: {
-      "value": (_vm.emailSmsCode)
+      "value": (_vm.email.smsCode)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.emailSmsCode = $event.target.value
+        _vm.email.smsCode = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -35100,7 +35149,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  }), _vm._v("\n                                            Смс-платежи\n                                        ")])])])]), _vm._v(" "), (!_vm.callConfirm.smsBlock) ? _c('div', {
+  }), _vm._v("Смс-платежи")])])])]), _vm._v(" "), (!_vm.callConfirm.smsBlock) ? _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-offset-1 col-sm-8"
@@ -35139,7 +35188,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  }), _vm._v("\n                                            Кол-конфирм\n                                        ")])])])]) : _vm._e(), _vm._v(" "), (_vm.callConfirm.smsBlock) ? _c('div', {
+  }), _vm._v("Кол-конфирм")])])])]) : _vm._e(), _vm._v(" "), (_vm.callConfirm.smsBlock) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-12 col-md-3 control-label",
@@ -35174,7 +35223,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('button', {
     staticClass: "btn btn-primary",
     on: {
-      "click": _vm.emailSmsConfirm
+      "click": _vm.callConfirmSmsConfirm
     }
   }, [_vm._v("\n                                        Подтвердить\n                                    ")])])]) : _vm._e()])]) : _vm._e()], 1)])])])], 1)
 },staticRenderFns: []}

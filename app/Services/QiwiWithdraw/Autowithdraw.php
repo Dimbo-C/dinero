@@ -70,7 +70,6 @@ class Autowithdraw {
      */
     private function withdrawRoutine() {
         $target = $this->settings->autoWithdrawal_target;
-        Log::info("Routine: " . $target);
         switch ($target) {
             case "wallet":
                 return $this->toWallet();

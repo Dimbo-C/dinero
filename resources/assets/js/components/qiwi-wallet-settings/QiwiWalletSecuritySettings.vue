@@ -37,12 +37,12 @@
                         <loading :show="!isLoaded"></loading>
                         <div v-if="isLoaded" class="panel-body">
                             <div class="form-horizontal">
-                                <div v-if="!smsConfirmationBlock" class="form-group">
+                                <div v-if="!smsConfirmation.smsBlock" class="form-group">
                                     <div class="col-sm-offset-1 col-sm-8">
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox"
-                                                       v-model="smsConfirmation"
+                                                       v-model="smsConfirmation.checkbox"
                                                        @click="smsConfirmationCheckbox"
                                                        checked>
                                                 Подтверждение платежей по СМС
@@ -51,12 +51,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="smsConfirmationBlock">
+                                <div class="form-group" v-if="smsConfirmation.smsBlock">
                                     <label for="" class="col-sm-12 col-md-3 control-label">Код из смс</label>
                                     <div class="col-sm-12 col-md-3">
                                         <input type="text"
                                                class="form-control"
-                                               v-model="smsConfirmCode"
+                                               v-model="smsConfirmation.code"
                                                placeholder="123456">
                                     </div>
                                     <div class="col-sm-12 col-md-3">
@@ -72,7 +72,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox"
-                                                       v-model="emailBinding"
+                                                       v-model="email.checkbox"
                                                        checked
                                                        @click="emailCheckbox">
                                                 Привязка email
@@ -81,12 +81,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="emailInputBlock">
+                                <div class="form-group" v-if="email.inputBlock">
                                     <label for="" class="col-sm-12 col-md-3 control-label">email для привязки</label>
                                     <div class="col-sm-12 col-md-3">
                                         <input type="text"
                                                class="form-control"
-                                               v-model="email"
+                                               v-model="email.email"
                                                placeholder="email@org.com">
                                     </div>
                                     <div class="col-sm-12 col-md-3">
@@ -98,12 +98,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" v-if="emailSmsBlock">
+                                <div class="form-group" v-if="email.smsBlock">
                                     <label for="" class="col-sm-12 col-md-3 control-label">Код из смс</label>
                                     <div class="col-sm-12 col-md-3">
                                         <input type="text"
                                                class="form-control"
-                                               v-model="emailSmsCode"
+                                               v-model="email.smsCode"
                                                placeholder="123456">
                                     </div>
                                     <div class="col-sm-12 col-md-3">
@@ -150,9 +150,7 @@
                                                 <input type="checkbox"
                                                        v-model="smsPayments"
                                                        checked
-                                                       @click="smsPaymentCheckbox">
-                                                Смс-платежи
-                                            </label>
+                                                       @click="smsPaymentCheckbox">Смс-платежи</label>
                                         </div>
                                     </div>
                                 </div>
@@ -164,9 +162,7 @@
                                                 <input type="checkbox"
                                                        v-model="callConfirm.checkbox"
                                                        @click="callConfirmCheckbox"
-                                                       checked>
-                                                Кол-конфирм
-                                            </label>
+                                                       checked>Кол-конфирм</label>
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +177,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-3">
                                         <button class="btn btn-primary"
-                                                @click="emailSmsConfirm">
+                                                @click="callConfirmSmsConfirm">
                                             Подтвердить
                                         </button>
 
@@ -211,30 +207,32 @@
     export default {
         data() {
             return {
-                smsConfirmation: false,
-                smsConfirmationBlock: false,
-                smsConfirmCode: "",
-                smsToken: "",
+                smsConfirmation: {
+                    checkbox: false,
+                    smsBlock: false,
+                    smsCode: "",
+                    token: ""
+                },
 
-                emailBinding: false,
-                emailInputBlock: false,
-                emailSmsBlock: false,
-                emailSmsCode: "",
-                emailSmsToken: "",
-                email: "",
-
-                useToken: false,
-                usePinCode: false,
-                smsPayments: false,
+                email: {
+                    email: "",
+                    checkbox: false,
+                    inputBlock: false,
+                    smsBlock: false,
+                    smsCode: "",
+                    smsToken: ""
+                },
 
                 callConfirm: {
                     checkbox: false,
                     smsBlock: false,
                     smsCode: "",
+                    token: ""
                 },
-//                callConfirm: false,
-//                callConfirmSmsBlock: false,
-//                callConfirmSmsCode: "",
+
+                useToken: false,
+                usePinCode: false,
+                smsPayments: false,
 
                 login: this.$route.params.wallet,
                 isLoaded: false,
@@ -245,32 +243,49 @@
         },
         methods: {
 
-            // handler for un-checking sms confirmation checkbox
+            // handler for checking and un-checking sms confirmation checkbox
             smsConfirmationCheckbox() {
-                console.log(this.smsConfirmation);
+                console.log(this.smsConfirmation.checkbox);
                 const data = {
                     'login': this.login,
                     'action': "SMS_CONFIRMATION",
                     'options': {
-                        'value': this.smsConfirmation,
-                        'token': this.smsToken
+                        'value': this.smsConfirmation.checkbox,
+                        'token': this.smsConfirmation.token
                     }
                 };
-
+                if (!this.smsConfirmation.checkbox) {
+                    this.smsConfirmation.smsBlock = true;
+                }
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
                         .then((data) => {
                             console.log(data);
-                            this.smsToken = data.token;
-                            if (!this.smsConfirmation) {
-                                this.smsConfirmationBlock = true;
-                            }
+                            this.smsConfirmation.token = data.token;
+                        });
+            },
+
+            // submit sms code for disabling "SMS_CONFIRMATION" feature
+            confirmSms(){
+                const data = {
+                    'login': this.login,
+                    'action': "SMS_CONFIRMATION",
+                    'options': {
+                        'code': this.smsConfirmation.code,
+                        'token': this.smsConfirmation.token
+                    }
+                };
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
+                        .then((data) => {
+                            console.log(data);
+                            this.smsConfirmation.checkbox = false;
+                            this.smsConfirmation.smsBlock = false;
                         });
             },
 
             // handler for email checkbox switching
             emailCheckbox(){
-                if (this.emailBinding) {
-                    this.emailInputBlock = true;
+                if (this.email.checkbox) {
+                    this.email.inputBlock = true;
                 } else {
                     this.emailFetchUnbindToken();
                 }
@@ -282,7 +297,7 @@
                     'login': this.login,
                     'action': "EMAIL",
                     'options': {
-                        'email': this.email,
+                        'email': this.email.email,
                     }
                 };
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
@@ -290,7 +305,7 @@
                             console.log(data);
                             if (data.success) {
                                 Bus.$emit('showNotification', "success", "Письмо для подтверждения отправлено на почту");
-                                this.emailInputBlock = false;
+                                this.email.inputBlock = false;
                             } else {
                                 Bus.$emit('showNotification', "danger", "Ошибка, проверьте введенный email");
                             }
@@ -299,7 +314,7 @@
 
             // get token for unbinding email from wallet (sms is sent to mobile)
             emailFetchUnbindToken(){
-                this.emailSmsBlock = true;
+                this.email.smsBlock = true;
                 const data = {
                     'login': this.login,
                     'action': "EMAIL",
@@ -308,8 +323,7 @@
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
                         .then((data) => {
                             console.log(data);
-                            this.emailSmsToken = data.token;
-
+                            this.email.smsToken = data.token;
                         });
             },
 
@@ -319,20 +333,20 @@
                     'login': this.login,
                     'action': "EMAIL",
                     'options': {
-                        'code': this.emailSmsCode,
-                        'token': this.emailSmsToken
+                        'code': this.email.smsCode,
+                        'token': this.email.smsToken
                     }
                 };
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
                         .then((data) => {
                             console.log(data);
                             if (data.success) {
-                                Bus.$emit('showNotification', "success", `Почта ${this.email} отвязана от этого кошелька`);
+                                Bus.$emit('showNotification', "success", `Почта отвязана от этого кошелька`);
                             } else {
                                 Bus.$emit('showNotification', "danger", "Ошибка, введенный код неверен");
-                                this.emailBinding = true;
+                                this.email.checkbox = true;
                             }
-                            this.emailSmsBlock = false;
+                            this.email.smsBlock = false;
                         });
             },
 
@@ -375,24 +389,6 @@
                         });
             },
 
-            // submit sms code for disabling "SMS_CONFIRMATION" feature
-            confirmSms(){
-                const data = {
-                    'login': this.login,
-                    'action': "SMS_CONFIRMATION",
-                    'options': {
-                        'code': this.smsConfirmCode,
-                        'token': this.smsToken
-                    }
-                };
-                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
-                        .then((data) => {
-                            console.log(data);
-                            this.smsConfirmation = false;
-                            this.smsConfirmationBlock = false;
-                        });
-            },
-
             // get current wallet security settings
             fetchSettings() {
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, {})
@@ -400,10 +396,10 @@
                             console.log(response);
                             const data = response.data;
 
-                            this.callConfirm = data.CALL_CONFIRMATION;
-                            this.emailBinding = data.EMAIL;
+                            this.callConfirm.checkbox = data.CALL_CONFIRMATION;
+                            this.email.checkbox = data.EMAIL;
+                            this.smsConfirmation.checkbox = data.SMS_CONFIRMATION;
                             this.usePinCode = data.PIN;
-                            this.smsConfirmation = data.SMS_CONFIRMATION;
                             this.smsPayments = data.SMS_PAYMENT;
                             this.useToken = data.TOKEN;
 
@@ -411,10 +407,31 @@
                         });
             },
 
+            // set 'call confirm' to true
             checkCallConfirm(){
-                this.callConfirmBlock = false;
+                const data = {
+                    'login': this.login,
+                    'action': "CALL_CONFIRMATION",
+                    'options': {
+                        'value': this.callConfirm.checkbox,
+                    }
+                };
+
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
+                        .then((data) => {
+                            console.log(data);
+//                            if (data.hasOwnProperty('status') && data.status === "NORMAL") {
+//                                const notificationText = "'Колл конфирм' включен";
+//                                Bus.$emit('showNotification', "success", notificationText);
+//                            } else {
+//                                const notificationText = "Ошибка при переключении";
+//                                Bus.$emit('showNotification', "danger", notificationText);
+//                                this.callConfirm.checkbox = !this.callConfirm.checkbox;
+//                            }
+                        });
             },
 
+            // action on un-checking the 'call confirm' checkbox
             uncheckCallConfirm(){
                 console.log(this.callConfirm.checkbox);
                 const data = {
@@ -428,7 +445,32 @@
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
                         .then((data) => {
                             console.log(data);
-                            this.smsToken = data.token;
+                            this.callConfirm.token = data.token;
+                        });
+            },
+
+            // submit code from sms for 'call confirm'
+            callConfirmSmsConfirm(){
+                console.log("call confirm");
+                const data = {
+                    'login': this.login,
+                    'action': "CALL_CONFIRMATION",
+                    'options': {
+                        'code': this.callConfirm.smsCode,
+                        'token': this.callConfirm.token
+                    }
+                };
+                console.log(data);
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
+                        .then((data) => {
+                            console.log(data);
+                            if (data.success) {
+                                Bus.$emit('showNotification', "success", `Подтверждение по смс отключено`);
+                            } else {
+                                Bus.$emit('showNotification', "danger", "Ошибка, введенный код неверен");
+                                this.email.checkbox = true;
+                            }
+                            this.callConfirm.smsBlock = false;
                         });
             },
 
@@ -437,17 +479,17 @@
 //                    'login': this.login,
 //                    'action': "SMS_CONFIRMATION",
 //                    'options': {
-//                        'value': this.smsConfirmation,
-//                        'token': this.smsToken
+//                        'value': this.smsConfirmation.checkbox,
+//                        'token': this.smsConfirmation.token
 //                    }
 //                };
 //
 //                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
 //                        .then((data) => {
 //                            console.log(data);
-//                            this.smsToken = data.token;
-//                            if (!this.smsConfirmation) {
-//                                this.smsConfirmationBlock = true;
+//                            this.smsConfirmation.token = data.token;
+//                            if (!this.smsConfirmation.checkbox) {
+//                                this.smsConfirmation.checkboxBlock = true;
 //                            }
 //                        });
 //            },
@@ -455,9 +497,9 @@
                 console.log(this.callConfirm);
                 this.callConfirm.smsBlock = !this.callConfirm.checkbox;
                 if (this.callConfirm.smsBlock) {
-                    uncheckCallConfirm();
+                    this.uncheckCallConfirm();
                 } else {
-                    checkCallConfirm();
+                    this.checkCallConfirm();
                 }
             },
 

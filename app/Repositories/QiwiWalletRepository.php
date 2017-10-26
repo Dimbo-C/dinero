@@ -206,7 +206,6 @@ class QiwiWalletRepository implements Contract {
 
             return $result;
         };
-        //        dd($proxy->id);
 
         // fetch balance from qiwi with library
         $request->typeId = (new QiwiWalletType())->findByType($request->type)->id;
@@ -216,17 +215,18 @@ class QiwiWalletRepository implements Contract {
         $request->monthIncome = $request->balance;
 
         // add new wallet to DB with proxy or not
-        $wallet = new Qiwiwallet();
-        $wallet->name = $data->name;
-        $wallet->login = $data->login;
-        $wallet->password = $data->password;
-        $wallet->is_active = $data->isActive;
-        $wallet->type_id = $data->typeId;
-        $wallet->balance = $data->balance;
-        $wallet->month_income = $data->monthIncome;
-        $wallet->use_proxy = $data->useProxy;
-        $wallet->proxy_id = $proxy->id;
-        $wallet->save();
+
+        $wallet = (new Qiwiwallet())::insertWallet($data, $proxy->id);
+        //        $wallet->name = $data->name;
+        //        $wallet->login = $data->login;
+        //        $wallet->password = $data->password;
+        //        $wallet->is_active = $data->isActive;
+        //        $wallet->type_id = $data->typeId;
+        //        $wallet->balance = $data->balance;
+        //        $wallet->month_income = $data->monthIncome;
+        //        $wallet->use_proxy = $data->useProxy;
+        //        $wallet->proxy_id = $proxy->id;
+        //        $wallet->save();
 
         // create a general settings and security settings in DB
         $settings = new QiwiWalletSettings(['wallet_id' => $wallet->id]);
@@ -263,7 +263,7 @@ class QiwiWalletRepository implements Contract {
         switch ($action) {
             case "SMS_CONFIRMATION":
                 if (isset($options['code'])) {
-                    $result = QiwiSecurityHelper::userConfirmBySMS($login, $options['token'], $options['code']);
+                    $result = QiwiSecurityHelper::userConfirmBySMS($login, "SMS_CONFIRMATION", $options['token'], $options['code']);
                 } else {
                     $result = QiwiSecurityHelper::smsConfirmation($login, $options['value']);
                 }
@@ -285,8 +285,12 @@ class QiwiWalletRepository implements Contract {
                 break;
 
             case "CALL_CONFIRMATION":
-                if (!isset($options['token'])) {
-                    $result = QiwiSecurityHelper::callConfirmFetchToken();
+                // switch off/on
+                if (isset($options['code'])) {
+                    $result = QiwiSecurityHelper::userConfirmBySMS($login, "CALL_CONFIRMATION", $options['token'], $options['code']);
+                    //                    $result = QiwiSecurityHelper::setSecurityAttribute($login, "CALL_CONFIRMATION", true);
+                } else {
+                    $result = QiwiSecurityHelper::callConfirm($login, $options['value']);
                 }
                 break;
         }

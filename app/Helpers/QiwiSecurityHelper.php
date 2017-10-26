@@ -86,7 +86,7 @@ class QiwiSecurityHelper {
     public static function smsConfirmation($login, $enabled) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $success = $qiwiControl->setQIWISecuritySetting("SMS_CONFIRMATION", $enabled);
-        $token = $qiwiControl->$success['data'];
+        $token = isset($success['data']) ? $success['data'] : "";
 
         return [
                 'success' => $success,
@@ -94,9 +94,9 @@ class QiwiSecurityHelper {
         ];
     }
 
-    public static function userConfirmBySMS($login, $token, $code) {
+    public static function userConfirmBySMS($login, $action, $token, $code) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
-        $success = $qiwiControl->userConfirmBySMS("SMS_CONFIRMATION", $token, $code);
+        $success = $qiwiControl->userConfirmBySMS($action, $token, $code);
 
         return ['success' => $success];
     }
@@ -109,10 +109,16 @@ class QiwiSecurityHelper {
         return $settings;
     }
 
-    public static function callConfirmFetchToken($login) {
+    public static function callConfirm($login,$enabled) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        $success = $qiwiControl->setQIWISecuritySetting("CALL_CONFIRMATION", $enabled);
+        $token = isset($success['data']) ? $success['data'] : "";
 
-        return $qiwiControl->setQIWISecuritySetting("CALL_CONFIRMATION", false);
+        return [
+                'success' => $success,
+                'token' => $token
+        ];
+//        return $qiwiControl->setQIWISecuritySetting("CALL_CONFIRMATION", false);
 
         //        if (!$token) {
         //            return ["success" => false,];

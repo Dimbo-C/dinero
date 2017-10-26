@@ -23,7 +23,7 @@ class CreateWalletSettingsTable extends Migration {
             $table->boolean('autoWithdrawal_active')->default(false);
             $table->string('autoWithdrawal_target')->default("card");
 
-            $table->integer('autoWithdrawal_type_id')->nullable()->unsigned()->index();
+            $table->integer('autoWithdrawal_type_id')->default(1)->unsigned()->index();
             $table->foreign('autoWithdrawal_type_id')->references("id")->on("autowithdraw_types")->onDelete('cascade');
             $table->integer('autoWithdrawal_minutes')->default(0);
             $table->double('autoWithdrawal_minimum_withdraw_amount')->default(2500);
