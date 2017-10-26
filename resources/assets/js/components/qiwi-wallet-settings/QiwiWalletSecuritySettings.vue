@@ -417,19 +417,19 @@
 
             uncheckCallConfirm(){
                 console.log(this.callConfirm.checkbox);
-//                const data = {
-//                    'login': this.login,
-//                    'action': "CALL_CONFIRMATION",
-//                    'options': {
-//                        'value': this.callConfirm.checkbox,
-//                    }
-//                };
-//
-//                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
-//                        .then((data) => {
-//                            console.log(data);
-//                            this.smsToken = data.token;
-//                        });
+                const data = {
+                    'login': this.login,
+                    'action': "CALL_CONFIRMATION",
+                    'options': {
+                        'value': this.callConfirm.checkbox,
+                    }
+                };
+
+                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/security`, new Form(data))
+                        .then((data) => {
+                            console.log(data);
+                            this.smsToken = data.token;
+                        });
             },
 
 

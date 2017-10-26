@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\AutowithdrawTypes;
 use App\Contracts\Repositories\QiwiWalletRepository as Contract;
 use App\Helpers\QiwiGeneralHelper;
+use App\Helpers\QiwiIdentificationHelper;
+use App\Helpers\QiwiSecurityHelper;
 use App\Processors\MassActionProcessor;
 use App\Processors\TransactionProcessor;
 use App\Proxy;
@@ -36,7 +38,7 @@ class QiwiWalletRepository implements Contract {
      * {@inheritdoc}
      */
     public function find($id) {
-        $wallet = QiwiWallet::where('id', $id)->first();
+        $wallet = (new QiwiWallet())->where('id', $id)->first();
 
         return $wallet ?: null;
     }
@@ -244,7 +246,7 @@ class QiwiWalletRepository implements Contract {
 
         // update proxy for wallet
         if ($wallet->use_proxy) {
-            Proxy::find($wallet->proxy_id)->update($data->proxy);
+            (new Proxy())->find($wallet->proxy_id)->update($data->proxy);
         }
 
         // update settings in settings table
@@ -261,25 +263,31 @@ class QiwiWalletRepository implements Contract {
         switch ($action) {
             case "SMS_CONFIRMATION":
                 if (isset($options['code'])) {
-                    $result = QiwiGeneralHelper::userConfirmBySMS($login, $options['token'], $options['code']);
+                    $result = QiwiSecurityHelper::userConfirmBySMS($login, $options['token'], $options['code']);
                 } else {
-                    $result = QiwiGeneralHelper::smsConfirmation($login, $options['value']);
+                    $result = QiwiSecurityHelper::smsConfirmation($login, $options['value']);
                 }
                 break;
 
             case "EMAIL":
                 if (isset($options['email'])) {
-                    $result = QiwiGeneralHelper::emailBinding($login, $options['email']);
+                    $result = QiwiSecurityHelper::emailBinding($login, $options['email']);
                 } else if (count($options) == 0) {
-                    $result = QiwiGeneralHelper::emailFetchToken($login);
+                    $result = QiwiSecurityHelper::emailFetchToken($login);
                 } else {
-                    $result = QiwiGeneralHelper::emailUnbinding($login, $options['code'], $options['token']);
+                    $result = QiwiSecurityHelper::emailUnbinding($login, $options['code'], $options['token']);
                 }
                 break;
             case "TOKEN":
             case "PIN":
             case "SMS_PAYMENT":
-                $result = QiwiGeneralHelper::setSecurityAttribute($login, $action, $options['value']);
+                $result = QiwiSecurityHelper::setSecurityAttribute($login, $action, $options['value']);
+                break;
+
+            case "CALL_CONFIRMATION":
+                if (!isset($options['token'])) {
+                    $result = QiwiSecurityHelper::callConfirmFetchToken();
+                }
                 break;
         }
 
@@ -287,15 +295,15 @@ class QiwiWalletRepository implements Contract {
     }
 
     public function fetchSecurity($login) {
-        return QiwiGeneralHelper::getSecuritySettings($login);
+        return QiwiSecurityHelper::getSecuritySettings($login);
     }
 
     public function getIdentification($login) {
-        return QiwiGeneralHelper::getIdentification($login);
+        return QiwiIdentificationHelper::getIdentification($login);
     }
 
     public function updateIdentification($data) {
-        return QiwiGeneralHelper::updateIdentification($data);
+        return QiwiIdentificationHelper::updateIdentification($data);
     }
 
 
@@ -310,6 +318,10 @@ class QiwiWalletRepository implements Contract {
         return $map->execute() === false ? "FAIL" : "OK";
     }
 
+    /**
+     * @param $login
+     * @return null|QiwiWallet
+     */
     private function findByLogin($login) {
         $wallet = QiwiWallet::where('login', $login)->first();
 
@@ -321,7 +333,8 @@ class QiwiWalletRepository implements Contract {
     }
 
     private function updateWallet($login, $name, $isActive, $walletType, $useProxy) {
-        $typeId = (new QiwiWalletType())->findByType($walletType)->id;
+        $type = (new QiwiWalletType())->findByType($walletType);
+        $typeId = $type->id;
 
         $wallet = $this->findByLogin($login);
 

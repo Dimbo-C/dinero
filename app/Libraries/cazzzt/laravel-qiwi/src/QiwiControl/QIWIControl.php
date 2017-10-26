@@ -2011,7 +2011,7 @@ class QIWIControl {
         ];
         $response = $this->ua->request(USERAGENT_METHOD_PUT, $url, $ref, $data, $headers, true);
 
-//        return $response;
+        //        return $response;
 
         if ($this->ua->getStatus() != 200) {
             $this->lastErrorStr = "Expected status 200, but " . $this->ua->getStatus() . ' received.';
@@ -2044,7 +2044,67 @@ class QIWIControl {
         return $response;
     }
 
-    function captcha() {
+    function fetchCallConfirmToken() {
+
+
+        $post_data_arr = array(
+                'type' => "CALL_CONFIRMATION",
+                'value' => false
+        );
+        $post_data = http_build_query($post_data_arr);
+
+        $url = QIWI_URL_MAIN . "/user/person/change/security.action";
+        $response = $this->ua->request(USERAGENT_METHOD_POST, $url, false, $post_data, [
+                'Accept' => 'application/json, text/javascript, */*; q=0.01',
+                'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Host' => QIWI_HOST,
+                'Origin' => QIWI_URL_MAIN,
+                'X-Requested-With' => 'XMLHttpRequest'
+        ]);
+
+        if ($this->ua->getStatus() !== 200) {
+            $this->lastErrorStr = "Failed to send security ticket set request. Status=" . $this->ua->getStatus();
+            return false;
+        }
+        $response = json_decode($response, true);
+        if (!($token = $this->getResponseType($response) == 'TOKEN' && isset($response['data']['token']) ? $response['data']['token'] : false)) {
+            $this->lastErrorStr = "Failed to fetch security token. Expected code TOKEN, received: " . $this->getResponseType($response);
+            return false;
+        }
+        $this->trace("[SQSS] Token received = $token");
+
+        $post_data_arr['token'] = $token;
+        $post_data = http_build_query($post_data_arr);
+        $response = $this->ua->request(USERAGENT_METHOD_POST, $url, false, $post_data, [
+                'Accept' => 'application/json, text/javascript, */*; q=0.01',
+                'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Host' => QIWI_HOST,
+                'Origin' => QIWI_URL_MAIN,
+                'X-Requested-With' => 'XMLHttpRequest'
+        ]);
+
+
+        $this->debugData = $response;
+        if ($this->ua->getStatus() !== 200) {
+            $this->lastErrorStr = "Failed to send security ticket update request. Status=" . $this->ua->getStatus();
+            return false;
+        }
+        $response = json_decode($response, true);
+
+        $this->trace("[SQSS] done.");
+        if ($this->getResponseType($response) == 'CONFIRM') {
+            $this->responseData = $response['identifier'];
+            return array(
+                    'status' => 'CONFIRM',
+                    'data' => $response['identifier']
+            );
+        } else if ($this->getResponseType($response) == 'NORMAL') {
+            return array(
+                    'status' => 'NORMAL'
+            );
+        }
+
+        return $token;
 
     }
 }

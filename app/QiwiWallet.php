@@ -23,18 +23,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \App\QiwiWalletType $type
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereBalance($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereLogin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereMonthIncome($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereProxyId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereTypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWallet whereUseProxy($value)
+ * @method static QiwiWallet whereBalance($value)
+ * @method static QiwiWallet whereCreatedAt($value)
+ * @method static QiwiWallet whereId($value)
+ * @method static QiwiWallet whereIsActive($value)
+ * @method static QiwiWallet whereLogin($value)
+ * @method static QiwiWallet whereMonthIncome($value)
+ * @method static QiwiWallet whereName($value)
+ * @method static QiwiWallet wherePassword($value)
+ * @method static QiwiWallet whereProxyId($value)
+ * @method static QiwiWallet whereTypeId($value)
+ * @method static QiwiWallet whereUpdatedAt($value)
+ * @method static QiwiWallet whereUseProxy($value)
  * @mixin \Eloquent
  * @property-read \App\QiwiWalletSecuritySettings $securitySettings
  * @property-read \App\QiwiWalletSettings $settings
@@ -133,19 +133,19 @@ class QiwiWallet extends Model {
      * @return QiwiWallet|Model
      */
     public static function findByLogin($login) {
-        return (new QiwiWallet())->where("login", $login)->first();
+        return QiwiWallet::where("login", $login)->first();
     }
 
     public static function findByName($name) {
-        return (new QiwiWallet())->where("name", $name)->first();
+        return QiwiWallet::where("name", $name)->first();
     }
 
     public static function walletExists($login) {
-        return (new QiwiWallet())->where('login', $login)->exists();
+        return QiwiWallet::where('login', $login)->exists();
     }
 
     public static function walletExistsByName($name) {
-        return (new QiwiWallet())->where('name', $name)->exists();
+        return QiwiWallet::where('name', $name)->exists();
     }
 
     private function postUpdateRoutine() {
