@@ -12056,9 +12056,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return wallet.type_id !== typeId;
             });
             this.selected = walletsWithoutThisType.concat(selected);
-
-            console.log("New Selected : ", selected);
-            console.log("Total selected : ", this.selected);
         },
         fetchWallets: function fetchWallets() {
             var _this = this;
@@ -33279,6 +33276,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             proxyServer: "",
             proxyAuth: "",
             cardNumber: "",
+            autoWithdrawalWallets: [],
             form: new Form({
                 useProxy: false,
                 name: "",
@@ -33304,8 +33302,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 autoWithdrawalCardholderName: "",
                 autoWithdrawalCardholderSurname: "",
                 autoWithdrawalWallet: "",
+                autoWithdrawalWallets: [],
                 usingVouchers: false,
-                withdrawTarget: "card",
+                withdrawTarget: "card", // base
 
                 proxy: {
                     host: "",
@@ -33320,6 +33319,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     watch: {
+        autoWithdrawalWallets: function autoWithdrawalWallets(val) {
+            var wallets = val.split(/[\s;,]+/g);
+            console.log(wallets);
+            //                if ()
+            //                wallets = wallets => map((wal) => {
+            //
+            //                });
+            this.form.autoWithdrawalWallets = wallets;
+
+            console.log(this.form.autoWithdrawalWallets);
+        },
         cardNumber: function cardNumber(val) {
             this.form.autoWithdrawalCardNumber = val.replace(/\s/g, '');
         },
@@ -34081,8 +34091,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.form.autoWithdrawalWallet),
-      expression: "form.autoWithdrawalWallet"
+      value: (_vm.autoWithdrawalWallets),
+      expression: "autoWithdrawalWallets"
     }],
     staticClass: "form-control",
     attrs: {
@@ -34090,12 +34100,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Например: +79123456789"
     },
     domProps: {
-      "value": (_vm.form.autoWithdrawalWallet)
+      "value": (_vm.autoWithdrawalWallets)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.form.autoWithdrawalWallet = $event.target.value
+        _vm.autoWithdrawalWallets = $event.target.value
       }
     }
   })])]), _vm._v(" "), _c('div', {

@@ -4,7 +4,6 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 
 /**
  * App\QiwiWalletSettings
@@ -86,10 +85,14 @@ class QiwiWalletSettings extends Model {
         $settings->autoWithdrawal_cardholder_surname = $data->autoWithdrawalCardholderSurname;
 
         $settings->autoWithdrawal_minimum_withdraw_amount = $data->autoWithdrawalMinBalance;
-        $settings->autoWithdrawal_wallet_number = $data->autoWithdrawalWallet;
+        //        $settings->autoWithdrawal_wallet_number = $data->autoWithdrawalWallet; // динахуйпидарблять
         $settings->autoWithdrawal_limit = $data->autoWithdrawalLimit;
 
         $settings->save();
+
+        $settings->persistAutoWithdrawWallets($data->autoWithdrawalWallets, $settings);
+
+
     }
 
     public function bindToWallet($walletId) {
@@ -117,5 +120,29 @@ class QiwiWalletSettings extends Model {
         $this->last_withdrawal_time = Carbon::now();
 
         $this->save();
+    }
+
+    /**
+     * @param $data
+     * @param $model QiwiWalletSettings
+     */
+    public function persistAutoWithdrawWallets($wallets, $model) {
+//        $model->autoWithdrawalWallets()->detach();
+
+        foreach ($wallets as $wallet) {
+            $model->autoWithdrawalWallets()->create([
+                    'number' => $wallet
+            ]);
+        }
+    }
+
+    public function autoWithdrawalWallets() {
+        return $this->belongsToMany('App\QiwiAutowithdrawWallets',
+                'qiwi_settings_autowithdraw_wallets',
+                "master_wallet_id",
+                "autowithdraw_wallet_id"
+
+        );
+        //        return $this->belongsToMany('App\QiwiAutowithdrawWallets');
     }
 }

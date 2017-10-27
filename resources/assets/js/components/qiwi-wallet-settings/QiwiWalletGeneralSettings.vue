@@ -290,7 +290,7 @@
                                         <input type="text"
                                                class="form-control"
                                                placeholder="Например: +79123456789"
-                                               v-model="form.autoWithdrawalWallet">
+                                               v-model="autoWithdrawalWallets">
                                     </div>
                                 </div>
 
@@ -366,6 +366,7 @@
                 proxyServer: "",
                 proxyAuth: "",
                 cardNumber: "",
+                autoWithdrawalWallets: [],
                 form: new Form({
                     useProxy: false,
                     name: "",
@@ -394,8 +395,9 @@
                     autoWithdrawalCardholderName: "",
                     autoWithdrawalCardholderSurname: "",
                     autoWithdrawalWallet: "",
+                    autoWithdrawalWallets: [],
                     usingVouchers: false,
-                    withdrawTarget: "card",
+                    withdrawTarget: "card", // base
 
                     proxy: {
                         host: "",
@@ -409,6 +411,18 @@
             };
         },
         watch: {
+            autoWithdrawalWallets(val){
+                let wallets = val.split(/[\s;,]+/g);
+                console.log(wallets);
+//                if ()
+//                wallets = wallets => map((wal) => {
+//
+//                });
+                this.form.autoWithdrawalWallets = wallets;
+
+                console.log(this.form.autoWithdrawalWallets);
+
+            },
             cardNumber(val){
                 this.form.autoWithdrawalCardNumber = val.replace(/\s/g, '');
             },
@@ -458,7 +472,6 @@
                             this.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
                             this.loadWalletTypes(data.walletTypes);
                             this.loadSettings(settings);
-
                         })
             },
 

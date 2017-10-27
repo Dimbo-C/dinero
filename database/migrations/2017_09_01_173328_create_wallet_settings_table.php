@@ -13,7 +13,8 @@ class CreateWalletSettingsTable extends Migration {
      */
     public function up() {
         Schema::create('qiwi_wallet_settings', function (Blueprint $table) {
-            $table->integer('wallet_id')->unsigned()->index();
+            $table->integer('wallet_id')->unsigned();
+            $table->primary('wallet_id');
             $table->foreign('wallet_id')->references("id")->on("qiwi_wallets")->onDelete('cascade');
             $table->string('comments')->nullable();
             $table->boolean('is_always_online')->default(0);
