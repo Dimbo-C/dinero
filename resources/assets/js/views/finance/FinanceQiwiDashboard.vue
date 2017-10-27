@@ -80,7 +80,9 @@
             return {
                 actions: {
                     moveToReceive: "Переместить в приемные",
-                    moveToWithdraw: "Переместить в автовыводные",
+                    moveToWithdraw: "Переместить в выводные",
+                    moveToAutoWithdrawNumber: "Переместить в автовыводные\\номер",
+                    moveToAutoWithdrawCard: "Переместить в автовыводные\\карта",
                     moveToReserve: "Переместить в резервные",
                     moveToSpent: "Переместить в отработанные",
                     remove: "Удалить"
@@ -106,38 +108,35 @@
                 let typeId = selected[0].type_id;
                 let walletsWithoutThisType = this.selected.filter((wallet) => wallet.type_id !== typeId);
                 this.selected = walletsWithoutThisType.concat(selected);
-
-                console.log("New Selected : ", selected);
-                console.log("Total selected : ", this.selected);
             },
             fetchWallets () {
                 axios.get('/api/qiwi-wallets')
-                    .then((response) => {
-                        this.walletsTypes = response.data;
-                        this.walletsIsLoaded = true;
+                        .then((response) => {
+                            this.walletsTypes = response.data;
+                            this.walletsIsLoaded = true;
 
-                        Bus.$emit('initTooltip');
-                    })
+                            Bus.$emit('initTooltip');
+                        })
             },
 
             moveWallets (wallets, fromId, toId) {
                 // convert array of wallets entities to array ids
                 let ids = wallets.map((wallet) => wallet.id);
                 axios.post('/api/qiwi-wallets/move', {wallets: ids, to: toId})
-                    .then(() => {
-                        let moveTo = this.walletsTypes.find(type => type.id === toId);
+                        .then(() => {
+                            let moveTo = this.walletsTypes.find(type => type.id === toId);
 
-                        let moveFrom = this.walletsTypes.find(type => type.id === fromId);
+                            let moveFrom = this.walletsTypes.find(type => type.id === fromId);
 
-                        moveFrom.wallets = moveFrom.wallets.filter((w) => {
-                            return !wallets.find(item => item.id === w.id);
+                            moveFrom.wallets = moveFrom.wallets.filter((w) => {
+                                return !wallets.find(item => item.id === w.id);
+                            });
+
+                            wallets.forEach((w) => {
+                                w.is_active = 1;
+                                moveTo.wallets.push(w)
+                            });
                         });
-
-                        wallets.forEach((w) => {
-                            w.is_active = 1;
-                            moveTo.wallets.push(w)
-                        });
-                    });
             },
 
             executeMassAction () {

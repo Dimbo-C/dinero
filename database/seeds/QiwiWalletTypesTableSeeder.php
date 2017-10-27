@@ -3,33 +3,23 @@ use Carbon\Carbon;
 
 class QiwiWalletTypesTableSeeder extends \Illuminate\Database\Seeder {
     public function run() {
-        DB::table('qiwi_wallet_types')->insert([
-                "name" => "Приемные киви",
-                "slug" => "receive",
+        $wallets = [
+                ["Приемные киви", "receive"],
+                ["Резервные киви", "reserve"],
+                ["Выводные киви", "output"],
+                ["Отработанные киви", "spent"],
+                ["Автовыводные\\номер", "auto_withdraw_number"],
+                ["Автовыводные\\карта", "auto_withdraw_card"],
+        ];
 
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-        DB::table('qiwi_wallet_types')->insert([
-                "name" => "Резервные киви",
-                "slug" => "reserve",
+        foreach ($wallets as $wallet) {
+            DB::table('qiwi_wallet_types')->insert([
+                    "name" => $wallet[0],
+                    "slug" => $wallet[1],
 
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-        DB::table('qiwi_wallet_types')->insert([
-                "name" => "Выводные киви",
-                "slug" => "output",
-
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-        DB::table('qiwi_wallet_types')->insert([
-                "name" => "Отработанные киви",
-                "slug" => "spent",
-
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+        }
     }
 }

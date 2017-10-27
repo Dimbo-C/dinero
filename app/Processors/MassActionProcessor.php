@@ -49,6 +49,14 @@ class MassActionProcessor {
         return $this->moveTo("spent");
     }
 
+    private function moveToAutoWithdrawNumber() {
+        return $this->moveTo("auto_withdraw_number");
+    }
+
+    private function moveToAutoWithdrawCard() {
+        return $this->moveTo("auto_withdraw_card");
+    }
+
     private function moveTo($type) {
         $typeId = (new QiwiWalletType())->findByType($type)['id'];
 

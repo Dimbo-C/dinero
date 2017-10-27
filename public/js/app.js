@@ -12027,7 +12027,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             actions: {
                 moveToReceive: "Переместить в приемные",
-                moveToWithdraw: "Переместить в автовыводные",
+                moveToWithdraw: "Переместить в выводные",
+                moveToAutoWithdrawNumber: "Переместить в автовыводные\\номер",
+                moveToAutoWithdrawCard: "Переместить в автовыводные\\карта",
                 moveToReserve: "Переместить в резервные",
                 moveToSpent: "Переместить в отработанные",
                 remove: "Удалить"

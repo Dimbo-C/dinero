@@ -147,14 +147,19 @@ class Autowithdraw {
 
     private function toWallet() {
         try {
+
             $to = $this->settings->autoWithdrawal_wallet_number;
             $amount = $this->withdrawAmount;
+
             $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
             $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $amount, $comment);
             Log::error("Error: " . $result->error);
+
             return ($result->error == null);
         } catch (\Exception $ex) {
+
             Log::error("Error in 'AutoWithdraw#toWallet()'");
+
             return false;
         }
     }
@@ -166,9 +171,8 @@ class Autowithdraw {
 
         $amount = $balance > $limit ? $limit : $balance;
 
-        //        // TODO: TEST STATE remove in production
-        //        $amount = 1;
-
         return $amount;
     }
+
+
 }
