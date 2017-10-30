@@ -285,12 +285,17 @@
                                 <!--</div>-->
 
                                 <div class="form-group">
-                                    <label for="" class="col-sm-4 control-label">Кошелек для автовывода</label>
+                                    <label for="" class="col-sm-4 control-label">Кошельки для автовывода</label>
                                     <div class="col-sm-8">
                                         <input type="text"
                                                class="form-control"
                                                placeholder="Например: +79123456789"
                                                v-model="autoWithdrawalWallets">
+                                        <span class="help-block">Укажите множество кошельков через пробел, ';' или ",",
+                                            на которые будет совершен автовывод.
+                                            Если один из них достигнет максимального баланса
+                                            - остаток денег будет переведен на следующий кошелек.
+                                            </span>
                                     </div>
                                 </div>
 
@@ -315,6 +320,7 @@
                                                v-model="cardNumber"
                                                placeholder="XXXX XXXX XXXX XXXX">
                                     </div>
+
                                 </div>
 
                                 <div class="form-group">

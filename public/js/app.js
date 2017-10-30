@@ -33265,6 +33265,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -34078,7 +34084,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Кошелек для автовывода")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Кошельки для автовывода")]), _vm._v(" "), _c('div', {
     staticClass: "col-sm-8"
   }, [_c('input', {
     directives: [{
@@ -34101,7 +34107,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.autoWithdrawalWallets = $event.target.value
       }
     }
-  })])]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Укажите множество кошельков через пробел, ';' или \",\",\n                                        на которые будет совершен автовывод.\n                                        Если один из них достигнет максимального баланса\n                                        - остаток денег будет переведен на следующий кошелек.\n                                        ")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-sm-4 control-label",
