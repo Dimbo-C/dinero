@@ -49,12 +49,17 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property float $autoWithdrawal_limit
  * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWalletSettings whereAutoWithdrawalLimit($value)
+ * @property string|null $autoWithdrawal_wallet_numbers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\QiwiAutowithdrawWallets[] $autoWithdrawalWallets
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWalletSettings whereAutoWithdrawalWalletNumbers($value)
  */
 class QiwiWalletSettings extends Model {
     protected $fillable = array('wallet_id');
     protected $table = "qiwi_wallet_settings";
     protected $primaryKey = "wallet_id";
     public $incrementing = false;
+
+    private $walletSplitter = "; ";
 
     public function findByLogin($login) {
         $wallet = (new QiwiWallet())->findByLogin($login);
@@ -85,14 +90,23 @@ class QiwiWalletSettings extends Model {
         $settings->autoWithdrawal_cardholder_surname = $data->autoWithdrawalCardholderSurname;
 
         $settings->autoWithdrawal_minimum_withdraw_amount = $data->autoWithdrawalMinBalance;
-        //        $settings->autoWithdrawal_wallet_number = $data->autoWithdrawalWallet; // динахуйпидарблять
+
+        $settings->autoWithdrawal_wallet_numbers = $this->implodeWalletNumbers($data->autoWithdrawalWallets);
         $settings->autoWithdrawal_limit = $data->autoWithdrawalLimit;
 
         $settings->save();
 
-        $settings->persistAutoWithdrawWallets($data->autoWithdrawalWallets, $settings);
+        //        $settings->persistAutoWithdrawWallets($data->autoWithdrawalWallets, $settings);
 
 
+    }
+
+    public function implodeWalletNumbers(array $walletNumbers) {
+        return implode($this->walletSplitter, $walletNumbers);
+    }
+
+    public function explodeWalletNumbers($walletNumbersString) {
+        return explode($this->walletSplitter, $walletNumbersString);
     }
 
     public function bindToWallet($walletId) {
@@ -127,7 +141,7 @@ class QiwiWalletSettings extends Model {
      * @param $model QiwiWalletSettings
      */
     public function persistAutoWithdrawWallets($wallets, $model) {
-//        $model->autoWithdrawalWallets()->detach();
+        //        $model->autoWithdrawalWallets()->detach();
 
         foreach ($wallets as $wallet) {
             $model->autoWithdrawalWallets()->create([
@@ -141,8 +155,6 @@ class QiwiWalletSettings extends Model {
                 'qiwi_settings_autowithdraw_wallets',
                 "master_wallet_id",
                 "autowithdraw_wallet_id"
-
         );
-        //        return $this->belongsToMany('App\QiwiAutowithdrawWallets');
     }
 }

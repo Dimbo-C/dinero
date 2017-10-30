@@ -21,7 +21,7 @@ class QiwiIdentificationHelper {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($data->login);
         //        $qiwiControl->login();
 
-        $settings = $qiwiControl->setQIWIWalletOwnerData(
+        $identificationUpdateResult = $qiwiControl->setQIWIWalletOwnerData(
                 $data->lastName,
                 $data->firstName,
                 $data->middleName,
@@ -32,6 +32,6 @@ class QiwiIdentificationHelper {
                 $data->oms
         );
 
-        return $settings;
+        return $identificationUpdateResult;
     }
 }

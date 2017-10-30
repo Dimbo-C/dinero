@@ -228,6 +228,7 @@ class QiwiWalletRepository implements Contract {
         $wallet->settings()->save($settings);
         $wallet->securitySettings()->save($securitySettings);
 
+        $result['code'] = "200";
         $result['status'] = "success";
         $result['message'] = "Кошелек успешно добавлен.";
 
@@ -236,7 +237,8 @@ class QiwiWalletRepository implements Contract {
 
     public function updateSettings($data) {
         // update wallet table
-        $wallet = $this->updateWallet($data->login, $data->name, $data->walletActive, $data->walletType, $data->useProxy);
+        $wallet = $this->updateWallet($data->login, $data->name, $data->walletActive,
+                $data->walletType, $data->useProxy);
 
         // update proxy for wallet
         if ($wallet->use_proxy) {
@@ -272,11 +274,6 @@ class QiwiWalletRepository implements Contract {
                     $result = QiwiSecurityHelper::emailUnbinding($login, $options['code'], $options['token']);
                 }
                 break;
-            case "TOKEN":
-            case "PIN":
-            case "SMS_PAYMENT":
-                $result = QiwiSecurityHelper::setSecurityAttribute($login, $action, $options['value']);
-                break;
 
             case "CALL_CONFIRMATION":
                 // switch off/on
@@ -286,6 +283,12 @@ class QiwiWalletRepository implements Contract {
                 } else {
                     $result = QiwiSecurityHelper::callConfirm($login, $options['value']);
                 }
+                break;
+
+            case "TOKEN":
+            case "PIN":
+            case "SMS_PAYMENT":
+                $result = QiwiSecurityHelper::setSecurityAttribute($login, $action, $options['value']);
                 break;
         }
 
@@ -304,7 +307,6 @@ class QiwiWalletRepository implements Contract {
         return QiwiIdentificationHelper::updateIdentification($data);
     }
 
-
     /**
      * @param $action string
      * @param $wallets array
@@ -316,35 +318,14 @@ class QiwiWalletRepository implements Contract {
         return $map->execute() === false ? "FAIL" : "OK";
     }
 
-    /**
-     * @param $login
-     * @return null|QiwiWallet
-     */
-    private function findByLogin($login) {
-        $wallet = QiwiWallet::where('login', $login)->first();
-
-        return $wallet ?: null;
-    }
-
     private function updateWalletSettings($data, $login) {
         (new QiwiWalletSettings)->updateSettings($data, $login);
     }
 
     private function updateWallet($login, $name, $isActive, $walletType, $useProxy) {
-        $type = (new QiwiWalletType())->findByType($walletType);
-        $typeId = $type->id;
-
-        $wallet = $this->findByLogin($login);
-
-        $wallet->name = $name;
-        $wallet->is_active = $isActive;
-        $wallet->type_id = $typeId;
-        $wallet->use_proxy = $useProxy;
-
-        $wallet->save();
+        $wallet = (new QiwiWallet())->findByLogin($login);
+        $wallet->updateWallet($name, $isActive, $walletType, $useProxy);
 
         return $wallet;
     }
-
-
 }

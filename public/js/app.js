@@ -33294,17 +33294,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 autoWithdrawalTargets: [{ value: "card", text: "На банковскую карту VISA/MASTERCARD" }, { value: "wallet", text: "На Qiwi кошелек" }],
 
                 autoWithdrawalTimeout: 0,
-                autoWithdrawalLimit: 14500,
+                autoWithdrawalLimit: 14500, // maximum auto withdraw amount
                 autoWithdrawalMinBalance: 2500, // bottom limiter for auto withdrawals
 
-                minimumBalance: 0, // balance to leave on wallet
+                minimumBalance: 0, // balance to leave on wallet after any withdraw
                 autoWithdrawalCardNumber: "",
                 autoWithdrawalCardholderName: "",
                 autoWithdrawalCardholderSurname: "",
                 autoWithdrawalWallet: "",
                 autoWithdrawalWallets: [],
                 usingVouchers: false,
-                withdrawTarget: "card", // base
+                withdrawTarget: "card", // basic withdraw target
 
                 proxy: {
                     host: "",
@@ -33312,20 +33312,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     login: "",
                     password: ""
                 },
-                login: this.$route.params.wallet
 
+                login: this.$route.params.wallet
             })
         };
     },
 
     watch: {
         autoWithdrawalWallets: function autoWithdrawalWallets(val) {
-            var wallets = val.split(/[\s;,]+/g);
+            console.log(val);
+
+            var wallets = val === "" || val === null ? [] : val.split(/[\s;,]+/g);
             console.log(wallets);
-            //                if ()
-            //                wallets = wallets => map((wal) => {
-            //
-            //                });
             this.form.autoWithdrawalWallets = wallets;
 
             console.log(this.form.autoWithdrawalWallets);
@@ -33360,10 +33358,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Prepare the component.
          */
         prepareComponent: function prepareComponent() {
-            //                this.$nextTick(() => {
-            //                    $('.tooltip').removeClass('in');
-            //                });
-
             this.loadData();
         },
         loadData: function loadData() {
@@ -33418,14 +33412,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             form.usingVouchers = settings.using_vouchers;
             form.autoWithdrawalCardholderName = settings.autoWithdrawal_cardholder_name;
             form.autoWithdrawalCardholderSurname = settings.autoWithdrawal_cardholder_surname;
-            form.autoWithdrawalWallet = settings.autoWithdrawal_wallet_number;
+
+            this.autoWithdrawalWallets = settings.autoWithdrawal_wallet_numbers;
+
             form.autoWithdrawalMinBalance = settings.autoWithdrawal_minimum_withdraw_amount;
             form.autoWithdrawalLimit = settings.autoWithdrawal_limit;
 
             if (settings.autoWithdrawal_card_number !== null) {
-                //                    let results = settings.autoWithdrawal_card_number.match(/\d{4}/g);
-
-                //                    this.cardNumber = results.join(" ");
                 this.cardNumber = settings.autoWithdrawal_card_number;
             } else this.cardNumber = "";
 

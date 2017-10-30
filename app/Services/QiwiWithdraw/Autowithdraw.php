@@ -147,13 +147,43 @@ class Autowithdraw {
 
     private function toWallet() {
         try {
+            if ($this->settings->autoWithdrawal_wallet_numbers == "") return false;
 
-            $to = $this->settings->autoWithdrawal_wallet_number;
+            $walletsNumbers = $this->settings->explodeWalletNumbers($this->settings->autoWithdrawal_wallet_numbers);
             $amount = $this->withdrawAmount;
 
-            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
-            $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $amount, $comment);
-            Log::error("Error: " . $result->error);
+            foreach ($walletsNumbers as $walletNumber) {
+                // stop this madness
+                if ($amount == 0) return true;
+
+                if (strpos($walletNumber, "+") === false) $walletNumber = "+$walletNumber";
+
+                // get target wallet
+                $autoWithdrawWallet = QiwiWallet::findByLogin(trim($walletNumber));
+                if ($autoWithdrawWallet == null) continue;
+
+                // if withdraw amount is more that it is possible to transfer to target wallet
+                $maximumTransactionAmount = $autoWithdrawWallet->settings->maximum_balance - $autoWithdrawWallet->balance;
+                if ($maximumTransactionAmount < $amount) {
+                    $withdrawAmount = $maximumTransactionAmount;
+                    $amount -= $withdrawAmount;
+                } else {
+                    $withdrawAmount = $amount;
+                }
+
+                $to = $walletNumber;
+
+                $comment = "Автовывод " . $this->login . " -> $to";
+                $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $withdrawAmount, $comment);
+                Log::error("Error: " . $result->error);
+            }
+
+            //            $to = $this->settings->autoWithdrawal_wallet_number;
+            //
+            //            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
+            //            $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $amount, $comment);
+            //            Log::error("Error: " . $result->error);
+
 
             return ($result->error == null);
         } catch (\Exception $ex) {

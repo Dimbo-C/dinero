@@ -144,6 +144,20 @@ class QiwiWallet extends Model {
         return QiwiWallet::where('name', $name)->exists();
     }
 
+    public function updateWallet($name, $isActive, $walletType, $useProxy) {
+        $type = (new QiwiWalletType())->findByType($walletType);
+        $typeId = $type->id;
+
+        $this->name = $name;
+        $this->is_active = $isActive;
+        $this->type_id = $typeId;
+        $this->use_proxy = $useProxy;
+
+        $this->save();
+
+        return $this;
+    }
+
     public function postUpdateRoutine() {
         $this->updateRecheckTime();
         $this->recheckMaximumBalance();
@@ -165,7 +179,6 @@ class QiwiWallet extends Model {
     }
 
     private function updateRecheckTime() {
-        //        $settings = (new QiwiWalletSettings())->findByLogin($login);
         $this->settings->last_balance_recheck = Carbon::now()->format('Y-m-d H:i:s');
         $this->settings->save();
     }

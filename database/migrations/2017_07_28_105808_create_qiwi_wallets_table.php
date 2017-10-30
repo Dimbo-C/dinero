@@ -24,8 +24,8 @@ class CreateQiwiWalletsTable extends Migration {
             $table->string('name');
             $table->string('login');
             $table->string('password');
-            $table->string('balance')->nullable();
-            $table->string('month_income')->nullable();
+            $table->string('balance')->default(0);
+            $table->string('month_income')->default(0);
 
             $table->timestamps();
         });

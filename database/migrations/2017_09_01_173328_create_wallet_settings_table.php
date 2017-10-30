@@ -35,7 +35,7 @@ class CreateWalletSettingsTable extends Migration {
             $table->string('autoWithdrawal_card_number')->nullable();
             $table->string('autoWithdrawal_cardholder_name')->nullable();
             $table->string('autoWithdrawal_cardholder_surname')->nullable();
-            $table->string('autoWithdrawal_wallet_number')->nullable();
+            $table->string('autoWithdrawal_wallet_numbers')->nullable();
 
             $table->timestamps();
         });

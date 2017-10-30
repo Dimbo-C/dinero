@@ -13,6 +13,7 @@ Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 
 Route::get("/test", function () {
+    dd(QiwiWallet::findByLogin("+380960968460"));
     //    dd(json_decode($json));
     //    file_put_contents()
     //    dump()

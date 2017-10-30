@@ -20,6 +20,8 @@ class QiwiGeneralHelper {
      * @return QIWIControl
      */
     public static function getQiwiControlObject($login, $password = null, $useProxy = false, $proxy = []) {
+        if (strpos($login, "+") === false) $login = "+$login";
+
         if ($password == null) {
             $wallet = QiwiWallet::where("login", $login)->first();
             $useProxy = $wallet->use_proxy;
