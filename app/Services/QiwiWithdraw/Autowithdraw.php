@@ -194,23 +194,22 @@ class Autowithdraw {
             return ($result->error == null);
         } catch (\Exception $ex) {
 
-                    Log::error("Error in 'AutoWithdraw#toWallet()'");
+            Log::error("Error in 'AutoWithdraw#toWallet()'");
 
-                    return false;
-                }
-}
+            return false;
+        }
+    }
 
-private
-function withdrawAmount() {
-    $balance = $this->wallet->balance;
-    $limit = $this->settings->autoWithdrawal_limit;
-    if ($limit == 0) return $balance;
+    private function withdrawAmount() {
+        $balance = $this->wallet->balance;
+        $limit = $this->settings->autoWithdrawal_limit;
+        if ($limit == 0) return $balance;
 
-    $amount = $balance > $limit ? $limit : $balance;
-    $amount *= 0.97;
+        $amount = $balance > $limit ? $limit : $balance;
+        $amount *= 0.97;
 
-    return $amount;
-}
+        return $amount;
+    }
 
 
 }
