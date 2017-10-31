@@ -121,27 +121,9 @@ class QiwiWalletRepository implements Contract {
         return json_encode(Withdraw::purchaseVoucher($login, $amount));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    //    public function updateBalanceAndIncome($login) {
-    //        $balance = QiwiGeneralHelper::getBalance($login);
-    //        $monthIncome = $balance;
-    //
-    //        $wallet = QiwiWallet::findByLogin($login);
-    //        $wallet->updateBalanceAndIncome($balance, $monthIncome);
-    //
-    //        return [
-    //                "monthIncome" => $monthIncome,
-    //                "balance" => $balance,
-    //                "options" => [],
-    //        ];
-    //    }
-
     public function updateBalance($login, $postAction = true) {
         $balance = QiwiGeneralHelper::getBalance($login);
         $wallet = QiwiWallet::findByLogin($login);
-
         $wallet->updateBalance($balance);
 
         return response()->json(['balance' => $balance], 200);

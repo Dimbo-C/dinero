@@ -184,16 +184,8 @@ class Autowithdraw {
                 Log::error("Error: " . $result->error);
             }
 
-            //            $to = $this->settings->autoWithdrawal_wallet_number;
-            //
-            //            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
-            //            $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $amount, $comment);
-            //            Log::error("Error: " . $result->error);
-
-
-            return ($result->error == null);
+            return true;
         } catch (\Exception $ex) {
-
             Log::error("Error in 'AutoWithdraw#toWallet()'");
 
             return false;
