@@ -96,7 +96,7 @@
                 <div class="panel-body">
                     <div v-if="!transactions.length">Нет отчетов за указанный период</div>
                     <div v-else>
-                        <div> class="table-responsive">
+                        <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                 <tr>

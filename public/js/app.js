@@ -14833,7 +14833,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "clearfix"
   })])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
-  }, [(!_vm.transactions.length) ? _c('div', [_vm._v("Нет отчетов за указанный период")]) : _c('div', [_c('div', [_vm._v(" class=\"table-responsive\">\n                        "), _c('table', {
+  }, [(!_vm.transactions.length) ? _c('div', [_vm._v("Нет отчетов за указанный период")]) : _c('div', [_c('div', {
+    staticClass: "table-responsive"
+  }, [_c('table', {
     staticClass: "table table-striped"
   }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.transactions), function(t) {
     return _c('tr', [_c('td', [_c('p', {
