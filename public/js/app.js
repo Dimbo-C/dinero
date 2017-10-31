@@ -11836,6 +11836,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -11858,7 +11866,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //                outcome: 0,
             dateRange: {
                 start: '',
-                end: ''
+                end: '',
+                page: 1
             }
         };
     },
@@ -11890,6 +11899,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fetchReport: function fetchReport() {
             var start = moment(this.state.dateStart).format("DD.MM.YYYY");
             var end = moment(this.state.dateEnd).format("DD.MM.YYYY");
+            this.dateRange.page = 1;
             this.fetchReportByDate(start, end);
         },
         fetchReportByDate: function fetchReportByDate(start, end) {
@@ -11935,6 +11945,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.fetchReportByDate(_start2, _end);
             }
         },
+        nextPage: function nextPage() {
+            var _this2 = this;
+
+            console.log(this.dateRange);
+            this.dateRange.page += 1;
+            console.log(this.dateRange);
+            this.isLoaded = false;
+            axios.get('/api/qiwi-wallets/' + this.login + '/report', { params: this.dateRange }).then(function (response) {
+                console.log(response);
+                _this2.transactions = response.data;
+                _this2.isLoaded = true;
+            });
+        },
+        prevPage: function prevPage() {
+            var _this3 = this;
+
+            console.log(this.dateRange);
+            this.dateRange.page -= this.dateRange.page === 1 ? 0 : 1;
+            console.log(this.dateRange);
+            this.isLoaded = false;
+            axios.get('/api/qiwi-wallets/' + this.login + '/report', { params: this.dateRange }).then(function (response) {
+                console.log(response);
+                _this3.transactions = response.data;
+                _this3.isLoaded = true;
+            });
+        },
 
 
         /**
@@ -11973,7 +12009,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return t.amount = Number(t.amount);
                 });
 
-                return __WEBPACK_IMPORTED_MODULE_0_lodash_sum___default()(transactions);
+                return __WEBPACK_IMPORTED_MODULE_0_lodash_sum___default()(transactions).toFixed(2);
             }
         }
     },
@@ -14733,12 +14769,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "state.dateEnd"
     }
-  })], 1), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12 col-lg-6 col-lg-offset-3"
   }, [_c('button', {
-    staticClass: "btn btn-default col-xs-6 col-xs-offset-3 col-lg-6",
+    staticClass: "btn btn-success col-xs-6 col-xs-offset-3 col-lg-6",
     on: {
       "click": _vm.fetchReport
     }
@@ -14799,7 +14835,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "table-responsive"
   }, [_c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.transactions), function(t) {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', [_vm._l((_vm.transactions), function(t) {
     return _c('tr', [_c('td', [_c('p', {
       staticClass: "small m-b-none",
       domProps: {
@@ -14837,7 +14873,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "textContent": _vm._s(t.commission)
       }
     })])
-  }))])])])]) : _vm._e()], 1)], 1)
+  }), _vm._v(" "), _c('div', {
+    staticClass: "row right"
+  }, [_c('div', {
+    staticClass: "col-xs-6"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.prevPage
+    }
+  }, [_vm._v("Предыдущая страница")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-6"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.nextPage
+    }
+  }, [_vm._v("Следующая страница")])])])], 2)])])])]) : _vm._e()], 1)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "pull-right"

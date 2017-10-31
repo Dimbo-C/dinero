@@ -33,10 +33,10 @@
                                     :value="state.dateEnd"
                                     v-model="state.dateEnd"></datepicker>
                         </div>
-
+                        <br>
                         <div class="row">
                             <div class="col-xs-12 col-lg-6 col-lg-offset-3">
-                                <button class="btn btn-default col-xs-6 col-xs-offset-3 col-lg-6" @click="fetchReport">
+                                <button class="btn btn-success col-xs-6 col-xs-offset-3 col-lg-6" @click="fetchReport">
                                     Обновить
                                 </button>
                             </div>
@@ -124,6 +124,14 @@
                                 <td>{{ t.sign }}{{ t.amount }} {{ t.currency }}</td>
                                 <td v-text="t.commission"></td>
                             </tr>
+                            <div class="row right">
+                                <div class="col-xs-6">
+                                    <button class="btn btn-primary" @click="prevPage">Предыдущая страница</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="btn btn-primary" @click="nextPage">Следующая страница</button>
+                                </div>
+                            </div>
                             </tbody>
                         </table>
                     </div>
@@ -156,7 +164,8 @@
                 dateRange: {
                     start: '',
                     end: '',
-                }
+                    page: 1
+                },
             };
         },
 
@@ -186,6 +195,7 @@
             fetchReport(){
                 let start = moment(this.state.dateStart).format("DD.MM.YYYY");
                 let end = moment(this.state.dateEnd).format("DD.MM.YYYY");
+                this.dateRange.page = 1;
                 this.fetchReportByDate(start, end);
             },
             fetchReportByDate(start, end) {
@@ -233,6 +243,31 @@
                 }
             },
 
+            nextPage(){
+                console.log(this.dateRange);
+                this.dateRange.page += 1;
+                console.log(this.dateRange);
+                this.isLoaded = false;
+                axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
+                        .then((response) => {
+                            console.log(response);
+                            this.transactions = response.data;
+                            this.isLoaded = true;
+                        })
+            },
+            prevPage(){
+                console.log(this.dateRange);
+                this.dateRange.page -= this.dateRange.page === 1 ? 0 : 1;
+                console.log(this.dateRange);
+                this.isLoaded = false;
+                axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
+                        .then((response) => {
+                            console.log(response);
+                            this.transactions = response.data;
+                            this.isLoaded = true;
+                        })
+            },
+
             /**
              * Prepare the component.
              */
@@ -270,7 +305,7 @@
                             .filter(t => t.sign === sign)
                             .map(t => t.amount = Number(t.amount));
 
-                    return _sum(transactions);
+                    return _sum(transactions).toFixed(2);
                 }
             }
         },

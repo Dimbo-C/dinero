@@ -13,15 +13,16 @@ trait QiwiReports {
      *
      * @param $start
      * @param $end
+     * @param $page
      * @return array
      */
-    public function reportForDateRange($start, $end) {
+    public function reportForDateRange($start, $end, $page = 1) {
         $query = [
                 'daterange' => 'true',
                 'start' => $start,
                 'finish' => $end,
         ];
-        return $this->fetchReport($query);
+        return $this->fetchReport($query, $page);
     }
 
     /**
@@ -30,8 +31,9 @@ trait QiwiReports {
      * @param int $size
      * @return array
      */
-    protected function fetchReport(array $query, $start = 0, $size = 15) {
+    protected function fetchReport(array $query, $page = 1, $size = 15) {
         $this->login();
+        $start = $page * $size;
 
         $response = $this->client->get('https://qiwi.com/report/list.action', [
                 'query' => $query,
