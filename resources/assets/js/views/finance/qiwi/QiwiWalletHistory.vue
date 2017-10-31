@@ -81,7 +81,7 @@
                             <div class="form-group">
                                 <p class="form-control-static">История транзакций <b v-text="this.login"></b>
                                     c <b>{{dateRange.start}}</b> по <b>{{dateRange.end}}</b>
-                                    (+ {{income}} / - {{outcome}})
+                                    (+ {{income}} / - {{expenditure}})
                                 </p>
                             </div>
                         </div>
@@ -135,6 +135,7 @@
 
 <script>
     import _sum from 'lodash/sum';
+    import _sumBy from 'lodash/sumBy';
     import Datepicker from 'vuejs-datepicker';
 
     export default {
@@ -150,8 +151,8 @@
                 },
                 isLoaded: false,
                 transactions: [],
-                income: 0,
-                outcome: 0,
+//                income: 0,
+//                outcome: 0,
                 dateRange: {
                     start: '',
                     end: '',
@@ -193,13 +194,13 @@
 
                 this.isLoaded = false;
                 axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
-                    .then((response) => {
-                        console.log(response);
-                        this.transactions = response.data.history;
-                        this.income = response.data.income;
-                        this.outcome = response.data.outcome;
-                        this.isLoaded = true;
-                    })
+                        .then((response) => {
+                            console.log(response);
+                            this.transactions = response.data;
+//                            this.income = response.data.income;
+//                            this.outcome = response.data.outcome;
+                            this.isLoaded = true;
+                        })
             },
 
             customFormatter (date) {
@@ -261,6 +262,16 @@
                 } else {
                     return '<i class="fa fa-circle text-success"></i> Успешно'
                 }
+            },
+
+            historySum(sign){
+                if (this.transactions) {
+                    const transactions = this.transactions
+                            .filter(t => t.sign === sign)
+                            .map(t => t.amount = Number(t.amount));
+
+                    return _sum(transactions);
+                }
             }
         },
 
@@ -269,25 +280,14 @@
                 return this.$route.params.wallet;
             },
 
-//            income () {
-//                if (this.transactions) {
-////                    let amounts = [];
-////                    let sum = 0;
-////                    const transactions = this.transactions.filter(t => t.amount_sign === '-');
-////
-////                    transactions.forEach((t) => {
-////                        amounts.push(parseFloat(t.amount.replace(',', '.').replace(/[^0-9]/, '')))
-////                    });
-////
-////                    return amounts;
-//                }
-//            },
+            income () {
+                return this.historySum("+");
+            },
 
             expenditure () {
-//                if (this.transactions) {
-//                    return `${_sum(this.transactions.filter(t => t.amount_sign === '+').amount)}`;
-//                }
+                return this.historySum("-");
             }
+
         }
     };
 </script>

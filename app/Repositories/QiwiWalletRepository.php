@@ -146,16 +146,10 @@ class QiwiWalletRepository implements Contract {
      */
     public function reportFor($query, $login) {
         $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
-        $start = $query['start'];
-        $end = $query['end'];
-        $transactionProcessor = new TransactionProcessor($qiwi->reportForDateRange($start, $end));
-        $totals = $qiwi->getTotals($start, $end);
+        $transactionProcessor = new TransactionProcessor(
+                $qiwi->reportForDateRange($query['start'], $query['end']));
 
-        return [
-                'history' => $transactionProcessor->getTransactions(),
-                'income' => $totals['income'],
-                'outcome' => $totals['expenditure'],
-        ];
+        return $transactionProcessor->getTransactions();
     }
 
     /**

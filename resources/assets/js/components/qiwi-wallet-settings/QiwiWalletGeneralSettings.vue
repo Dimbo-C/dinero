@@ -299,19 +299,6 @@
                                     </div>
                                 </div>
 
-                                <!--<div class="form-group">-->
-                                <!--<div class="col-sm-offset-4 col-sm-8">-->
-                                <!--<div class="checkbox">-->
-                                <!--<label>-->
-                                <!--<input type="radio"-->
-                                <!--value="card"-->
-                                <!--v-model="form.withdrawTarget">-->
-                                <!--Автовывод на карту-->
-                                <!--</label>-->
-                                <!--</div>-->
-                                <!--</div>-->
-                                <!--</div>-->
-
                                 <div class="form-group">
                                     <label for="" class="col-sm-4 control-label">Карта для автовывода</label>
                                     <div class="col-sm-8">
