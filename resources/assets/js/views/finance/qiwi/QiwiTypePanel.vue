@@ -166,13 +166,12 @@
                 this.spinners.push(login);
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
-                        .then((balance) => {
+                        .then((response) => {
+                            const balance = response.balance;
                             console.log("Balance: " + balance);
                             this.items.map((item) => {
                                 if (item.login === login) {
                                     item.balance = this.tidySum(balance);
-
-                                    // stop spinner
                                     this.spinners = this.spinners.filter((elem) => login !== elem);
                                 }
                             });
@@ -182,7 +181,8 @@
             updateIncome(login){
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-income', new Form(auth))
-                        .then((income) => {
+                        .then((response) => {
+                            const income = response.monthIncome;
                             console.log("Income: " + income);
                             this.items.map((item) => {
                                 if (item.login === login) {

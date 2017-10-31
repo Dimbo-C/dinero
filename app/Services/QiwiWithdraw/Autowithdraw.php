@@ -112,7 +112,8 @@ class Autowithdraw {
     }
 
     private function isEnoughMoney() {
-        if ($this->wallet->balance < ($this->withdrawAmount() + $this->withdrawAmount() * 0.02)) {
+        //        if ($this->wallet->balance < ($this->withdrawAmount() + $this->withdrawAmount() * 0.02)) {
+        if ($this->wallet->balance < ($this->withdrawAmount())) {
             Log::info("Not enough money for auto withdraw");
             return false;
         }
@@ -125,24 +126,25 @@ class Autowithdraw {
     }
 
     private function toCard() {
-        try {
-            $login = $this->login;
-            $cardnum = $this->settings->autoWithdrawal_card_number;
-            $fname = $this->settings->autoWithdrawal_cardholder_name;
-            $lname = $this->settings->autoWithdrawal_cardholder_surname;
-            $sum = $this->withdrawAmount;
-            $currency = "RUB";
-            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
-            $result = Withdraw::toCreditCard(
-                    $login, $cardnum, $fname,
-                    $lname, $sum, $currency, $comment);
+        //        try {
+        $login = $this->login;
+        $cardnum = $this->settings->autoWithdrawal_card_number;
+        $fname = $this->settings->autoWithdrawal_cardholder_name;
+        $lname = $this->settings->autoWithdrawal_cardholder_surname;
+        $sum = $this->withdrawAmount;
+        $currency = "RUB";
+        //            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
+        $comment = "Автовывод {$this->login} -> $cardnum";
+        $result = Withdraw::toCreditCard(
+                $login, $cardnum, $fname,
+                $lname, $sum, $currency, $comment);
 
-            return ($result->error == null);
-        } catch (\Exception $ex) {
-            Log::error("Error in 'AutoWithdraw#toCard()'");
-
-            return false;
-        }
+        return ($result->error == null);
+        //        } catch (\Exception $ex) {
+        //            Log::error("Error in 'AutoWithdraw#toCard()'");
+        //
+        //            return false;
+        //        }
     }
 
     private function toWallet() {
@@ -152,16 +154,20 @@ class Autowithdraw {
             $walletsNumbers = $this->settings->explodeWalletNumbers($this->settings->autoWithdrawal_wallet_numbers);
             $amount = $this->withdrawAmount;
 
+            Log::info("Amount: $amount");
+            Log::info($walletsNumbers);
             foreach ($walletsNumbers as $walletNumber) {
                 // stop this madness
                 if ($amount == 0) return true;
 
-                if (strpos($walletNumber, "+") === false) $walletNumber = "+$walletNumber";
+                // prepend + if it is absent
+                if (strpos($walletNumber, "+") === false) $walletNumber = trim("+$walletNumber");
 
                 // get target wallet
-                $autoWithdrawWallet = QiwiWallet::findByLogin(trim($walletNumber));
+                $autoWithdrawWallet = QiwiWallet::findByLogin($walletNumber);
                 if ($autoWithdrawWallet == null) continue;
 
+                Log::info("Withdraw to $walletNumber");
                 // if withdraw amount is more that it is possible to transfer to target wallet
                 $maximumTransactionAmount = $autoWithdrawWallet->settings->maximum_balance - $autoWithdrawWallet->balance;
                 if ($maximumTransactionAmount < $amount) {
@@ -173,7 +179,7 @@ class Autowithdraw {
 
                 $to = $walletNumber;
 
-                $comment = "Автовывод " . $this->login . " -> $to";
+                $comment = "Автовывод {$this->login} -> $to";
                 $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $withdrawAmount, $comment);
                 Log::error("Error: " . $result->error);
             }
@@ -188,21 +194,23 @@ class Autowithdraw {
             return ($result->error == null);
         } catch (\Exception $ex) {
 
-            Log::error("Error in 'AutoWithdraw#toWallet()'");
+                    Log::error("Error in 'AutoWithdraw#toWallet()'");
 
-            return false;
-        }
-    }
+                    return false;
+                }
+}
 
-    private function withdrawAmount() {
-        $balance = $this->wallet->balance;
-        $limit = $this->settings->autoWithdrawal_limit;
-        if ($limit == 0) return $balance;
+private
+function withdrawAmount() {
+    $balance = $this->wallet->balance;
+    $limit = $this->settings->autoWithdrawal_limit;
+    if ($limit == 0) return $balance;
 
-        $amount = $balance > $limit ? $limit : $balance;
+    $amount = $balance > $limit ? $limit : $balance;
+    $amount *= 0.97;
 
-        return $amount;
-    }
+    return $amount;
+}
 
 
 }

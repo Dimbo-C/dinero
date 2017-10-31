@@ -59,7 +59,7 @@ class QiwiWalletsController extends Controller {
         );
     }
 
-    public function autoWithdraw($login, Request $request) {
+    public function autoWithdraw($login) {
         return $this->wallet->autoWithdraw($login);
     }
 

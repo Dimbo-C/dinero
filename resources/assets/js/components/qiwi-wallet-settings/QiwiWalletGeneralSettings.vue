@@ -447,7 +447,6 @@
                 this.loadData();
             },
 
-
             loadData(){
                 // get settings of this wallet
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`)
@@ -533,14 +532,14 @@
             },
 
             triggerAutoWithdraw(){
-                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/auto-withdraw`, this.form)
-                        .then((data) => {
-                            console.log(data);
-                            if (data) {
-                                Bus.$emit('showNotification', "success", "Выведено");
-                            } else {
-                                Bus.$emit('showNotification', "danger", "Неудача, проверьте баланс и настройки безопасности");
-                            }
+                axios.post(`/api/qiwi-wallets/${this.$route.params.wallet}/auto-withdraw`, this.form)
+                        .then(response => {
+                            console.log(response.data);
+                            Bus.$emit('showNotification', "success", response.data.message);
+                        })
+                        .catch(error => {
+                            console.log(error.response);
+                            Bus.$emit('showNotification', "danger", error.response.data.message);
                         });
             },
 

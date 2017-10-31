@@ -24,12 +24,21 @@ interface QiwiWalletRepository {
     public function find($id);
 
     /**
-     * Update balance of specific wallet
-     * and return balance and income for the current month
+     * Update balance of specific wallet and return current value
      * @param $login
+     * @param $postAction boolean if post action should be executed
      * @return mixed
      */
-    public function updateBalanceAndIncome($login);
+    public function updateBalance($login, $postAction = true);
+
+    /**
+     * Update income of specific wallet and return current value
+     * @param $login
+     * @param $postAction boolean if post action should be executed
+     * @return mixed
+     */
+    public function updateIncome($login, $postAction = true);
+
 
     /**
      * Get report for specific DateRange

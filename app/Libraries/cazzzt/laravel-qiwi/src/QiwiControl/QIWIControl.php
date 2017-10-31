@@ -1059,8 +1059,10 @@ class QIWIControl {
                 return false;
             }
         }
+
+        Log::info($res);
         if ($res['data']['status'] != 200) {
-            $this->lastErrorStr = ['data']['body']['message'];
+            $this->lastErrorStr = $res['data']['body']['message'];
             return false;
         }
         if ($res['data']['status'] != 200) {

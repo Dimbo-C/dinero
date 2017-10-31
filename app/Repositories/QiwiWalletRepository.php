@@ -95,7 +95,22 @@ class QiwiWalletRepository implements Contract {
     public function autoWithdraw($login) {
         $aw = new Autowithdraw($login);
 
-        return ($aw->autoWithdraw(1, true)) ? 1 : 0;
+        $status = $aw->autoWithdraw(1, true) ? 200 : 400;
+        switch ($status) {
+            case 200:
+                $message = "Автовывод успешно проведен";
+                break;
+
+            case 400:
+                $message = "Не удалось вывести средства. Проверьте баланс и ограничения кошелька";
+                break;
+
+            default:
+                $message = "Ошибка сервера, попробуйте позже";
+                break;
+        }
+
+        return response()->json(['message' => $message], $status);
     }
 
     public function activateVoucher($login, $code) {
@@ -109,27 +124,27 @@ class QiwiWalletRepository implements Contract {
     /**
      * {@inheritdoc}
      */
-    public function updateBalanceAndIncome($login) {
-        $balance = QiwiGeneralHelper::getBalance($login);
-        $monthIncome = $balance;
+    //    public function updateBalanceAndIncome($login) {
+    //        $balance = QiwiGeneralHelper::getBalance($login);
+    //        $monthIncome = $balance;
+    //
+    //        $wallet = QiwiWallet::findByLogin($login);
+    //        $wallet->updateBalanceAndIncome($balance, $monthIncome);
+    //
+    //        return [
+    //                "monthIncome" => $monthIncome,
+    //                "balance" => $balance,
+    //                "options" => [],
+    //        ];
+    //    }
 
-        $wallet = QiwiWallet::findByLogin($login);
-        $wallet->updateBalanceAndIncome($balance, $monthIncome);
-
-        return [
-                "monthIncome" => $monthIncome,
-                "balance" => $balance,
-                "options" => [],
-        ];
-    }
-
-    public function updateBalance($login) {
+    public function updateBalance($login, $postAction = true) {
         $balance = QiwiGeneralHelper::getBalance($login);
         $wallet = QiwiWallet::findByLogin($login);
 
         $wallet->updateBalance($balance);
 
-        return $balance;
+        return response()->json(['balance' => $balance], 200);
     }
 
     public function updateIncome($login, $postAction = true) {
@@ -138,7 +153,7 @@ class QiwiWalletRepository implements Contract {
         $wallet->updateIncome($monthIncome);
         if ($postAction) $wallet->postUpdateRoutine();
 
-        return $monthIncome;
+        return response()->json(['monthIncome' => $monthIncome], 200);
     }
 
     /**
@@ -162,7 +177,6 @@ class QiwiWalletRepository implements Contract {
         $settings['walletSettings'] = $wallet->settings;
         $settings['walletTypes'] = QiwiWalletType::all();
         $settings['autoWithdrawTypes'] = AutowithdrawTypes::all();
-        $settings['id'] = $wallet->id;
         $settings['proxy'] = Proxy::find($wallet->proxy_id);
 
         return $settings;

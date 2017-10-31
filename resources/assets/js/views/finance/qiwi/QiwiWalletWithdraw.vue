@@ -236,29 +236,29 @@
                 console.log(this.form);
                 this.processed = true;
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/withdraw`, this.form)
-                    .then((data) => {
-                        let notificationType = data.status == 200 ? "success" : "danger";
-                        this.notificationClass = "alert-" + notificationType;
-                        this.resultObtained = true;
-                        this.responseText = data.resultText;
-                        this.processed = false;
-                        this.updateWallet(this.$route.params.wallet);
-                    });
+                        .then((data) => {
+                            let notificationType = data.status == 200 ? "success" : "danger";
+                            this.notificationClass = "alert-" + notificationType;
+                            this.resultObtained = true;
+                            this.responseText = data.resultText;
+                            this.processed = false;
+                            this.updateWallet(this.$route.params.wallet);
+                        });
             },
             initBalance(){
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`)
-                    .then((response) => {
-                        const balance = response.data.wallet.balance;
-                        this.form.sum = balance > 0 ? 1 : 0;
-                    })
+                        .then((response) => {
+                            const balance = response.data.wallet.balance;
+                            this.form.sum = balance > 0 ? 1 : 0;
+                        })
             },
             updateWallet(login) {
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
-                    .then((balance) => {
-                        this.form.sum = balance;
-                        this.updatedBalance = balance;
-                    })
+                        .then((response) => {
+                            this.form.sum = response.balance;
+                            this.updatedBalance = response.balance;
+                        })
             },
         }
     }
