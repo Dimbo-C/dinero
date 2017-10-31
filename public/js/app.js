@@ -11844,6 +11844,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -14831,11 +14833,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "clearfix"
   })])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
-  }, [(!_vm.transactions.length) ? _c('div', [_vm._v("Нет отчетов за указанный период")]) : _c('div', {
-    staticClass: "table-responsive"
-  }, [_c('table', {
+  }, [(!_vm.transactions.length) ? _c('div', [_vm._v("Нет отчетов за указанный период")]) : _c('div', [_c('div', [_vm._v(" class=\"table-responsive\">\n                        "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', [_vm._l((_vm.transactions), function(t) {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.transactions), function(t) {
     return _c('tr', [_c('td', [_c('p', {
       staticClass: "small m-b-none",
       domProps: {
@@ -14873,23 +14873,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "textContent": _vm._s(t.commission)
       }
     })])
-  }), _vm._v(" "), _c('div', {
-    staticClass: "row right"
+  }))])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-xs-6"
+    staticClass: "col-xs-4 col-md-2"
   }, [_c('button', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.prevPage
     }
   }, [_vm._v("Предыдущая страница")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-6"
+    staticClass: "col-xs-3"
   }, [_c('button', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.nextPage
     }
-  }, [_vm._v("Следующая страница")])])])], 2)])])])]) : _vm._e()], 1)], 1)
+  }, [_vm._v("Следующая страница")])])])])])]) : _vm._e()], 1)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "pull-right"

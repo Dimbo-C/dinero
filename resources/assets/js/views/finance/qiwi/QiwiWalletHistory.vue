@@ -95,45 +95,47 @@
 
                 <div class="panel-body">
                     <div v-if="!transactions.length">Нет отчетов за указанный период</div>
-                    <div v-else class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Дата и время</th>
-                                <th>Код</th>
-                                <th>Статус</th>
-                                <th>Реквизит</th>
-                                <th>Коментарий*</th>
-                                <th>Сумма</th>
-                                <th>Комиссия</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="t in transactions">
-                                <td>
-                                    <p class="small m-b-none" v-text="t.date"></p>
-                                    <p class="small m-b-none" v-text="t.time"></p>
-                                </td>
-                                <td v-text="t.transaction"></td>
-                                <td v-html="status(t)"></td>
-                                <td>
-                                    <p class="small m-b-none" v-text="t.provider"></p>
-                                    <p class="small m-b-none" v-text="t.opNumber"></p>
-                                </td>
-                                <td v-html="comment(t)"></td>
-                                <td>{{ t.sign }}{{ t.amount }} {{ t.currency }}</td>
-                                <td v-text="t.commission"></td>
-                            </tr>
-                            <div class="row right">
-                                <div class="col-xs-6">
-                                    <button class="btn btn-primary" @click="prevPage">Предыдущая страница</button>
-                                </div>
-                                <div class="col-xs-6">
-                                    <button class="btn btn-primary" @click="nextPage">Следующая страница</button>
-                                </div>
+                    <div v-else>
+                        <div> class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Дата и время</th>
+                                    <th>Код</th>
+                                    <th>Статус</th>
+                                    <th>Реквизит</th>
+                                    <th>Коментарий*</th>
+                                    <th>Сумма</th>
+                                    <th>Комиссия</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="t in transactions">
+                                    <td>
+                                        <p class="small m-b-none" v-text="t.date"></p>
+                                        <p class="small m-b-none" v-text="t.time"></p>
+                                    </td>
+                                    <td v-text="t.transaction"></td>
+                                    <td v-html="status(t)"></td>
+                                    <td>
+                                        <p class="small m-b-none" v-text="t.provider"></p>
+                                        <p class="small m-b-none" v-text="t.opNumber"></p>
+                                    </td>
+                                    <td v-html="comment(t)"></td>
+                                    <td>{{ t.sign }}{{ t.amount }} {{ t.currency }}</td>
+                                    <td v-text="t.commission"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4 col-md-2">
+                                <button class="btn btn-primary" @click="prevPage">Предыдущая страница</button>
                             </div>
-                            </tbody>
-                        </table>
+                            <div class="col-xs-3">
+                                <button class="btn btn-primary" @click="nextPage">Следующая страница</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
