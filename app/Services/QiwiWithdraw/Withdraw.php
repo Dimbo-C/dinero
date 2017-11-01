@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Cazzzt\Qiwi\QiwiControl\QIWIControl;
 use App\Helpers\QiwiGeneralHelper;
 use App\Structures\WithdrawResult;
+use Illuminate\Support\Facades\Log;
 
 class Withdraw {
     public static function toQiwiWallet($login, $to, $currency, $amount, $comment = false) {
@@ -13,6 +14,8 @@ class Withdraw {
 
         $result = new WithdrawResult();
         $result->error = $qiwiControl->getLastError();
+        Log::error("Error in Withdraw#toQiwiWallet");
+        Log::error($result->error);
         $result->debugData = $qiwiControl->debugData;
         $result->status = 200;
         if ($result->error != null) {

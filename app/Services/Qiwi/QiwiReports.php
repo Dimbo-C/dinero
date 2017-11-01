@@ -27,13 +27,13 @@ trait QiwiReports {
 
     /**
      * @param array $query
-     * @param int $start
+     * @param int $page
      * @param int $size
      * @return array
      */
     protected function fetchReport(array $query, $page = 1, $size = 15) {
         $this->login();
-        $start = $page * $size;
+        $start = ($page - 1) * $size;
 
         $response = $this->client->get('https://qiwi.com/report/list.action', [
                 'query' => $query,

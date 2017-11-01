@@ -36,7 +36,7 @@
                         <br>
                         <div class="row">
                             <div class="col-xs-12 col-lg-6 col-lg-offset-3">
-                                <button class="btn btn-success col-xs-6 col-xs-offset-3 col-lg-6" @click="fetchReport">
+                                <button class="btn btn-success col-xs-6 col-xs-offset-3 col-lg-6" @click="update">
                                     Обновить
                                 </button>
                             </div>
@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <div v-if="!transactions.length">Нет отчетов за указанный период</div>
+                    <div v-if="!transactions.length && dateRange.page==1">Нет отчетов за указанный период</div>
                     <div v-else>
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -191,19 +191,21 @@
 
         methods: {
             update(){
-                this.fetchReport();
+                this.fetchReport(1);
             },
 
-            fetchReport(){
+            fetchReport(page){
                 let start = moment(this.state.dateStart).format("DD.MM.YYYY");
                 let end = moment(this.state.dateEnd).format("DD.MM.YYYY");
-                this.dateRange.page = 1;
+                this.dateRange.page = page;
                 this.fetchReportByDate(start, end);
             },
             fetchReportByDate(start, end) {
                 this.dateRange.start = start;
                 this.dateRange.end = end;
 
+                console.log("Fetch report");
+                console.log(this.dateRange);
                 this.isLoaded = false;
                 axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
                         .then((response) => {
@@ -246,28 +248,14 @@
             },
 
             nextPage(){
-                console.log(this.dateRange);
-                this.dateRange.page += 1;
-                console.log(this.dateRange);
-                this.isLoaded = false;
-                axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
-                        .then((response) => {
-                            console.log(response);
-                            this.transactions = response.data;
-                            this.isLoaded = true;
-                        })
+                const nextPageNumber = this.dateRange.page + 1;
+                this.fetchReport(nextPageNumber);
             },
             prevPage(){
-                console.log(this.dateRange);
-                this.dateRange.page -= this.dateRange.page === 1 ? 0 : 1;
-                console.log(this.dateRange);
-                this.isLoaded = false;
-                axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
-                        .then((response) => {
-                            console.log(response);
-                            this.transactions = response.data;
-                            this.isLoaded = true;
-                        })
+                const prevPageNumber = this.dateRange.page === 1
+                        ? this.dateRange.page
+                        : this.dateRange.page - 1;
+                this.fetchReport(prevPageNumber);
             },
 
             /**

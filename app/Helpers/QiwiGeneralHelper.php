@@ -10,6 +10,10 @@ use App\Services\Qiwi\Qiwi;
 use App\Cazzzt\Qiwi\QiwiControl\QIWIControl;
 use Illuminate\Support\Facades\Log;
 
+define("QIWI_VISA_VIRTUAL", "489049");
+define("VISA", "4");
+define("MASTERCARD", "5");
+define("AMERICANEXPRESS", "3");
 
 class QiwiGeneralHelper {
     /**
@@ -63,6 +67,12 @@ class QiwiGeneralHelper {
         return $qiwi;
     }
 
+    public static function getTodaysExpenditure($login) {
+        $control = self::getQiwiInstance($login);
+
+        return $control->getTotals(date("d.m.Y"), date("d.m.Y"))['expenditure'];
+    }
+
     public static function getBalance($login) {
         $control = self::getQiwiControlObject($login);
 
@@ -74,5 +84,18 @@ class QiwiGeneralHelper {
         $income = $qiwi->getTotals(date("01.m.Y"), date("d.m.Y"))['income'];
 
         return $income;
+    }
+
+    public static function detectCardProvider($cardNumber) {
+        $sixNum = substr(trim($cardNumber), 0, 6);
+        $firstNum = substr(trim($cardNumber), 0, 1);
+
+        if ($sixNum == QIWI_VISA_VIRTUAL) {
+            return "VISA_VIRTUAL";
+        } elseif ($firstNum == VISA) {
+            return "VISA";
+        } else {
+            return "ELSE";
+        }
     }
 }

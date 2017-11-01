@@ -11896,12 +11896,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         update: function update() {
-            this.fetchReport();
+            this.fetchReport(1);
         },
-        fetchReport: function fetchReport() {
+        fetchReport: function fetchReport(page) {
             var start = moment(this.state.dateStart).format("DD.MM.YYYY");
             var end = moment(this.state.dateEnd).format("DD.MM.YYYY");
-            this.dateRange.page = 1;
+            this.dateRange.page = page;
             this.fetchReportByDate(start, end);
         },
         fetchReportByDate: function fetchReportByDate(start, end) {
@@ -11910,6 +11910,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dateRange.start = start;
             this.dateRange.end = end;
 
+            console.log("Fetch report");
+            console.log(this.dateRange);
             this.isLoaded = false;
             axios.get('/api/qiwi-wallets/' + this.login + '/report', { params: this.dateRange }).then(function (response) {
                 console.log(response);
@@ -11948,30 +11950,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         nextPage: function nextPage() {
-            var _this2 = this;
-
-            console.log(this.dateRange);
-            this.dateRange.page += 1;
-            console.log(this.dateRange);
-            this.isLoaded = false;
-            axios.get('/api/qiwi-wallets/' + this.login + '/report', { params: this.dateRange }).then(function (response) {
-                console.log(response);
-                _this2.transactions = response.data;
-                _this2.isLoaded = true;
-            });
+            var nextPageNumber = this.dateRange.page + 1;
+            this.fetchReport(nextPageNumber);
         },
         prevPage: function prevPage() {
-            var _this3 = this;
-
-            console.log(this.dateRange);
-            this.dateRange.page -= this.dateRange.page === 1 ? 0 : 1;
-            console.log(this.dateRange);
-            this.isLoaded = false;
-            axios.get('/api/qiwi-wallets/' + this.login + '/report', { params: this.dateRange }).then(function (response) {
-                console.log(response);
-                _this3.transactions = response.data;
-                _this3.isLoaded = true;
-            });
+            var prevPageNumber = this.dateRange.page === 1 ? this.dateRange.page : this.dateRange.page - 1;
+            this.fetchReport(prevPageNumber);
         },
 
 
@@ -14778,7 +14762,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('button', {
     staticClass: "btn btn-success col-xs-6 col-xs-offset-3 col-lg-6",
     on: {
-      "click": _vm.fetchReport
+      "click": _vm.update
     }
   }, [_vm._v("\n                                Обновить\n                            ")])])])]), _vm._v(" "), _c('ul', {
     staticClass: "list-inline"
@@ -14833,7 +14817,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "clearfix"
   })])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
-  }, [(!_vm.transactions.length) ? _c('div', [_vm._v("Нет отчетов за указанный период")]) : _c('div', [_c('div', {
+  }, [(!_vm.transactions.length && _vm.dateRange.page == 1) ? _c('div', [_vm._v("Нет отчетов за указанный период")]) : _c('div', [_c('div', {
     staticClass: "table-responsive"
   }, [_c('table', {
     staticClass: "table table-striped"
@@ -16090,6 +16074,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var auth = { "login": login };
             Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth)).then(function (response) {
                 var balance = response.balance;
+                console.log(response);
                 console.log("Balance: " + balance);
                 _this2.items.map(function (item) {
                     if (item.login === login) {
@@ -16099,6 +16084,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         });
                     }
                 });
+            }).catch(function (error) {
+                console.log(error.response);
             });
         },
         updateIncome: function updateIncome(login) {

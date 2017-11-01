@@ -13,7 +13,9 @@ Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 
 Route::get("/test", function () {
-    dd(QiwiWallet::findByLogin("+380960968460"));
+    $control = \App\Helpers\QiwiGeneralHelper::getQiwiControlObject("380960968460");
+    dd(['card provider' => $control->detectCardProvider("5168742207673892")]);
+
     //    dd(json_decode($json));
     //    file_put_contents()
     //    dump()

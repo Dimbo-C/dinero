@@ -1061,6 +1061,7 @@ class QIWIControl {
         }
 
         Log::info($res);
+
         if ($res['data']['status'] != 200) {
             $this->lastErrorStr = $res['data']['body']['message'];
             return false;

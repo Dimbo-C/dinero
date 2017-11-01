@@ -107,7 +107,7 @@ class QiwiWallet extends Model {
         $this->month_income = $monthIncome;
         $this->save();
 
-        $this->postUpdateRoutine();
+//        $this->postUpdateRoutine();
     }
 
     public function updateBalance($balance) {

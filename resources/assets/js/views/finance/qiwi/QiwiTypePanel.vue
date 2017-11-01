@@ -168,6 +168,7 @@
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
                         .then((response) => {
                             const balance = response.balance;
+                            console.log(response);
                             console.log("Balance: " + balance);
                             this.items.map((item) => {
                                 if (item.login === login) {
@@ -175,6 +176,9 @@
                                     this.spinners = this.spinners.filter((elem) => login !== elem);
                                 }
                             });
+                        })
+                        .catch(error => {
+                            console.log(error.response);
                         });
             },
 
