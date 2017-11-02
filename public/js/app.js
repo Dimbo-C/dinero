@@ -11846,6 +11846,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -11864,8 +11870,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             isLoaded: false,
             transactions: [],
-            //                income: 0,
-            //                outcome: 0,
+            income: 0,
+            expenditure: 0,
             dateRange: {
                 start: '',
                 end: '',
@@ -11909,16 +11915,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.dateRange.start = start;
             this.dateRange.end = end;
-
-            console.log("Fetch report");
-            console.log(this.dateRange);
             this.isLoaded = false;
+
+            // get history of transactions
             axios.get('/api/qiwi-wallets/' + this.login + '/report', { params: this.dateRange }).then(function (response) {
                 console.log(response);
                 _this.transactions = response.data;
-                //                            this.income = response.data.income;
-                //                            this.outcome = response.data.outcome;
                 _this.isLoaded = true;
+            });
+
+            // get income and expenditure
+            axios.get('/api/qiwi-wallets/' + this.login + '/incomeExpenditure', { params: this.dateRange }).then(function (response) {
+                console.log(response);
+                _this.income = response.data.income;
+                _this.expenditure = response.data.expenditure;
             });
         },
         customFormatter: function customFormatter(date) {
@@ -12003,12 +12013,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         login: function login() {
             return this.$route.params.wallet;
-        },
-        income: function income() {
-            return this.historySum("+");
-        },
-        expenditure: function expenditure() {
-            return this.historySum("-");
         }
     }
 });
@@ -14865,17 +14869,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-xs-4 col-md-2"
   }, [_c('button', {
     staticClass: "btn btn-primary",
+    attrs: {
+      "disabled": this.dateRange.page == 1
+    },
     on: {
       "click": _vm.prevPage
     }
-  }, [_vm._v("Предыдущая страница")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Предыдущая страница\n                            ")])]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-3"
   }, [_c('button', {
     staticClass: "btn btn-primary",
+    attrs: {
+      "disabled": this.transactions.length < 15
+    },
     on: {
       "click": _vm.nextPage
     }
-  }, [_vm._v("Следующая страница")])])])])])]) : _vm._e()], 1)], 1)
+  }, [_vm._v("Следующая страница\n                            ")])])])])])]) : _vm._e()], 1)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "pull-right"

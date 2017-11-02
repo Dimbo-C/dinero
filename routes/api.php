@@ -25,6 +25,8 @@ Route::prefix("qiwi-wallets")->group(function () {
     Route::post('/mass-action', 'QiwiWalletsController@massAction');
 
     Route::get('/{wallet}/report', 'Api\QiwiWalletsController@report');
+    Route::get('/{wallet}/incomeExpenditure', 'Api\QiwiWalletsController@incomeExpenditure');
+
     Route::get('/{wallet}/settings', 'Api\QiwiWalletsController@settings');
 
     Route::get('/{wallet}/identification', 'QiwiWalletsController@getIdentification');

@@ -130,10 +130,16 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-4 col-md-2">
-                                <button class="btn btn-primary" @click="prevPage">Предыдущая страница</button>
+                                <button class="btn btn-primary"
+                                        :disabled="this.dateRange.page==1"
+                                        @click="prevPage">Предыдущая страница
+                                </button>
                             </div>
                             <div class="col-xs-3">
-                                <button class="btn btn-primary" @click="nextPage">Следующая страница</button>
+                                <button class="btn btn-primary"
+                                        :disabled="this.transactions.length<15"
+                                        @click="nextPage">Следующая страница
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -161,8 +167,8 @@
                 },
                 isLoaded: false,
                 transactions: [],
-//                income: 0,
-//                outcome: 0,
+                income: 0,
+                expenditure: 0,
                 dateRange: {
                     start: '',
                     end: '',
@@ -170,6 +176,7 @@
                 },
             };
         },
+
 
         watch: {
             dateRange: {
@@ -203,18 +210,23 @@
             fetchReportByDate(start, end) {
                 this.dateRange.start = start;
                 this.dateRange.end = end;
-
-                console.log("Fetch report");
-                console.log(this.dateRange);
                 this.isLoaded = false;
+
+                // get history of transactions
                 axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
                         .then((response) => {
                             console.log(response);
                             this.transactions = response.data;
-//                            this.income = response.data.income;
-//                            this.outcome = response.data.outcome;
                             this.isLoaded = true;
-                        })
+                        });
+
+                // get income and expenditure
+                axios.get(`/api/qiwi-wallets/${this.login}/incomeExpenditure`, {params: this.dateRange})
+                        .then((response) => {
+                            console.log(response);
+                            this.income = response.data.income;
+                            this.expenditure = response.data.expenditure;
+                        });
             },
 
             customFormatter (date) {
@@ -305,13 +317,13 @@
                 return this.$route.params.wallet;
             },
 
-            income () {
-                return this.historySum("+");
-            },
-
-            expenditure () {
-                return this.historySum("-");
-            }
+//            income () {
+//                return this.historySum("+");
+//            },
+//
+//            expenditure () {
+//                return this.historySum("-");
+//            }
 
         }
     };

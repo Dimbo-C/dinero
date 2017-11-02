@@ -134,7 +134,7 @@ class QiwiWalletRepository implements Contract {
         $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
         $wallet = QiwiWallet::findByLogin($login);
         $wallet->updateIncome($monthIncome);
-//        if ($postAction) $wallet->postUpdateRoutine();
+        //        if ($postAction) $wallet->postUpdateRoutine();
 
         return response()->json(['monthIncome' => $monthIncome], 200);
     }
@@ -147,7 +147,18 @@ class QiwiWalletRepository implements Contract {
         $transactionProcessor = new TransactionProcessor(
                 $qiwi->reportForDateRange($query['start'], $query['end'], $query['page']));
 
+
         return $transactionProcessor->getTransactions();
+    }
+
+    public function reportIncomeExpenditure($query, $login) {
+        $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
+        $totals = $qiwi->getTotals($query['start'], $query['end']);
+
+        return [
+                'income' => $totals['income'],
+                'expenditure' => $totals['expenditure'],
+        ];
     }
 
     /**

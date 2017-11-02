@@ -32,6 +32,16 @@ class QiwiWalletsController extends Controller {
     }
 
     /**
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function incomeExpenditure(Request $request, $id) {
+        return response()->json($this->wallet->reportIncomeExpenditure($request->all(), $id));
+    }
+
+    /**
      * Получаем настройки.
      *
      * @param $id
