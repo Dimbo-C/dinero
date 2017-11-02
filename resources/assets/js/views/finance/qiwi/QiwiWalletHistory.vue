@@ -22,14 +22,27 @@
                             <datepicker
                                     :language="state.language"
                                     :input-class="state.inputClass"
+                                    :calendar-class="state.calendarClass"
+                                    :wrapper-class="'green'"
                                     :format="customFormatter"
+                                    :bootstrapStyling="state.bootstrapStyling"
+                                    :full-month-name="state.fullMonthName"
+                                    :monday-first="state.mondayFirst"
+
                                     :value="state.dateStart"
                                     v-model="state.dateStart"></datepicker>
+
                             <span class="input-group-addon">по</span>
+
                             <datepicker
                                     :language="state.language"
-                                    :format="customFormatter"
                                     :input-class="state.inputClass"
+                                    :calendar-class="state.calendarClass"
+                                    :format="customFormatter"
+                                    :bootstrapStyling="state.bootstrapStyling"
+                                    :full-month-name="state.fullMonthName"
+                                    :monday-first="state.mondayFirst"
+
                                     :value="state.dateEnd"
                                     v-model="state.dateEnd"></datepicker>
                         </div>
@@ -162,8 +175,11 @@
                     dateStart: "",
                     dateEnd: "",
                     inputClass: "form-control input-group-addon",
-                    language: "ru"
-
+                    calendarClass: "green",
+                    language: "ru",
+                    bootstrapStyling: false,
+                    fullMonthName: true,
+                    mondayFirst: true
                 },
                 isLoaded: false,
                 transactions: [],
@@ -301,6 +317,7 @@
                 }
             },
 
+            // calculate income and expenditure from history list
             historySum(sign){
                 if (this.transactions) {
                     const transactions = this.transactions
@@ -328,3 +345,13 @@
         }
     };
 </script>
+
+<style scoped>
+    .cell.day {
+        background-color: #000000;
+    }
+
+    .green {
+        background-color: #6eff00;
+    }
+</style>
