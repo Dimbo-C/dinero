@@ -92,6 +92,7 @@ class Autowithdraw {
     }
 
     private function postWithdrawRoutine() {
+        Log::info("Post withdraw routine");
         $control = QiwiGeneralHelper::getQiwiControlObject($this->wallet->login);
 
         $newBalance = $control->loadBalance()['RUB'];
