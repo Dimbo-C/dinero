@@ -213,7 +213,7 @@ class Autowithdraw {
 
         switch ($this->settings->autoWithdrawal_target) {
             case "wallet":
-                $expenditure = QiwiGeneralHelper::getTodaysExpenditure($this->wallet->login);
+//                $expenditure = QiwiGeneralHelper::getTodaysExpenditure($this->wallet->login);
 //                if ($expenditure > 100000) $withdrawAmount *= 0.99;
                 $withdrawAmount *= 0.99;
                 break;
