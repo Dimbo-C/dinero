@@ -31,9 +31,14 @@ class Withdraw {
     public static function toCreditCard($login, $cardNumber, $firstName, $lastName, $sum, $currency, $comment = "") {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         Log::info("Sum right before transfer: $sum");
-        $qiwiControl->transferMoneyToCard($cardNumber, $firstName, $lastName, $sum, $currency, $comment);
+        $result = $qiwiControl->transferMoneyToCard($cardNumber, $firstName, $lastName, $sum, $currency, $comment);
 
-        Log::info("ToCreditCard withdraw");
+        Log::info("Result: " . ($result ? "true" : "false"));
+        Log::info("Error:");
+        Log::info($qiwiControl->getLastError());
+        Log::info("After error");
+
+
         $result = new WithdrawResult();
         $result->error = $qiwiControl->getLastError();
         $result->debugData = $qiwiControl->debugData;
