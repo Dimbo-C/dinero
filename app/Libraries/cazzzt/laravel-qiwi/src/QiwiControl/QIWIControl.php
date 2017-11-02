@@ -1434,7 +1434,7 @@ class QIWIControl {
         $payProviderUrl = QIWI_URL_MAIN . "/payment/form.action?provider=$provider_id";
         if (!$this->doTGTS(USERAGENT_METHOD_GET, false, ['Content-Type' => 'application/json'], 201)) {
             $this->lastErrorStr = "TGTS failed";
-//            return false;
+            return false;
         }
 
         //Balance
@@ -1449,7 +1449,7 @@ class QIWIControl {
         //Обновить ключи безопасности
         if (!$this->updateTGTSTicket()) {
             $this->lastErrorStr = "Update TGTS failed";
-//            return false;
+            return false;
         }
 
         if (!$this->updateSTSTicket()) {
