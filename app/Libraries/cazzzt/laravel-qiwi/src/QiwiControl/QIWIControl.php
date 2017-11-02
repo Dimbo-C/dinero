@@ -1449,7 +1449,7 @@ class QIWIControl {
         //Обновить ключи безопасности
         if (!$this->updateTGTSTicket()) {
             $this->lastErrorStr = "Update TGTS failed";
-            return false;
+//            return false;
         }
 
         if (!$this->updateSTSTicket()) {
