@@ -769,9 +769,13 @@ class QIWIControl {
 
         $content = $this->ua->request($method, "https://sso.qiwi.com/cas/tgts", "https://sso.qiwi.com/app/proxy?v=1",
                 $post_data, $headers);
+        Log::info("Content in payprovider: ");
+        Log::info($content);
 
         if (!in_array($this->ua->getStatus(), $correct_statuses)) {
             $this->trace("[TGTS] ERROR: Expected status=$correct_status, returned status=" . $this->ua->getStatus());
+            $this->lastErrorStr = "[TGTS] ERROR: Expected status=$correct_status, returned status=" . $this->ua->getStatus();
+
             return false;
         }
 
