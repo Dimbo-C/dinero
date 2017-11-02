@@ -775,7 +775,8 @@ class QIWIControl {
         if (!in_array($this->ua->getStatus(), $correct_statuses)) {
             $this->trace("[TGTS] ERROR: Expected status=$correct_status, returned status=" . $this->ua->getStatus());
             $this->lastErrorStr = "[TGTS] ERROR: Expected status=$correct_status, returned status=" . $this->ua->getStatus();
-
+            Log::info("Payprovider error");
+            Log::info($this->lastErrorStr);
             return false;
         }
 
