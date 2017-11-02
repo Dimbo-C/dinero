@@ -1425,6 +1425,7 @@ class QIWIControl {
     function payProvider($provider_id, $currency, $amount, $fields, $comment) {
         if (!($currencyId = $this->currencyToId($currency))) {
             $this->trace("[QIWI:PAYPROVIDER] Currency $currency not supported.");
+            $this->lastErrorStr = "[QIWI:PAYPROVIDER] Currency $currency not supported.";
             return false;
         }
 
@@ -1432,11 +1433,13 @@ class QIWIControl {
 
         $payProviderUrl = QIWI_URL_MAIN . "/payment/form.action?provider=$provider_id";
         if (!$this->doTGTS(USERAGENT_METHOD_GET, false, ['Content-Type' => 'application/json'], 201)) {
+            $this->lastErrorStr = "TGTS failed";
             return false;
         }
 
         //Balance
         if (!($balance = $this->loadBalance())) {
+            $this->lastErrorStr = "balance load failed";
             return false;
         }
 
@@ -1445,6 +1448,7 @@ class QIWIControl {
 
         //Обновить ключи безопасности
         if (!$this->updateTGTSTicket()) {
+            $this->lastErrorStr = "Update TGTS failed";
             return false;
         }
 
@@ -1455,6 +1459,7 @@ class QIWIControl {
         //Проверить провайдера
         if (!$this->checkProviderIdent($provider_id, $payProviderUrl)) {
             $this->trace("[PAY] Failed to check provider credentials");
+            $this->lastErrorStr = "[PAY] Failed to check provider credentials";
             return false;
         }
 
@@ -1465,21 +1470,27 @@ class QIWIControl {
 
         if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
             $this->trace("[PAY] Failed to validate field.");
+            $this->lastErrorStr = "[PAY] Failed to validate field.";
             return false;
         }
 
         if (!($paymentInfo = $this->confirmProviderPayment($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
             $this->trace("[PAY] Failed to confirm payment.");
+            $this->lastErrorStr = "[PAY] Failed to confirm payment.";
+
             return false;
         }
 
         if (!isset($paymentInfo['data']['body']['transaction'])) {
             $this->trace("[PAY] Failed to retrieve transaction information");
+            $this->lastErrorStr = "[PAY] Failed to retrieve transaction information";
             return false;
         }
 
         $tr = $paymentInfo['data']['body']['transaction'];
         $tr['paymentId'] = $paymentInfo['paymentId'];
+        $this->lastErrorStr = $tr;
+
         return $tr;
     }
 
@@ -1778,6 +1789,7 @@ class QIWIControl {
         $cardNumber = implode("", $matches[1]);
 
         if (!($prov = $this->detectCardProvider($cardNumber))) {
+            $this->lastErrorStr = "card provider not detected";
             return false;
         }
 
