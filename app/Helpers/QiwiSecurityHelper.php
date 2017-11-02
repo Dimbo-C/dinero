@@ -109,7 +109,7 @@ class QiwiSecurityHelper {
         return $settings;
     }
 
-    public static function callConfirm($login,$enabled) {
+    public static function callConfirm($login, $enabled) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $success = $qiwiControl->setQIWISecuritySetting("CALL_CONFIRMATION", $enabled);
         $token = isset($success['data']) ? $success['data'] : "";
@@ -118,7 +118,7 @@ class QiwiSecurityHelper {
                 'success' => $success,
                 'token' => $token
         ];
-//        return $qiwiControl->setQIWISecuritySetting("CALL_CONFIRMATION", false);
+        //        return $qiwiControl->setQIWISecuritySetting("CALL_CONFIRMATION", false);
 
         //        if (!$token) {
         //            return ["success" => false,];

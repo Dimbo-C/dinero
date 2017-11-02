@@ -134,7 +134,7 @@ class QiwiWalletRepository implements Contract {
         $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
         $wallet = QiwiWallet::findByLogin($login);
         $wallet->updateIncome($monthIncome);
-        if ($postAction) $wallet->postUpdateRoutine();
+//        if ($postAction) $wallet->postUpdateRoutine();
 
         return response()->json(['monthIncome' => $monthIncome], 200);
     }

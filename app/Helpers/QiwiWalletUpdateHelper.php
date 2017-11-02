@@ -25,11 +25,17 @@ class QiwiWalletUpdateHelper {
     public static function updateWallet($login) {
         if (!QiwiWalletUpdateHelper::isTimeToUpdate($login)) return false;
 
-        $repository = new QiwiWalletRepository();
+        $balance = QiwiGeneralHelper::getBalance($login);
+        $wallet = QiwiWallet::findByLogin($login);
+        if ($balance != null) $wallet->updateBalance($balance);
+
+        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
+        $wallet->updateIncome($monthIncome);
+        if ($monthIncome != null) $wallet->postUpdateRoutine();
 
         return [
-                "balance" => $repository->updateBalance($login),
-                "monthIncome" => $repository->updateIncome($login)
+                "balance" => $balance,
+                "monthIncome" => $monthIncome
         ];
     }
 
