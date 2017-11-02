@@ -155,6 +155,7 @@ class Autowithdraw {
         $currency = "RUB";
         //            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
         $comment = "Автовывод {$this->login} -> $cardnum";
+        Log::info("Comment: $comment");
         $result = Withdraw::toCreditCard($login, $cardnum, $fname, $lname, $sum, $currency, $comment);
 
         return ($result->error == null);
@@ -213,8 +214,8 @@ class Autowithdraw {
 
         switch ($this->settings->autoWithdrawal_target) {
             case "wallet":
-//                $expenditure = QiwiGeneralHelper::getTodaysExpenditure($this->wallet->login);
-//                if ($expenditure > 100000) $withdrawAmount *= 0.99;
+                //                $expenditure = QiwiGeneralHelper::getTodaysExpenditure($this->wallet->login);
+                //                if ($expenditure > 100000) $withdrawAmount *= 0.99;
                 $withdrawAmount *= 0.99;
                 break;
 
