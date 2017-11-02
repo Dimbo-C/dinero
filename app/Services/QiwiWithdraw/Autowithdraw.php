@@ -157,7 +157,7 @@ class Autowithdraw {
         $comment = "Автовывод {$this->login} -> $cardnum";
         Log::info("Comment: $comment");
         $result = Withdraw::toCreditCard($login, $cardnum, $fname, $lname, $sum, $currency, $comment);
-        Log::info($result);
+
 
         return ($result->error == null);
         //        } catch (\Exception $ex) {
