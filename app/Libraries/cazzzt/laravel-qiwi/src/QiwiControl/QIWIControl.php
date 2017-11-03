@@ -1763,8 +1763,9 @@ class QIWIControl {
                 'Origin' => QIWI_URL_MAIN,
                 'X-Requested-With' => 'XMLHttpRequest'
         ]);
-        $response = json_decode($response, true);
         Log::info("Response in detecting card provider:" . $response);
+        $response = json_decode($response, true);
+
 
         if ($this->getResponseType($response) != 'NORMAL') {
             Log::info("Error detecting card provider:" . $this->getResponseMessage($response));
