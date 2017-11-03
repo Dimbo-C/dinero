@@ -1494,7 +1494,6 @@ class QIWIControl {
 
         $tr = $paymentInfo['data']['body']['transaction'];
         $tr['paymentId'] = $paymentInfo['paymentId'];
-        $this->lastErrorStr = $tr;
 
         return $tr;
     }

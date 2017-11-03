@@ -8,13 +8,21 @@ use App\Structures\WithdrawResult;
 use Illuminate\Support\Facades\Log;
 
 class Withdraw {
+    /**
+     * @param $login
+     * @param $to
+     * @param $currency
+     * @param $amount
+     * @param bool $comment
+     * @return WithdrawResult
+     */
     public static function toQiwiWallet($login, $to, $currency, $amount, $comment = false) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->transferMoney($to, $currency, $amount, $comment);
 
         $result = new WithdrawResult();
         $result->error = $qiwiControl->getLastError();
-        Log::error("Error in Withdraw#toQiwiWallet");
+        Log::error("Error in Withdraw#toQiwiWallet:");
         Log::error($result->error);
         $result->debugData = $qiwiControl->debugData;
         $result->status = 200;
@@ -28,6 +36,16 @@ class Withdraw {
         return $result;
     }
 
+    /**
+     * @param $login
+     * @param $cardNumber
+     * @param $firstName
+     * @param $lastName
+     * @param $sum
+     * @param $currency
+     * @param string $comment
+     * @return WithdrawResult|bool
+     */
     public static function toCreditCard($login, $cardNumber, $firstName, $lastName, $sum, $currency, $comment = "") {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         Log::info("Sum right before transfer: $sum");
@@ -43,9 +61,15 @@ class Withdraw {
         $result->error = $qiwiControl->getLastError();
         $result->debugData = $qiwiControl->debugData;
         $result->status = 200;
-//        Log::info("Error: " . ($result->error));
+
+//        Log::info("Error before : ");
+//        Log::info($result->error);
+
         if ($result->error != null) {
             $result->status = 400;
+            Log::info("Error in toCard : ");
+            Log::info((array) $result->error);
+//            dd($result->error);
             $result->resultText = "<b>Ошибка!</b> " . $result->error;
         } else {
             $result->resultText = "<b>Отлично! </b>Вы успешно совершили перевод с QIWI кошелька "
@@ -55,6 +79,11 @@ class Withdraw {
         return $result;
     }
 
+    /**
+     * @param $login
+     * @param $sum
+     * @return WithdrawResult
+     */
     public static function purchaseVoucher($login, $sum) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $qiwiControl->purchaseVoucher($sum);
@@ -96,6 +125,7 @@ class Withdraw {
     /**
      * Create an object that has 'status' and 'resultText' fields
      * that will be used on front-end
+     *
      * @param $qiwiControl QIWIControl
      * @return WithdrawResult
      */
