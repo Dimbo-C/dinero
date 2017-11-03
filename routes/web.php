@@ -20,6 +20,9 @@ Route::get("/test", function () {
     //    dd(json_decode($json));
     //    file_put_contents()
     //    dump()
+    $money = 361.1;
+    $percent = 2;
+    dd(\App\Helpers\MoneyHelper::getBaseCost($money, $percent, 50));
     $login = "380960968460";
 
     dispatch(new UpdateBalanceJob($login));

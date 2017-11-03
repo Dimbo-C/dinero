@@ -1766,7 +1766,6 @@ class QIWIControl {
         Log::info("Response in detecting card provider:" . $response);
         $response = json_decode($response, true);
 
-
         if ($this->getResponseType($response) != 'NORMAL') {
             Log::info("Error detecting card provider:" . $this->getResponseMessage($response));
             //            $this->lastErrorStr = "Error detecting card provider:" . $this->getResponseMessage($response);

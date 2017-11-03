@@ -26,15 +26,15 @@ class Kernel extends ConsoleKernel {
      */
     protected function schedule(Schedule $schedule) {
         $schedule->call(function () {
+            $this->updateBalances();
             $this->autoWithdraw();
             $this->refreshSessions();
-            $this->updateBalances();
         })->everyMinute();
     }
 
     private function updateBalances() {
         foreach (QiwiWallet::all() as $wallet) {
-            QiwiWalletUpdateHelper::updateWallet($wallet->login);
+            QiwiWalletUpdateHelper::updateBalance($wallet->login);
         }
     }
 
