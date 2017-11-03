@@ -127,6 +127,7 @@ class QiwiWalletSettings extends Model {
         $diff = $end->diffInMinutes($now);
         $isTime = $diff >= $this->autoWithdrawal_minutes;
 
+//        if(!$isTime) Log::info("")
         return $isTime;
     }
 
