@@ -23,8 +23,8 @@ echo "Your balance is {$client->balance} US cents\n";
 // To use recaptcha_Token
 // Set the proxy and reCaptcha token data
 $data = array(
-    'proxy'      => 'http://user:password@127.0.0.1:1234',
-    'proxytype'    => 'HTTP',
+//    'proxy'      => 'http://user:password@127.0.0.1:1234',
+//    'proxytype'    => 'HTTP',
     'googlekey'       => '6Lc2fhwTAAAAAGatXTzFYfvlQMI2T7B6ji8UVV_b',
     'pageurl' => 'http://google.com');
 //Create a json string

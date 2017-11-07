@@ -88,8 +88,8 @@ class QiwiWalletRepository implements Contract {
             default:
                 $result = new WithdrawResult();
         }
-        return json_encode($result);
 
+        return json_encode($result);
     }
 
     public function autoWithdraw($login) {
@@ -226,6 +226,7 @@ class QiwiWalletRepository implements Contract {
                 'wallet_id' => $wallet->id,
                 "autoWithdrawal_type_id" => 1
         ]);
+
         $securitySettings = new QiwiWalletSecuritySettings(['wallet_id' => $wallet->id]);
         $wallet->settings()->save($settings);
         $wallet->securitySettings()->save($securitySettings);

@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-10-14.
+    * Generated on 2017-11-06.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -39,7 +39,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'App\Contracts\Repositories\ProxyRepository' => \App\Repositories\ProxyRepository::class,
         'App\Contracts\Repositories\UserRepository' => \App\Repositories\UserRepository::class,
-        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiGeneralHelper::class,
+        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiWalletRepository::class,
         'App\Contracts\InitialFrontendState' => \App\InitialFrontendState::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
@@ -163,7 +163,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'App\Contracts\Repositories\ProxyRepository' => \App\Repositories\ProxyRepository::class,
         'App\Contracts\Repositories\UserRepository' => \App\Repositories\UserRepository::class,
-        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiGeneralHelper::class,
+        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiWalletRepository::class,
         'App\Contracts\InitialFrontendState' => \App\InitialFrontendState::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
@@ -287,7 +287,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'App\Contracts\Repositories\ProxyRepository' => \App\Repositories\ProxyRepository::class,
         'App\Contracts\Repositories\UserRepository' => \App\Repositories\UserRepository::class,
-        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiGeneralHelper::class,
+        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiWalletRepository::class,
         'App\Contracts\InitialFrontendState' => \App\InitialFrontendState::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
@@ -411,7 +411,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'App\Contracts\Repositories\ProxyRepository' => \App\Repositories\ProxyRepository::class,
         'App\Contracts\Repositories\UserRepository' => \App\Repositories\UserRepository::class,
-        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiGeneralHelper::class,
+        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiWalletRepository::class,
         'App\Contracts\InitialFrontendState' => \App\InitialFrontendState::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
@@ -535,7 +535,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'App\Contracts\Repositories\ProxyRepository' => \App\Repositories\ProxyRepository::class,
         'App\Contracts\Repositories\UserRepository' => \App\Repositories\UserRepository::class,
-        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiGeneralHelper::class,
+        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiWalletRepository::class,
         'App\Contracts\InitialFrontendState' => \App\InitialFrontendState::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
@@ -659,7 +659,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'App\Contracts\Repositories\ProxyRepository' => \App\Repositories\ProxyRepository::class,
         'App\Contracts\Repositories\UserRepository' => \App\Repositories\UserRepository::class,
-        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiGeneralHelper::class,
+        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiWalletRepository::class,
         'App\Contracts\InitialFrontendState' => \App\InitialFrontendState::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
@@ -783,7 +783,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'App\Contracts\Repositories\ProxyRepository' => \App\Repositories\ProxyRepository::class,
         'App\Contracts\Repositories\UserRepository' => \App\Repositories\UserRepository::class,
-        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiGeneralHelper::class,
+        'App\Contracts\Repositories\QiwiWalletRepository' => \App\Repositories\QiwiWalletRepository::class,
         'App\Contracts\InitialFrontendState' => \App\InitialFrontendState::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,

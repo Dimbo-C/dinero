@@ -8,7 +8,8 @@ use App\Services\Autowithdraw;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
-class Kernel extends ConsoleKernel {
+class Kernel extends ConsoleKernel
+{
     /**
      * The Artisan commands provided by your application.
      *
@@ -24,7 +25,8 @@ class Kernel extends ConsoleKernel {
      * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule) {
+    protected function schedule(Schedule $schedule)
+    {
         $schedule->call(function () {
             $this->updateBalances();
             $this->autoWithdraw();
@@ -32,19 +34,22 @@ class Kernel extends ConsoleKernel {
         })->everyMinute();
     }
 
-    private function updateBalances() {
+    private function updateBalances()
+    {
         foreach (QiwiWallet::all() as $wallet) {
             QiwiWalletUpdateHelper::updateBalance($wallet->login);
         }
     }
 
-    private function refreshSessions() {
+    private function refreshSessions()
+    {
         foreach (QiwiWallet::all() as $wallet) {
             QiwiWalletUpdateHelper::restoreSession($wallet->login);
         }
     }
 
-    private function autoWithdraw() {
+    private function autoWithdraw()
+    {
         foreach (QiwiWallet::all() as $wallet) {
             $aw = new Autowithdraw($wallet->login);
             $aw->autoWithdraw(AUTOWITHDRAW_EVERY_X_MINUTES);
@@ -56,7 +61,8 @@ class Kernel extends ConsoleKernel {
      *
      * @return void
      */
-    protected function commands() {
+    protected function commands()
+    {
         require base_path('routes/console.php');
     }
 }
