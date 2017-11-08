@@ -248,11 +248,14 @@ class Autowithdraw {
         $type = QiwiGeneralHelper::detectCardProvider($this->wallet->settings->autoWithdrawal_card_number);
         switch ($type) {
             case "VISA_VIRTUAL":
-                return $withdrawAmount * 0.99;
+                return MoneyHelper::getBaseCost($withdrawAmount, 1);
+            //                return $withdrawAmount * 0.99;
 
             // VISA standard and all others
             default:
-                return ($withdrawAmount - 50) * 0.98;
+                return MoneyHelper::getBaseCost($withdrawAmount, 1, 50);
+
+//                return ($withdrawAmount - 50) * 0.98;
         }
     }
 }

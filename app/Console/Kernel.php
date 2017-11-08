@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $this->autoWithdraw();
             $this->updateBalances();
+            $this->autoWithdraw();
             $this->refreshSessions();
         })->everyMinute();
     }

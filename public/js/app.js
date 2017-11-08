@@ -17484,6 +17484,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(this.form);
             this.processed = true;
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/withdraw", this.form).then(function (data) {
+                console.log(data);
                 var notificationType = data.status == 200 ? "success" : "danger";
                 _this.notificationClass = "alert-" + notificationType;
                 _this.resultObtained = true;
