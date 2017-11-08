@@ -9,13 +9,13 @@
 namespace App\Helpers;
 
 
+use Mockery\Exception;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class QiwiIdentificationHelper {
     public static function getIdentification($login) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
         $identification = $qiwiControl->getQIWIWalletOwnerData();
-//        $identification = false;
         if ($identification == false) throw new ResourceNotFoundException("Identification response not found");
 
         return $identification;
@@ -23,8 +23,6 @@ class QiwiIdentificationHelper {
 
     public static function updateIdentification($data) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($data->login);
-        //        $qiwiControl->login();
-
         $identificationUpdateResult = $qiwiControl->setQIWIWalletOwnerData(
                 $data->lastName,
                 $data->firstName,
@@ -36,7 +34,8 @@ class QiwiIdentificationHelper {
                 $data->oms
         );
 
-        dd(['update result' => $identificationUpdateResult]);
+        if ($identificationUpdateResult == false) throw new Exception("Update unsuccessful");
+        $identificationUpdateResult = self::getIdentification($data->login);
 
         return $identificationUpdateResult;
     }

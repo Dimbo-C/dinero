@@ -45385,6 +45385,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -45415,19 +45416,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/identification").then(function (response) {
-                console.log("identification response");
-                console.log(response);
                 var data = response.data;
-
-                _this.form.firstName = data.firstName;
-                _this.form.lastName = data.lastName;
-                _this.form.middleName = data.middleName;
-                _this.form.birthDate = data.birthDate;
-                _this.form.passport = data.passport;
-                _this.form.inn = data.inn;
-                _this.form.oms = data.oms;
-                _this.form.snils = data.snils;
-                _this.type = data.type;
+                _this.fillFormFields(data);
 
                 _this.isLoaded = true;
             }).catch(function (error) {
@@ -45435,15 +45425,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.isLoaded = true;
             });
         },
+        fillFormFields: function fillFormFields(data) {
+            this.form.firstName = data.firstName;
+            this.form.lastName = data.lastName;
+            this.form.middleName = data.middleName;
+            this.form.birthDate = data.birthDate;
+            this.form.passport = data.passport;
+            this.form.inn = data.inn;
+            this.form.oms = data.oms;
+            this.form.snils = data.snils;
+            this.type = data.type;
+        },
         updateIdentification: function updateIdentification() {
-            Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/identification", this.form).then(function (data) {
-                console.log(data);
+            var _this2 = this;
 
-                if ("code" in data) {
-                    Bus.$emit('showNotification', "danger", "Не удалось обновить идентификационные данные, ошибка сервера");
-                } else {
-                    Bus.$emit('showNotification', "success", "Персональные данные обновлены");
-                }
+            this.isLoaded = false;
+            axios.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/identification", this.form).then(function (response) {
+                console.log("response from update");
+                console.log(response);
+                _this2.fillFormFields(response.data);
+                Bus.$emit('showNotification', "success", "Персональные данные обновлены");
+                _this2.isLoaded = true;
+            }).catch(function (error) {
+                Bus.$emit('showNotification', "danger", "Не удалось обновить идентификационные данные");
+                _this2.isLoaded = true;
             });
         },
         showSetting: function showSetting(tabName) {
@@ -45930,6 +45935,7 @@ var render = function() {
                                 "button",
                                 {
                                   staticClass: "btn btn-primary",
+                                  attrs: { disabled: !_vm.isLoaded },
                                   on: { click: _vm.updateIdentification }
                                 },
                                 [

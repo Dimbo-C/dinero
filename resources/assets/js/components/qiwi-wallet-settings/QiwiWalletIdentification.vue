@@ -129,6 +129,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-8">
                                         <button class="btn btn-primary"
+                                                :disabled="!isLoaded"
                                                 @click="updateIdentification">
                                             Обновить
                                         </button>
@@ -172,19 +173,8 @@
             fetchOwnerData() {
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/identification`)
                     .then((response) => {
-                        console.log("identification response");
-                        console.log(response);
                         const data = response.data;
-
-                        this.form.firstName = data.firstName;
-                        this.form.lastName = data.lastName;
-                        this.form.middleName = data.middleName;
-                        this.form.birthDate = data.birthDate;
-                        this.form.passport = data.passport;
-                        this.form.inn = data.inn;
-                        this.form.oms = data.oms;
-                        this.form.snils = data.snils;
-                        this.type = data.type;
+                        this.fillFormFields(data);
 
                         this.isLoaded = true;
                     })
@@ -194,17 +184,32 @@
                     });
             },
 
-            updateIdentification() {
-                Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/identification`, this.form)
-                    .then((data) => {
-                        console.log(data);
+            fillFormFields(data) {
+                this.form.firstName = data.firstName;
+                this.form.lastName = data.lastName;
+                this.form.middleName = data.middleName;
+                this.form.birthDate = data.birthDate;
+                this.form.passport = data.passport;
+                this.form.inn = data.inn;
+                this.form.oms = data.oms;
+                this.form.snils = data.snils;
+                this.type = data.type;
+            },
 
-                        if ("code" in data) {
-                            Bus.$emit('showNotification', "danger", "Не удалось обновить идентификационные данные, ошибка сервера");
-                        } else {
-                            Bus.$emit('showNotification', "success", "Персональные данные обновлены");
-                        }
+            updateIdentification() {
+                this.isLoaded = false;
+                axios.post(`/api/qiwi-wallets/${this.$route.params.wallet}/identification`, this.form)
+                    .then((response) => {
+                        console.log("response from update");
+                        console.log(response);
+                        this.fillFormFields(response.data);
+                        Bus.$emit('showNotification', "success", "Персональные данные обновлены");
+                        this.isLoaded = true;
                     })
+                    .catch((error) => {
+                        Bus.$emit('showNotification', "danger", "Не удалось обновить идентификационные данные");
+                        this.isLoaded = true;
+                    });
             },
 
             showSetting(tabName) {
