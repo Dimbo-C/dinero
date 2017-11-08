@@ -139,26 +139,4 @@ class QiwiWalletSettings extends Model {
 
         $this->save();
     }
-
-    /**
-     * @param $data
-     * @param $model QiwiWalletSettings
-     */
-    public function persistAutoWithdrawWallets($wallets, $model) {
-        //        $model->autoWithdrawalWallets()->detach();
-
-        foreach ($wallets as $wallet) {
-            $model->autoWithdrawalWallets()->create([
-                    'number' => $wallet
-            ]);
-        }
-    }
-
-    public function autoWithdrawalWallets() {
-        return $this->belongsToMany('App\QiwiAutowithdrawWallets',
-                'qiwi_settings_autowithdraw_wallets',
-                "master_wallet_id",
-                "autowithdraw_wallet_id"
-        );
-    }
 }
