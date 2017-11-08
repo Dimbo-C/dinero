@@ -21,16 +21,12 @@ class QiwiWalletUpdateHelper {
         $now = Carbon::now();
         $end = Carbon::parse($settings->last_balance_recheck);
 
-
-        $len = $end->diffInMinutes($now);
         $diffInSeconds = $end->diffInSeconds($now);
-        Log::info("UpdateHelper#isTimeToUpdate " . $login);
-        Log::info("Diff in seconds: $diffInSeconds");
-        //        $end->diffInSeconds()
-        $diffInSeconds -= 20;
+
+        // correction in calculations to prevent small inequalities in compared seconds
+        $diffInSeconds += 20;
 
         return $diffInSeconds >= $settings->balance_recheck_timeout * 60;
-        //        return $len >= $settings->balance_recheck_timeout;
     }
 
     public static function updateBalance($login) {

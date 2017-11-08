@@ -27,7 +27,7 @@ class Qiwi {
                 ]
         ]);
         $proxyString = $proxyAuth != null
-                ? "tcp://$proxyAuth@$proxy"
+                ? "http://$proxyAuth@$proxy"
                 : $proxy;
 
         $this->client = new Client([

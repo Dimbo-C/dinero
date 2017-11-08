@@ -58,6 +58,10 @@ class QiwiWallet extends Model {
         return $this->hasOne('App\QiwiWalletSettings', 'wallet_id');
     }
 
+    public function proxy() {
+        return $this->hasOne('App\Proxy');
+    }
+
     public function securitySettings() {
         return $this->hasOne('App\QiwiWalletSecuritySettings', 'wallet_id');
     }
@@ -107,7 +111,7 @@ class QiwiWallet extends Model {
         $this->month_income = $monthIncome;
         $this->save();
 
-//        $this->postUpdateRoutine();
+        //        $this->postUpdateRoutine();
     }
 
     public function updateBalance($balance) {

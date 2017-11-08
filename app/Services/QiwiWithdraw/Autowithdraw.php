@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\AutowithdrawTypes;
+use App\Helpers\MoneyHelper;
 use App\Helpers\QiwiGeneralHelper;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
@@ -28,9 +29,18 @@ class Autowithdraw {
     private $autoWithdrawType;
     private $login;
     private $withdrawAmount;
+    private $force;
+    private $autoWithdrawMode;
 
-    function __construct($walletLogin) {
+    /**
+     * Autowithdraw constructor.
+     *
+     * @param $walletLogin
+     * @param bool $force
+     */
+    function __construct($walletLogin, $force = false) {
         $this->login = $walletLogin;
+        $this->force = $force;
         $this->init();
     }
 
@@ -43,13 +53,13 @@ class Autowithdraw {
     }
 
     /**
-     * @param $autowithdrawMode
-     * @param bool $force
+     * @param null $autowithdrawMode
      * @return bool
      */
-    public function autoWithdraw($autowithdrawMode, $force = false) {
-        Log::info("Autowithdraw start for " . $this->login);
-        $guardsPassed = $this->guards($autowithdrawMode, $force);
+    public function autoWithdraw($autowithdrawMode = null) {
+        $this->autoWithdrawMode = $autowithdrawMode;
+        Log::info("Autowithdraw start for {$this->login} mode: $autowithdrawMode");
+        $guardsPassed = $this->guards();
         Log::info("Guards passed for {$this->login}: " . ($guardsPassed ? "TRUE" : "FALSE"));
 
         if (!$guardsPassed) return false;
@@ -57,16 +67,16 @@ class Autowithdraw {
         $this->withdrawAmount = $this->calculateWithdrawAmount();
 
         Log::info("Autowithdraw routine for " . $this->login);
-        $result = $this->withdrawRoutine();
+        $success = $this->withdrawRoutine();
 
         // update timer if action was successful
-        if ($result) {
+        if ($success) {
             $this->settings->updateWithdrawalTimer();
         }
 
-        Log::info("Autowithdraw from {$this->login} " . ($result ? "successful" : "failed"));
+        Log::info("Autowithdraw from {$this->login} " . ($success ? "successful" : "failed"));
 
-        return $result;
+        return $success;
     }
 
     /**
@@ -103,19 +113,18 @@ class Autowithdraw {
     }
 
     // all necessary checks before proceeding to executing auto withdraw
-    private function guards($mode, $force = false) {
-        if (!$force) {
-            if (!$this->isModeRight($mode)) return false;
+    private function guards() {
+        if (!$this->force) {
+            if (!$this->isModeRight()) return false;
             if (!$this->wallet->settings->isAutoWidthdrawalActive()) return false;
         }
-
         if (!$this->isEnoughMoney()) return false;
 
         return true;
     }
 
-    private function isModeRight($mode) {
-        switch ($mode) {
+    private function isModeRight() {
+        switch ($this->autoWithdrawMode) {
             case AUTOWITHDRAW_EVERY_X_MINUTES:
                 if ($this->autoWithdrawType->isEveryXMinutes() && $this->settings->isTimeToWithdraw()) return true;
                 break;
@@ -218,7 +227,8 @@ class Autowithdraw {
             case "wallet":
                 //                $expenditure = QiwiGeneralHelper::getTodaysExpenditure($this->wallet->login);
                 //                if ($expenditure > 100000) $withdrawAmount *= 0.99;
-                $withdrawAmount *= 0.99;
+                $withdrawAmount = MoneyHelper::getBaseCost($withdrawAmount, 1);
+                //                $withdrawAmount *= 0.99;
                 break;
 
             case "card":

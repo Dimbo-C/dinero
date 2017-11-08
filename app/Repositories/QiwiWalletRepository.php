@@ -93,9 +93,9 @@ class QiwiWalletRepository implements Contract {
     }
 
     public function autoWithdraw($login) {
-        $aw = new Autowithdraw($login);
+        $aw = new Autowithdraw($login, true);
 
-        $status = $aw->autoWithdraw(AUTOWITHDRAW_EVERY_X_MINUTES, true) ? 200 : 400;
+        $status = $aw->autoWithdraw() ? 200 : 400;
         switch ($status) {
             case 200:
                 $message = "Автовывод успешно проведен";

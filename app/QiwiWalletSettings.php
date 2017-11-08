@@ -125,16 +125,12 @@ class QiwiWalletSettings extends Model {
     public function isTimeToWithdraw() {
         $now = Carbon::now();
         $end = Carbon::parse($this->last_withdrawal_time);
-        $diff = $end->diffInMinutes($now);
         $diffInsec = $end->diffInSeconds($now);
-        $diffInsec -= 20;
-        $isTime = $diffInsec >= $this->autoWithdrawal_minutes * 60;
-        //        $isTime = $diff >= $this->autoWithdrawal_minutes;
-        Log::info($isTime ? "It is time to autowithdraw!!!!" : "It is not a time for autowithdraw!!!");
-        Log::info("QiwiWalletSettings#isTimeToWithdraw ");
-        Log::info("Diff in seconds: $diffInsec");
 
-        //        if(!$isTime) Log::info("")
+        // correction in calculations to prevent small inequalities in compared seconds
+        $diffInsec += 20;
+        $isTime = $diffInsec >= $this->autoWithdrawal_minutes * 60;
+
         return $isTime;
     }
 
