@@ -45416,12 +45416,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/identification").then(function (response) {
-                var data = response.data;
-                _this.fillFormFields(data);
-
+                _this.fillFormFields(response.data);
                 _this.isLoaded = true;
             }).catch(function (error) {
-                Bus.$emit('showNotification', "danger", "Не удалось Получить идентификационные данные");
+                Bus.$emit('showNotification', "danger", "Не удалось получить идентификационные данные");
                 _this.isLoaded = true;
             });
         },
@@ -45441,8 +45439,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.isLoaded = false;
             axios.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/identification", this.form).then(function (response) {
-                console.log("response from update");
-                console.log(response);
                 _this2.fillFormFields(response.data);
                 Bus.$emit('showNotification', "success", "Персональные данные обновлены");
                 _this2.isLoaded = true;

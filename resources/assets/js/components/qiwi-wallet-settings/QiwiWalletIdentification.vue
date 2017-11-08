@@ -173,13 +173,11 @@
             fetchOwnerData() {
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/identification`)
                     .then((response) => {
-                        const data = response.data;
-                        this.fillFormFields(data);
-
+                        this.fillFormFields(response.data);
                         this.isLoaded = true;
                     })
                     .catch((error) => {
-                        Bus.$emit('showNotification', "danger", "Не удалось Получить идентификационные данные");
+                        Bus.$emit('showNotification', "danger", "Не удалось получить идентификационные данные");
                         this.isLoaded = true;
                     });
             },
@@ -200,8 +198,6 @@
                 this.isLoaded = false;
                 axios.post(`/api/qiwi-wallets/${this.$route.params.wallet}/identification`, this.form)
                     .then((response) => {
-                        console.log("response from update");
-                        console.log(response);
                         this.fillFormFields(response.data);
                         Bus.$emit('showNotification', "success", "Персональные данные обновлены");
                         this.isLoaded = true;

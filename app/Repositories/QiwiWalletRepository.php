@@ -305,9 +305,7 @@ class QiwiWalletRepository implements Contract {
     }
 
     public function getIdentification($login) {
-        $response = QiwiIdentificationHelper::getIdentification($login);
-
-        return $response;
+        return QiwiIdentificationHelper::getIdentification($login);
     }
 
     public function updateIdentification($data) {
