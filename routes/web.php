@@ -12,28 +12,25 @@ Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 
 Route::get("/test", function () {
-
-
     $client = new GuzzleHttp\Client();
     $res = $client->request("GET", "https://qiwi.com");
     $content = $res->getBody()->getContents();
-//    echo $content;
 
     preg_match("/sitekey:\"(.+?)\"/", $content, $matches);
-    $sitekey = $matches[1];
-//    dd($sitekey);
+    $sitekey = $matches[1]; // text like "6LfjX_4SAAAAAFfINkDklY_r2Q5BRiEqmLjs4UAC"
 
     $client = new DeathByCaptcha_HttpClient(
         env("DEATHBYCAPTCHA_USERNAME"),
         env("DEATHBYCAPTCHA_PASSWORD")
     );
+
     $client->is_verbose = true;
     echo "Sitekey is $sitekey";
     echo "<br>";
     echo "Your balance is {$client->balance} US cents\n";
 
     $data = array(
-        'proxy' => 'http://user6760:0ajq7n@5.8.66.122:8239',
+        'proxy' => 'http://validUser:validPass@validHost:validPort',
         'proxytype' => 'HTTP',
 //        'googlekey' => '6Lc2fhwTAAAAAGatXTzFYfvlQMI2T7B6ji8UVV_b',
         'googlekey' => $sitekey,

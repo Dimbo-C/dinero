@@ -145,8 +145,10 @@ class QiwiWalletRepository implements Contract {
     public function reportFor($query, $login) {
         $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
         $transactionProcessor = new TransactionProcessor(
-                $qiwi->reportForDateRange($query['start'], $query['end'], $query['page']));
-
+                $qiwi->reportForDateRange(
+                        $query['start'],
+                        $query['end'],
+                        $query['page']));
 
         return $transactionProcessor->getTransactions();
     }
@@ -303,7 +305,9 @@ class QiwiWalletRepository implements Contract {
     }
 
     public function getIdentification($login) {
-        return QiwiIdentificationHelper::getIdentification($login);
+        $response = QiwiIdentificationHelper::getIdentification($login);
+
+        return $response;
     }
 
     public function updateIdentification($data) {
@@ -317,6 +321,7 @@ class QiwiWalletRepository implements Contract {
      */
     public function massAction($action, $wallets) {
         $map = new MassActionProcessor($action, $wallets);
+
 
         return $map->execute() === false ? "FAIL" : "OK";
     }

@@ -45387,6 +45387,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
@@ -45414,17 +45415,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/identification").then(function (response) {
+                console.log("identification response");
                 console.log(response);
                 var data = response.data;
-                //                            this.form = data;
-                //                            console.log("before assign");
-                //                            console.log(this.form);
-                //                            console.log(data);
-                //
-                ////                            _.merge(this.form, data);
-                //                            console.log("after assign");
-                //                            console.log(this.form);
-                //                            console.log(data);
+
                 _this.form.firstName = data.firstName;
                 _this.form.lastName = data.lastName;
                 _this.form.middleName = data.middleName;
@@ -45436,6 +45430,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.type = data.type;
 
                 _this.isLoaded = true;
+            }).catch(function (error) {
+                Bus.$emit('showNotification', "danger", "Не удалось Получить идентификационные данные");
+                _this.isLoaded = true;
             });
         },
         updateIdentification: function updateIdentification() {
@@ -45443,11 +45440,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(data);
 
                 if ("code" in data) {
-                    //                                const string = data.code;
-                    //                                const result = string.match(/error/i);
-                    //                                if (result) {
                     Bus.$emit('showNotification', "danger", "Не удалось обновить идентификационные данные, ошибка сервера");
-                    //                                }
                 } else {
                     Bus.$emit('showNotification', "success", "Персональные данные обновлены");
                 }

@@ -50,4 +50,6 @@ class QiwiWalletsController extends Controller {
     public function settings($id) {
         return response()->json($this->wallet->settings($id));
     }
+
+
 }

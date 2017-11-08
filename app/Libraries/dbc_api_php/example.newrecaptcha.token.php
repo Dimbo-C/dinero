@@ -25,16 +25,16 @@ echo "Your balance is {$client->balance} US cents\n";
 $data = array(
 //    'proxy'      => 'http://user:password@127.0.0.1:1234',
 //    'proxytype'    => 'HTTP',
-    'googlekey'       => '6Lc2fhwTAAAAAGatXTzFYfvlQMI2T7B6ji8UVV_b',
+    'googlekey' => '6Lc2fhwTAAAAAGatXTzFYfvlQMI2T7B6ji8UVV_b',
     'pageurl' => 'http://google.com');
 //Create a json string
 $json = json_encode($data);
 
 //Put the type and the json payload
 $extra = [
-    'type'=>4,
-    'token_params'=> $json,  # banner img
-    ];
+    'type' => 4,
+    'token_params' => $json,  # banner img
+];
 
 // Put null the first parameter and add the extra payload
 if ($captcha = $client->decode(null, $extra)) {
@@ -42,13 +42,13 @@ if ($captcha = $client->decode(null, $extra)) {
 
     sleep(DeathByCaptcha_Client::DEFAULT_TIMEOUT);
 
-        // Poll for CAPTCHA indexes:
-        if ($text = $client->get_text($captcha['captcha'])) {
-            echo "CAPTCHA {$captcha['captcha']} solved: {$text}\n";
+    // Poll for CAPTCHA indexes:
+    if ($text = $client->get_text($captcha['captcha'])) {
+        echo "CAPTCHA {$captcha['captcha']} solved: {$text}\n";
 
-            // Report an incorrectly solved CAPTCHA.
-            // Make sure the CAPTCHA was in fact incorrectly solved!
-            //$client->report($captcha['captcha']);
-        }
+        // Report an incorrectly solved CAPTCHA.
+        // Make sure the CAPTCHA was in fact incorrectly solved!
+        //$client->report($captcha['captcha']);
     }
+}
 ?>

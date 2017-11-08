@@ -146,6 +146,7 @@
 
 <script>
     import * as _ from "lodash";
+
     export default {
         data() {
             return {
@@ -168,52 +169,45 @@
             this.fetchOwnerData();
         },
         methods: {
-            fetchOwnerData(){
+            fetchOwnerData() {
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/identification`)
-                        .then((response) => {
-                            console.log(response);
-                            const data = response.data;
-//                            this.form = data;
-//                            console.log("before assign");
-//                            console.log(this.form);
-//                            console.log(data);
-//
-////                            _.merge(this.form, data);
-//                            console.log("after assign");
-//                            console.log(this.form);
-//                            console.log(data);
-                            this.form.firstName = data.firstName;
-                            this.form.lastName = data.lastName;
-                            this.form.middleName = data.middleName;
-                            this.form.birthDate = data.birthDate;
-                            this.form.passport = data.passport;
-                            this.form.inn = data.inn;
-                            this.form.oms = data.oms;
-                            this.form.snils = data.snils;
-                            this.type = data.type;
+                    .then((response) => {
+                        console.log("identification response");
+                        console.log(response);
+                        const data = response.data;
 
-                            this.isLoaded = true;
-                        })
+                        this.form.firstName = data.firstName;
+                        this.form.lastName = data.lastName;
+                        this.form.middleName = data.middleName;
+                        this.form.birthDate = data.birthDate;
+                        this.form.passport = data.passport;
+                        this.form.inn = data.inn;
+                        this.form.oms = data.oms;
+                        this.form.snils = data.snils;
+                        this.type = data.type;
+
+                        this.isLoaded = true;
+                    })
+                    .catch((error) => {
+                        Bus.$emit('showNotification', "danger", "Не удалось Получить идентификационные данные");
+                        this.isLoaded = true;
+                    });
             },
 
-            updateIdentification(){
+            updateIdentification() {
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/identification`, this.form)
-                        .then((data) => {
-                            console.log(data);
+                    .then((data) => {
+                        console.log(data);
 
-                            if ("code" in data) {
-//                                const string = data.code;
-//                                const result = string.match(/error/i);
-//                                if (result) {
-                                Bus.$emit('showNotification', "danger", "Не удалось обновить идентификационные данные, ошибка сервера");
-//                                }
-                            } else {
-                                Bus.$emit('showNotification', "success", "Персональные данные обновлены");
-                            }
-                        });
+                        if ("code" in data) {
+                            Bus.$emit('showNotification', "danger", "Не удалось обновить идентификационные данные, ошибка сервера");
+                        } else {
+                            Bus.$emit('showNotification', "success", "Персональные данные обновлены");
+                        }
+                    })
             },
 
-            showSetting(tabName){
+            showSetting(tabName) {
                 this.$parent.tab = tabName;
             },
         }
