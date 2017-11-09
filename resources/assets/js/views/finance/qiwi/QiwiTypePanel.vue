@@ -37,8 +37,15 @@
                         <td v-text="w.name"></td>
                         <td v-text="w.login"></td>
                         <td v-if="!isInactive">
+                            <a data-toggle="tooltip"
+                               data-placement="top"
+                               title="Автовывод">
+                                <i class="fa fa-upload fa-fw"
+                                   v-bind:class="{'withdrawing-active':withdrawers.includes(w.login)}"
+                                   v-bind:id="w.login"
+                                   v-on:click.stop="autoWithdrawWallet(w.login)"></i>
+                            </a>
                             <span :id="w.login">
-                                <!--{{ spinners.includes(w.login) ? noSum : tidySum(w.balance) | currency }}-->
                                 {{ moneys(w.balance, w.login)}}
                             </span>
                             <a data-toggle="tooltip"
@@ -59,7 +66,7 @@
                                              class="btn btn-default"
                                              data-toggle="tooltip"
                                              data-placement="top"
-                                             title="Вывод">
+                                             title="Ручной вывод">
                                     <i class="fa fa-usd"></i>
                                 </router-link>
                                 <router-link :to="'/finance/qiwi/' + w.login + '/history'"
@@ -123,77 +130,86 @@
     export default {
         mixins: [Table],
         props: ['type', 'types', 'exclude', 'is-inactive'],
-        data () {
+        data() {
             return {
                 noSum: "...",
                 moveTo: this.types.filter(t => t.id !== this.type.id)[0].id,
                 foo: '',
                 onChangeSelect: '',
-                spinners: []
+                spinners: [],
+                withdrawers: []
             };
         },
-        mounted () {
+
+        mounted() {
             this.items = this.type.wallets;
         },
 
         watch: {
-            selected(val){
+            selected(val) {
                 this.$emit('updateSelected', val);
             },
         },
+
         methods: {
-            moneys(balance, login){
+            moneys(balance, login) {
                 if (this.spinners.includes(login)) {
                     return "...";
                 } else {
                     return this.tidySum(balance) + " руб.";
                 }
             },
-            moveWallets () {
+            moveWallets() {
                 console.log(this.selected);
                 const moveFrom = this.isInactive
-                        ? this.selected[0].type_id
-                        : this.type.id;
+                    ? this.selected[0].type_id
+                    : this.type.id;
 
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
             },
 
-            removeWallet(login){
+            removeWallet(login) {
                 this.$router.push({path: `/finance/qiwi/remove/${login}`});
             },
 
-            updateBalance(login){
+            updateBalance(login) {
                 this.spinners.push(login);
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
-                        .then((response) => {
-                            const balance = response.balance;
-                            console.log(response);
-                            console.log("Balance: " + balance);
-                            this.items.map((item) => {
-                                if (item.login === login) {
-                                    item.balance = this.tidySum(balance);
-                                    this.spinners = this.spinners.filter((elem) => login !== elem);
-                                }
-                            });
-                        })
-                        .catch(error => {
-                            console.log(error.response);
-                        });
+                    .then((response) => {
+                        const balance = response.balance;
+                        console.log("Balance: " + balance);
+                        this.updateBalanceCallback(login, balance);
+                    })
+                    .catch(error => {
+                        console.log(error.response);
+                        this.updateBalanceCallback(login);
+                    });
             },
 
-            updateIncome(login){
+            updateBalanceCallback(login, balance = null) {
+                this.items.map((item) => {
+                    if (item.login === login) {
+                        if (balance !== null) {
+                            item.balance = this.tidySum(balance);
+                        }
+                        this.spinners = this.spinners.filter((elem) => login !== elem);
+                    }
+                });
+            },
+
+            updateIncome(login) {
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-income', new Form(auth))
-                        .then((response) => {
-                            const income = response.monthIncome;
-                            console.log("Income: " + income);
-                            this.items.map((item) => {
-                                if (item.login === login) {
-                                    item.month_income = this.tidySum(income);
-                                }
-                            });
-                        })
+                    .then((response) => {
+                        const income = response.monthIncome;
+                        console.log("Income: " + income);
+                        this.items.map((item) => {
+                            if (item.login === login) {
+                                item.month_income = this.tidySum(income);
+                            }
+                        });
+                    })
             },
 
             updateWallet(login) {
@@ -201,7 +217,32 @@
                 this.updateIncome(login);
             },
 
-            tidySum(sum){
+            autoWithdrawWallet(login) {
+                this.withdrawers.push(login);
+
+                axios.post(`/api/qiwi-wallets/${login}/auto-withdraw`)
+                    .then(response => {
+                        Bus.$emit('showNotification', "success", "Автовывод успешно проведен");
+                        this.updateWallet(login);
+                    })
+                    .catch(error => {
+                        const status = error.response.status;
+                        if (status === 400) {
+                            Bus.$emit('showNotification', "danger", "Не удалось провести автовывод, проверьте баланс кошелька и настройки");
+                        } else if (status === 500) {
+                            Bus.$emit('showNotification', "danger", "Ошибка сервера, попробуйте позже");
+                        }
+                    })
+                    .finally(() => {
+                        this.items.map((item) => {
+                            if (item.login === login) {
+                                this.withdrawers = this.withdrawers.filter((elem) => login !== elem);
+                            }
+                        });
+                    })
+            },
+
+            tidySum(sum) {
                 let str = (typeof sum === "object") ? "0.00" : (sum + "");
                 if (str === "") str = "0.00";
 
@@ -212,7 +253,7 @@
             }
         },
         computed: {
-            firstDayOfTheMonth () {
+            firstDayOfTheMonth() {
                 const today = new Date();
                 let mm = today.getMonth() + 1; //January is 0!
                 const yyyy = today.getFullYear();
@@ -225,3 +266,10 @@
         }
     };
 </script>
+
+<style scoped>
+    .withdrawing-active {
+        background-color: #fff;
+        color: green;
+    }
+</style>

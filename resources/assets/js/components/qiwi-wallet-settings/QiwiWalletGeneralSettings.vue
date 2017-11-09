@@ -331,12 +331,12 @@
                                         </button>
                                     </div>
 
-                                    <div class="col-xs-4 col-xs-offset-2 col-lg-2 col-lg-offset-2">
-                                        <button class="btn btn-primary"
-                                                @click="triggerAutoWithdraw">
-                                            Автовывод
-                                        </button>
-                                    </div>
+                                    <!--<div class="col-xs-4 col-xs-offset-2 col-lg-2 col-lg-offset-2">-->
+                                        <!--<button class="btn btn-primary"-->
+                                                <!--@click="triggerAutoWithdraw">-->
+                                            <!--Автовывод-->
+                                        <!--</button>-->
+                                    <!--</div>-->
                                 </div>
                             </div>
                         </div>
@@ -531,17 +531,17 @@
                         });
             },
 
-            triggerAutoWithdraw(){
-                axios.post(`/api/qiwi-wallets/${this.$route.params.wallet}/auto-withdraw`, this.form)
-                        .then(response => {
-                            console.log(response.data);
-                            Bus.$emit('showNotification', "success", response.data.message);
-                        })
-                        .catch(error => {
-                            console.log(error.response);
-                            Bus.$emit('showNotification', "danger", error.response.data.message);
-                        });
-            },
+//            triggerAutoWithdraw(){
+//                axios.post(`/api/qiwi-wallets/${this.$route.params.wallet}/auto-withdraw`, this.form)
+//                        .then(response => {
+//                            console.log(response.data);
+//                            Bus.$emit('showNotification', "success", response.data.message);
+//                        })
+//                        .catch(error => {
+//                            console.log(error.response);
+//                            Bus.$emit('showNotification', "danger", error.response.data.message);
+//                        });
+//            },
 
             showSetting(tabName){
                 this.$parent.tab = tabName;

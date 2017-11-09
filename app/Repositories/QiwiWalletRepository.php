@@ -95,22 +95,13 @@ class QiwiWalletRepository implements Contract {
     public function autoWithdraw($login) {
         $aw = new Autowithdraw($login, true);
 
-        $status = $aw->autoWithdraw() ? 200 : 400;
-        switch ($status) {
-            case 200:
-                $message = "Автовывод успешно проведен";
-                break;
-
-            case 400:
-                $message = "Не удалось вывести средства. Проверьте баланс и ограничения кошелька";
-                break;
-
-            default:
-                $message = "Ошибка сервера, попробуйте позже";
-                break;
+        try {
+            $status = $aw->autoWithdraw() ? 200 : 400;
+        } catch (\Exception $ex) {
+            $status = 500;
         }
 
-        return response()->json(['message' => $message], $status);
+        return response()->json([], $status);
     }
 
     public function activateVoucher($login, $code) {
