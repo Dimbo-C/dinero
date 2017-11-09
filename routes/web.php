@@ -11,7 +11,10 @@ Route::get('/aliexpress', 'Admins\OwnAdminsController@all');
 Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
-    \App\Helpers\DeathByCaptchaHelper::execute();
+    dd(\App\QiwiWalletType::autoWithdrawals()
+            ->map(function ($wallet) {
+                return $wallet->login;
+            }));
     //    echo $res->getBody()->getContents();
 
     //    $control = \App\Helpers\QiwiGeneralHelper::getQiwiControlObject("380960968460");

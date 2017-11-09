@@ -332,10 +332,10 @@
                                     </div>
 
                                     <!--<div class="col-xs-4 col-xs-offset-2 col-lg-2 col-lg-offset-2">-->
-                                        <!--<button class="btn btn-primary"-->
-                                                <!--@click="triggerAutoWithdraw">-->
-                                            <!--Автовывод-->
-                                        <!--</button>-->
+                                    <!--<button class="btn btn-primary"-->
+                                    <!--@click="triggerAutoWithdraw">-->
+                                    <!--Автовывод-->
+                                    <!--</button>-->
                                     <!--</div>-->
                                 </div>
                             </div>
@@ -376,7 +376,8 @@
                     autoWithdrawalTarget: "",
                     autoWithdrawalTargets: [
                         {value: "card", text: "На банковскую карту VISA/MASTERCARD"},
-                        {value: "wallet", text: "На Qiwi кошелек"}
+                        {value: "wallet", text: "На Qiwi кошелек"},
+                        {value: "withdrawals", text: "На свободный кошелек для автовывода"}
                     ],
 
                     autoWithdrawalTimeout: 0,
@@ -404,9 +405,7 @@
             };
         },
         watch: {
-            autoWithdrawalWallets(val){
-                console.log(val);
-
+            autoWithdrawalWallets(val) {
                 let wallets = (val === "" || val === null) ? [] : val.split(/[\s;,]+/g);
                 console.log(wallets);
                 this.form.autoWithdrawalWallets = wallets;
@@ -414,7 +413,7 @@
                 console.log(this.form.autoWithdrawalWallets);
 
             },
-            cardNumber(val){
+            cardNumber(val) {
                 this.form.autoWithdrawalCardNumber = val.replace(/\s/g, '');
             },
 
@@ -447,21 +446,21 @@
                 this.loadData();
             },
 
-            loadData(){
+            loadData() {
                 // get settings of this wallet
                 axios.get(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`)
-                        .then((response) => {
-                            let data = response.data;
-                            let settings = Object.assign(data.walletSettings, data.wallet);
-                            settings.proxy = data.proxy;
+                    .then((response) => {
+                        let data = response.data;
+                        let settings = Object.assign(data.walletSettings, data.wallet);
+                        settings.proxy = data.proxy;
 
-                            this.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
-                            this.loadWalletTypes(data.walletTypes);
-                            this.loadSettings(settings);
-                        })
+                        this.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
+                        this.loadWalletTypes(data.walletTypes);
+                        this.loadSettings(settings);
+                    })
             },
 
-            loadAutoWithdrawalTypes(options){
+            loadAutoWithdrawalTypes(options) {
                 options.map((option) => {
                     this.form.autoWithdrawalTypes.push({value: option.slug, text: option.type})
                 });
@@ -469,7 +468,7 @@
                 this.form.autoWithdrawalType = this.form.autoWithdrawalTypes[1].value;
             },
 
-            loadWalletTypes(types){
+            loadWalletTypes(types) {
                 let form = this.form;
                 types.map((type) => {
                     form.walletTypes.push({value: type.slug, text: type.name})
@@ -478,15 +477,15 @@
                 form.walletType = form.walletTypes[1].value;
             },
 
-            loadSettings(settings){
+            loadSettings(settings) {
                 console.log("settings:");
                 console.log(settings);
                 let form = this.form;
 
                 this.proxyServer = settings.proxy.host === null
-                        ? "" : settings.proxy.host + ":" + settings.proxy.port;
+                    ? "" : settings.proxy.host + ":" + settings.proxy.port;
                 this.proxyAuth = settings.proxy.login === null
-                        ? "" : settings.proxy.login + "" + ":" + settings.proxy.password;
+                    ? "" : settings.proxy.login + "" + ":" + settings.proxy.password;
 
                 form.name = settings.name;
                 form.comments = settings.comments;
@@ -522,13 +521,16 @@
                 this.form.autoWithdrawalTarget = settings.autoWithdrawal_target;
             },
 
-            saveSettings(){
+            saveSettings() {
                 console.log(this.form);
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`, this.form)
-                        .then((data) => {
-                            console.log(data);
-                            Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
-                        });
+                    .then((data) => {
+                        console.log(data);
+                        Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
+                    })
+                    .catch(() => {
+                        Bus.$emit('showNotification', "danger", "Не удалось сохранить настройки");
+                    });
             },
 
 //            triggerAutoWithdraw(){
@@ -543,7 +545,7 @@
 //                        });
 //            },
 
-            showSetting(tabName){
+            showSetting(tabName) {
                 this.$parent.tab = tabName;
             },
         }

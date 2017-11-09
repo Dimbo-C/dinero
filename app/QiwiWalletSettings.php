@@ -99,7 +99,6 @@ class QiwiWalletSettings extends Model {
 
         //        $settings->persistAutoWithdrawWallets($data->autoWithdrawalWallets, $settings);
 
-
     }
 
     public function implodeWalletNumbers(array $walletNumbers) {

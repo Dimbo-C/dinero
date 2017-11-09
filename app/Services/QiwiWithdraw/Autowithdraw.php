@@ -7,6 +7,7 @@ use App\Helpers\MoneyHelper;
 use App\Helpers\QiwiGeneralHelper;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
+use App\QiwiWalletType;
 use App\Repositories\QiwiWalletRepository;
 use Illuminate\Support\Facades\Log;
 
@@ -86,12 +87,19 @@ class Autowithdraw {
         $target = $this->settings->autoWithdrawal_target;
         switch ($target) {
             case "wallet":
-                $result = $this->toWallet();
+                $walletsNumbers = $this->settings->explodeWalletNumbers($this->settings->autoWithdrawal_wallet_numbers);
+                $result = $this->toWallet($walletsNumbers);
+                break;
+
+            case "withdrawals":
+                $walletsNumbers = QiwiWalletType::autoWithdrawals(true);
+                $result = $this->toWallet($walletsNumbers);
                 break;
 
             case "card":
                 $result = $this->toCard();
                 break;
+
 
             default:
                 $result = false;
@@ -156,7 +164,6 @@ class Autowithdraw {
     }
 
     private function toCard() {
-        //        try {
         $login = $this->login;
         $cardnum = $this->settings->autoWithdrawal_card_number;
         $fname = $this->settings->autoWithdrawal_cardholder_name;
@@ -168,21 +175,12 @@ class Autowithdraw {
         Log::info("Comment: $comment");
         $result = Withdraw::toCreditCard($login, $cardnum, $fname, $lname, $sum, $currency, $comment);
 
-
         return ($result->error == null);
-        //        } catch (\Exception $ex) {
-        //            Log::error("Error in 'AutoWithdraw#toCard()'");
-        //
-        //            return false;
-        //        }
     }
 
-    private function toWallet() {
+    private function toWallet($walletsNumbers) {
         try {
             if ($this->settings->autoWithdrawal_wallet_numbers == "") return false;
-
-            $walletsNumbers = $this->settings->explodeWalletNumbers($this->settings->autoWithdrawal_wallet_numbers);
-            //            $amount = $this->withdrawAmount;
 
             foreach ($walletsNumbers as $walletNumber) {
                 // stop this madness
@@ -206,6 +204,15 @@ class Autowithdraw {
                 $comment = "Автовывод {$this->login} -> $to";
                 $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $this->withdrawAmount, $comment);
                 Log::error("Error: " . $result->error);
+
+                // update wallet if it is over maximum balance
+                if ($result->error == "") {
+                    $receivingWallet = QiwiWallet::findByLogin($to);
+                    $receivingWallet->balance += $this->withdrawAmount;
+                    $receivingWallet->updateIfOverTheMax();
+
+                    break;
+                }
             }
 
             return true;
@@ -225,10 +232,7 @@ class Autowithdraw {
 
         switch ($this->settings->autoWithdrawal_target) {
             case "wallet":
-                //                $expenditure = QiwiGeneralHelper::getTodaysExpenditure($this->wallet->login);
-                //                if ($expenditure > 100000) $withdrawAmount *= 0.99;
                 $withdrawAmount = MoneyHelper::getBaseCost($withdrawAmount, 1);
-                //                $withdrawAmount *= 0.99;
                 break;
 
             case "card":
@@ -249,13 +253,10 @@ class Autowithdraw {
         switch ($type) {
             case "VISA_VIRTUAL":
                 return MoneyHelper::getBaseCost($withdrawAmount, 1);
-            //                return $withdrawAmount * 0.99;
 
             // VISA standard and all others
             default:
                 return MoneyHelper::getBaseCost($withdrawAmount, 1, 50);
-
-//                return ($withdrawAmount - 50) * 0.98;
         }
     }
 }

@@ -162,6 +162,25 @@ class QiwiWallet extends Model {
         return $this;
     }
 
+    public function updateIfOverTheMax() {
+        if ($this->isOverTheMax()) $this->moveToReserved();
+    }
+
+    public function isOverTheMax() {
+        return $this->balance >= $this->settings->maximum_balance;
+    }
+
+    public function moveToReserved() {
+        $reservedType = QiwiWalletType::getReserved();
+        $this->update(['type_id' => $reservedType->id]);
+    }
+
+    //    public static function getWithdrawalWallets(){
+    //        (new QiwiWallet())->where('type_id',)
+    //    }
+
+    //    public function targetWallets()
+
     public function postUpdateRoutine() {
         $this->updateRecheckTime();
         $this->recheckMaximumBalance();
