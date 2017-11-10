@@ -186,7 +186,7 @@ class Autowithdraw {
         Log::info("in toWallet");
         try {
             Log::info("in toWallet/try");
-            if ($this->settings->autoWithdrawal_wallet_numbers == "") return false;
+//            if ($this->settings->autoWithdrawal_wallet_numbers == "") return false;
 
             foreach ($walletsNumbers as $walletNumber) {
                 Log::info("in toWallet/try/foreach");
