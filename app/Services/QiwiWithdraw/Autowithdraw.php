@@ -93,7 +93,7 @@ class Autowithdraw {
                 break;
 
             case "withdrawals":
-                $walletsNumbers = QiwiWalletType::autoWithdrawals(true);
+                $walletsNumbers = QiwiWalletType::allAutoWithdrawals(true);
                 Log::info("Wallets");
 
                 $result = $this->toWallet($walletsNumbers);

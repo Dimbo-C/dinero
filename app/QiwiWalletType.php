@@ -34,6 +34,7 @@ class QiwiWalletType extends Model {
     public static function autoWithdrawals($logins = false) {
         $type = QiwiWalletType::where("slug", "output")->first();
 
+
         if ($logins) {
             return $type->wallets->map(function ($wallet) {
                 return $wallet->login;
@@ -41,6 +42,41 @@ class QiwiWalletType extends Model {
         }
 
         return $type->wallets;
+    }
+
+    public static function autoWithdrawalsNumber($logins = false) {
+        $type = QiwiWalletType::where("slug", "auto_withdraw_number")->first();
+
+
+        if ($logins) {
+            return $type->wallets->map(function ($wallet) {
+                return $wallet->login;
+            });
+        }
+
+        return $type->wallets;
+    }
+
+    public static function autoWithdrawalsCard($logins = false) {
+        $type = QiwiWalletType::where("slug", "auto_withdraw_card")->first();
+
+        if ($logins) {
+            return $type->wallets->map(function ($wallet) {
+                return $wallet->login;
+            });
+        }
+
+        return $type->wallets;
+    }
+
+    public static function allAutoWithdrawals($logins = false) {
+        $allWallets = array_merge(
+                self::autoWithdrawals($logins),
+                self::autoWithdrawalsNumber($logins)
+        //                self::autoWithdrawalsCard($logins)
+        );
+
+        return $allWallets;
     }
 
     public function findByType($type) {

@@ -1,5 +1,6 @@
 <?php
 
+use App\QiwiWalletType;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WelcomeController@show');
@@ -11,10 +12,7 @@ Route::get('/aliexpress', 'Admins\OwnAdminsController@all');
 Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
-    dd(\App\QiwiWalletType::autoWithdrawals()
-            ->map(function ($wallet) {
-                return $wallet->login;
-            }));
+    dd(QiwiWalletType::allAutoWithdrawals(true));
     //    echo $res->getBody()->getContents();
 
     //    $control = \App\Helpers\QiwiGeneralHelper::getQiwiControlObject("380960968460");
