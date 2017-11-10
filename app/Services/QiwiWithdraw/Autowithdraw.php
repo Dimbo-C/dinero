@@ -85,6 +85,7 @@ class Autowithdraw {
      */
     private function withdrawRoutine() {
         $target = $this->settings->autoWithdrawal_target;
+        Log::info("Target in routine: $target");
         switch ($target) {
             case "wallet":
                 $walletsNumbers = $this->settings->explodeWalletNumbers($this->settings->autoWithdrawal_wallet_numbers);
@@ -93,7 +94,10 @@ class Autowithdraw {
 
             case "withdrawals":
                 $walletsNumbers = QiwiWalletType::autoWithdrawals(true);
+                Log::info("Wallets");
+
                 $result = $this->toWallet($walletsNumbers);
+                Log::info($walletsNumbers);
                 break;
 
             case "card":
@@ -227,7 +231,6 @@ class Autowithdraw {
     private function calculateWithdrawAmount() {
         $balance = $this->wallet->balance;
         $limit = $this->settings->autoWithdrawal_limit;
-
         $withdrawAmount = $balance > $limit ? $limit : $balance;
 
         switch ($this->settings->autoWithdrawal_target) {
