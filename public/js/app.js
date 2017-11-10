@@ -14112,6 +14112,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -17010,7 +17011,7 @@ var render = function() {
                         language: _vm.state.language,
                         "input-class": _vm.state.inputClass,
                         "calendar-class": _vm.state.calendarClass,
-                        "wrapper-class": "green",
+                        "wrapper-class": _vm.state.wrapperClass,
                         format: _vm.customFormatter,
                         bootstrapStyling: _vm.state.bootstrapStyling,
                         "full-month-name": _vm.state.fullMonthName,
@@ -17035,6 +17036,7 @@ var render = function() {
                         language: _vm.state.language,
                         "input-class": _vm.state.inputClass,
                         "calendar-class": _vm.state.calendarClass,
+                        "wrapper-class": _vm.state.wrapperClass,
                         format: _vm.customFormatter,
                         bootstrapStyling: _vm.state.bootstrapStyling,
                         "full-month-name": _vm.state.fullMonthName,
