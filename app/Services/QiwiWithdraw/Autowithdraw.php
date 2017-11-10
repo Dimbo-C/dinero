@@ -100,6 +100,14 @@ class Autowithdraw {
                 Log::info($walletsNumbers);
                 break;
 
+            case "withdrawals_number":
+                $walletsNumbers = QiwiWalletType::autoWithdrawalsNumber(true);
+                Log::info("Wallets");
+
+                $result = $this->toWallet($walletsNumbers);
+                Log::info($walletsNumbers);
+                break;
+
             case "card":
                 $result = $this->toCard();
                 break;
@@ -186,7 +194,7 @@ class Autowithdraw {
         Log::info("in toWallet");
         try {
             Log::info("in toWallet/try");
-//            if ($this->settings->autoWithdrawal_wallet_numbers == "") return false;
+            //            if ($this->settings->autoWithdrawal_wallet_numbers == "") return false;
 
             foreach ($walletsNumbers as $walletNumber) {
                 Log::info("in toWallet/try/foreach");

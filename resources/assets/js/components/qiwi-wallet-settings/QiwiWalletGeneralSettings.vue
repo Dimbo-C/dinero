@@ -377,7 +377,9 @@
                     autoWithdrawalTargets: [
                         {value: "card", text: "На банковскую карту VISA/MASTERCARD"},
                         {value: "wallet", text: "На Qiwi кошелек"},
-                        {value: "withdrawals", text: "На свободный кошелек для автовывода"}
+                        {value: "withdrawals", text: "На свободный кошелек для автовывода"},
+                        {value: "withdrawals_card", text: "На свободный кошелек 'Автовывод\\карта'"},
+                        {value: "withdrawals_wallet", text: "На свободный кошелек 'Автовывод\\номер'"},
                     ],
 
                     autoWithdrawalTimeout: 0,
