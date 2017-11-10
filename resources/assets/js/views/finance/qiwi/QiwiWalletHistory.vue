@@ -24,6 +24,7 @@
                                     :input-class="state.inputClass"
                                     :calendar-class="state.calendarClass"
                                     :wrapper-class="state.wrapperClass"
+                                    :highlighted="state.highlighted"
                                     :format="customFormatter"
                                     :bootstrapStyling="state.bootstrapStyling"
                                     :full-month-name="state.fullMonthName"
@@ -39,6 +40,7 @@
                                     :input-class="state.inputClass"
                                     :calendar-class="state.calendarClass"
                                     :wrapper-class="state.wrapperClass"
+                                    :highlighted="state.highlighted"
                                     :format="customFormatter"
                                     :bootstrapStyling="state.bootstrapStyling"
                                     :full-month-name="state.fullMonthName"
@@ -177,10 +179,14 @@
                     dateEnd: "",
                     inputClass: "form-control input-group-addon",
                     calendarClass: "green",
+                    wrapperClass: "wrapper-class",
                     language: "ru",
                     bootstrapStyling: false,
                     fullMonthName: true,
-                    mondayFirst: true
+                    mondayFirst: true,
+                    highlighted: {
+                        days: [1, 3, 5, 0]
+                    }
                 },
                 isLoaded: false,
                 transactions: [],
@@ -214,11 +220,11 @@
         },
 
         methods: {
-            update(){
+            update() {
                 this.fetchReport(1);
             },
 
-            fetchReport(page){
+            fetchReport(page) {
                 let start = moment(this.state.dateStart).format("DD.MM.YYYY");
                 let end = moment(this.state.dateEnd).format("DD.MM.YYYY");
                 this.dateRange.page = page;
@@ -231,26 +237,26 @@
 
                 // get history of transactions
                 axios.get(`/api/qiwi-wallets/${this.login}/report`, {params: this.dateRange})
-                        .then((response) => {
-                            console.log(response);
-                            this.transactions = response.data;
-                            this.isLoaded = true;
-                        });
+                    .then((response) => {
+                        console.log(response);
+                        this.transactions = response.data;
+                        this.isLoaded = true;
+                    });
 
                 // get income and expenditure
                 axios.get(`/api/qiwi-wallets/${this.login}/incomeExpenditure`, {params: this.dateRange})
-                        .then((response) => {
-                            console.log(response);
-                            this.income = response.data.income;
-                            this.expenditure = response.data.expenditure;
-                        });
+                    .then((response) => {
+                        console.log(response);
+                        this.income = response.data.income;
+                        this.expenditure = response.data.expenditure;
+                    });
             },
 
-            customFormatter (date) {
+            customFormatter(date) {
                 return moment(date).format('DD.MM.YYYY')
             },
 
-            setDateRange (key) {
+            setDateRange(key) {
                 if (key === 'today') {
                     this.state.dateStart = moment().toDate();
                     let start = moment().format('DD.MM.YYYY');
@@ -276,14 +282,14 @@
                 }
             },
 
-            nextPage(){
+            nextPage() {
                 const nextPageNumber = this.dateRange.page + 1;
                 this.fetchReport(nextPageNumber);
             },
-            prevPage(){
+            prevPage() {
                 const prevPageNumber = this.dateRange.page === 1
-                        ? this.dateRange.page
-                        : this.dateRange.page - 1;
+                    ? this.dateRange.page
+                    : this.dateRange.page - 1;
                 this.fetchReport(prevPageNumber);
             },
 
@@ -300,7 +306,7 @@
                 });
             },
 
-            comment(t){
+            comment(t) {
                 if (t.status === 'error') {
                     return t.comment + '<p style="color:red"> (' + t.errorMessage + ')</p>'
                 } else {
@@ -308,7 +314,7 @@
                 }
             },
 
-            status (t) {
+            status(t) {
                 if (t.status === 'error') {
                     return '<i class="fa fa-circle text-danger"></i> Ошибка'
                 } else if (t.status === 'error') {
@@ -319,11 +325,11 @@
             },
 
             // calculate income and expenditure from history list
-            historySum(sign){
+            historySum(sign) {
                 if (this.transactions) {
                     const transactions = this.transactions
-                            .filter(t => t.sign === sign)
-                            .map(t => t.amount = Number(t.amount));
+                        .filter(t => t.sign === sign)
+                        .map(t => t.amount = Number(t.amount));
 
                     return _sum(transactions).toFixed(2);
                 }
@@ -331,7 +337,7 @@
         },
 
         computed: {
-            login () {
+            login() {
                 return this.$route.params.wallet;
             },
 

@@ -14113,6 +14113,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -14127,10 +14129,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 dateEnd: "",
                 inputClass: "form-control input-group-addon",
                 calendarClass: "green",
+                wrapperClass: "wrapper-class",
                 language: "ru",
                 bootstrapStyling: false,
                 fullMonthName: true,
-                mondayFirst: true
+                mondayFirst: true,
+                highlighted: {
+                    days: [1, 3, 5, 0]
+                }
             },
             isLoaded: false,
             transactions: [],
@@ -17012,6 +17018,7 @@ var render = function() {
                         "input-class": _vm.state.inputClass,
                         "calendar-class": _vm.state.calendarClass,
                         "wrapper-class": _vm.state.wrapperClass,
+                        highlighted: _vm.state.highlighted,
                         format: _vm.customFormatter,
                         bootstrapStyling: _vm.state.bootstrapStyling,
                         "full-month-name": _vm.state.fullMonthName,
@@ -17037,6 +17044,7 @@ var render = function() {
                         "input-class": _vm.state.inputClass,
                         "calendar-class": _vm.state.calendarClass,
                         "wrapper-class": _vm.state.wrapperClass,
+                        highlighted: _vm.state.highlighted,
                         format: _vm.customFormatter,
                         bootstrapStyling: _vm.state.bootstrapStyling,
                         "full-month-name": _vm.state.fullMonthName,
