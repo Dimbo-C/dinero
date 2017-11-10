@@ -70,11 +70,18 @@ class QiwiWalletType extends Model {
     }
 
     public static function allAutoWithdrawals($logins = false) {
-        $allWallets = array_merge(
-                self::autoWithdrawals($logins),
-                self::autoWithdrawalsNumber($logins)
-        //                self::autoWithdrawalsCard($logins)
-        );
+        $allWallets = collect();
+        foreach (self::autoWithdrawals($logins) as $wallet) {
+            $allWallets->push($wallet);
+        }
+        foreach (self::autoWithdrawalsNumber($logins) as $wallet) {
+            $allWallets->push($wallet);
+        }
+//        $allWallets = array_merge(
+        //                self::autoWithdrawals($logins),
+        //                self::autoWithdrawalsNumber($logins)
+        //        //                self::autoWithdrawalsCard($logins)
+        //        );
 
         return $allWallets;
     }
