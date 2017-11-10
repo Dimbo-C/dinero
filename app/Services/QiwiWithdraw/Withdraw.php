@@ -18,6 +18,11 @@ class Withdraw {
      */
     public static function toQiwiWallet($login, $to, $currency, $amount, $comment = false) {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject($login);
+        if (!$qiwiControl->login()) {
+            Log::error("Cant login into $login");
+        } else {
+            Log::info("Logged into $login");
+        };
         $qiwiControl->transferMoney($to, $currency, $amount, $comment);
 
         $result = new WithdrawResult();
@@ -62,14 +67,14 @@ class Withdraw {
         $result->debugData = $qiwiControl->debugData;
         $result->status = 200;
 
-//        Log::info("Error before : ");
-//        Log::info($result->error);
+        //        Log::info("Error before : ");
+        //        Log::info($result->error);
 
         if ($result->error != null) {
             $result->status = 400;
             Log::info("Error in toCard : ");
             Log::info((array) $result->error);
-//            dd($result->error);
+            //            dd($result->error);
             $result->resultText = "<b>Ошибка!</b> " . $result->error;
         } else {
             $result->resultText = "<b>Отлично! </b>Вы успешно совершили перевод с QIWI кошелька "
