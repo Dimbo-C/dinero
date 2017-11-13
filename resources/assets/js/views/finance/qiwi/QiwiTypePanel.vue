@@ -175,7 +175,7 @@
             updateBalance(login) {
                 this.spinners.push(login);
                 let auth = {"login": login};
-                axios.post('/api/qiwi-wallets/update-balance', new Form(auth))
+                Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
                     .then((response) => {
                         const balance = response.balance;
                         console.log("Balance: " + balance);
@@ -214,7 +214,7 @@
 
             updateWallet(login) {
                 this.updateBalance(login);
-//                this.updateIncome(login);
+                this.updateIncome(login);
             },
 
             autoWithdrawWallet(login) {

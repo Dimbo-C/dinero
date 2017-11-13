@@ -18787,7 +18787,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             this.spinners.push(login);
             var auth = { "login": login };
-            axios.post('/api/qiwi-wallets/update-balance', new Form(auth)).then(function (response) {
+            Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth)).then(function (response) {
                 var balance = response.balance;
                 console.log("Balance: " + balance);
                 _this2.updateBalanceCallback(login, balance);
@@ -18828,7 +18828,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
         updateWallet: function updateWallet(login) {
             this.updateBalance(login);
-            //                this.updateIncome(login);
+            this.updateIncome(login);
         },
         autoWithdrawWallet: function autoWithdrawWallet(login) {
             var _this5 = this;

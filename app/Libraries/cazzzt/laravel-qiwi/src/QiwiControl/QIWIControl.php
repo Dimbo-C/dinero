@@ -769,8 +769,8 @@ class QIWIControl {
 
         $content = $this->ua->request($method, "https://sso.qiwi.com/cas/tgts", "https://sso.qiwi.com/app/proxy?v=1",
                 $post_data, $headers);
-//        Log::info("Content in payprovider: ");
-//        Log::info($content);
+        //        Log::info("Content in payprovider: ");
+        //        Log::info($content);
 
         if (!in_array($this->ua->getStatus(), $correct_statuses)) {
             $this->trace("[TGTS] ERROR: Expected status=$correct_status, returned status=" . $this->ua->getStatus());
@@ -1473,13 +1473,21 @@ class QIWIControl {
                 'accountId' => "$currencyId"
         );
 
-        if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
-            $this->trace("[PAY] Failed to validate field.");
-            $this->lastErrorStr = "[PAY] Failed to validate field.";
-            return false;
-        }
+        //        if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
+        //            $this->trace("[PAY] Failed to validate field.");
+        //            $this->lastErrorStr = "[PAY] Failed to validate field.";
+        //            return false;
+        //        }
 
-        if (!($paymentInfo = $this->confirmProviderPayment($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
+
+        Log::info("Amount: $amount");
+        Log::info("Amount: $currencyId");
+        Log::info("Amount: $comment");
+        Log::info("Amount curr id: " . "account_$currencyId");
+        Log::info("Provider id: $provider_id");
+        dump(['fields' => $fields]);
+        if (!($paymentInfo = $this->confirmProviderPayment($amount, $currencyId,
+                "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
             $this->trace("[PAY] Failed to confirm payment.");
             $this->lastErrorStr = "[PAY] Failed to confirm payment.";
 
