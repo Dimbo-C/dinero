@@ -1486,11 +1486,13 @@ class QIWIControl {
         Log::info("Amount curr id: " . "account_$currencyId");
         Log::info("Provider id: $provider_id");
         dump(['fields' => $fields]);
+
         if (!($paymentInfo = $this->confirmProviderPayment($amount, $currencyId,
                 "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
             $this->trace("[PAY] Failed to confirm payment.");
             $this->lastErrorStr = "[PAY] Failed to confirm payment.";
 
+            Log::info($this->lastErrorStr);
             return false;
         }
 
