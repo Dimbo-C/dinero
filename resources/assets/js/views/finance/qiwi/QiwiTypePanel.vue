@@ -214,7 +214,7 @@
 
             updateWallet(login) {
                 this.updateBalance(login);
-                this.updateIncome(login);
+//                this.updateIncome(login);
             },
 
             autoWithdrawWallet(login) {

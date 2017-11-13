@@ -18827,7 +18827,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
         updateWallet: function updateWallet(login) {
             this.updateBalance(login);
-            this.updateIncome(login);
+            //                this.updateIncome(login);
         },
         autoWithdrawWallet: function autoWithdrawWallet(login) {
             var _this5 = this;

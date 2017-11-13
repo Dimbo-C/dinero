@@ -100,7 +100,7 @@ class Autowithdraw {
                 Log::info($walletsNumbers);
                 break;
 
-            case "withdrawals_number":
+            case "withdrawals_wallet":
                 $walletsNumbers = QiwiWalletType::autoWithdrawalsNumber(true);
                 Log::info("Wallets");
 
