@@ -24,7 +24,14 @@ class QiwiWalletRepository implements Contract {
     }
 
     public function all() {
-        return QiwiWalletType::with('wallets')->get();
+        $types = QiwiWalletType::with('wallets')->get();
+        foreach ($types as $type) {
+            foreach ($type['wallets'] as &$wallet) {
+                $wallet['settings'] = $wallet->settings;
+            }
+        }
+
+        return $types;
     }
 
     /**

@@ -97,60 +97,61 @@
             };
         },
         watch: {
-            filter () {
+            filter() {
 
             }
         },
         methods: {
-            updateSelected(selected){
+            updateSelected(selected) {
                 if (selected.length === 0) return;
 
                 let typeId = selected[0].type_id;
                 let walletsWithoutThisType = this.selected.filter((wallet) => wallet.type_id !== typeId);
                 this.selected = walletsWithoutThisType.concat(selected);
             },
-            fetchWallets () {
+            fetchWallets() {
                 axios.get('/api/qiwi-wallets')
-                        .then((response) => {
-                            this.walletsTypes = response.data;
-                            this.walletsIsLoaded = true;
+                    .then((response) => {
+                        console.log(response);
+                        this.walletsTypes = response.data;
+                        this.walletsIsLoaded = true;
 
-                            Bus.$emit('initTooltip');
-                        })
+                        Bus.$emit('initTooltip');
+                    })
             },
 
-            moveWallets (wallets, fromId, toId) {
+            moveWallets(wallets, fromId, toId) {
                 // convert array of wallets entities to array ids
                 let ids = wallets.map((wallet) => wallet.id);
                 axios.post('/api/qiwi-wallets/move', {wallets: ids, to: toId})
-                        .then(() => {
-                            let moveTo = this.walletsTypes.find(type => type.id === toId);
+                    .then(() => {
+                        let moveTo = this.walletsTypes.find(type => type.id === toId);
 
-                            let moveFrom = this.walletsTypes.find(type => type.id === fromId);
+                        let moveFrom = this.walletsTypes.find(type => type.id === fromId);
 
-                            moveFrom.wallets = moveFrom.wallets.filter((w) => {
-                                return !wallets.find(item => item.id === w.id);
-                            });
-
-                            wallets.forEach((w) => {
-                                w.is_active = 1;
-                                moveTo.wallets.push(w)
-                            });
+                        moveFrom.wallets = moveFrom.wallets.filter((w) => {
+                            return !wallets.find(item => item.id === w.id);
                         });
+
+                        wallets.forEach((w) => {
+                            w.is_active = 1;
+                            moveTo.wallets.push(w)
+                        });
+                    });
             },
 
-            executeMassAction () {
+            executeMassAction() {
                 Vue.ls.set('wallets', this.selected);
                 Vue.ls.set('action', this.massAction);
 
                 this.$router.push({path: `/finance/qiwi/mass-action`});
             },
-            removeFromType (wallets, fromId) {
+            removeFromType(wallets, fromId) {
 
             }
         },
         computed: {
-            inactive () {
+            inactive() {
                 let inactive = {name: 'Неактивные киви', wallets: [], selected: []};
 
                 this.walletsTypes.forEach((type) => {

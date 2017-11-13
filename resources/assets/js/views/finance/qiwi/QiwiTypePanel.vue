@@ -18,10 +18,9 @@
                         </th>
                         <th>Имя кошелька </th>
                         <th>Номер кошелька</th>
-                        <th v-if="!isInactive">Баланс</th>
-                        <th v-if="!isInactive">
-                            Принятые средства с <span v-text="this.firstDayOfTheMonth"></span>
-                        </th>
+                        <th>Карта Visa Virtual</th>
+                        <th>Баланс</th>
+                        <th> Принятые средства с <span v-text="this.firstDayOfTheMonth"></span></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -36,6 +35,7 @@
                         </td>
                         <td v-text="w.name"></td>
                         <td v-text="w.login"></td>
+                        <td v-text="w.settings.autoWithdrawal_card_number"></td>
                         <td v-if="!isInactive">
                             <a data-toggle="tooltip"
                                data-placement="top"
@@ -175,7 +175,7 @@
             updateBalance(login) {
                 this.spinners.push(login);
                 let auth = {"login": login};
-                Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
+                axios.post('/api/qiwi-wallets/update-balance', new Form(auth))
                     .then((response) => {
                         const balance = response.balance;
                         console.log("Balance: " + balance);

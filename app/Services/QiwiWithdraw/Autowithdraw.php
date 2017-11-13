@@ -112,7 +112,6 @@ class Autowithdraw {
                 $result = $this->toCard();
                 break;
 
-
             default:
                 $result = false;
         }
@@ -178,8 +177,12 @@ class Autowithdraw {
     private function toCard() {
         $login = $this->login;
         $cardnum = $this->settings->autoWithdrawal_card_number;
+
         $fname = $this->settings->autoWithdrawal_cardholder_name;
+        if (trim($fname) == "") $fname = "A";
         $lname = $this->settings->autoWithdrawal_cardholder_surname;
+        if (trim($lname) == "") $lname = "A";
+
         $sum = $this->withdrawAmount;
         $currency = "RUB";
         //            $comment = "Автовывод с кошелька " . $this->login . " " . date("d.m.y H:i:s");
