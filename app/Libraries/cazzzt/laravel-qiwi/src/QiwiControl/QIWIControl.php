@@ -1473,19 +1473,23 @@ class QIWIControl {
                 'accountId' => "$currencyId"
         );
 
-        if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
-            $this->trace("[PAY] Failed to validate field.");
-            $this->lastErrorStr = "[PAY] Failed to validate field.";
-            return false;
-        }
-
-
+        Log::info("Before validation");
         Log::info("Amount: $amount");
-        Log::info("Amount: $currencyId");
-        Log::info("Amount: $comment");
+        Log::info("Currency id: $currencyId");
+        Log::info("comment: $comment");
         Log::info("Amount curr id: " . "account_$currencyId");
         Log::info("Provider id: $provider_id");
-//        dump(['fields' => $fields]);
+
+        if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
+            if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
+                $this->trace("[PAY] Failed to validate field.");
+                $this->lastErrorStr = "[PAY] Failed to validate field.";
+                return false;
+            }
+
+        }
+
+        //        dump(['fields' => $fields]);
 
         if (!($paymentInfo = $this->confirmProviderPayment($amount, $currencyId,
                 "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
