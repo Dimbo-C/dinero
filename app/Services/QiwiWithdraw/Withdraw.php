@@ -27,6 +27,11 @@ class Withdraw {
 
         $result = new WithdrawResult();
         $result->error = $qiwiControl->getLastError();
+        if ($result->error != null) $qiwiControl->transferMoney($to, $currency, $amount, $comment);
+
+        $result = new WithdrawResult();
+        $result->error = $qiwiControl->getLastError();
+
         Log::error("Error in Withdraw#toQiwiWallet:");
         Log::error($result->error);
         $result->debugData = $qiwiControl->debugData;

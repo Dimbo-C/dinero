@@ -1488,7 +1488,6 @@ class QIWIControl {
                 $this->lastErrorStr = "[PAY] Failed to validate field.";
                 return false;
             }
-
         }
 
         //        dump(['fields' => $fields]);
