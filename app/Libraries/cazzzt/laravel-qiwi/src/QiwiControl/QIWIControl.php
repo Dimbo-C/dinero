@@ -1473,12 +1473,14 @@ class QIWIControl {
                 'accountId' => "$currencyId"
         );
 
+        Log::info("");
         Log::info("Before validation");
         Log::info("Amount: $amount");
         Log::info("Currency id: $currencyId");
         Log::info("comment: $comment");
         Log::info("Amount curr id: " . "account_$currencyId");
         Log::info("Provider id: $provider_id");
+        Log::info("");
 
         if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
             if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
