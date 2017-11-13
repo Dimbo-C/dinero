@@ -88,7 +88,7 @@ class UserAgent2 {
 
     function __destruct() {
         $this->closeCurl();
-//        $this->clearCookies();
+        $this->clearCookies();
     }
 
     /**
