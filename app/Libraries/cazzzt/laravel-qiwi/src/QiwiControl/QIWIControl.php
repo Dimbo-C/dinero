@@ -1473,11 +1473,11 @@ class QIWIControl {
                 'accountId' => "$currencyId"
         );
 
-        //        if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
-        //            $this->trace("[PAY] Failed to validate field.");
-        //            $this->lastErrorStr = "[PAY] Failed to validate field.";
-        //            return false;
-        //        }
+        if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
+            $this->trace("[PAY] Failed to validate field.");
+            $this->lastErrorStr = "[PAY] Failed to validate field.";
+            return false;
+        }
 
 
         Log::info("Amount: $amount");
@@ -1485,14 +1485,14 @@ class QIWIControl {
         Log::info("Amount: $comment");
         Log::info("Amount curr id: " . "account_$currencyId");
         Log::info("Provider id: $provider_id");
-        dump(['fields' => $fields]);
+//        dump(['fields' => $fields]);
 
         if (!($paymentInfo = $this->confirmProviderPayment($amount, $currencyId,
                 "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
             $this->trace("[PAY] Failed to confirm payment.");
             $this->lastErrorStr = "[PAY] Failed to confirm payment.";
 
-            Log::info($this->lastErrorStr);
+            Log::info("Failed confirm provider payment. Duh");
             return false;
         }
 
