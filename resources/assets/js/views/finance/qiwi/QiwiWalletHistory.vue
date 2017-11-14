@@ -185,8 +185,20 @@
                     fullMonthName: true,
                     mondayFirst: true,
                     highlighted: {
-                        days: [1, 3, 5, 0]
-                    }
+//                        days: [1, 3, 5, 0]
+                        customPredictor: date => {
+                            const dateStart = this.$data.state.dateStart;
+                            const dateEnd = this.$data.state.dateEnd;
+
+                            const startMs = (new Date(dateStart)).getTime();
+                            const endMs = (new Date(dateEnd)).getTime();
+                            const argMs = (new Date(date)).getTime();
+
+                            if (argMs >= startMs && argMs <= endMs) {
+                                return true;
+                            }
+                        }
+                    },
                 },
                 isLoaded: false,
                 transactions: [],

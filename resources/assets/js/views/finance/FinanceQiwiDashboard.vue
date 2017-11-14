@@ -1,5 +1,6 @@
 <template>
     <div>
+        <vue-progress-bar></vue-progress-bar>
         <page-header icon="fa-money" title="Панель управления">
             <li>
                 <a class="disabled">Финансы</a>
@@ -48,6 +49,10 @@
                 </span>
             </div>
 
+            <transition name="fade">
+
+            </transition>
+
 
             <qiwi-type-panel v-for="type in walletsTypes"
                              :key="type.id"
@@ -65,17 +70,23 @@
             </qiwi-type-panel>
         </div>
     </div>
+
 </template>
 
 <script>
     import QiwiTypePanel from './qiwi/QiwiTypePanel.vue';
+    import 'babel-polyfill';
+    //    Vue.component('vue-progress-bar', VueProgressBar);
 
     export default {
         components: {QiwiTypePanel},
         mounted() {
+
             Vue.ls.set('actions', this.actions);
             this.fetchWallets();
+            this.runningLine();
         },
+
         data() {
             return {
                 actions: {
@@ -88,19 +99,19 @@
                     remove: "Удалить"
                 },
                 massAction: "",
-
-                searchQuery: '',
+                searchQuery: "",
                 walletsIsLoaded: false,
                 walletsTypes: null,
                 selected: [],
-
             };
         },
+
         watch: {
             filter() {
 
             }
         },
+
         methods: {
             updateSelected(selected) {
                 if (selected.length === 0) return;
@@ -109,7 +120,9 @@
                 let walletsWithoutThisType = this.selected.filter((wallet) => wallet.type_id !== typeId);
                 this.selected = walletsWithoutThisType.concat(selected);
             },
+
             fetchWallets() {
+                this.$Progress.start();
                 axios.get('/api/qiwi-wallets')
                     .then((response) => {
                         console.log(response);
@@ -117,7 +130,21 @@
                         this.walletsIsLoaded = true;
 
                         Bus.$emit('initTooltip');
+                        this.$Progress.finish();
                     })
+            },
+
+            async runningLine() {
+                while (true) {
+                    await this.sleep(10000);
+                    this.fetchWallets();
+
+                    console.log("Updated!");
+                }
+            },
+
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
             },
 
             moveWallets(wallets, fromId, toId) {
@@ -146,9 +173,6 @@
 
                 this.$router.push({path: `/finance/qiwi/mass-action`});
             },
-            removeFromType(wallets, fromId) {
-
-            }
         },
         computed: {
             inactive() {

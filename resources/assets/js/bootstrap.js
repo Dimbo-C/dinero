@@ -5,13 +5,19 @@ import moment from "moment";
 import VueLocalStorage from "vue-ls";
 import VTooltip from "v-tooltip";
 import BootstrapVue from "bootstrap-vue"
-
 import {Pagination} from "vue-pagination-2";
+import VueProgressBar from "vue-progressbar";
+
 
 window.VueLocalStorage = VueLocalStorage;
 Vue.use(BootstrapVue);
 Vue.use(VueLocalStorage);
 Vue.use(VTooltip);
+Vue.use(VueProgressBar, {
+    color: 'rgb(143, 255, 199)',
+    failedColor: 'red',
+    height: '2px'
+});
 
 window.Bus = new Vue();
 

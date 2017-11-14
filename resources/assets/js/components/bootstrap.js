@@ -14,6 +14,7 @@ Vue.component('page-header', PageHeader);
 Vue.component('navbar', Navbar);
 Vue.component('loading', Loading);
 Vue.component('modal', Modal);
+
 Vue.component('qiwi-wallet-general-settings', QiwiWalletGeneralSettings);
 Vue.component('qiwi-wallet-security-settings', QiwiWalletSecuritySettings);
 Vue.component('qiwi-wallet-identification', QiwiWalletIdentification);
