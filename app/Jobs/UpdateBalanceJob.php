@@ -2,27 +2,27 @@
 
 namespace App\Jobs;
 
+use App\Helpers\QiwiGeneralHelper;
 use App\QiwiWallet;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Mockery\Exception;
 
 class UpdateBalanceJob implements ShouldQueue {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /* @var QiwiWallet */
-    private $wallet;
+    /* @var string */
+    private $login;
 
     /**
      * UpdateBalanceJob constructor.
      * @param $login
      */
     public function __construct($login) {
-        $this->wallet = QiwiWallet::findByLogin($login);
+        $this->login = $login;
     }
 
     /**
@@ -31,12 +31,16 @@ class UpdateBalanceJob implements ShouldQueue {
      * @return void
      */
     public function handle() {
-        if ($this->wallet == null) {
-            Log::error("Wallet not found in Update balance job");
-            throw new Exception("Nigger please stay in field and grab dem shovel");
-        }
+        //        if ($this->wallet == null) {
+        //            Log::error("Wallet not found in Update balance job");
+        //            throw new Exception("Nigger please stay in field and grab dem shovel");
+        //        }
 
-        dump($this->wallet);
+        $monthIncome = QiwiGeneralHelper::getMonthIncome($this->login);
+
+        $wallet = QiwiWallet::findByLogin($this->login);
+        $wallet->updateIncome($monthIncome);
+        dump($wallet);
     }
 
     public function failed() {
