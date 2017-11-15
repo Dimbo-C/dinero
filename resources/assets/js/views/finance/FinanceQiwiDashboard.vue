@@ -81,7 +81,7 @@
     export default {
         components: {QiwiTypePanel},
         mounted() {
-
+            console.log(window.Dinero);
             Vue.ls.set('actions', this.actions);
             this.fetchWallets();
             this.runningLine();

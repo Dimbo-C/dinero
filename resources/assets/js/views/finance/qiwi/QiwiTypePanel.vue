@@ -156,7 +156,7 @@
                 if (this.spinners.includes(login)) {
                     return "...";
                 } else {
-                    return this.tidySum(balance) + " руб.";
+                    return this.tidySum(balance) + " " + Dinero.currencySymbol;
                 }
             },
             moveWallets() {

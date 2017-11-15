@@ -33,9 +33,11 @@
                                     <p class="small">Данная конвертация примерная,
                                         разница в курсах может быть значительной от бирже к бирже</p>
                                     <button class="btn btn-default"
-                                            @click="showModal('modal-take-bitcoin')">Принять</button>
+                                            @click="showModal('modal-take-bitcoin')">Принять
+                                    </button>
                                     <button class="btn btn-default"
-                                            @click="showModal('modal-send-bitcoin')">Отправить</button>
+                                            @click="showModal('modal-send-bitcoin')">Отправить
+                                    </button>
                                     <router-link to="/finance/history/bitcoin" class="btn btn-default">
                                         История транзакций
                                     </router-link>
@@ -55,10 +57,18 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr><td>Оборот за месяц (руб.):</td></tr>
-                                        <tr><td>Оборот за сегодня:</td></tr>
-                                        <tr><td>Оборот за вчера:</td></tr>
-                                        <tr><td>Доступные к выводу средства (на данный момент):</td></tr>
+                                        <tr>
+                                            <td>Оборот за месяц ({{currencySymbol}}):</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Оборот за сегодня:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Оборот за вчера:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Доступные к выводу средства (на данный момент):</td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -79,14 +89,20 @@
     import SendBitcoinModal from './SendBitcoinModal.vue';
 
     export default {
-      components: {
-        TakeBitcoinModal,
-        SendBitcoinModal
-      },
-      methods: {
-        showModal(id) {
-          $(`#${id}`).modal('show');
+        components: {
+            TakeBitcoinModal,
+            SendBitcoinModal
+        },
+        methods: {
+            showModal(id) {
+                $(`#${id}`).modal('show');
+            }
+        },
+        data() {
+            return {
+                currencySymbol: Dinero.currencySymbol
+            }
+
         }
-      },
     };
 </script>

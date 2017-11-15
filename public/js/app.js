@@ -14159,20 +14159,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    TakeBitcoinModal: __WEBPACK_IMPORTED_MODULE_0__TakeBitCoinModal_vue___default.a,
-    SendBitcoinModal: __WEBPACK_IMPORTED_MODULE_1__SendBitcoinModal_vue___default.a
-  },
-  methods: {
-    showModal: function showModal(id) {
-      $('#' + id).modal('show');
+    components: {
+        TakeBitcoinModal: __WEBPACK_IMPORTED_MODULE_0__TakeBitCoinModal_vue___default.a,
+        SendBitcoinModal: __WEBPACK_IMPORTED_MODULE_1__SendBitcoinModal_vue___default.a
+    },
+    methods: {
+        showModal: function showModal(id) {
+            $('#' + id).modal('show');
+        }
+    },
+    data: function data() {
+        return {
+            currencySymbol: Dinero.currencySymbol
+        };
     }
-  }
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
 
@@ -14535,7 +14550,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Принять")]
+                          [_vm._v("Принять\n                                ")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -14548,7 +14563,11 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Отправить")]
+                          [
+                            _vm._v(
+                              "Отправить\n                                "
+                            )
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -14569,7 +14588,40 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(1)
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane",
+                    attrs: { role: "tabpanel", id: "qiwi" }
+                  },
+                  [
+                    _c("div", { staticClass: "p-md" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("table", { staticClass: "table" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("tbody", [
+                          _c("tr", [
+                            _c("td", [
+                              _vm._v(
+                                "Оборот за месяц (" +
+                                  _vm._s(_vm.currencySymbol) +
+                                  "):"
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _vm._m(4),
+                          _vm._v(" "),
+                          _vm._m(5)
+                        ])
+                      ])
+                    ])
+                  ]
+                )
               ])
             ])
           ])
@@ -14633,43 +14685,43 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "tab-pane", attrs: { role: "tabpanel", id: "qiwi" } },
-      [
-        _c("div", { staticClass: "p-md" }, [
-          _c("p", [
-            _c("button", { staticClass: "btn btn-default" }, [
-              _vm._v("Панель управления")
-            ]),
-            _vm._v(" "),
-            _c("button", { staticClass: "btn btn-default" }, [
-              _vm._v("Персональный просмотр")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("table", { staticClass: "table" }, [
-            _c("thead", [
-              _c("tr", [_c("th", [_vm._v("Финасовая информация:")])])
-            ]),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [_c("td", [_vm._v("Оборот за месяц (руб.):")])]),
-              _vm._v(" "),
-              _c("tr", [_c("td", [_vm._v("Оборот за сегодня:")])]),
-              _vm._v(" "),
-              _c("tr", [_c("td", [_vm._v("Оборот за вчера:")])]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", [
-                  _vm._v("Доступные к выводу средства (на данный момент):")
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
+    return _c("p", [
+      _c("button", { staticClass: "btn btn-default" }, [
+        _vm._v("Панель управления")
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-default" }, [
+        _vm._v("Персональный просмотр")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [_c("th", [_vm._v("Финасовая информация:")])])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [_c("td", [_vm._v("Оборот за сегодня:")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [_c("td", [_vm._v("Оборот за вчера:")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", [_vm._v("Доступные к выводу средства (на данный момент):")])
+    ])
   }
 ]
 render._withStripped = true
@@ -22037,7 +22089,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: { QiwiTypePanel: __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue___default.a },
     mounted: function mounted() {
-
+        console.log(window.Dinero);
         Vue.ls.set('actions', this.actions);
         this.fetchWallets();
         this.runningLine();
@@ -22458,7 +22510,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (this.spinners.includes(login)) {
                 return "...";
             } else {
-                return this.tidySum(balance) + " руб.";
+                return this.tidySum(balance) + " " + Dinero.currencySymbol;
             }
         },
         moveWallets: function moveWallets() {

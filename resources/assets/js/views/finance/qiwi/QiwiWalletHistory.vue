@@ -298,6 +298,7 @@
                 const nextPageNumber = this.dateRange.page + 1;
                 this.fetchReport(nextPageNumber);
             },
+
             prevPage() {
                 const prevPageNumber = this.dateRange.page === 1
                     ? this.dateRange.page
