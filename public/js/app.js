@@ -22575,7 +22575,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             axios.post('/api/qiwi-wallets/' + login + '/auto-withdraw').then(function (response) {
                 Bus.$emit('showNotification', "success", "Автовывод успешно проведен");
-                _this4.updateWallet(login);
+                //                        this.updateWallet(login);
             }).catch(function (error) {
                 var status = error.response.status;
                 if (status === 400) {

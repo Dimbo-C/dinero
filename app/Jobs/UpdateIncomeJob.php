@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class UpdateBalanceJob implements ShouldQueue {
+class UpdateIncomeJob implements ShouldQueue {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /* @var string */
@@ -31,14 +31,15 @@ class UpdateBalanceJob implements ShouldQueue {
      * @return void
      */
     public function handle() {
-        $balance = QiwiGeneralHelper::getBalance($this->login);
-        $wallet = QiwiWallet::findByLogin($this->login);
-        if ($balance != null) $wallet->updateBalance($balance);
+        $monthIncome = QiwiGeneralHelper::getMonthIncome($this->login);
 
+        $wallet = QiwiWallet::findByLogin($this->login);
+        $wallet->updateIncome($monthIncome);
+        Log::info("I am in update job");
         dump($wallet);
     }
 
     public function failed() {
-        Log::error("Error in UpdateBalanceJob");
+        Log::error("Error in UpdateIncomeJob");
     }
 }

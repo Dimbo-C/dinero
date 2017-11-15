@@ -223,7 +223,7 @@
                 axios.post(`/api/qiwi-wallets/${login}/auto-withdraw`)
                     .then(response => {
                         Bus.$emit('showNotification', "success", "Автовывод успешно проведен");
-                        this.updateWallet(login);
+//                        this.updateWallet(login);
                     })
                     .catch(error => {
                         const status = error.response.status;

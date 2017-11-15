@@ -5,10 +5,11 @@ namespace App\Services;
 use App\AutowithdrawTypes;
 use App\Helpers\MoneyHelper;
 use App\Helpers\QiwiGeneralHelper;
+use App\Jobs\UpdateBalanceJob;
+use App\Jobs\UpdateIncomeJob;
 use App\QiwiWallet;
 use App\QiwiWalletSettings;
 use App\QiwiWalletType;
-use App\Repositories\QiwiWalletRepository;
 use Illuminate\Support\Facades\Log;
 
 define("AUTOWITHDRAW_EVERY_X_MINUTES", 1);
@@ -72,6 +73,7 @@ class Autowithdraw {
 
         // update timer if action was successful
         if ($success) {
+            $this->postWithdrawRoutine();
             $this->settings->updateWithdrawalTimer();
         }
 
@@ -115,20 +117,22 @@ class Autowithdraw {
             default:
                 $result = false;
         }
-        $this->postWithdrawRoutine();
 
         return $result;
     }
 
     private function postWithdrawRoutine() {
         Log::info("Post withdraw routine");
-        $control = QiwiGeneralHelper::getQiwiControlObject($this->wallet->login);
-
-        $newBalance = $control->loadBalance()['RUB'];
-        $this->wallet->updateBalance($newBalance);
-
-        $monthIncome = QiwiGeneralHelper::getMonthIncome($this->wallet->login);
-        $this->wallet->updateIncome($monthIncome);
+        //        $control = QiwiGeneralHelper::getQiwiControlObject($this->wallet->login);
+        $updateBalanceJob = new UpdateBalanceJob($this->wallet->login);
+        $updateIncomeJob = new UpdateIncomeJob($this->wallet->login);
+        dispatch($updateBalanceJob);
+        dispatch($updateIncomeJob);
+        //        $newBalance = $control->loadBalance()['RUB'];
+        //        $this->wallet->updateBalance($newBalance);
+        //
+        //        $monthIncome = QiwiGeneralHelper::getMonthIncome($this->wallet->login);
+        //        $this->wallet->updateIncome($monthIncome);
     }
 
     // all necessary checks before proceeding to executing auto withdraw
