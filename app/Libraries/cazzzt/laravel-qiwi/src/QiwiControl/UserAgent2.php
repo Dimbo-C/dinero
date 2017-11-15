@@ -78,8 +78,8 @@ class UserAgent2 {
         curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($this->ch, CURLOPT_ENCODING, '');
         curl_setopt($this->ch, CURLOPT_HEADER, 1);
-        //        curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT ,0);
-        //        curl_setopt($this->ch, CURLOPT_TIMEOUT, 400); //timeout in seconds
+        curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($this->ch, CURLOPT_TIMEOUT, 400); //timeout in seconds
     }
 
     function closeCurl() {
