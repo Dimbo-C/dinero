@@ -87,6 +87,10 @@
             this.runningLine();
         },
 
+        beforeDestroy() {
+            this.updatingWalletsRoutine = false;
+        },
+
         data() {
             return {
                 actions: {
@@ -103,6 +107,7 @@
                 walletsIsLoaded: false,
                 walletsTypes: null,
                 selected: [],
+                updatingWalletsRoutine: true
             };
         },
 
@@ -137,6 +142,8 @@
             async runningLine() {
                 while (true) {
                     await this.sleep(10000);
+                    if (!this.updatingWalletsRoutine) break;
+
                     this.fetchWallets();
 
                     console.log("Updated!");

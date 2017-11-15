@@ -5843,7 +5843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(318);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bootstrap__ = __webpack_require__(711);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bootstrap__ = __webpack_require__(710);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_bootstrap__ = __webpack_require__(759);
 
 
@@ -5958,9 +5958,9 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__views_finance_qiwi_QiwiWalletWithdraw_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__views_finance_qiwi_QiwiWalletWithdraw_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__views_finance_FinanceQiwiDashboard_vue__ = __webpack_require__(492);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__views_finance_FinanceQiwiDashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__views_finance_FinanceQiwiDashboard_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__views_finance_qiwi_QiwiMassAction_vue__ = __webpack_require__(703);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__views_finance_qiwi_QiwiMassAction_vue__ = __webpack_require__(702);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__views_finance_qiwi_QiwiMassAction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__views_finance_qiwi_QiwiMassAction_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__views_finance_qiwi_QiwiEggs_vue__ = __webpack_require__(708);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__views_finance_qiwi_QiwiEggs_vue__ = __webpack_require__(707);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__views_finance_qiwi_QiwiEggs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__views_finance_qiwi_QiwiEggs_vue__);
 
 
@@ -21903,7 +21903,7 @@ var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(493)
 /* template */
-var __vue_template__ = __webpack_require__(702)
+var __vue_template__ = __webpack_require__(701)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -22042,6 +22042,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         this.fetchWallets();
         this.runningLine();
     },
+    beforeDestroy: function beforeDestroy() {
+        this.updatingWalletsRoutine = false;
+    },
     data: function data() {
         return {
             actions: {
@@ -22057,7 +22060,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             searchQuery: "",
             walletsIsLoaded: false,
             walletsTypes: null,
-            selected: []
+            selected: [],
+            updatingWalletsRoutine: true
         };
     },
 
@@ -22096,7 +22100,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context.prev = _context.next) {
                             case 0:
                                 if (false) {
-                                    _context.next = 7;
+                                    _context.next = 9;
                                     break;
                                 }
 
@@ -22104,13 +22108,22 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 return this.sleep(10000);
 
                             case 3:
+                                if (this.updatingWalletsRoutine) {
+                                    _context.next = 5;
+                                    break;
+                                }
+
+                                return _context.abrupt('break', 9);
+
+                            case 5:
+
                                 this.fetchWallets();
 
                                 console.log("Updated!");
                                 _context.next = 0;
                                 break;
 
-                            case 7:
+                            case 9:
                             case 'end':
                                 return _context.stop();
                         }
@@ -28175,180 +28188,6 @@ module.exports = function (regExp, replace) {
 /* 701 */
 /***/ (function(module, exports, __webpack_require__) {
 
-!function (t, o) {
-     true ? o() : "function" == typeof define && define.amd ? define(o) : o()
-}(0, function () {
-    "use strict";
-
-    function t(t, o) {
-        for (var i, e, s = 1; s < arguments.length; ++s) {
-            e = arguments[s];
-            for (i in e) Object.prototype.hasOwnProperty.call(e, i) && (t[i] = e[i])
-        }
-        return t
-    }
-
-    !function () {
-        if ("undefined" != typeof document) {
-            var t = document.head || document.getElementsByTagName("head")[0], o = document.createElement("style"),
-                i = " .__cov-progress { position: fixed; opacity: 1; z-index: 999999; } ";
-            o.type = "text/css", o.styleSheet ? o.styleSheet.cssText = i : o.appendChild(document.createTextNode(i)), t.appendChild(o)
-        }
-    }();
-    var o = "undefined" != typeof window, i = {
-        render: function () {
-            var t = this, o = t.$createElement;
-            return (t._self._c || o)("div", {staticClass: "__cov-progress", style: t.style})
-        }, staticRenderFns: [], name: "VueProgress", serverCacheKey: function () {
-            return "Progress"
-        }, computed: {
-            style: function () {
-                var t = this.progress.options.location, o = {
-                    "background-color": this.progress.options.canSuccess ? this.progress.options.color : this.progress.options.failedColor,
-                    opacity: this.progress.options.show ? 1 : 0
-                };
-                return "top" == t || "bottom" == t ? ("top" === t ? o.top = "0px" : o.bottom = "0px", this.progress.options.inverse ? o.right = "0px" : o.left = "0px", o.width = this.progress.percent + "%", o.height = this.progress.options.thickness, o.transition = "width " + this.progress.options.transition.speed + ", opacity " + this.progress.options.transition.opacity) : "left" != t && "right" != t || ("left" === t ? o.left = "0px" : o.right = "0px", this.progress.options.inverse ? o.top = "0px" : o.bottom = "0px", o.height = this.progress.percent + "%", o.width = this.progress.options.thickness, o.transition = "height " + this.progress.options.transition.speed + ", opacity " + this.progress.options.transition.opacity), o
-            }, progress: function () {
-                return o ? window.VueProgressBarEventBus.RADON_LOADING_BAR : {
-                    percent: 0,
-                    options: {
-                        canSuccess: !0,
-                        show: !1,
-                        color: "rgb(19, 91, 55)",
-                        failedColor: "red",
-                        thickness: "2px",
-                        transition: {speed: "0.2s", opacity: "0.6s", termination: 300},
-                        location: "top",
-                        autoRevert: !0,
-                        inverse: !1
-                    }
-                }
-            }
-        }
-    };
-    module.exports.install = function (o) {
-        var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-            s = (o.version.split(".")[0], "undefined" != typeof window), n = {
-                $vm: null, state: {tFailColor: "", tColor: "", timer: null, cut: 0}, init: function (t) {
-                    this.$vm = t
-                }, start: function (t) {
-                    var o = this;
-                    this.$vm && (t || (t = 3e3), this.$vm.RADON_LOADING_BAR.percent = 0, this.$vm.RADON_LOADING_BAR.options.show = !0, this.$vm.RADON_LOADING_BAR.options.canSuccess = !0, this.state.cut = 1e4 / Math.floor(t), clearInterval(this.state.timer), this.state.timer = setInterval(function () {
-                        o.increase(o.state.cut * Math.random()), o.$vm.RADON_LOADING_BAR.percent > 95 && o.finish()
-                    }, 100))
-                }, set: function (t) {
-                    this.$vm.RADON_LOADING_BAR.options.show = !0, this.$vm.RADON_LOADING_BAR.options.canSuccess = !0, this.$vm.RADON_LOADING_BAR.percent = Math.floor(t)
-                }, get: function () {
-                    return Math.floor(this.$vm.RADON_LOADING_BAR.percent)
-                }, increase: function (t) {
-                    this.$vm.RADON_LOADING_BAR.percent = this.$vm.RADON_LOADING_BAR.percent + Math.floor(t)
-                }, decrease: function (t) {
-                    this.$vm.RADON_LOADING_BAR.percent = this.$vm.RADON_LOADING_BAR.percent - Math.floor(t)
-                }, hide: function () {
-                    var t = this;
-                    clearInterval(this.state.timer), this.state.timer = null, setTimeout(function () {
-                        t.$vm.RADON_LOADING_BAR.options.show = !1, o.nextTick(function () {
-                            setTimeout(function () {
-                                t.$vm.RADON_LOADING_BAR.percent = 0
-                            }, 100), t.$vm.RADON_LOADING_BAR.options.autoRevert && setTimeout(function () {
-                                t.revert()
-                            }, 300)
-                        })
-                    }, this.$vm.RADON_LOADING_BAR.options.transition.termination)
-                }, pause: function () {
-                    clearInterval(this.state.timer)
-                }, finish: function () {
-                    this.$vm && (this.$vm.RADON_LOADING_BAR.percent = 100, this.hide())
-                }, fail: function () {
-                    this.$vm.RADON_LOADING_BAR.options.canSuccess = !1, this.$vm.RADON_LOADING_BAR.percent = 100, this.hide()
-                }, setFailColor: function (t) {
-                    this.$vm.RADON_LOADING_BAR.options.failedColor = t
-                }, setColor: function (t) {
-                    this.$vm.RADON_LOADING_BAR.options.color = t
-                }, setLocation: function (t) {
-                    this.$vm.RADON_LOADING_BAR.options.location = t
-                }, setTransition: function (t) {
-                    this.$vm.RADON_LOADING_BAR.options.transition = t
-                }, tempFailColor: function (t) {
-                    this.state.tFailColor = this.$vm.RADON_LOADING_BAR.options.failedColor, this.$vm.RADON_LOADING_BAR.options.failedColor = t
-                }, tempColor: function (t) {
-                    this.state.tColor = this.$vm.RADON_LOADING_BAR.options.color, this.$vm.RADON_LOADING_BAR.options.color = t
-                }, tempLocation: function (t) {
-                    this.state.tLocation = this.$vm.RADON_LOADING_BAR.options.location, this.$vm.RADON_LOADING_BAR.options.location = t
-                }, tempTransition: function (t) {
-                    this.state.tTransition = this.$vm.RADON_LOADING_BAR.options.transition, this.$vm.RADON_LOADING_BAR.options.transition = t
-                }, revertColor: function () {
-                    this.$vm.RADON_LOADING_BAR.options.color = this.state.tColor, this.state.tColor = ""
-                }, revertFailColor: function () {
-                    this.$vm.RADON_LOADING_BAR.options.failedColor = this.state.tFailColor, this.state.tFailColor = ""
-                }, revertLocation: function () {
-                    this.$vm.RADON_LOADING_BAR.options.location = this.state.tLocation, this.state.tLocation = ""
-                }, revertTransition: function () {
-                    this.$vm.RADON_LOADING_BAR.options.transition = this.state.tTransition, this.state.tTransition = {}
-                }, revert: function () {
-                    this.$vm.RADON_LOADING_BAR.options.autoRevert && (this.state.tColor && this.revertColor(), this.state.tFailColor && this.revertFailColor(), this.state.tLocation && this.revertLocation(), !this.state.tTransition || void 0 === this.state.tTransition.speed && void 0 === this.state.tTransition.opacity || this.revertTransition())
-                }, parseMeta: function (t) {
-                    for (var o in t.func) {
-                        var i = t.func[o];
-                        switch (i.call) {
-                            case"color":
-                                switch (i.modifier) {
-                                    case"set":
-                                        this.setColor(i.argument);
-                                        break;
-                                    case"temp":
-                                        this.tempColor(i.argument)
-                                }
-                                break;
-                            case"fail":
-                                switch (i.modifier) {
-                                    case"set":
-                                        this.setFailColor(i.argument);
-                                        break;
-                                    case"temp":
-                                        this.tempFailColor(i.argument)
-                                }
-                                break;
-                            case"location":
-                                switch (i.modifier) {
-                                    case"set":
-                                        this.setLocation(i.argument);
-                                        break;
-                                    case"temp":
-                                        this.tempLocation(i.argument)
-                                }
-                                break;
-                            case"transition":
-                                switch (i.modifier) {
-                                    case"set":
-                                        this.setTransition(i.argument);
-                                        break;
-                                    case"temp":
-                                        this.tempTransition(i.argument)
-                                }
-                        }
-                    }
-                }
-            }, r = t({
-                canSuccess: !0,
-                show: !1,
-                color: "#73ccec",
-                failedColor: "red",
-                thickness: "2px",
-                transition: {speed: "0.2s", opacity: "0.6s", termination: 300},
-                autoRevert: !0,
-                location: "top",
-                inverse: !1
-            }, e), a = new o({data: {RADON_LOADING_BAR: {percent: 0, options: r}}});
-        s && (window.VueProgressBarEventBus = a, n.init(a)), o.component("vue-progress-bar", i), o.prototype.$Progress = n
-    }
-});
-
-
-/***/ }),
-/* 702 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -28543,19 +28382,19 @@ if (false) {
 }
 
 /***/ }),
-/* 703 */
+/* 702 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(704)
+  __webpack_require__(703)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(706)
+var __vue_script__ = __webpack_require__(705)
 /* template */
-var __vue_template__ = __webpack_require__(707)
+var __vue_template__ = __webpack_require__(706)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28595,13 +28434,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 704 */
+/* 703 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(705);
+var content = __webpack_require__(704);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -28621,7 +28460,7 @@ if(false) {
 }
 
 /***/ }),
-/* 705 */
+/* 704 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(50)(undefined);
@@ -28635,7 +28474,7 @@ exports.push([module.i, "\n.body-header[data-v-3d0778be] {\n    padding: 15px 0;
 
 
 /***/ }),
-/* 706 */
+/* 705 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28742,7 +28581,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 707 */
+/* 706 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -28889,15 +28728,15 @@ if (false) {
 }
 
 /***/ }),
-/* 708 */
+/* 707 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(709)
+var __vue_script__ = __webpack_require__(708)
 /* template */
-var __vue_template__ = __webpack_require__(710)
+var __vue_template__ = __webpack_require__(709)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28937,7 +28776,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 709 */
+/* 708 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29121,7 +28960,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 710 */
+/* 709 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -29402,7 +29241,7 @@ if (false) {
 }
 
 /***/ }),
-/* 711 */
+/* 710 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29414,13 +29253,13 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_ls__ = __webpack_require__(730);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_ls__ = __webpack_require__(729);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_ls___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vue_ls__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_v_tooltip__ = __webpack_require__(731);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_bootstrap_vue__ = __webpack_require__(732);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_pagination_2__ = __webpack_require__(735);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_v_tooltip__ = __webpack_require__(730);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_bootstrap_vue__ = __webpack_require__(731);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_pagination_2__ = __webpack_require__(734);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_pagination_2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_vue_pagination_2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_vue_progressbar__ = __webpack_require__(701);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_vue_progressbar__ = __webpack_require__(737);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_vue_progressbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_vue_progressbar__);
 
 
@@ -29521,6 +29360,7 @@ __webpack_require__(743).shim();
 // });
 
 /***/ }),
+/* 711 */,
 /* 712 */,
 /* 713 */,
 /* 714 */,
@@ -29538,8 +29378,7 @@ __webpack_require__(743).shim();
 /* 726 */,
 /* 727 */,
 /* 728 */,
-/* 729 */,
-/* 730 */
+/* 729 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
@@ -30112,7 +29951,7 @@ return VueLocalStorage;
 
 
 /***/ }),
-/* 731 */
+/* 730 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -36414,12 +36253,12 @@ if (GlobalVue) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(32)))
 
 /***/ }),
-/* 732 */
+/* 731 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_popper_js__ = __webpack_require__(733);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_startcase__ = __webpack_require__(734);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_popper_js__ = __webpack_require__(732);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_startcase__ = __webpack_require__(733);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_startcase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_startcase__);
 
 
@@ -47674,7 +47513,7 @@ vueUse(VuePlugin);
 
 
 /***/ }),
-/* 733 */
+/* 732 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50116,7 +49955,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(32)))
 
 /***/ }),
-/* 734 */
+/* 733 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -50703,10 +50542,10 @@ module.exports = startCase;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
 
 /***/ }),
-/* 735 */
+/* 734 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Pagination = __webpack_require__(736);
+var Pagination = __webpack_require__(735);
 var PaginationEvent = __webpack_require__(302);
 
 module.exports = {
@@ -50716,7 +50555,7 @@ module.exports = {
 
 
 /***/ }),
-/* 736 */
+/* 735 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50724,7 +50563,7 @@ module.exports = {
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var template = __webpack_require__(737);
+var template = __webpack_require__(736);
 var bus = __webpack_require__(302);
 
 module.exports = {
@@ -50870,7 +50709,7 @@ function range(start, count) {
 }
 
 /***/ }),
-/* 737 */
+/* 736 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50977,6 +50816,180 @@ module.exports = function () {
     );
   };
 };
+
+/***/ }),
+/* 737 */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function (t, o) {
+     true ? o() : "function" == typeof define && define.amd ? define(o) : o()
+}(0, function () {
+    "use strict";
+
+    function t(t, o) {
+        for (var i, e, s = 1; s < arguments.length; ++s) {
+            e = arguments[s];
+            for (i in e) Object.prototype.hasOwnProperty.call(e, i) && (t[i] = e[i])
+        }
+        return t
+    }
+
+    !function () {
+        if ("undefined" != typeof document) {
+            var t = document.head || document.getElementsByTagName("head")[0], o = document.createElement("style"),
+                i = " .__cov-progress { position: fixed; opacity: 1; z-index: 999999; } ";
+            o.type = "text/css", o.styleSheet ? o.styleSheet.cssText = i : o.appendChild(document.createTextNode(i)), t.appendChild(o)
+        }
+    }();
+    var o = "undefined" != typeof window, i = {
+        render: function () {
+            var t = this, o = t.$createElement;
+            return (t._self._c || o)("div", {staticClass: "__cov-progress", style: t.style})
+        }, staticRenderFns: [], name: "VueProgress", serverCacheKey: function () {
+            return "Progress"
+        }, computed: {
+            style: function () {
+                var t = this.progress.options.location, o = {
+                    "background-color": this.progress.options.canSuccess ? this.progress.options.color : this.progress.options.failedColor,
+                    opacity: this.progress.options.show ? 1 : 0
+                };
+                return "top" == t || "bottom" == t ? ("top" === t ? o.top = "0px" : o.bottom = "0px", this.progress.options.inverse ? o.right = "0px" : o.left = "0px", o.width = this.progress.percent + "%", o.height = this.progress.options.thickness, o.transition = "width " + this.progress.options.transition.speed + ", opacity " + this.progress.options.transition.opacity) : "left" != t && "right" != t || ("left" === t ? o.left = "0px" : o.right = "0px", this.progress.options.inverse ? o.top = "0px" : o.bottom = "0px", o.height = this.progress.percent + "%", o.width = this.progress.options.thickness, o.transition = "height " + this.progress.options.transition.speed + ", opacity " + this.progress.options.transition.opacity), o
+            }, progress: function () {
+                return o ? window.VueProgressBarEventBus.RADON_LOADING_BAR : {
+                    percent: 0,
+                    options: {
+                        canSuccess: !0,
+                        show: !1,
+                        color: "rgb(19, 91, 55)",
+                        failedColor: "red",
+                        thickness: "2px",
+                        transition: {speed: "0.2s", opacity: "0.6s", termination: 300},
+                        location: "top",
+                        autoRevert: !0,
+                        inverse: !1
+                    }
+                }
+            }
+        }
+    };
+    module.exports.install = function (o) {
+        var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+            s = (o.version.split(".")[0], "undefined" != typeof window), n = {
+                $vm: null, state: {tFailColor: "", tColor: "", timer: null, cut: 0}, init: function (t) {
+                    this.$vm = t
+                }, start: function (t) {
+                    var o = this;
+                    this.$vm && (t || (t = 3e3), this.$vm.RADON_LOADING_BAR.percent = 0, this.$vm.RADON_LOADING_BAR.options.show = !0, this.$vm.RADON_LOADING_BAR.options.canSuccess = !0, this.state.cut = 1e4 / Math.floor(t), clearInterval(this.state.timer), this.state.timer = setInterval(function () {
+                        o.increase(o.state.cut * Math.random()), o.$vm.RADON_LOADING_BAR.percent > 95 && o.finish()
+                    }, 100))
+                }, set: function (t) {
+                    this.$vm.RADON_LOADING_BAR.options.show = !0, this.$vm.RADON_LOADING_BAR.options.canSuccess = !0, this.$vm.RADON_LOADING_BAR.percent = Math.floor(t)
+                }, get: function () {
+                    return Math.floor(this.$vm.RADON_LOADING_BAR.percent)
+                }, increase: function (t) {
+                    this.$vm.RADON_LOADING_BAR.percent = this.$vm.RADON_LOADING_BAR.percent + Math.floor(t)
+                }, decrease: function (t) {
+                    this.$vm.RADON_LOADING_BAR.percent = this.$vm.RADON_LOADING_BAR.percent - Math.floor(t)
+                }, hide: function () {
+                    var t = this;
+                    clearInterval(this.state.timer), this.state.timer = null, setTimeout(function () {
+                        t.$vm.RADON_LOADING_BAR.options.show = !1, o.nextTick(function () {
+                            setTimeout(function () {
+                                t.$vm.RADON_LOADING_BAR.percent = 0
+                            }, 100), t.$vm.RADON_LOADING_BAR.options.autoRevert && setTimeout(function () {
+                                t.revert()
+                            }, 300)
+                        })
+                    }, this.$vm.RADON_LOADING_BAR.options.transition.termination)
+                }, pause: function () {
+                    clearInterval(this.state.timer)
+                }, finish: function () {
+                    this.$vm && (this.$vm.RADON_LOADING_BAR.percent = 100, this.hide())
+                }, fail: function () {
+                    this.$vm.RADON_LOADING_BAR.options.canSuccess = !1, this.$vm.RADON_LOADING_BAR.percent = 100, this.hide()
+                }, setFailColor: function (t) {
+                    this.$vm.RADON_LOADING_BAR.options.failedColor = t
+                }, setColor: function (t) {
+                    this.$vm.RADON_LOADING_BAR.options.color = t
+                }, setLocation: function (t) {
+                    this.$vm.RADON_LOADING_BAR.options.location = t
+                }, setTransition: function (t) {
+                    this.$vm.RADON_LOADING_BAR.options.transition = t
+                }, tempFailColor: function (t) {
+                    this.state.tFailColor = this.$vm.RADON_LOADING_BAR.options.failedColor, this.$vm.RADON_LOADING_BAR.options.failedColor = t
+                }, tempColor: function (t) {
+                    this.state.tColor = this.$vm.RADON_LOADING_BAR.options.color, this.$vm.RADON_LOADING_BAR.options.color = t
+                }, tempLocation: function (t) {
+                    this.state.tLocation = this.$vm.RADON_LOADING_BAR.options.location, this.$vm.RADON_LOADING_BAR.options.location = t
+                }, tempTransition: function (t) {
+                    this.state.tTransition = this.$vm.RADON_LOADING_BAR.options.transition, this.$vm.RADON_LOADING_BAR.options.transition = t
+                }, revertColor: function () {
+                    this.$vm.RADON_LOADING_BAR.options.color = this.state.tColor, this.state.tColor = ""
+                }, revertFailColor: function () {
+                    this.$vm.RADON_LOADING_BAR.options.failedColor = this.state.tFailColor, this.state.tFailColor = ""
+                }, revertLocation: function () {
+                    this.$vm.RADON_LOADING_BAR.options.location = this.state.tLocation, this.state.tLocation = ""
+                }, revertTransition: function () {
+                    this.$vm.RADON_LOADING_BAR.options.transition = this.state.tTransition, this.state.tTransition = {}
+                }, revert: function () {
+                    this.$vm.RADON_LOADING_BAR.options.autoRevert && (this.state.tColor && this.revertColor(), this.state.tFailColor && this.revertFailColor(), this.state.tLocation && this.revertLocation(), !this.state.tTransition || void 0 === this.state.tTransition.speed && void 0 === this.state.tTransition.opacity || this.revertTransition())
+                }, parseMeta: function (t) {
+                    for (var o in t.func) {
+                        var i = t.func[o];
+                        switch (i.call) {
+                            case"color":
+                                switch (i.modifier) {
+                                    case"set":
+                                        this.setColor(i.argument);
+                                        break;
+                                    case"temp":
+                                        this.tempColor(i.argument)
+                                }
+                                break;
+                            case"fail":
+                                switch (i.modifier) {
+                                    case"set":
+                                        this.setFailColor(i.argument);
+                                        break;
+                                    case"temp":
+                                        this.tempFailColor(i.argument)
+                                }
+                                break;
+                            case"location":
+                                switch (i.modifier) {
+                                    case"set":
+                                        this.setLocation(i.argument);
+                                        break;
+                                    case"temp":
+                                        this.tempLocation(i.argument)
+                                }
+                                break;
+                            case"transition":
+                                switch (i.modifier) {
+                                    case"set":
+                                        this.setTransition(i.argument);
+                                        break;
+                                    case"temp":
+                                        this.tempTransition(i.argument)
+                                }
+                        }
+                    }
+                }
+            }, r = t({
+                canSuccess: !0,
+                show: !1,
+                color: "#73ccec",
+                failedColor: "red",
+                thickness: "2px",
+                transition: {speed: "0.2s", opacity: "0.6s", termination: 300},
+                autoRevert: !0,
+                location: "top",
+                inverse: !1
+            }, e), a = new o({data: {RADON_LOADING_BAR: {percent: 0, options: r}}});
+        s && (window.VueProgressBarEventBus = a, n.init(a)), o.component("vue-progress-bar", i), o.prototype.$Progress = n
+    }
+});
+
 
 /***/ }),
 /* 738 */
