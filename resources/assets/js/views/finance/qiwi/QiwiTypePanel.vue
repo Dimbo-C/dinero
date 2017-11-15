@@ -202,13 +202,13 @@
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-income', new Form(auth))
                     .then((response) => {
-                        const income = response.monthIncome;
-                        console.log("Income: " + income);
-                        this.items.map((item) => {
-                            if (item.login === login) {
-                                item.month_income = this.tidySum(income);
-                            }
-                        });
+//                        const income = response.monthIncome;
+//                        console.log("Income: " + income);
+//                        this.items.map((item) => {
+//                            if (item.login === login) {
+//                                item.month_income = this.tidySum(income);
+//                            }
+//                        });
                     })
             },
 

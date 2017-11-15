@@ -7,6 +7,7 @@ use App\Contracts\Repositories\QiwiWalletRepository as Contract;
 use App\Helpers\QiwiGeneralHelper;
 use App\Helpers\QiwiIdentificationHelper;
 use App\Helpers\QiwiSecurityHelper;
+use App\Jobs\UpdateBalanceJob;
 use App\Processors\MassActionProcessor;
 use App\Processors\TransactionProcessor;
 use App\Proxy;
@@ -129,12 +130,14 @@ class QiwiWalletRepository implements Contract {
     }
 
     public function updateIncome($login, $postAction = true) {
-        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
-        $wallet = QiwiWallet::findByLogin($login);
-        $wallet->updateIncome($monthIncome);
+        $job = new UpdateBalanceJob($login);
+        dispatch($job);
+//        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
+//        $wallet = QiwiWallet::findByLogin($login);
+//        $wallet->updateIncome($monthIncome);
         //        if ($postAction) $wallet->postUpdateRoutine();
 
-        return response()->json(['monthIncome' => $monthIncome], 200);
+        return response()->json([], 200);
     }
 
     /**

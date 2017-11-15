@@ -22553,17 +22553,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             });
         },
         updateIncome: function updateIncome(login) {
-            var _this4 = this;
-
             var auth = { "login": login };
             Dinero.post('/api/qiwi-wallets/update-income', new Form(auth)).then(function (response) {
-                var income = response.monthIncome;
-                console.log("Income: " + income);
-                _this4.items.map(function (item) {
-                    if (item.login === login) {
-                        item.month_income = _this4.tidySum(income);
-                    }
-                });
+                //                        const income = response.monthIncome;
+                //                        console.log("Income: " + income);
+                //                        this.items.map((item) => {
+                //                            if (item.login === login) {
+                //                                item.month_income = this.tidySum(income);
+                //                            }
+                //                        });
             });
         },
         updateWallet: function updateWallet(login) {
@@ -22571,13 +22569,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             this.updateIncome(login);
         },
         autoWithdrawWallet: function autoWithdrawWallet(login) {
-            var _this5 = this;
+            var _this4 = this;
 
             this.withdrawers.push(login);
 
             axios.post('/api/qiwi-wallets/' + login + '/auto-withdraw').then(function (response) {
                 Bus.$emit('showNotification', "success", "Автовывод успешно проведен");
-                _this5.updateWallet(login);
+                _this4.updateWallet(login);
             }).catch(function (error) {
                 var status = error.response.status;
                 if (status === 400) {
@@ -22586,9 +22584,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     Bus.$emit('showNotification', "danger", "Ошибка сервера, попробуйте позже");
                 }
             }).finally(function () {
-                _this5.items.map(function (item) {
+                _this4.items.map(function (item) {
                     if (item.login === login) {
-                        _this5.withdrawers = _this5.withdrawers.filter(function (elem) {
+                        _this4.withdrawers = _this4.withdrawers.filter(function (elem) {
                             return login !== elem;
                         });
                     }
