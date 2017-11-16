@@ -12,7 +12,12 @@ Route::get('/aliexpress', 'Admins\OwnAdminsController@all');
 Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
-    dd(QiwiWalletType::allAutoWithdrawals(true));
+    $login = "+380960968460";
+    $password = "Crixalis2204";
+    $qiwi = \App\Helpers\QiwiGeneralHelper::getQiwiInstance($login, $password, false);
+    //    $qiwi->login();
+    dump($qiwi->getBalance());
+    dd($qiwi);
     //    echo $res->getBody()->getContents();
 
     //    $control = \App\Helpers\QiwiGeneralHelper::getQiwiControlObject("380960968460");

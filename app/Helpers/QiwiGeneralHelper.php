@@ -48,24 +48,69 @@ class QiwiGeneralHelper {
     }
 
     /**
-     *  Get qiwi service object
      * @param $login
+     * @param null $password
+     * @param null $useProxy
+     * @param array $proxy
      * @return Qiwi
      */
-    public static function getQiwiInstance($login) {
-        $wallet = QiwiWallet::where("login", $login)->first();
-        if ($wallet->use_proxy) {
-            $proxy = Proxy::find($wallet->proxy_id);
-            $qiwi = new Qiwi($wallet->login, $wallet->password,
-                    $proxy->host . ":" . $proxy->port,
-                    $proxy->login . ":" . $proxy->password);
+    public static function getQiwiInstance($login, $password = null, $useProxy = null, $proxy = []) {
+
+        //        $wallet = self::getQiwiInstanceWallet($login, $password, $useProxy, $proxy);
+        //        if ($password == null) {
+        //            $wallet = QiwiWallet::where("login", $login)->first();
+        //            $login = $wallet->login;
+        //            $password = $wallet->password;
+        //            $useProxy = $wallet->use_proxy;
+        //            $proxy = Proxy::find($wallet->proxy_id);
+        //        }
+        $wallet = self::getQiwiInstanceWallet($login, $password, $useProxy, $proxy);
+
+        //        dd(['wallet' => $wallet]);
+
+        if ($wallet['useProxy']) {
+            $qiwi = new Qiwi(
+                    $wallet['login'], $wallet['password'],
+                    $wallet['proxy']->host . ":" . $wallet['proxy']->port,
+                    $wallet['proxy']->login . ":" . $wallet['proxy']->password);
         } else {
-            $qiwi = new Qiwi($wallet->login, $wallet->password);
+            $qiwi = new Qiwi($wallet['login'], $wallet['password']);
         }
-        $qiwi->login();
+//$qiwi->login();
+        Log::info("Login: " . ($qiwi->login() ? "SUCCESS" : "FAILE"));
 
         return $qiwi;
     }
+
+    /**
+     * Get instance of wallet from DB if it exists or newly created temporary wallet object.
+     *
+     *
+     * Good Lord, I wish php had function overloading........
+     *
+     * @param $login
+     * @param null $password
+     * @param null $useProxy
+     * @param array $proxy
+     * @return array
+     */
+    public static function getQiwiInstanceWallet($login, $password = null, $useProxy = null, $proxy = []) {
+        if ($password == null) {
+            $wallet = QiwiWallet::where("login", $login)->first();
+            $login = $wallet->login;
+            $password = $wallet->password;
+            $useProxy = $wallet->use_proxy;
+            $proxy = Proxy::find($wallet->proxy_id);
+        }
+
+        return [
+                'login' => $login,
+                'password' => $password,
+                'useProxy' => $useProxy,
+                'proxy' => $proxy,
+        ];
+    }
+
 
     public static function getTodaysExpenditure($login) {
         $control = self::getQiwiInstance($login);
