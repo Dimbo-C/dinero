@@ -133,9 +133,9 @@ class QiwiWalletRepository implements Contract {
     public function updateIncome($login, $postAction = true) {
         $job = new UpdateIncomeJob($login);
         dispatch($job);
-//        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
-//        $wallet = QiwiWallet::findByLogin($login);
-//        $wallet->updateIncome($monthIncome);
+        //        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
+        //        $wallet = QiwiWallet::findByLogin($login);
+        //        $wallet->updateIncome($monthIncome);
         //        if ($postAction) $wallet->postUpdateRoutine();
 
         return response()->json([], 200);
@@ -207,19 +207,33 @@ class QiwiWalletRepository implements Contract {
         $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
                 $request->login, $request->password,
                 $request->useProxy, $request['proxy']);
-        if (!$qiwiControl->login()) {
+
+        //        dump(['logged' => $qiwiControl->loggedIn]);
+        //        dump(['qiwi' => $qiwiControl]);
+        //        dump(['balance' => $qiwiControl->getBalance()]);
+//        echo "<pre>";
+//        print_r($qiwiControl);
+//        echo "</pre>";
+//        echo "<pre>";
+//        echo "Balance<br>";
+//        print_r($qiwiControl->loadBalance());
+//        echo "</pre>";
+        if (!$qiwiControl->login() && ($qiwiControl->loadBalance() == false)) {
             $result['status'] = "failure";
-            $result['message'] = "Кошелек не найден в системе Qiwi " . $qiwiControl->getLastError();
+            //            $result['message'] = "Кошелек не найден в системе Qiwi " . $qiwiControl->getLastError();
+            $result['message'] = "Кошелек не найден в системе Qiwi";
 
             return $result;
         };
 
         // fetch balance from qiwi with library
         $request->typeId = (new QiwiWalletType())->findByType($request->type)->id;
-        $request->balance = $qiwiControl->loadBalance()['RUB'];
+        //                $request->balance = $qiwiControl->loadBalance()['RUB'];
+        $request->balance = 0;
 
         // get income data from qiwi (lib returns empty array for now, so it is a dummy)
-        $request->monthIncome = $request->balance;
+        //        $request->monthIncome = $request->balance;
+        $request->monthIncome = 0;
 
         // add new wallet to DB with proxy or not
 

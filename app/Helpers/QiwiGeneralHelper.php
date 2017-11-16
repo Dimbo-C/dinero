@@ -68,16 +68,18 @@ class QiwiGeneralHelper {
 
         //        dd(['wallet' => $wallet]);
 
+//        dd($wallet);
         if ($wallet['useProxy']) {
             $qiwi = new Qiwi(
                     $wallet['login'], $wallet['password'],
-                    $wallet['proxy']->host . ":" . $wallet['proxy']->port,
-                    $wallet['proxy']->login . ":" . $wallet['proxy']->password);
+                    $wallet['proxy']['host'] . ":" . $wallet['proxy']['port'],
+                    $wallet['proxy']['login'] . ":" . $wallet['proxy']['password']
+            );
         } else {
             $qiwi = new Qiwi($wallet['login'], $wallet['password']);
         }
-//$qiwi->login();
-        Log::info("Login: " . ($qiwi->login() ? "SUCCESS" : "FAILE"));
+        $qiwi->login();
+//        Log::info("Login: " . ($qiwi->login() ? "SUCCESS" : "FAILE"));
 
         return $qiwi;
     }

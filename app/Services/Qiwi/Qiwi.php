@@ -11,7 +11,7 @@ class Qiwi {
 
     protected $login;
     protected $password;
-    protected $loggedIn;
+    public $loggedIn;
     protected $cookieJar;
     protected $client;
 
@@ -53,6 +53,11 @@ class Qiwi {
      * @return mixed
      */
     public function getBalance() {
-        return $this->getPersonState()->data->balances;
+        try {
+            return $this->getPersonState()->data->balances;
+        } catch (\Exception $exception) {
+            return null;
+        }
+//        return $this->getPersonState()->data->balances;
     }
 }

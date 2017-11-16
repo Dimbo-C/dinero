@@ -13,6 +13,7 @@ Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
     $login = "+380960968460";
+    //    $login = "+380507308340";
     $password = "Crixalis2204";
     $qiwi = \App\Helpers\QiwiGeneralHelper::getQiwiInstance($login, $password, false);
     //    $qiwi->login();
