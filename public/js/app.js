@@ -22333,7 +22333,7 @@ exports = module.exports = __webpack_require__(50)(undefined);
 
 
 // module
-exports.push([module.i, "\n.withdrawing-active[data-v-2048463a] {\n    background-color: #fff;\n    color: green;\n}\n", ""]);
+exports.push([module.i, "\n.withdrawing-active[data-v-2048463a] {\n    background-color: #fff;\n    color: green;\n}\n.table-header-block[data-v-2048463a] {\n    padding: 10px;\n    cursor: pointer;\n}\n.tr-remove-padding[data-v-2048463a] {\n    padding: 0;\n}\n", ""]);
 
 // exports
 
@@ -22348,6 +22348,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__mixins_table__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -22491,21 +22503,82 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             foo: '',
             onChangeSelect: '',
             spinners: [],
-            withdrawers: []
+            withdrawers: [],
+            sort: {
+                column: "name",
+                order: 1 // 1 - desc, 0 - asc
+            }
         };
     },
     mounted: function mounted() {
         this.items = this.type.wallets;
+        this.sorter();
     },
 
 
     watch: {
         selected: function selected(val) {
             this.$emit('updateSelected', val);
+        },
+
+
+        // on this element change - run sorter again (to sort updated(received) values
+        type: function type() {
+            this.sorter();
         }
+
     },
 
     methods: {
+        setSortField: function setSortField(fieldName) {
+            this.sort.order = fieldName == this.sort.column ? !this.sort.order : this.sort.order;
+
+            this.sort.column = fieldName;
+            this.sorter();
+        },
+        sorter: function sorter() {
+            var _this2 = this;
+
+            var colName = this.sort.column;
+            var prior = this.sort.order == 0 ? -1 : 1;
+            this.type.wallets = this.type.wallets.sort(function (w1, w2) {
+                var cardNum1 = w1.settings.autoWithdrawal_card_number;
+                var cardNum2 = w2.settings.autoWithdrawal_card_number;
+                //                    const keys = {
+                //                        'name': "name",
+                //                        'number': "login",
+                //                        'visa': "settings.autoWithdrawal_card_number",
+                //                        'balance': "balance",
+                //                        'income': "month_income",
+                //                    };
+                switch (colName) {
+                    case "name":
+                        return w1.name < w2.name ? prior : -prior;
+                    case "number":
+                        return w1.login < w2.login ? prior : -prior;
+                    case "visa":
+                        return cardNum1 < cardNum2 ? prior : -prior;
+                    case "balance":
+                        return _this2.moneysToFloat(w1.balance) < _this2.moneysToFloat(w2.balance) ? prior : -prior;
+                    case "income":
+                        return _this2.moneysToFloat(w1.month_income) < _this2.moneysToFloat(w2.month_income) ? prior : -prior;
+                }
+
+                //                    switch (colName) {
+                //                        case 'name':
+                //                            return (w1.name < w2.name) ? -1 : 1;
+                //                        case 'number':
+                //                            return (w1.login < w2.login) ? -1 : 1;
+                //                        case 'visa':
+                //                            return (w1.name < w2.name) ? -1 : 1;
+                //                        case 'balance':
+                //                            return (w1.name < w2.name) ? -1 : 1;
+                //                        case 'income':
+                //                            return (w1.name < w2.name) ? -1 : 1;
+                //
+                //                    }
+            });
+        },
         moneys: function moneys(balance, login) {
             if (this.spinners.includes(login)) {
                 return "...";
@@ -22514,7 +22587,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
         },
         moveWallets: function moveWallets() {
-            console.log(this.selected);
             var moveFrom = this.isInactive ? this.selected[0].type_id : this.type.id;
 
             this.$emit('moveWallets', this.selected, moveFrom, this.moveTo);
@@ -22523,30 +22595,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             this.$router.push({ path: '/finance/qiwi/remove/' + login });
         },
         updateBalance: function updateBalance(login) {
-            var _this2 = this;
+            var _this3 = this;
 
             this.spinners.push(login);
             var auth = { "login": login };
             Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth)).then(function (response) {
                 var balance = response.balance;
                 console.log("Balance: " + balance);
-                _this2.updateBalanceCallback(login, balance);
+                _this3.updateBalanceCallback(login, balance);
             }).catch(function (error) {
                 console.log(error.response);
-                _this2.updateBalanceCallback(login);
+                _this3.updateBalanceCallback(login);
             });
         },
         updateBalanceCallback: function updateBalanceCallback(login) {
-            var _this3 = this;
+            var _this4 = this;
 
             var balance = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
             this.items.map(function (item) {
                 if (item.login === login) {
                     if (balance !== null) {
-                        item.balance = _this3.tidySum(balance);
+                        item.balance = _this4.tidySum(balance);
                     }
-                    _this3.spinners = _this3.spinners.filter(function (elem) {
+                    _this4.spinners = _this4.spinners.filter(function (elem) {
                         return login !== elem;
                     });
                 }
@@ -22563,7 +22635,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             this.updateIncome(login);
         },
         autoWithdrawWallet: function autoWithdrawWallet(login) {
-            var _this4 = this;
+            var _this5 = this;
 
             this.withdrawers.push(login);
 
@@ -22578,9 +22650,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     Bus.$emit('showNotification', "danger", "Ошибка сервера, попробуйте позже");
                 }
             }).finally(function () {
-                _this4.items.map(function (item) {
+                _this5.items.map(function (item) {
                     if (item.login === login) {
-                        _this4.withdrawers = _this4.withdrawers.filter(function (elem) {
+                        _this5.withdrawers = _this5.withdrawers.filter(function (elem) {
                             return login !== elem;
                         });
                     }
@@ -22595,6 +22667,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             str = parseFloat(str).toFixed(2);
 
             return str;
+        },
+        moneysToFloat: function moneysToFloat(moneyString) {
+            // remove the commas and parse to float
+            return parseFloat(moneyString.replace(",", ""));
         }
     },
     computed: {
@@ -22676,19 +22752,86 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("th", [_vm._v("Имя кошелька ")]),
+              _c("th", { staticClass: "tr-remove-padding" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "table-header-block ",
+                    on: {
+                      click: function($event) {
+                        _vm.setSortField("name")
+                      }
+                    }
+                  },
+                  [_vm._v("Имя")]
+                )
+              ]),
               _vm._v(" "),
-              _c("th", [_vm._v("Номер кошелька")]),
+              _c("th", { staticClass: "tr-remove-padding" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "table-header-block",
+                    on: {
+                      click: function($event) {
+                        _vm.setSortField("number")
+                      }
+                    }
+                  },
+                  [_vm._v("Номер кошелька")]
+                )
+              ]),
               _vm._v(" "),
-              _c("th", [_vm._v("Карта Visa Virtual")]),
+              _c("th", { staticClass: "tr-remove-padding" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "table-header-block",
+                    on: {
+                      click: function($event) {
+                        _vm.setSortField("visa")
+                      }
+                    }
+                  },
+                  [_vm._v("Карта Visa Virtual")]
+                )
+              ]),
               _vm._v(" "),
-              _c("th", [_vm._v("Баланс")]),
+              _c("th", { staticClass: "tr-remove-padding" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "table-header-block",
+                    on: {
+                      click: function($event) {
+                        _vm.setSortField("balance")
+                      }
+                    }
+                  },
+                  [_vm._v("Баланс")]
+                )
+              ]),
               _vm._v(" "),
-              _c("th", [
-                _vm._v(" Принятые средства с "),
-                _c("span", {
-                  domProps: { textContent: _vm._s(this.firstDayOfTheMonth) }
-                })
+              _c("th", { staticClass: "tr-remove-padding" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "table-header-block",
+                    on: {
+                      click: function($event) {
+                        _vm.setSortField("income")
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Принятые средства с "
+                    ),
+                    _c("span", {
+                      domProps: { textContent: _vm._s(this.firstDayOfTheMonth) }
+                    })
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("th")
@@ -54437,6 +54580,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -54448,6 +54596,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             proxyServer: "",
             proxyAuth: "",
             cardNumber: "",
+            alert: {
+                show: false,
+                className: "alert-success",
+                text: ""
+            },
             autoWithdrawalWallets: [],
             form: new Form({
                 useProxy: false,
@@ -54611,13 +54764,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.form.autoWithdrawalTarget = settings.autoWithdrawal_target;
         },
         saveSettings: function saveSettings() {
+            var _this4 = this;
+
             console.log(this.form);
             Dinero.post("/api/qiwi-wallets/" + this.$route.params.wallet + "/settings", this.form).then(function (data) {
                 console.log(data);
-                Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
+                _this4.showAlert("alert-success", "Изменения успешно сохранены");
             }).catch(function () {
-                Bus.$emit('showNotification', "danger", "Не удалось сохранить настройки");
+                _this4.showAlert("alert-danger", "Не удалось сохранить настройки");
             });
+            this.scrollToTop();
+        },
+        showAlert: function showAlert(className, text) {
+            //                        Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
+            this.alert.show = true;
+            this.alert.className = className;
+            this.alert.text = text;
         },
 
 
@@ -54633,6 +54795,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //                        });
         //            },
 
+        scrollToTop: function scrollToTop() {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+        },
         showSetting: function showSetting(tabName) {
             this.$parent.tab = tabName;
         }
@@ -54738,6 +54905,23 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "panel-body" }, [
                   _c("div", { staticClass: "form-horizontal" }, [
+                    _vm.alert.show
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "alert",
+                            class: [_vm.alert.className]
+                          },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(_vm.alert.text) +
+                                "\n                            "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
                       _c("label", { staticClass: "col-sm-4 control-label" }, [
                         _vm._v("Название кошелька")

@@ -37,6 +37,11 @@
 
                         <div class="panel-body">
                             <div class="form-horizontal">
+                                <div v-if="alert.show"
+                                     v-bind:class="[alert.className]"
+                                     class="alert">
+                                    {{alert.text}}
+                                </div>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Название кошелька</label>
                                     <div class="col-sm-8">
@@ -360,6 +365,11 @@
                 proxyServer: "",
                 proxyAuth: "",
                 cardNumber: "",
+                alert: {
+                    show: false,
+                    className: "alert-success",
+                    text: "",
+                },
                 autoWithdrawalWallets: [],
                 form: new Form({
                     useProxy: false,
@@ -536,11 +546,20 @@
                 Dinero.post(`/api/qiwi-wallets/${this.$route.params.wallet}/settings`, this.form)
                     .then((data) => {
                         console.log(data);
-                        Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
+                        this.showAlert("alert-success", "Изменения успешно сохранены");
                     })
                     .catch(() => {
-                        Bus.$emit('showNotification', "danger", "Не удалось сохранить настройки");
+                        this.showAlert("alert-danger", "Не удалось сохранить настройки");
                     });
+                this.scrollToTop();
+
+            },
+
+            showAlert(className, text) {
+                //                        Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
+                this.alert.show = true;
+                this.alert.className = className;
+                this.alert.text = text;
             },
 
 //            triggerAutoWithdraw(){
@@ -555,6 +574,11 @@
 //                        });
 //            },
 
+            scrollToTop() {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 600);
+            },
             showSetting(tabName) {
                 this.$parent.tab = tabName;
             },

@@ -16,11 +16,23 @@
                                 </label>
                             </div>
                         </th>
-                        <th>Имя кошелька </th>
-                        <th>Номер кошелька</th>
-                        <th>Карта Visa Virtual</th>
-                        <th>Баланс</th>
-                        <th> Принятые средства с <span v-text="this.firstDayOfTheMonth"></span></th>
+                        <th class="tr-remove-padding">
+                            <div v-on:click="setSortField('name')" class="table-header-block ">Имя</div>
+                        </th>
+                        <th class="tr-remove-padding">
+                            <div v-on:click="setSortField('number')" class="table-header-block">Номер кошелька</div>
+                        </th>
+                        <th class="tr-remove-padding">
+                            <div v-on:click="setSortField('visa')" class="table-header-block">Карта Visa Virtual</div>
+                        </th>
+                        <th class="tr-remove-padding">
+                            <div v-on:click="setSortField('balance')" class="table-header-block">Баланс</div>
+                        </th>
+                        <th class="tr-remove-padding">
+                            <div v-on:click="setSortField('income')" class="table-header-block">
+                                Принятые средства с <span v-text="this.firstDayOfTheMonth"></span>
+                            </div>
+                        </th>
                         <th></th>
                     </tr>
                     </thead>
@@ -137,21 +149,88 @@
                 foo: '',
                 onChangeSelect: '',
                 spinners: [],
-                withdrawers: []
+                withdrawers: [],
+                sort: {
+                    column: "name",
+                    order: 1 // 1 - desc, 0 - asc
+                }
             };
         },
 
         mounted() {
             this.items = this.type.wallets;
+            this.sorter();
         },
 
         watch: {
             selected(val) {
                 this.$emit('updateSelected', val);
             },
+
+            // on this element change - run sorter again (to sort updated(received) values
+            type: function () {
+                this.sorter();
+            }
+
+
         },
 
         methods: {
+            setSortField(fieldName) {
+                this.sort.order = (fieldName == this.sort.column)
+                    ? !this.sort.order
+                    : this.sort.order;
+
+                this.sort.column = fieldName;
+                this.sorter();
+            },
+
+            sorter() {
+                const colName = this.sort.column;
+                const prior = this.sort.order == 0 ? -1 : 1;
+                this.type.wallets = this.type.wallets.sort((w1, w2) => {
+                    const cardNum1 = w1.settings.autoWithdrawal_card_number;
+                    const cardNum2 = w2.settings.autoWithdrawal_card_number;
+//                    const keys = {
+//                        'name': "name",
+//                        'number': "login",
+//                        'visa': "settings.autoWithdrawal_card_number",
+//                        'balance': "balance",
+//                        'income': "month_income",
+//                    };
+                    switch (colName) {
+                        case "name":
+                            return (w1.name < w2.name) ? prior : -prior;
+                        case "number":
+                            return (w1.login < w2.login) ? prior : -prior;
+                        case "visa":
+                            return (cardNum1 < cardNum2) ? prior : -prior;
+                        case "balance":
+                            return (this.moneysToFloat(w1.balance) < this.moneysToFloat(w2.balance))
+                                ? prior : -prior;
+                        case "income":
+                            return (
+                                this.moneysToFloat(w1.month_income) < this.moneysToFloat(w2.month_income))
+                                ? prior : -prior;
+                    }
+
+//                    switch (colName) {
+//                        case 'name':
+//                            return (w1.name < w2.name) ? -1 : 1;
+//                        case 'number':
+//                            return (w1.login < w2.login) ? -1 : 1;
+//                        case 'visa':
+//                            return (w1.name < w2.name) ? -1 : 1;
+//                        case 'balance':
+//                            return (w1.name < w2.name) ? -1 : 1;
+//                        case 'income':
+//                            return (w1.name < w2.name) ? -1 : 1;
+//
+//                    }
+                })
+
+            },
+
             moneys(balance, login) {
                 if (this.spinners.includes(login)) {
                     return "...";
@@ -159,8 +238,8 @@
                     return this.tidySum(balance) + " " + Dinero.currencySymbol;
                 }
             },
+
             moveWallets() {
-                console.log(this.selected);
                 const moveFrom = this.isInactive
                     ? this.selected[0].type_id
                     : this.type.id;
@@ -244,6 +323,11 @@
                 str = parseFloat(str).toFixed(2);
 
                 return str;
+            },
+
+            moneysToFloat(moneyString) {
+                // remove the commas and parse to float
+                return parseFloat(moneyString.replace(",", ""));
             }
         },
         computed: {
@@ -265,5 +349,14 @@
     .withdrawing-active {
         background-color: #fff;
         color: green;
+    }
+
+    .table-header-block {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .tr-remove-padding {
+        padding: 0;
     }
 </style>
