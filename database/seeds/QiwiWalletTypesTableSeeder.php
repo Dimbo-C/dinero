@@ -4,8 +4,12 @@ use Carbon\Carbon;
 
 class QiwiWalletTypesTableSeeder extends \Illuminate\Database\Seeder {
     public function run() {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
 
         DB::table("qiwi_wallet_types")->truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // reset index
         $statement = "ALTER TABLE qiwi_wallet_types AUTO_INCREMENT = 1;";
@@ -29,5 +33,6 @@ class QiwiWalletTypesTableSeeder extends \Illuminate\Database\Seeder {
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
         }
+
     }
 }
