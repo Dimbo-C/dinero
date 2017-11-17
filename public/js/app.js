@@ -22555,13 +22555,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         updateIncome: function updateIncome(login) {
             var auth = { "login": login };
             Dinero.post('/api/qiwi-wallets/update-income', new Form(auth)).then(function (response) {
-                //                        const income = response.monthIncome;
-                //                        console.log("Income: " + income);
-                //                        this.items.map((item) => {
-                //                            if (item.login === login) {
-                //                                item.month_income = this.tidySum(income);
-                //                            }
-                //                        });
+                // TODO: mb some notification on update (it is really dispatched as a job, so result is not immediate)
             });
         },
         updateWallet: function updateWallet(login) {
@@ -54092,6 +54086,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {//
 //
 //
 //
@@ -54524,7 +54519,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * Prepare the component.
      */
     mounted: function mounted() {
+        var _this = this;
+
         this.prepareComponent();
+
+        // did it with jQuery because in Vue it requires to bind that event to all input
+        $('.container-fluid').keydown(function (event) {
+            if (event.key === "Enter") {
+                _this.saveSettings();
+            }
+        });
     },
 
 
@@ -54536,7 +54540,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.loadData();
         },
         loadData: function loadData() {
-            var _this = this;
+            var _this2 = this;
 
             // get settings of this wallet
             axios.get("/api/qiwi-wallets/" + this.$route.params.wallet + "/settings").then(function (response) {
@@ -54544,16 +54548,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var settings = Object.assign(data.walletSettings, data.wallet);
                 settings.proxy = data.proxy;
 
-                _this.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
-                _this.loadWalletTypes(data.walletTypes);
-                _this.loadSettings(settings);
+                _this2.loadAutoWithdrawalTypes(data.autoWithdrawTypes);
+                _this2.loadWalletTypes(data.walletTypes);
+                _this2.loadSettings(settings);
             });
         },
         loadAutoWithdrawalTypes: function loadAutoWithdrawalTypes(options) {
-            var _this2 = this;
+            var _this3 = this;
 
             options.map(function (option) {
-                _this2.form.autoWithdrawalTypes.push({ value: option.slug, text: option.type });
+                _this3.form.autoWithdrawalTypes.push({ value: option.slug, text: option.type });
             });
 
             this.form.autoWithdrawalType = this.form.autoWithdrawalTypes[1].value;
@@ -54634,6 +54638,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     }
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
 
 /***/ }),
 /* 782 */
@@ -54665,1039 +54670,1063 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("div", { staticClass: "panel panel-default" }, [
-              _c("div", { staticClass: "panel-heading" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-12 col-md-8" }, [
-                    _vm._v(
-                      "\n                                Настройки кошелька Qiwi (" +
-                        _vm._s(_vm.form.login) +
-                        ")\n                            "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-12 col-md-2 text-center" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary full-width",
-                        on: {
-                          click: function($event) {
-                            _vm.showSetting("security")
-                          }
-                        }
-                      },
-                      [_vm._v("Безопасность\n                                ")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-12 col-md-2 text-center" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-primary full-width marginless paddingless",
-                        on: {
-                          click: function($event) {
-                            _vm.showSetting("identification")
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "Идентификация\n                                "
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "panel-body" }, [
-                _c("div", { staticClass: "form-horizontal" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { staticClass: "col-sm-4 control-label" }, [
-                      _vm._v("Название кошелька")
+      _c(
+        "div",
+        { staticClass: "container-fluid", on: { keyenter: _vm.saveSettings } },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("div", { staticClass: "panel panel-default" }, [
+                _c("div", { staticClass: "panel-heading" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-12 col-md-8" }, [
+                      _vm._v(
+                        "\n                                Настройки кошелька Qiwi (" +
+                          _vm._s(_vm.form.login) +
+                          ")\n                            "
+                      )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.name,
-                            expression: "form.name"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.form.name },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.form, "name", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { staticClass: "col-sm-4 control-label" }, [
-                      _vm._v("Комментарий к кошельку")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.comments,
-                            expression: "form.comments"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        domProps: { value: _vm.form.comments },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.form, "comments", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
-                      _c("div", { staticClass: "checkbox" }, [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.useProxy,
-                                expression: "form.useProxy"
-                              }
-                            ],
-                            attrs: { type: "checkbox" },
-                            domProps: {
-                              checked: Array.isArray(_vm.form.useProxy)
-                                ? _vm._i(_vm.form.useProxy, null) > -1
-                                : _vm.form.useProxy
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.form.useProxy,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = null,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      (_vm.form.useProxy = $$a.concat([$$v]))
-                                  } else {
-                                    $$i > -1 &&
-                                      (_vm.form.useProxy = $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1)))
-                                  }
-                                } else {
-                                  _vm.$set(_vm.form, "useProxy", $$c)
-                                }
-                              }
-                            }
-                          }),
-                          _vm._v(
-                            "\n                                            Использовать прокси\n                                        "
-                          )
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm.form.useProxy
-                    ? _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "col-sm-4 control-label",
-                            attrs: { for: "" }
-                          },
-                          [_vm._v("Прокси сервер")]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-sm-8" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.proxyServer,
-                                expression: "proxyServer"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text", placeholder: "host:port" },
-                            domProps: { value: _vm.proxyServer },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.proxyServer = $event.target.value
-                              }
-                            }
-                          })
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.form.useProxy
-                    ? _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "col-sm-4 control-label",
-                            attrs: { for: "" }
-                          },
-                          [_vm._v("Авторизация прокси")]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-sm-8" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.proxyAuth,
-                                expression: "proxyAuth"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              disabled: !_vm.form.useProxy,
-                              placeholder: "login:password"
-                            },
-                            domProps: { value: _vm.proxyAuth },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.proxyAuth = $event.target.value
-                              }
-                            }
-                          })
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
-                      _c("div", { staticClass: "checkbox" }, [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.walletActive,
-                                expression: "form.walletActive"
-                              }
-                            ],
-                            attrs: { type: "checkbox", checked: "" },
-                            domProps: {
-                              checked: Array.isArray(_vm.form.walletActive)
-                                ? _vm._i(_vm.form.walletActive, null) > -1
-                                : _vm.form.walletActive
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.form.walletActive,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = null,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      (_vm.form.walletActive = $$a.concat([
-                                        $$v
-                                      ]))
-                                  } else {
-                                    $$i > -1 &&
-                                      (_vm.form.walletActive = $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1)))
-                                  }
-                                } else {
-                                  _vm.$set(_vm.form, "walletActive", $$c)
-                                }
-                              }
-                            }
-                          }),
-                          _vm._v(
-                            "\n                                            Кошелек активен\n                                        "
-                          )
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
-                      _c("div", { staticClass: "checkbox" }, [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.alwaysOnline,
-                                expression: "form.alwaysOnline"
-                              }
-                            ],
-                            attrs: { type: "checkbox", checked: "" },
-                            domProps: {
-                              checked: Array.isArray(_vm.form.alwaysOnline)
-                                ? _vm._i(_vm.form.alwaysOnline, null) > -1
-                                : _vm.form.alwaysOnline
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.form.alwaysOnline,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = null,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      (_vm.form.alwaysOnline = $$a.concat([
-                                        $$v
-                                      ]))
-                                  } else {
-                                    $$i > -1 &&
-                                      (_vm.form.alwaysOnline = $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1)))
-                                  }
-                                } else {
-                                  _vm.$set(_vm.form, "alwaysOnline", $$c)
-                                }
-                              }
-                            }
-                          }),
-                          _vm._v(
-                            "\n                                            Режим «Всегда онлайн»\n                                        "
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "help-block" }, [
-                        _vm._v(
-                          "Поставьте галочку,\n                                        если хотите чтобы сессия кошелька всегда поддерживалась в режиме\n                                        онлайн. Аналогично постоянному нахождению в браузере.\n                                        Если галочка не стоит - сессия будет слетать и кошелек будет перелогиниваться.\n                                        Не используйте для всех кошельков поголовно, только для автовыводных и приемных,\n                                        где своевременное снятие денег в приоритете.\n                                    "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Частота проверки баланса, мин.")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.balanceRecheckTimeout,
-                            expression: "form.balanceRecheckTimeout"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "number", min: "0" },
-                        domProps: { value: _vm.form.balanceRecheckTimeout },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form,
-                              "balanceRecheckTimeout",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "help-block" }, [
-                        _vm._v(
-                          "Укажите через какое количество минут система должна автоматически\n                                    обновлять баланс кошелька. Чтобы отключить функцию введите 0"
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Тип кошелька")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.walletType,
-                              expression: "form.walletType"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.form,
-                                "walletType",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        _vm._l(_vm.form.walletTypes, function(o) {
-                          return _c("option", {
-                            domProps: {
-                              value: o.value,
-                              textContent: _vm._s(o.text)
-                            }
-                          })
-                        })
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Максимальный баланс")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.maximumBalance,
-                            expression: "form.maximumBalance"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.form.maximumBalance },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form,
-                              "maximumBalance",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "help-block" }, [
-                        _vm._v(
-                          "Максимальный баланс кошелька, при достижении которого\n                                        кошелек автоматически уходит в резервные"
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Минимальный баланс")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.minimumBalance,
-                            expression: "form.minimumBalance"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.form.minimumBalance },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form,
-                              "minimumBalance",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "help-block" }, [
-                        _vm._v(
-                          "Минимальный баланс кошелька.\n                                        Работает на автовыводе.\n                                        Оставляет сумму на балансе кошелька.\n                                        Для отключения введите 0.\n                                    "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Баланс для автовывода")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.autoWithdrawalMinBalance,
-                            expression: "form.autoWithdrawalMinBalance"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.form.autoWithdrawalMinBalance },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form,
-                              "autoWithdrawalMinBalance",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "help-block" }, [
-                        _vm._v(
-                          "Работает только если кошелек настроен на автовывод.\n                                        Автовывод срабатывает если баланс кошелька больше либо равен указанной сумме.\n                                        Для отключения введите 0.\n                                    "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Лимит транзакций на вывод")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.autoWithdrawalLimit,
-                            expression: "form.autoWithdrawalLimit"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.form.autoWithdrawalLimit },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form,
-                              "autoWithdrawalLimit",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "help-block" }, [
-                        _vm._v(
-                          "Работает только если кошелек настроен на автовывод.\n                                        За 1 раз будет выведена сумма, не превышающая данное значение.\n                                        Для отключения введите 0.\n                                    "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
-                      _c("div", { staticClass: "checkbox" }, [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.autoWithdrawalActive,
-                                expression: "form.autoWithdrawalActive"
-                              }
-                            ],
-                            attrs: { type: "checkbox" },
-                            domProps: {
-                              checked: Array.isArray(
-                                _vm.form.autoWithdrawalActive
-                              )
-                                ? _vm._i(_vm.form.autoWithdrawalActive, null) >
-                                  -1
-                                : _vm.form.autoWithdrawalActive
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.form.autoWithdrawalActive,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = null,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      (_vm.form.autoWithdrawalActive = $$a.concat(
-                                        [$$v]
-                                      ))
-                                  } else {
-                                    $$i > -1 &&
-                                      (_vm.form.autoWithdrawalActive = $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1)))
-                                  }
-                                } else {
-                                  _vm.$set(
-                                    _vm.form,
-                                    "autoWithdrawalActive",
-                                    $$c
-                                  )
-                                }
-                              }
-                            }
-                          }),
-                          _vm._v(
-                            "\n                                            Автовывод включен\n                                        "
-                          )
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Режим работы автовывода")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.autoWithdrawalType,
-                              expression: "form.autoWithdrawalType"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.form,
-                                "autoWithdrawalType",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        _vm._l(_vm.form.autoWithdrawalTypes, function(o) {
-                          return _c("option", {
-                            domProps: {
-                              value: o.value,
-                              textContent: _vm._s(o.text)
-                            }
-                          })
-                        })
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Тип автовывода")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.autoWithdrawalTarget,
-                              expression: "form.autoWithdrawalTarget"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.form,
-                                "autoWithdrawalTarget",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        _vm._l(_vm.form.autoWithdrawalTargets, function(o) {
-                          return _c("option", {
-                            domProps: {
-                              value: o.value,
-                              textContent: _vm._s(o.text)
-                            }
-                          })
-                        })
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" },
-                        model: {
-                          value: _vm.form.autoWithdrawalType,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "autoWithdrawalType", $$v)
-                          },
-                          expression: "form.autoWithdrawalType"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                    Вызывать автовывод каждые X минут\n                                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.autoWithdrawalTimeout,
-                            expression: "form.autoWithdrawalTimeout"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.form.autoWithdrawalTimeout },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form,
-                              "autoWithdrawalTimeout",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(0)
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Кошельки для автовывода")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.autoWithdrawalWallets,
-                            expression: "autoWithdrawalWallets"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          placeholder: "Например: +79123456789"
-                        },
-                        domProps: { value: _vm.autoWithdrawalWallets },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.autoWithdrawalWallets = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "help-block" }, [
-                        _vm._v(
-                          "Укажите множество кошельков через пробел, ';' или \",\",\n                                        на которые будет совершен автовывод.\n                                        Если один из них достигнет максимального баланса\n                                        - остаток денег будет переведен на следующий кошелек.\n                                        "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Карта для автовывода")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-8" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.cardNumber,
-                            expression: "cardNumber"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          placeholder: "XXXX XXXX XXXX XXXX"
-                        },
-                        domProps: { value: _vm.cardNumber },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.cardNumber = $event.target.value
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-4 control-label",
-                        attrs: { for: "" }
-                      },
-                      [_vm._v("Данные владельца карты")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.autoWithdrawalCardholderName,
-                            expression: "form.autoWithdrawalCardholderName"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", placeholder: "Имя" },
-                        domProps: {
-                          value: _vm.form.autoWithdrawalCardholderName
-                        },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form,
-                              "autoWithdrawalCardholderName",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.autoWithdrawalCardholderSurname,
-                            expression: "form.autoWithdrawalCardholderSurname"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", placeholder: "Фамилия" },
-                        domProps: {
-                          value: _vm.form.autoWithdrawalCardholderSurname
-                        },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form,
-                              "autoWithdrawalCardholderSurname",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
                     _c(
                       "div",
-                      {
-                        staticClass:
-                          "col-xs-4 col-xs-offset-1 col-lg-2 col-lg-offset-4"
-                      },
+                      { staticClass: "col-sm-12 col-md-2 text-center" },
                       [
                         _c(
                           "button",
                           {
-                            staticClass: "btn btn-primary",
-                            on: { click: _vm.saveSettings }
+                            staticClass: "btn btn-primary full-width",
+                            on: {
+                              click: function($event) {
+                                _vm.showSetting("security")
+                              }
+                            }
                           },
                           [
                             _vm._v(
-                              "Сохранить\n                                    "
+                              "Безопасность\n                                "
+                            )
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-sm-12 col-md-2 text-center" },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-primary full-width marginless paddingless",
+                            on: {
+                              click: function($event) {
+                                _vm.showSetting("identification")
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "Идентификация\n                                "
                             )
                           ]
                         )
                       ]
                     )
                   ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "panel-body" }, [
+                  _c("div", { staticClass: "form-horizontal" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-sm-4 control-label" }, [
+                        _vm._v("Название кошелька")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.name,
+                              expression: "form.name"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.form.name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "name", $event.target.value)
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-sm-4 control-label" }, [
+                        _vm._v("Комментарий к кошельку")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.comments,
+                              expression: "form.comments"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          domProps: { value: _vm.form.comments },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "comments",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                        _c("div", { staticClass: "checkbox" }, [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.useProxy,
+                                  expression: "form.useProxy"
+                                }
+                              ],
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: Array.isArray(_vm.form.useProxy)
+                                  ? _vm._i(_vm.form.useProxy, null) > -1
+                                  : _vm.form.useProxy
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.form.useProxy,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.form.useProxy = $$a.concat([$$v]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.form.useProxy = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.form, "useProxy", $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                                            Использовать прокси\n                                        "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm.form.useProxy
+                      ? _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-4 control-label",
+                              attrs: { for: "" }
+                            },
+                            [_vm._v("Прокси сервер")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-8" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.proxyServer,
+                                  expression: "proxyServer"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text", placeholder: "host:port" },
+                              domProps: { value: _vm.proxyServer },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.proxyServer = $event.target.value
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.form.useProxy
+                      ? _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-4 control-label",
+                              attrs: { for: "" }
+                            },
+                            [_vm._v("Авторизация прокси")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-8" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.proxyAuth,
+                                  expression: "proxyAuth"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                disabled: !_vm.form.useProxy,
+                                placeholder: "login:password"
+                              },
+                              domProps: { value: _vm.proxyAuth },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.proxyAuth = $event.target.value
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                        _c("div", { staticClass: "checkbox" }, [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.walletActive,
+                                  expression: "form.walletActive"
+                                }
+                              ],
+                              attrs: { type: "checkbox", checked: "" },
+                              domProps: {
+                                checked: Array.isArray(_vm.form.walletActive)
+                                  ? _vm._i(_vm.form.walletActive, null) > -1
+                                  : _vm.form.walletActive
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.form.walletActive,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.form.walletActive = $$a.concat([
+                                          $$v
+                                        ]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.form.walletActive = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.form, "walletActive", $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                                            Кошелек активен\n                                        "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                        _c("div", { staticClass: "checkbox" }, [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.alwaysOnline,
+                                  expression: "form.alwaysOnline"
+                                }
+                              ],
+                              attrs: { type: "checkbox", checked: "" },
+                              domProps: {
+                                checked: Array.isArray(_vm.form.alwaysOnline)
+                                  ? _vm._i(_vm.form.alwaysOnline, null) > -1
+                                  : _vm.form.alwaysOnline
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.form.alwaysOnline,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.form.alwaysOnline = $$a.concat([
+                                          $$v
+                                        ]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.form.alwaysOnline = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.form, "alwaysOnline", $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                                            Режим «Всегда онлайн»\n                                        "
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v(
+                            "Поставьте галочку,\n                                        если хотите чтобы сессия кошелька всегда поддерживалась в режиме\n                                        онлайн. Аналогично постоянному нахождению в браузере.\n                                        Если галочка не стоит - сессия будет слетать и кошелек будет перелогиниваться.\n                                        Не используйте для всех кошельков поголовно, только для автовыводных и приемных,\n                                        где своевременное снятие денег в приоритете.\n                                    "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Частота проверки баланса, мин.")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.balanceRecheckTimeout,
+                              expression: "form.balanceRecheckTimeout"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "number", min: "0" },
+                          domProps: { value: _vm.form.balanceRecheckTimeout },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "balanceRecheckTimeout",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v(
+                            "Укажите через какое количество минут система должна автоматически\n                                    обновлять баланс кошелька. Чтобы отключить функцию введите 0"
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Тип кошелька")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.walletType,
+                                expression: "form.walletType"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "walletType",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.form.walletTypes, function(o) {
+                            return _c("option", {
+                              domProps: {
+                                value: o.value,
+                                textContent: _vm._s(o.text)
+                              }
+                            })
+                          })
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Максимальный баланс")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.maximumBalance,
+                              expression: "form.maximumBalance"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.form.maximumBalance },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "maximumBalance",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v(
+                            "Максимальный баланс кошелька, при достижении которого\n                                        кошелек автоматически уходит в резервные"
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Минимальный баланс")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.minimumBalance,
+                              expression: "form.minimumBalance"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.form.minimumBalance },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "minimumBalance",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v(
+                            "Минимальный баланс кошелька.\n                                        Работает на автовыводе.\n                                        Оставляет сумму на балансе кошелька.\n                                        Для отключения введите 0.\n                                    "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Баланс для автовывода")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.autoWithdrawalMinBalance,
+                              expression: "form.autoWithdrawalMinBalance"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: {
+                            value: _vm.form.autoWithdrawalMinBalance
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "autoWithdrawalMinBalance",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v(
+                            "Работает только если кошелек настроен на автовывод.\n                                        Автовывод срабатывает если баланс кошелька больше либо равен указанной сумме.\n                                        Для отключения введите 0.\n                                    "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Лимит транзакций на вывод")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.autoWithdrawalLimit,
+                              expression: "form.autoWithdrawalLimit"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.form.autoWithdrawalLimit },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "autoWithdrawalLimit",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v(
+                            "Работает только если кошелек настроен на автовывод.\n                                        За 1 раз будет выведена сумма, не превышающая данное значение.\n                                        Для отключения введите 0.\n                                    "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "col-sm-offset-4 col-sm-8" }, [
+                        _c("div", { staticClass: "checkbox" }, [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.autoWithdrawalActive,
+                                  expression: "form.autoWithdrawalActive"
+                                }
+                              ],
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: Array.isArray(
+                                  _vm.form.autoWithdrawalActive
+                                )
+                                  ? _vm._i(
+                                      _vm.form.autoWithdrawalActive,
+                                      null
+                                    ) > -1
+                                  : _vm.form.autoWithdrawalActive
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.form.autoWithdrawalActive,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.form.autoWithdrawalActive = $$a.concat(
+                                          [$$v]
+                                        ))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.form.autoWithdrawalActive = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.$set(
+                                      _vm.form,
+                                      "autoWithdrawalActive",
+                                      $$c
+                                    )
+                                  }
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                                            Автовывод включен\n                                        "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Режим работы автовывода")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.autoWithdrawalType,
+                                expression: "form.autoWithdrawalType"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "autoWithdrawalType",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.form.autoWithdrawalTypes, function(o) {
+                            return _c("option", {
+                              domProps: {
+                                value: o.value,
+                                textContent: _vm._s(o.text)
+                              }
+                            })
+                          })
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Тип автовывода")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.autoWithdrawalTarget,
+                                expression: "form.autoWithdrawalTarget"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "autoWithdrawalTarget",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.form.autoWithdrawalTargets, function(o) {
+                            return _c("option", {
+                              domProps: {
+                                value: o.value,
+                                textContent: _vm._s(o.text)
+                              }
+                            })
+                          })
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" },
+                          model: {
+                            value: _vm.form.autoWithdrawalType,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "autoWithdrawalType", $$v)
+                            },
+                            expression: "form.autoWithdrawalType"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                    Вызывать автовывод каждые X минут\n                                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.autoWithdrawalTimeout,
+                              expression: "form.autoWithdrawalTimeout"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.form.autoWithdrawalTimeout },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "autoWithdrawalTimeout",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(0)
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Кошельки для автовывода")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.autoWithdrawalWallets,
+                              expression: "autoWithdrawalWallets"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Например: +79123456789"
+                          },
+                          domProps: { value: _vm.autoWithdrawalWallets },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.autoWithdrawalWallets = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v(
+                            "Укажите множество кошельков через пробел, ';' или \",\",\n                                        на которые будет совершен автовывод.\n                                        Если один из них достигнет максимального баланса\n                                        - остаток денег будет переведен на следующий кошелек.\n                                        "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Карта для автовывода")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.cardNumber,
+                              expression: "cardNumber"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "XXXX XXXX XXXX XXXX"
+                          },
+                          domProps: { value: _vm.cardNumber },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.cardNumber = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-4 control-label",
+                          attrs: { for: "" }
+                        },
+                        [_vm._v("Данные владельца карты")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.autoWithdrawalCardholderName,
+                              expression: "form.autoWithdrawalCardholderName"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", placeholder: "Имя" },
+                          domProps: {
+                            value: _vm.form.autoWithdrawalCardholderName
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "autoWithdrawalCardholderName",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.autoWithdrawalCardholderSurname,
+                              expression: "form.autoWithdrawalCardholderSurname"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", placeholder: "Фамилия" },
+                          domProps: {
+                            value: _vm.form.autoWithdrawalCardholderSurname
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "autoWithdrawalCardholderSurname",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "col-xs-4 col-xs-offset-1 col-lg-2 col-lg-offset-4"
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              on: { click: _vm.saveSettings }
+                            },
+                            [
+                              _vm._v(
+                                "Сохранить\n                                    "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  ])
                 ])
               ])
             ])
           ])
-        ])
-      ])
+        ]
+      )
     ],
     1
   )

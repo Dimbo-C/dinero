@@ -12,11 +12,11 @@ Route::get('/aliexpress', 'Admins\OwnAdminsController@all');
 Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
-    while (true) {
-        if (Queue::pop() == null) break;
-    };
-
-    echo "It is over, it is done";
+//    while (true) {
+//        if (Queue::pop() == null) break;
+//    };
+//
+//    echo "It is over, it is done";
 
 dd(Queue::getName(Queue::getConnectionName()));
     //    $login = "+380960968460";

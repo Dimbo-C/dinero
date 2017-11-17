@@ -11,7 +11,8 @@
                 <a>Панель управления</a>
             </router-link>
         </page-header>
-        <div class="container-fluid">
+        <div class="container-fluid"
+             @keyenter="saveSettings">
             <div class="row">
                 <div class="col-sm-8">
                     <div class="panel panel-default">
@@ -438,6 +439,13 @@
          */
         mounted() {
             this.prepareComponent();
+
+            // did it with jQuery because in Vue it requires to bind that event to all input
+            $('.container-fluid').keydown(event => {
+                if (event.key === "Enter") {
+                    this.saveSettings();
+                }
+            })
         },
 
         methods: {
