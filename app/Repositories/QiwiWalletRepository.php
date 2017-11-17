@@ -19,6 +19,7 @@ use App\QiwiWalletType;
 use App\Services\Autowithdraw;
 use App\Services\Withdraw;
 use App\Structures\WithdrawResult;
+use Illuminate\Support\Facades\Log;
 
 class QiwiWalletRepository implements Contract {
 
