@@ -253,7 +253,7 @@ class Autowithdraw {
             case "withdrawals":
             case "withdrawals_wallet":
             case "wallet":
-                $withdrawAmount = MoneyHelper::getBaseCost($withdrawAmount, 1);
+                $withdrawAmount = MoneyHelper::getBaseCost($withdrawAmount, 2);
                 break;
 
             case "card":
