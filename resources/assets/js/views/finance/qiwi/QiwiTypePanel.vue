@@ -327,7 +327,7 @@
 
             moneysToFloat(moneyString) {
                 // remove the commas and parse to float
-                return parseFloat(moneyString.replace(", ", ""));
+                return parseFloat(moneyString.replace(/[, ]/g, ""));
             }
         },
         computed: {
