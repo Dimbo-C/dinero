@@ -6,10 +6,10 @@ class QiwiWalletTypesTableSeeder extends \Illuminate\Database\Seeder {
         $wallets = [
                 ["Приемные киви", "receive"],
                 ["Выводные киви", "output"],
-                ["Резервные киви", "reserve"],
-                ["Отработанные киви", "spent"],
                 ["Автовыводные\\номер", "auto_withdraw_number"],
                 ["Автовыводные\\карта", "auto_withdraw_card"],
+                ["Резервные киви", "reserve"],
+                ["Отработанные киви", "spent"],
         ];
 
         foreach ($wallets as $wallet) {
