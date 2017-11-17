@@ -1,8 +1,16 @@
 <?php
+
 use Carbon\Carbon;
 
 class QiwiWalletTypesTableSeeder extends \Illuminate\Database\Seeder {
     public function run() {
+
+        DB::table("qiwi_wallet_types")->truncate();
+
+        // reset index
+        $statement = "ALTER TABLE qiwi_wallet_types AUTO_INCREMENT = 1;";
+        DB::unprepared($statement);
+
         $wallets = [
                 ["Приемные киви", "receive"],
                 ["Выводные киви", "output"],
