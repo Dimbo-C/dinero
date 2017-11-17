@@ -54,19 +54,22 @@
             </transition>
 
 
-            <qiwi-type-panel v-for="type in walletsTypes"
-                             :key="type.id"
-                             :type="type"
-                             :types="walletsTypes"
-                             @updateSelected="updateSelected"
-                             @moveWallets="moveWallets"
-            ></qiwi-type-panel>
+            <qiwi-type-panel
+                    v-for="type in walletsTypes"
+                    :key="type.id"
+                    :type="type"
+                    :types="walletsTypes"
+                    @updateSelected="updateSelected"
+                    @moveWallets="moveWallets">
+            </qiwi-type-panel>
 
-            <qiwi-type-panel :type="inactive"
-                             :types="walletsTypes"
-                             :exclude="'spent'"
-                             :is-inactive="true"
-                             @moveWallets="moveWallets">
+            <qiwi-type-panel
+                    v-if="inactive.wallets.length>0"
+                    :type="inactive"
+                    :types="walletsTypes"
+                    :exclude="'spent'"
+                    :is-inactive="true"
+                    @moveWallets="moveWallets">
             </qiwi-type-panel>
         </div>
     </div>
@@ -181,6 +184,7 @@
                 this.$router.push({path: `/finance/qiwi/mass-action`});
             },
         },
+
         computed: {
             inactive() {
                 let inactive = {name: 'Неактивные киви', wallets: [], selected: []};

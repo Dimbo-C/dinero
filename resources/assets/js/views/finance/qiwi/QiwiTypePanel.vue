@@ -48,7 +48,8 @@
                         <td v-text="w.name"></td>
                         <td v-text="w.login"></td>
                         <td v-text="w.settings.autoWithdrawal_card_number"></td>
-                        <td v-if="!isInactive">
+                        <!--<td v-if="!isInactive">-->
+                        <td>
                             <a data-toggle="tooltip"
                                data-placement="top"
                                title="Автовывод">
@@ -69,7 +70,8 @@
                                    v-on:click.stop="updateWallet(w.login)"></i>
                             </a>
                         </td>
-                        <td v-if="!isInactive">
+                        <!--<td v-if="!isInactive">-->
+                        <td >
                             <span>{{ tidySum(w.month_income) | currency }}</span>
                         </td>
                         <td class="text-right">

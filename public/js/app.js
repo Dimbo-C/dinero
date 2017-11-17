@@ -22081,6 +22081,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
 
 
 
@@ -22229,6 +22232,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.$router.push({ path: '/finance/qiwi/mass-action' });
         }
     },
+
     computed: {
         inactive: function inactive() {
             var inactive = { name: 'Неактивные киви', wallets: [], selected: [] };
@@ -22348,6 +22352,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__mixins_table__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+//
+//
 //
 //
 //
@@ -22900,83 +22906,79 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    !_vm.isInactive
-                      ? _c("td", [
-                          _c(
-                            "a",
-                            {
-                              attrs: {
-                                "data-toggle": "tooltip",
-                                "data-placement": "top",
-                                title: "Автовывод"
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-upload fa-fw",
-                                class: {
-                                  "withdrawing-active": _vm.withdrawers.includes(
-                                    w.login
-                                  )
-                                },
-                                attrs: { id: w.login },
-                                on: {
-                                  click: function($event) {
-                                    $event.stopPropagation()
-                                    _vm.autoWithdrawWallet(w.login)
-                                  }
-                                }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("span", { attrs: { id: w.login } }, [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(_vm.moneys(w.balance, w.login)) +
-                                "\n                        "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              attrs: {
-                                "data-toggle": "tooltip",
-                                "data-placement": "top",
-                                title: "Обновить"
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-refresh fa-fw",
-                                class: {
-                                  "fa-spin": _vm.spinners.includes(w.login)
-                                },
-                                attrs: { id: w.login },
-                                on: {
-                                  click: function($event) {
-                                    $event.stopPropagation()
-                                    _vm.updateWallet(w.login)
-                                  }
-                                }
-                              })
-                            ]
-                          )
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    !_vm.isInactive
-                      ? _c("td", [
-                          _c("span", [
-                            _vm._v(
-                              _vm._s(
-                                _vm._f("currency")(_vm.tidySum(w.month_income))
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "top",
+                            title: "Автовывод"
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-upload fa-fw",
+                            class: {
+                              "withdrawing-active": _vm.withdrawers.includes(
+                                w.login
                               )
-                            )
-                          ])
-                        ])
-                      : _vm._e(),
+                            },
+                            attrs: { id: w.login },
+                            on: {
+                              click: function($event) {
+                                $event.stopPropagation()
+                                _vm.autoWithdrawWallet(w.login)
+                              }
+                            }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { attrs: { id: w.login } }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(_vm.moneys(w.balance, w.login)) +
+                            "\n                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "top",
+                            title: "Обновить"
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-refresh fa-fw",
+                            class: {
+                              "fa-spin": _vm.spinners.includes(w.login)
+                            },
+                            attrs: { id: w.login },
+                            on: {
+                              click: function($event) {
+                                $event.stopPropagation()
+                                _vm.updateWallet(w.login)
+                              }
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("currency")(_vm.tidySum(w.month_income))
+                          )
+                        )
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "text-right" }, [
                       _c(
@@ -28527,15 +28529,17 @@ var render = function() {
                 })
               }),
               _vm._v(" "),
-              _c("qiwi-type-panel", {
-                attrs: {
-                  type: _vm.inactive,
-                  types: _vm.walletsTypes,
-                  exclude: "spent",
-                  "is-inactive": true
-                },
-                on: { moveWallets: _vm.moveWallets }
-              })
+              _vm.inactive.wallets.length > 0
+                ? _c("qiwi-type-panel", {
+                    attrs: {
+                      type: _vm.inactive,
+                      types: _vm.walletsTypes,
+                      exclude: "spent",
+                      "is-inactive": true
+                    },
+                    on: { moveWallets: _vm.moveWallets }
+                  })
+                : _vm._e()
             ],
             2
           )
