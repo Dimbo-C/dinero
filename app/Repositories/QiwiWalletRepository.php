@@ -124,6 +124,7 @@ class QiwiWalletRepository implements Contract {
     public function updateBalance($login, $postAction = true) {
         $balance = QiwiGeneralHelper::getBalance($login);
         $wallet = QiwiWallet::findByLogin($login);
+        Log::info("Balance on update: $balance");
         if ($balance != null) $wallet->updateBalance($balance);
         if ($postAction) $wallet->postUpdateRoutine();
 
@@ -208,21 +209,9 @@ class QiwiWalletRepository implements Contract {
                 $request->login, $request->password,
                 $request->useProxy, $request['proxy']);
 
-        //        dump(['logged' => $qiwiControl->loggedIn]);
-        //        dump(['qiwi' => $qiwiControl]);
-        //        dump(['balance' => $qiwiControl->getBalance()]);
-//        echo "<pre>";
-//        print_r($qiwiControl);
-//        echo "</pre>";
-//        echo "<pre>";
-//        echo "Balance<br>";
-//        print_r($qiwiControl->loadBalance());
-//        echo "</pre>";
         if (!$qiwiControl->login() && ($qiwiControl->loadBalance() == false)) {
             $result['status'] = "failure";
-            //            $result['message'] = "Кошелек не найден в системе Qiwi " . $qiwiControl->getLastError();
             $result['message'] = "Кошелек не найден в системе Qiwi";
-            
 
             return $result;
         };
