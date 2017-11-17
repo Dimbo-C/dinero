@@ -18,6 +18,7 @@ Route::get("/test", function () {
 
     echo "It is over, it is done";
 
+dd(Queue::getName(Queue::getConnectionName()));
     //    $login = "+380960968460";
     //    //    $login = "+380507308340";
     //    $password = "Crixalis2204";
