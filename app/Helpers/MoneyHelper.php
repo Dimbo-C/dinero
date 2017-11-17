@@ -29,12 +29,23 @@ class MoneyHelper {
         return false;
     }
 
-    public static function getBaseCost($amount, $percentage, $additional = 0) {
-        $divider = 1 + $percentage / 100;
+    public static function getBaseCost($amount, $percentageToSubstract, $additional = 0) {
+        $divider = 1 + $percentageToSubstract / 100;
         $amount -= $additional;
         $resultAmount = $amount / $divider;
 
         return $resultAmount;
-//        return $amount - $resultAmount;
+    }
+
+    public static function getCardWithdrawAmount($withdrawAmount,$cardNumber) {
+        $type = QiwiGeneralHelper::detectCardProvider($cardNumber);
+        switch ($type) {
+            case "VISA_VIRTUAL":
+                return self::getBaseCost($withdrawAmount, 1);
+
+            // VISA standard and all others
+            default:
+                return self::getBaseCost($withdrawAmount, 1, 50);
+        }
     }
 }

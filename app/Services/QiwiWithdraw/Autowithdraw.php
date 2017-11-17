@@ -68,6 +68,7 @@ class Autowithdraw {
 
         $this->withdrawAmount = $this->calculateWithdrawAmount();
 
+        Log::info("Trying to withdraw {$this->withdrawAmount} from {$this->login}");
         Log::info("Autowithdraw routine for " . $this->login);
         $success = $this->withdrawRoutine();
 
@@ -220,6 +221,7 @@ class Autowithdraw {
 
                 $comment = "Автовывод {$this->login} -> $to";
                 Log::info($comment);
+
                 $result = Withdraw::toQiwiWallet($this->login, $to, "RUB", $this->withdrawAmount, $comment);
                 Log::error("Error: " . $result->error);
 
@@ -248,15 +250,15 @@ class Autowithdraw {
         $withdrawAmount = $balance > $limit ? $limit : $balance;
 
         switch ($this->settings->autoWithdrawal_target) {
+            case "withdrawals":
+            case "withdrawals_wallet":
             case "wallet":
                 $withdrawAmount = MoneyHelper::getBaseCost($withdrawAmount, 1);
                 break;
 
             case "card":
-                $withdrawAmount = $this->getCardWithdrawAmount($withdrawAmount);
-                break;
-
-            default:
+                $withdrawAmount = MoneyHelper::getCardWithdrawAmount(
+                        $withdrawAmount, $this->wallet->settings->autoWithdrawal_card_number);
                 break;
         }
         Log::info("Calculated withdraw amount: $withdrawAmount");
@@ -265,15 +267,15 @@ class Autowithdraw {
     }
 
 
-    private function getCardWithdrawAmount($withdrawAmount) {
-        $type = QiwiGeneralHelper::detectCardProvider($this->wallet->settings->autoWithdrawal_card_number);
-        switch ($type) {
-            case "VISA_VIRTUAL":
-                return MoneyHelper::getBaseCost($withdrawAmount, 1);
-
-            // VISA standard and all others
-            default:
-                return MoneyHelper::getBaseCost($withdrawAmount, 1, 50);
-        }
-    }
+    //    private function getCardWithdrawAmount($withdrawAmount,$cardNumber) {
+    //        $type = QiwiGeneralHelper::detectCardProvider($this->wallet->settings->autoWithdrawal_card_number);
+    //        switch ($type) {
+    //            case "VISA_VIRTUAL":
+    //                return MoneyHelper::getBaseCost($withdrawAmount, 1);
+    //
+    //            // VISA standard and all others
+    //            default:
+    //                return MoneyHelper::getBaseCost($withdrawAmount, 1, 50);
+    //        }
+    //    }
 }

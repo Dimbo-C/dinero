@@ -222,6 +222,7 @@ class QiwiWalletRepository implements Contract {
             $result['status'] = "failure";
             //            $result['message'] = "Кошелек не найден в системе Qiwi " . $qiwiControl->getLastError();
             $result['message'] = "Кошелек не найден в системе Qiwi";
+            
 
             return $result;
         };
