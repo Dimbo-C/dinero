@@ -12,13 +12,14 @@ Route::get('/aliexpress', 'Admins\OwnAdminsController@all');
 Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
-    $login = "+380960968460";
-    //    $login = "+380507308340";
-    $password = "Crixalis2204";
-    $qiwi = \App\Helpers\QiwiGeneralHelper::getQiwiInstance($login, $password, false);
-    //    $qiwi->login();
-    dump($qiwi->getBalance());
-    dd($qiwi);
+    dd(Queue::pop());
+    //    $login = "+380960968460";
+    //    //    $login = "+380507308340";
+    //    $password = "Crixalis2204";
+    //    $qiwi = \App\Helpers\QiwiGeneralHelper::getQiwiInstance($login, $password, false);
+    //    //    $qiwi->login();
+    //    dump($qiwi->getBalance());
+    //    dd($qiwi);
     //    echo $res->getBody()->getContents();
 
     //    $control = \App\Helpers\QiwiGeneralHelper::getQiwiControlObject("380960968460");
