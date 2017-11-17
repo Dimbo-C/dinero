@@ -12,7 +12,12 @@ Route::get('/aliexpress', 'Admins\OwnAdminsController@all');
 Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
-    dd(Queue::pop());
+    while (true) {
+        if (Queue::pop() == null) break;
+    };
+
+    echo "It is over, it is done";
+
     //    $login = "+380960968460";
     //    //    $login = "+380507308340";
     //    $password = "Crixalis2204";
