@@ -552,7 +552,6 @@
                         this.showAlert("alert-danger", "Не удалось сохранить настройки");
                     });
                 this.scrollToTop();
-
             },
 
             showAlert(className, text) {

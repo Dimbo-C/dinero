@@ -22563,7 +22563,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     case "income":
                         return _this2.moneysToFloat(w1.month_income) < _this2.moneysToFloat(w2.month_income) ? prior : -prior;
                 }
-
                 //                    switch (colName) {
                 //                        case 'name':
                 //                            return (w1.name < w2.name) ? -1 : 1;

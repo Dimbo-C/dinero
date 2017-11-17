@@ -213,7 +213,6 @@
                                 this.moneysToFloat(w1.month_income) < this.moneysToFloat(w2.month_income))
                                 ? prior : -prior;
                     }
-
 //                    switch (colName) {
 //                        case 'name':
 //                            return (w1.name < w2.name) ? -1 : 1;

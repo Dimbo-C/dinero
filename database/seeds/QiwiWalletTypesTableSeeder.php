@@ -5,8 +5,8 @@ class QiwiWalletTypesTableSeeder extends \Illuminate\Database\Seeder {
     public function run() {
         $wallets = [
                 ["Приемные киви", "receive"],
-                ["Резервные киви", "reserve"],
                 ["Выводные киви", "output"],
+                ["Резервные киви", "reserve"],
                 ["Отработанные киви", "spent"],
                 ["Автовыводные\\номер", "auto_withdraw_number"],
                 ["Автовыводные\\карта", "auto_withdraw_card"],
