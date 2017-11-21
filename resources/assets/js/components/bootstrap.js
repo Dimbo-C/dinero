@@ -4,7 +4,7 @@ import PageHeader from './PageHeader.vue'
 import Navbar from './Navbar.vue'
 import Loading from './Loading.vue'
 import Modal from './Modal.vue'
-import QiwiWalletGeneralSettings from "./qiwi-wallet-settings/QiwiWalletGeneralSettings.vue"
+import QiwiWalletGeneralSettings from "./qiwi-wallet-settings/general/QiwiWalletGeneralSettings.vue"
 import QiwiWalletSecuritySettings from "./qiwi-wallet-settings/QiwiWalletSecuritySettings.vue"
 import QiwiWalletIdentification from "./qiwi-wallet-settings/QiwiWalletIdentification.vue"
 

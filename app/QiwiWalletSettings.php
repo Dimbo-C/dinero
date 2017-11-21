@@ -78,8 +78,9 @@ class QiwiWalletSettings extends Model {
         $settings->is_always_online = $data->alwaysOnline;
         $settings->balance_recheck_timeout = $data->balanceRecheckTimeout;
         $settings->maximum_balance = $data->maximumBalance;
+        $settings->minimum_balance = $data->minimumBalance;
         $settings->using_vouchers = $data->usingVouchers;
-        $settings->maximum_balance = $data->maximumBalance;
+
 
         $settings->autoWithdrawal_active = $data->autoWithdrawalActive;
         $settings->autoWithdrawal_type_id = $autoWithdrawTypeId;

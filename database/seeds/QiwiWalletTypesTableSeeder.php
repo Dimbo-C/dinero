@@ -4,17 +4,16 @@ use Carbon\Carbon;
 
 class QiwiWalletTypesTableSeeder extends \Illuminate\Database\Seeder {
     public function run() {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
-
-        DB::table("qiwi_wallet_types")->truncate();
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-        // reset index
-        $statement = "ALTER TABLE qiwi_wallet_types AUTO_INCREMENT = 1;";
-        DB::unprepared($statement);
-
+//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//
+//
+//        DB::table("qiwi_wallet_types")->truncate();
+//
+//        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+//
+//        // reset index
+//        $statement = "ALTER TABLE qiwi_wallet_types AUTO_INCREMENT = 1;";
+//        DB::unprepared($statement);
         $wallets = [
                 ["Приемные киви", "receive"],
                 ["Выводные киви", "output"],
