@@ -32,7 +32,7 @@ class QiwiWalletUpdateHelper {
     public static function updateBalance($login) {
         if (!QiwiWalletUpdateHelper::isTimeToUpdate($login)) return false;
 
-        $balance = QiwiGeneralHelper::getBalance($login);
+        $balance = QiwiGeneralHelper::getBalance2($login);
         $wallet = QiwiWallet::findByLogin($login);
         if ($balance != null) $wallet->updateBalance($balance);
 

@@ -37,7 +37,8 @@ class Qiwi {
     }
 
     public function getPersonState() {
-        $this->login();
+//        echo "Before request " . date("H:i:s") . " <br>";
+//                $this->login();
 
         $response = $this->client->post('https://qiwi.com/person/state.action', [
                 'Host' => 'qiwi.com',
@@ -45,7 +46,7 @@ class Qiwi {
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Referer' => 'https://qiwi.com/main.action',
         ]);
-
+//        echo "After request " . date("H:i:s") . " <br>";
         return json_decode($response->getBody()->getContents());
     }
 
@@ -58,6 +59,6 @@ class Qiwi {
         } catch (\Exception $exception) {
             return null;
         }
-//        return $this->getPersonState()->data->balances;
+        //        return $this->getPersonState()->data->balances;
     }
 }

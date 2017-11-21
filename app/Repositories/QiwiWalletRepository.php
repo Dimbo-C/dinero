@@ -122,11 +122,12 @@ class QiwiWalletRepository implements Contract {
     }
 
     public function updateBalance($login, $postAction = true) {
-        $balance = QiwiGeneralHelper::getBalance($login);
+        $balance = QiwiGeneralHelper::getBalance2($login);
         $wallet = QiwiWallet::findByLogin($login);
         Log::info("Balance on update: $balance");
         if ($balance != null) $wallet->updateBalance($balance);
         if ($postAction) $wallet->postUpdateRoutine();
+//        dd(['balance' => $balance]);
 
         return response()->json(['balance' => $balance], 200);
     }

@@ -12,13 +12,27 @@ Route::get('/aliexpress', 'Admins\OwnAdminsController@all');
 Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
-//    while (true) {
-//        if (Queue::pop() == null) break;
-//    };
-//
-//    echo "It is over, it is done";
+    $login = "+79096127856";
 
-dd(Queue::getName(Queue::getConnectionName()));
+    echo "Before action: " . date("H:i:s") . " <br>";
+    //    $job = new \App\Jobs\UpdateBalanceJob($login);
+    //    dispatch($job);
+    //    $control = \App\Helpers\QiwiGeneralHelper::getQiwiControlObject($login);
+
+    echo "<pre>";
+    echo (\App\Helpers\QiwiGeneralHelper::getBalance2($login));
+    echo "</pre>";
+
+
+    echo "After action: " . date("H:i:s") . " <br>";
+
+    //    while (true) {
+    //        if (Queue::pop() == null) break;
+    //    };
+    //
+    //    echo "It is over, it is done";
+
+    //dd(Queue::getName(Queue::getConnectionName()));
     //    $login = "+380960968460";
     //    //    $login = "+380507308340";
     //    $password = "Crixalis2204";

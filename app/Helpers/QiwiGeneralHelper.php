@@ -68,7 +68,7 @@ class QiwiGeneralHelper {
 
         //        dd(['wallet' => $wallet]);
 
-//        dd($wallet);
+        //        dd($wallet);
         if ($wallet['useProxy']) {
             $qiwi = new Qiwi(
                     $wallet['login'], $wallet['password'],
@@ -79,7 +79,7 @@ class QiwiGeneralHelper {
             $qiwi = new Qiwi($wallet['login'], $wallet['password']);
         }
         $qiwi->login();
-//        Log::info("Login: " . ($qiwi->login() ? "SUCCESS" : "FAILE"));
+        //        Log::info("Login: " . ($qiwi->login() ? "SUCCESS" : "FAILE"));
 
         return $qiwi;
     }
@@ -124,6 +124,12 @@ class QiwiGeneralHelper {
         $control = self::getQiwiControlObject($login);
 
         return $control->loadBalance()['RUB'];
+    }
+
+    public static function getBalance2($login) {
+        $control = self::getQiwiInstance($login);
+
+        return ((array) $control->getBalance())['RUB'];
     }
 
     public static function getMonthIncome($login) {
