@@ -28353,7 +28353,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
-//    Vue.component('vue-progress-bar', VueProgressBar);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: { QiwiTypePanel: __WEBPACK_IMPORTED_MODULE_0__qiwi_QiwiTypePanel_vue___default.a },
@@ -28382,7 +28381,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             walletsIsLoaded: false,
             walletsTypes: null,
             selected: [],
-            updatingWalletsRoutine: true
+            updatingWalletsRoutine: true,
+            updateDelay: 5
         };
     },
 
@@ -28426,7 +28426,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 }
 
                                 _context.next = 3;
-                                return this.sleep(10000);
+                                return this.sleep(this.updateDelay * 1000);
 
                             case 3:
                                 if (this.updatingWalletsRoutine) {
@@ -28816,13 +28816,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             this.type.wallets = this.type.wallets.sort(function (w1, w2) {
                 var cardNum1 = w1.settings.autoWithdrawal_card_number;
                 var cardNum2 = w2.settings.autoWithdrawal_card_number;
-                //                    const keys = {
-                //                        'name': "name",
-                //                        'number': "login",
-                //                        'visa': "settings.autoWithdrawal_card_number",
-                //                        'balance': "balance",
-                //                        'income': "month_income",
-                //                    };
+
                 switch (colName) {
                     case "name":
                         return w1.name < w2.name ? prior : -prior;
@@ -28835,19 +28829,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     case "income":
                         return _this2.moneysToFloat(w1.month_income) < _this2.moneysToFloat(w2.month_income) ? prior : -prior;
                 }
-                //                    switch (colName) {
-                //                        case 'name':
-                //                            return (w1.name < w2.name) ? -1 : 1;
-                //                        case 'number':
-                //                            return (w1.login < w2.login) ? -1 : 1;
-                //                        case 'visa':
-                //                            return (w1.name < w2.name) ? -1 : 1;
-                //                        case 'balance':
-                //                            return (w1.name < w2.name) ? -1 : 1;
-                //                        case 'income':
-                //                            return (w1.name < w2.name) ? -1 : 1;
-                //
-                //                    }
             });
         },
         moneys: function moneys(balance, login) {
@@ -28889,6 +28870,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     if (balance !== null) {
                         item.balance = _this4.tidySum(balance);
                     }
+
                     _this4.spinners = _this4.spinners.filter(function (elem) {
                         return login !== elem;
                     });
@@ -28912,7 +28894,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             axios.post('/api/qiwi-wallets/' + login + '/auto-withdraw').then(function (response) {
                 Bus.$emit('showNotification', "success", "Автовывод успешно проведен");
-                //                        this.updateWallet(login);
             }).catch(function (error) {
                 var status = error.response.status;
                 if (status === 400) {

@@ -34,7 +34,7 @@ class UpdateBalanceJob implements ShouldQueue {
         $balance = QiwiGeneralHelper::getBalance($this->login);
         $wallet = QiwiWallet::findByLogin($this->login);
         if ($balance != null) $wallet->updateBalance($balance);
-
+        Log::info("Update balance job");
         dump($wallet);
     }
 

@@ -79,7 +79,6 @@
 <script>
     import QiwiTypePanel from './qiwi/QiwiTypePanel.vue';
     import 'babel-polyfill';
-    //    Vue.component('vue-progress-bar', VueProgressBar);
 
     export default {
         components: {QiwiTypePanel},
@@ -110,7 +109,8 @@
                 walletsIsLoaded: false,
                 walletsTypes: null,
                 selected: [],
-                updatingWalletsRoutine: true
+                updatingWalletsRoutine: true,
+                updateDelay: 5,
             };
         },
 
@@ -132,19 +132,19 @@
             fetchWallets() {
                 this.$Progress.start();
                 axios.get('/api/qiwi-wallets')
-                    .then((response) => {
-                        console.log(response);
-                        this.walletsTypes = response.data;
-                        this.walletsIsLoaded = true;
+                        .then((response) => {
+                            console.log(response);
+                            this.walletsTypes = response.data;
+                            this.walletsIsLoaded = true;
 
-                        Bus.$emit('initTooltip');
-                        this.$Progress.finish();
-                    })
+                            Bus.$emit('initTooltip');
+                            this.$Progress.finish();
+                        })
             },
 
             async runningLine() {
                 while (true) {
-                    await this.sleep(10000);
+                    await this.sleep(this.updateDelay * 1000);
                     if (!this.updatingWalletsRoutine) break;
 
                     this.fetchWallets();
@@ -161,20 +161,20 @@
                 // convert array of wallets entities to array ids
                 let ids = wallets.map((wallet) => wallet.id);
                 axios.post('/api/qiwi-wallets/move', {wallets: ids, to: toId})
-                    .then(() => {
-                        let moveTo = this.walletsTypes.find(type => type.id === toId);
+                        .then(() => {
+                            let moveTo = this.walletsTypes.find(type => type.id === toId);
 
-                        let moveFrom = this.walletsTypes.find(type => type.id === fromId);
+                            let moveFrom = this.walletsTypes.find(type => type.id === fromId);
 
-                        moveFrom.wallets = moveFrom.wallets.filter((w) => {
-                            return !wallets.find(item => item.id === w.id);
+                            moveFrom.wallets = moveFrom.wallets.filter((w) => {
+                                return !wallets.find(item => item.id === w.id);
+                            });
+
+                            wallets.forEach((w) => {
+                                w.is_active = 1;
+                                moveTo.wallets.push(w)
+                            });
                         });
-
-                        wallets.forEach((w) => {
-                            w.is_active = 1;
-                            moveTo.wallets.push(w)
-                        });
-                    });
             },
 
             executeMassAction() {

@@ -1046,6 +1046,8 @@ class QIWIControl {
         );
 
         $post_data = json_encode($post_data);
+        Log::info("Before request in confirm provider payment " . date("H:i:s"));
+
         $content = $this->ua->request(USERAGENT_METHOD_POST, $validateProviderFieldsUrl, $ref, $post_data, [
                 "Accept" => "application/vnd.qiwi.v2+json",
                 "Content-Type" => "application/json",
@@ -1053,6 +1055,7 @@ class QIWIControl {
                 "Content-length" => strlen($post_data),
                 "X-Requested-With" => "XMLHttpRequest"
         ]);
+        Log::info("After request in confirm provider payment " . date("H:i:s"));
 
         $res = json_decode($content, true);
         if ($res['data']['status'] == 200) {
@@ -1483,11 +1486,11 @@ class QIWIControl {
         Log::info("");
 
         if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
-            if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
-                $this->trace("[PAY] Failed to validate field.");
-                $this->lastErrorStr = "[PAY] Failed to validate field.";
-                return false;
-            }
+//            if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
+            $this->trace("[PAY] Failed to validate field.");
+            $this->lastErrorStr = "[PAY] Failed to validate field.";
+            return false;
+//            }
         }
 
         //        dump(['fields' => $fields]);

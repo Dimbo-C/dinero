@@ -35,7 +35,7 @@ class UpdateIncomeJob implements ShouldQueue {
 
         $wallet = QiwiWallet::findByLogin($this->login);
         $wallet->updateIncome($monthIncome);
-        Log::info("I am in update job");
+        Log::info("Update income job");
         dump($wallet);
     }
 

@@ -38,6 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \App\QiwiWalletSecuritySettings $securitySettings
  * @property-read \App\QiwiWalletSettings $settings
+ * @property-read \App\Proxy $proxy
  */
 class QiwiWallet extends Model {
     protected $table = "qiwi_wallets";

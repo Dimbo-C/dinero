@@ -128,6 +128,7 @@ class QiwiGeneralHelper {
 
     public static function getBalance2($login) {
         $control = self::getQiwiInstance($login);
+        if (!isset(((array) $control->getBalance())['RUB'])) return null;
 
         return ((array) $control->getBalance())['RUB'];
     }

@@ -29,23 +29,42 @@ class MoneyHelper {
         return false;
     }
 
-    public static function getBaseCost($amount, $percentageToSubstract, $additional = 0) {
-        $divider = 1 + $percentageToSubstract / 100;
-        $amount -= $additional;
+    public static function getBaseCost($amount, $percentageToSubtract, $minimumBalance = 0) {
+//        $amount -= $minimumBalance;
+        $divider = 1 + $percentageToSubtract / 100;
         $resultAmount = $amount / $divider;
 
-        return $resultAmount;
+        $taxAmount = $amount - $resultAmount;
+
+        $baseCost = ($taxAmount < $minimumBalance)
+                ? ($amount - $minimumBalance)
+                : ($resultAmount);
+
+        return $baseCost;
     }
 
-    public static function getCardWithdrawAmount($withdrawAmount,$cardNumber) {
+//    public static function getCardWithdrawAmount($withdrawAmount, $cardNumber, $additionalSubtraction = 50) {
+//        $type = QiwiGeneralHelper::detectCardProvider($cardNumber);
+//        switch ($type) {
+//            case "VISA_VIRTUAL":
+//                return self::getBaseCost($withdrawAmount, 1);
+//
+//            // VISA standard and all others
+//            default:
+//                return self::getBaseCost($withdrawAmount, 1, $additionalSubtraction);
+//        }
+//    }
+
+    // subtract static tax (50 rub) if card is not a visa virtual
+    public static function cardSubtractStaticTax($withdrawAmount, $cardNumber) {
         $type = QiwiGeneralHelper::detectCardProvider($cardNumber);
         switch ($type) {
             case "VISA_VIRTUAL":
-                return self::getBaseCost($withdrawAmount, 1);
+                return $withdrawAmount;
 
             // VISA standard and all others
             default:
-                return self::getBaseCost($withdrawAmount, 1, 50);
+                return $withdrawAmount - 50;
         }
     }
 }

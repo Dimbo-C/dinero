@@ -193,13 +193,7 @@
                 this.type.wallets = this.type.wallets.sort((w1, w2) => {
                     const cardNum1 = w1.settings.autoWithdrawal_card_number;
                     const cardNum2 = w2.settings.autoWithdrawal_card_number;
-//                    const keys = {
-//                        'name': "name",
-//                        'number': "login",
-//                        'visa': "settings.autoWithdrawal_card_number",
-//                        'balance': "balance",
-//                        'income': "month_income",
-//                    };
+
                     switch (colName) {
                         case "name":
                             return (w1.name < w2.name) ? prior : -prior;
@@ -215,19 +209,6 @@
                                 this.moneysToFloat(w1.month_income) < this.moneysToFloat(w2.month_income))
                                 ? prior : -prior;
                     }
-//                    switch (colName) {
-//                        case 'name':
-//                            return (w1.name < w2.name) ? -1 : 1;
-//                        case 'number':
-//                            return (w1.login < w2.login) ? -1 : 1;
-//                        case 'visa':
-//                            return (w1.name < w2.name) ? -1 : 1;
-//                        case 'balance':
-//                            return (w1.name < w2.name) ? -1 : 1;
-//                        case 'income':
-//                            return (w1.name < w2.name) ? -1 : 1;
-//
-//                    }
                 })
 
             },
@@ -273,6 +254,7 @@
                         if (balance !== null) {
                             item.balance = this.tidySum(balance);
                         }
+
                         this.spinners = this.spinners.filter((elem) => login !== elem);
                     }
                 });
@@ -297,7 +279,6 @@
                 axios.post(`/api/qiwi-wallets/${login}/auto-withdraw`)
                     .then(response => {
                         Bus.$emit('showNotification', "success", "Автовывод успешно проведен");
-//                        this.updateWallet(login);
                     })
                     .catch(error => {
                         const status = error.response.status;

@@ -36,7 +36,7 @@ class Withdraw {
         Log::error($result->error);
         $result->debugData = $qiwiControl->debugData;
         $result->status = 200;
-        if ($result->error != null) {
+        if ($result->error != null && $result->error != "") {
             $result->status = 400;
             $result->resultText = "<b>Ошибка!</b> " . $result->error;
         } else {
