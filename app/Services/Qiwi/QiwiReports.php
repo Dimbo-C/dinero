@@ -9,53 +9,47 @@ use Symfony\Component\DomCrawler\Crawler;
 
 trait QiwiReports {
     /**
-     * Отчет за период.
-     *
      * @param $start
      * @param $end
-     * @param $page
+     * @param array $options
      * @return array
      */
-    public function reportForDateRange($start, $end, $page = 1) {
+    public function reportForDateRange($start, $end, $options = []) {
         $query = [
                 'daterange' => 'true',
                 'start' => $start,
                 'finish' => $end,
         ];
-        return $this->fetchReport($query, $page);
+
+        return $this->fetchReport($query, $options);
     }
 
     /**
      * @param array $query
-     * @param int $page
-     * @param int $size
+     * @param $options
      * @return array
      */
-    protected function fetchReport(array $query, $page = 1, $size = 15) {
-        $this->login();
+    protected function fetchReport(array $query, $options) {
+//        $this->login();
+
+        $size = isset($options['size']) ? $options['size'] : 20;
+        $page = isset($options['page']) ? $options['page'] : 1;
         $start = ($page - 1) * $size;
 
-        $response = $this->client->get('https://qiwi.com/report/list.action', [
-                'query' => $query,
-        ]);
-
-        $html = $response->getBody()->getContents();
+        $html = $this->fetchHistoryPage($query);
+//        $response = $this->client->get(
+//                'https://qiwi.com/report/list.action',
+//                ['query' => $query,]);
+////        dd($response);
+//
+//        $html = $response->getBody()->getContents();
         $crawler = new Crawler($html);
         $items = $crawler->filter('.reportsLine[data-container-name="item"]');
         $transactions = [];
-        //        for ($j = $start; $j < $start + $size; $j++) {
-        //            $node = $items[$j];
-        foreach ($items as $i => $node) {
-            //                ->each(function (Crawler $node, $i) use ($start, $size) {
-            //        $items = $crawler
-            //                ->filter('.reportsLine[data-container-name="item"]')
-            //                ->each(function (Crawler $node, $i) use ($start, $size) {
 
-            //            dd(['node' => $node]);
-            // 'ignore' unnecessary nodes
+        foreach ($items as $i => $node) {
             if ($i < $start) continue;
             if ($i >= $size + $start) break;
-            //            if ($i < $start || $i >= $size + $start) return null;
 
             $node = new Crawler($node);
             $transaction = new Transaction();
@@ -75,12 +69,7 @@ trait QiwiReports {
             }
 
             $transactions[] = $transaction;
-        };//);
-
-        //remove nulls
-        //        $items = array_filter($items, function ($item) {
-        //            return $item !== null;
-        //        });
+        };
 
         return $transactions;
     }
@@ -96,13 +85,9 @@ trait QiwiReports {
                 'start' => $start,
                 'finish' => $end,
         ];
-        $this->login();
+//        $this->login();
 
-        $response = $this->client->get('https://qiwi.com/report/list.action', [
-                'query' => $query,
-        ]);
-
-        $html = $response->getBody()->getContents();
+        $html = $this->fetchHistoryPage($query);
         $crawler = new Crawler($html);
 
         try {
@@ -139,6 +124,21 @@ trait QiwiReports {
     //
     //        return $items;
     //    }
+
+    protected function fetchHistoryPage($query) {
+        $key = "history-page-{$this->login}-{$query['start']}-{$query['finish']}";
+
+        if (!\Cache::has($key)) {
+            $historyPageHtml = $this->client->get(
+                    'https://qiwi.com/report/list.action',
+                    ['query' => $query,]
+            )->getBody()->getContents();
+
+            \Cache::put($key, $historyPageHtml, env("HISTORY_CACHE_STORAGE_TIME", 1));
+        }
+
+        return \Cache::get($key);
+    }
 
     protected function setAmountSign($class) {
         $class = str_replace('IncomeWithExpend', '', $class);

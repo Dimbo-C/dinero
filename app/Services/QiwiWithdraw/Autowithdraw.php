@@ -221,6 +221,7 @@ class Autowithdraw {
                     $receivingWallet = QiwiWallet::findByLogin($to);
                     $receivingWallet->balance += $this->withdrawAmount;
                     $receivingWallet->updateIfOverTheMax();
+                    Log::info("Right before dispatch of balance update");
                     dispatch(new UpdateBalanceJob($to));
 
                     break;

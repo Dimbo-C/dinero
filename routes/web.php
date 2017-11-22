@@ -1,5 +1,7 @@
 <?php
 
+use App\Helpers\QiwiGeneralHelper;
+use App\Processors\TransactionProcessor;
 use App\QiwiWalletType;
 use Illuminate\Support\Facades\Route;
 
@@ -12,17 +14,31 @@ Route::get('/aliexpress', 'Admins\OwnAdminsController@all');
 Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
-    $login = "+79096127856";
+    $login = "+380507308340";
+    $query = [
+            'start' => '22.11.2017',
+            'end' => '22.11.2017',
+            'page' => '1',
+            'size' => '20'
+    ];
 
     echo "Before action: " . date("H:i:s") . " <br>";
-    //    $job = new \App\Jobs\UpdateBalanceJob($login);
-    //    dispatch($job);
-    //    $control = \App\Helpers\QiwiGeneralHelper::getQiwiControlObject($login);
 
-    echo "<pre>";
-    echo (\App\Helpers\QiwiGeneralHelper::getBalance2($login));
-    echo "</pre>";
+    $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
+    $options = [
+            'page' => $query['page'],
+            'size' => $query['size'],
+    ];
 
+    $transactionProcessor = new TransactionProcessor(
+            $qiwi->reportForDateRange(
+                    $query['start'],
+                    $query['end'],
+                    $options
+            )
+    );
+
+    dd($transactionProcessor->getTransactions());
 
     echo "After action: " . date("H:i:s") . " <br>";
 
