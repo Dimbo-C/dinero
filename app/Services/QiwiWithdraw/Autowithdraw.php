@@ -189,6 +189,7 @@ class Autowithdraw {
 
     private function toWallet($walletsNumbers) {
         Log::info("in toWallet");
+        $result = true;
         try {
             foreach ($walletsNumbers as $walletNumber) {
                 // stop this madness
@@ -225,10 +226,12 @@ class Autowithdraw {
                     dispatch(new UpdateBalanceJob($to));
 
                     break;
+                } else {
+                    $result = false;
                 }
             }
 
-            return true;
+            return $result;
         } catch (\Exception $ex) {
             Log::error("Error in 'AutoWithdraw#toWallet()'");
 
@@ -257,11 +260,11 @@ class Autowithdraw {
                         $this->wallet->settings->autoWithdrawal_card_number
                 );
                 $withdrawAmount = MoneyHelper::getBaseCost($withdrawAmount, 2, $minimumBalance);
-//                $withdrawAmount = MoneyHelper::getCardWithdrawAmount(
-//                        $withdrawAmount,
-//                        $this->wallet->settings->autoWithdrawal_card_number,
-//                        $minimumBalance + 50
-//                );
+                //                $withdrawAmount = MoneyHelper::getCardWithdrawAmount(
+                //                        $withdrawAmount,
+                //                        $this->wallet->settings->autoWithdrawal_card_number,
+                //                        $minimumBalance + 50
+                //                );
                 break;
         }
         Log::info("Calculated withdraw amount: $withdrawAmount");
