@@ -24,23 +24,23 @@ Route::get("/test", function () {
 
     echo "Before action: " . date("H:i:s") . " <br>";
 
-    $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
-    $options = [
-            'page' => $query['page'],
-            'size' => $query['size'],
-    ];
-
-    $transactionProcessor = new TransactionProcessor(
-            $qiwi->reportForDateRange(
-                    $query['start'],
-                    $query['end'],
-                    $options
-            )
-    );
-
-    dd($transactionProcessor->getTransactions());
-
-    echo "After action: " . date("H:i:s") . " <br>";
+    //    $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
+    //    $options = [
+    //            'page' => $query['page'],
+    //            'size' => $query['size'],
+    //    ];
+    //
+    //    $transactionProcessor = new TransactionProcessor(
+    //            $qiwi->reportForDateRange(
+    //                    $query['start'],
+    //                    $query['end'],
+    //                    $options
+    //            )
+    //    );
+    //
+    //    dd($transactionProcessor->getTransactions());
+    //
+    //    echo "After action: " . date("H:i:s") . " <br>";
 
     //    while (true) {
     //        if (Queue::pop() == null) break;
@@ -49,13 +49,15 @@ Route::get("/test", function () {
     //    echo "It is over, it is done";
 
     //dd(Queue::getName(Queue::getConnectionName()));
-    //    $login = "+380960968460";
-    //    //    $login = "+380507308340";
-    //    $password = "Crixalis2204";
-    //    $qiwi = \App\Helpers\QiwiGeneralHelper::getQiwiInstance($login, $password, false);
-    //    //    $qiwi->login();
-    //    dump($qiwi->getBalance());
-    //    dd($qiwi);
+//    $login = "+380960968460";
+    //    $login = "+380507308340";
+//    $password = "Crixalis2204";
+    $qiwi = \App\Helpers\QiwiGeneralHelper::getQiwiInstance($login);
+    //    $qiwi->login();
+    echo "Inside action: " . date("H:i:s") . " <br>";
+    dump($qiwi->getBalance());
+    //        dd($qiwi);
+    echo "After action: " . date("H:i:s") . " <br>";
     //    echo $res->getBody()->getContents();
 
     //    $control = \App\Helpers\QiwiGeneralHelper::getQiwiControlObject("380960968460");

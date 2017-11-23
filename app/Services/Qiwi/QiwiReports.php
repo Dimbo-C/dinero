@@ -30,19 +30,14 @@ trait QiwiReports {
      * @return array
      */
     protected function fetchReport(array $query, $options) {
-//        $this->login();
+        //        $this->login();
 
         $size = isset($options['size']) ? $options['size'] : 20;
         $page = isset($options['page']) ? $options['page'] : 1;
         $start = ($page - 1) * $size;
 
         $html = $this->fetchHistoryPage($query);
-//        $response = $this->client->get(
-//                'https://qiwi.com/report/list.action',
-//                ['query' => $query,]);
-////        dd($response);
-//
-//        $html = $response->getBody()->getContents();
+
         $crawler = new Crawler($html);
         $items = $crawler->filter('.reportsLine[data-container-name="item"]');
         $transactions = [];
@@ -85,7 +80,7 @@ trait QiwiReports {
                 'start' => $start,
                 'finish' => $end,
         ];
-//        $this->login();
+        //        $this->login();
 
         $html = $this->fetchHistoryPage($query);
         $crawler = new Crawler($html);
@@ -110,42 +105,20 @@ trait QiwiReports {
         ];
     }
 
-    //    public function getIncome(array $query) {
-    //        $this->login();
-    //
-    //        $response = $this->client->get('https://qiwi.com/report/list.action', [
-    //                'query' => $query,
-    //        ]);
-    //
-    //        $html = $response->getBody()->getContents();
-    //        $crawler = new Crawler($html);
-    //        $moneyText = $crawler->filter('.SuccessWithFail.expenditure .success')->first()->text();
-    //        $items = MoneyHelper::moneyToFloat($moneyText);
-    //
-    //        return $items;
-    //    }
-
     protected function fetchHistoryPage($query) {
         $key = "history-page-{$this->login}-{$query['start']}-{$query['finish']}";
 
-        if (!\Cache::has($key)) {
-            $historyPageHtml = $this->client->get(
+        return \Cache::remember($key, env("HISTORY_CACHE_STORAGE_TIME", 1), function () use ($query) {
+            return $this->client->get(
                     'https://qiwi.com/report/list.action',
                     ['query' => $query,]
             )->getBody()->getContents();
-
-            \Cache::put($key, $historyPageHtml, env("HISTORY_CACHE_STORAGE_TIME", 1));
-        }
-
-        return \Cache::get($key);
+        });
     }
 
     protected function setAmountSign($class) {
         $class = str_replace('IncomeWithExpend', '', $class);
-        if (trim($class) == 'income') {
-            return '+';
-        } else {
-            return '-';
-        }
+
+        return (trim($class) == 'income') ? '+' : '-';
     }
 }
