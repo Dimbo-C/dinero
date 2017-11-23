@@ -25,9 +25,9 @@ class Withdraw {
         };
         $qiwiControl->transferMoney($to, $currency, $amount, $comment);
 
-//        $result = new WithdrawResult();
-//        $result->error = $qiwiControl->getLastError();
-//        if ($result->error != null) $qiwiControl->transferMoney($to, $currency, $amount, $comment);
+        //        $result = new WithdrawResult();
+        //        $result->error = $qiwiControl->getLastError();
+        //        if ($result->error != null) $qiwiControl->transferMoney($to, $currency, $amount, $comment);
 
         $result = new WithdrawResult();
         $result->error = $qiwiControl->getLastError();

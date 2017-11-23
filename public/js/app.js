@@ -18711,6 +18711,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         };
     },
     mounted: function mounted() {
+        this.sort.column = Vue.ls.get('sort.column') || "name";
+        this.sort.order = Vue.ls.get('sort.order') || 0;
+
         this.items = this.type.wallets;
         this.sorter();
     },
@@ -18734,7 +18737,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             this.sort.order = fieldName == this.sort.column ? !this.sort.order : this.sort.order;
 
             this.sort.column = fieldName;
+
             this.sorter();
+
+            Vue.ls.set('sort.column', this.sort.column);
+            Vue.ls.set('sort.order', +this.sort.order);
         },
         sorter: function sorter() {
             var _this2 = this;

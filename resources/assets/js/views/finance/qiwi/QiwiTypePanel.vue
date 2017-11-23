@@ -71,7 +71,7 @@
                             </a>
                         </td>
                         <!--<td v-if="!isInactive">-->
-                        <td >
+                        <td>
                             <span>{{ tidySum(w.month_income) | currency }}</span>
                         </td>
                         <td class="text-right">
@@ -160,6 +160,9 @@
         },
 
         mounted() {
+            this.sort.column = Vue.ls.get('sort.column') || "name";
+            this.sort.order = Vue.ls.get('sort.order') || 0;
+
             this.items = this.type.wallets;
             this.sorter();
         },
@@ -184,7 +187,12 @@
                     : this.sort.order;
 
                 this.sort.column = fieldName;
+
                 this.sorter();
+
+                Vue.ls.set('sort.column', this.sort.column);
+                Vue.ls.set('sort.order', +this.sort.order);
+
             },
 
             sorter() {
