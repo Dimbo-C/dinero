@@ -191,6 +191,16 @@ class QiwiWallet extends Model {
         $aw->autoWithdraw(AUTOWITHDRAW_AFTER_BALANCE_UPDATE);
     }
 
+    public function addFailedAttempt() {
+        $this->settings->increment('failed_attempts');
+        $this->settings->save();
+    }
+
+    public function resetFailedAttempts() {
+        $this->settings->failed_attempts = 0;
+        $this->settings->save();
+    }
+
     // put wallet to reserve if it's maximum balance is more that current balance
     private function recheckMaximumBalance() {
         if ($this->balance >= $this->settings->maximum_balance) {

@@ -55,6 +55,8 @@ use Illuminate\Support\Facades\Log;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWalletSettings whereAutoWithdrawalWalletNumbers($value)
  * @property string $minimum_balance
  * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWalletSettings whereMinimumBalance($value)
+ * @property string $failed_attempts
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWalletSettings whereFailedAttempts($value)
  */
 class QiwiWalletSettings extends Model {
     protected $fillable = array('wallet_id');

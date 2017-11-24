@@ -33,20 +33,21 @@ class Qiwi {
         $this->client = new Client([
                 'cookies' => $this->cookieJar,
                 'proxy' => $proxyString,
+                'timeout' => 5
         ]);
     }
 
     public function getPersonState() {
-//        echo "Before request " . date("H:i:s") . " <br>";
-//                $this->login();
+        //        echo "Before request " . date("H:i:s") . " <br>";
+        //                $this->login();
 
         $response = $this->client->post('https://qiwi.com/person/state.action', [
                 'Host' => 'qiwi.com',
                 'Origin' => 'https://qiwi.com',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Referer' => 'https://qiwi.com/main.action',
-        ]);
-//        echo "After request " . date("H:i:s") . " <br>";
+        ], ['timeout' => 2]);
+        //        echo "After request " . date("H:i:s") . " <br>";
         return json_decode($response->getBody()->getContents());
     }
 
