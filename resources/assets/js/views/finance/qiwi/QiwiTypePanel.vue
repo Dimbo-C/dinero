@@ -58,9 +58,6 @@
                                    v-bind:id="w.login"
                                    v-on:click.stop="autoWithdrawWallet(w.login)"></i>
                             </a>
-                            <span :id="w.login">
-                                {{ moneys(w.balance, w.login)}}
-                            </span>
                             <a data-toggle="tooltip"
                                data-placement="top"
                                title="Обновить">
@@ -69,10 +66,20 @@
                                    v-bind:id="w.login"
                                    v-on:click.stop="updateWallet(w.login)"></i>
                             </a>
+                            <a data-toggle="tooltip"
+                               data-placement="top"
+                               title="Неудачных входов">
+                                <i class="fa fa-square"
+                                   :class="attemptClass(w.settings.failed_attempts)"
+                                   aria-hidden="true"></i>
+                            </a>
+                            <span :id="w.login">
+                                {{ spinnerSwitcher(w.balance, w.login)}}
+                            </span>
                         </td>
                         <!--<td v-if="!isInactive">-->
                         <td>
-                            <span>{{ tidySum(w.month_income) | currency }}</span>
+                            <span>{{ tidySum(w.month_income) | currency}}</span>
                         </td>
                         <td class="text-right">
                             <div class="btn-group" role="group">
@@ -140,6 +147,7 @@
 
 <script>
     import Table from '../../../mixins/table';
+    import * as _ from "lodash/array";
 
     export default {
         mixins: [Table],
@@ -167,6 +175,14 @@
             this.sorter();
         },
 
+        created: function () {
+            this.$parent.$on('update', (wallets) => {
+                const walletsToUpdate = _.intersection(wallets, this.type.wallets.map(wallet => wallet.login));
+                this.selected = [];
+                walletsToUpdate.forEach(wallet => this.updateWallet(wallet));
+            });
+        },
+
         watch: {
             selected(val) {
                 this.$emit('updateSelected', val);
@@ -183,8 +199,8 @@
         methods: {
             setSortField(fieldName) {
                 this.sort.order = (fieldName == this.sort.column)
-                    ? !this.sort.order
-                    : this.sort.order;
+                        ? !this.sort.order
+                        : this.sort.order;
 
                 this.sort.column = fieldName;
 
@@ -211,28 +227,22 @@
                             return (cardNum1 < cardNum2) ? prior : -prior;
                         case "balance":
                             return (this.moneysToFloat(w1.balance) < this.moneysToFloat(w2.balance))
-                                ? prior : -prior;
+                                    ? prior : -prior;
+//                            return this.bigMoneyCompare(w1.balance, w2.balance) ? prior : -prior;
                         case "income":
                             return (
-                                this.moneysToFloat(w1.month_income) < this.moneysToFloat(w2.month_income))
-                                ? prior : -prior;
+                            this.moneysToFloat(w1.month_income) < this.moneysToFloat(w2.month_income))
+                                    ? prior : -prior;
+//                            return this.bigMoneyCompare(w1.month_income, w2.month_income) ? prior : -prior;
                     }
                 })
 
             },
 
-            moneys(balance, login) {
-                if (this.spinners.includes(login)) {
-                    return "...";
-                } else {
-                    return this.tidySum(balance) + " " + Dinero.currencySymbol;
-                }
-            },
-
             moveWallets() {
                 const moveFrom = this.isInactive
-                    ? this.selected[0].type_id
-                    : this.type.id;
+                        ? this.selected[0].type_id
+                        : this.type.id;
 
                 this.$emit('moveWallets', this.selected, moveFrom, this.moveTo)
             },
@@ -245,22 +255,28 @@
                 this.spinners.push(login);
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-balance', new Form(auth))
-                    .then((response) => {
-                        const balance = response.balance;
-                        console.log("Balance: " + balance);
-                        this.updateBalanceCallback(login, balance);
-                    })
-                    .catch(error => {
-                        console.log(error.response);
-                        this.updateBalanceCallback(login);
-                    });
+                        .then((response) => {
+                            const balance = response.balance;
+                            console.log("Balance: " + balance);
+                            this.updateBalanceCallback(login, balance);
+                        })
+                        .catch(error => {
+//                            console.log(error.response);
+                            this.updateBalanceCallback(login);
+                        });
             },
 
             updateBalanceCallback(login, balance = null) {
-                this.items.map((item) => {
-                    if (item.login === login) {
-                        if (balance !== null) {
-                            item.balance = this.tidySum(balance);
+                this.items.map((wallet) => {
+                    if (wallet.login === login) {
+
+                        console.log("Balance in callback", balance);
+                        wallet.balance = this.tidySum(balance);
+
+                        if (balance == null) {
+                            wallet.settings.failed_attempts += 1;
+                        } else {
+                            wallet.settings.failed_attempts = 0;
                         }
 
                         this.spinners = this.spinners.filter((elem) => login !== elem);
@@ -271,9 +287,9 @@
             updateIncome(login) {
                 let auth = {"login": login};
                 Dinero.post('/api/qiwi-wallets/update-income', new Form(auth))
-                    .then((response) => {
-                        // TODO: mb some notification on update (it is really dispatched as a job, so result is not immediate)
-                    })
+                        .then((response) => {
+                            // TODO: mb some notification on update (it is really dispatched as a job, so result is not immediate)
+                        })
             },
 
             updateWallet(login) {
@@ -285,43 +301,104 @@
                 this.withdrawers.push(login);
 
                 axios.post(`/api/qiwi-wallets/${login}/auto-withdraw`)
-                    .then(response => {
-                        Bus.$emit('showNotification', "success", "Автовывод успешно проведен");
-                    })
-                    .catch(error => {
-                        const status = error.response.status;
-                        if (status === 400) {
-                            Bus.$emit('showNotification', "danger", "Не удалось провести автовывод, проверьте баланс кошелька и настройки");
-                        } else if (status === 500) {
-                            Bus.$emit('showNotification', "danger", "Ошибка сервера, попробуйте позже");
-                        }
-                    })
-                    .finally(() => {
-                        this.items.map((item) => {
-                            if (item.login === login) {
-                                this.withdrawers = this.withdrawers.filter((elem) => login !== elem);
+                        .then(response => {
+                            Bus.$emit('showNotification', "success", "Автовывод успешно проведен");
+                        })
+                        .catch(error => {
+                            const status = error.response.status;
+                            if (status === 400) {
+                                Bus.$emit('showNotification', "danger", "Не удалось провести автовывод, проверьте баланс кошелька и настройки");
+                            } else if (status === 500) {
+                                Bus.$emit('showNotification', "danger", "Ошибка сервера, попробуйте позже");
                             }
-                        });
-                    })
+                        })
+                        .finally(() => {
+                            this.items.map((item) => {
+                                if (item.login === login) {
+                                    this.withdrawers = this.withdrawers.filter((elem) => login !== elem);
+                                }
+                            });
+                        })
             },
 
+            spinnerSwitcher(balance, login) {
+                if (this.spinners.includes(login)) {
+                    return "...";
+                } else {
+                    return this.tidySum(balance) + " " + Dinero.currencySymbol;
+                }
+            },
+
+            // TODO: REFACTOR ASAP, LITERAL GARBAGE
             tidySum(sum) {
-                let str = (typeof sum === "object") ? "0.00" : (sum + "");
-                if (str === "") str = "0.00";
+                sum = "" + sum;
+                sum = sum.replace(/,/g, "");
+                if (isNaN(sum) || +sum === -1) {
+                    console.log("Number : ", sum, " is ?");
+                    return "?";
+                } else {
+//                    console.log("Sum inc", sum);
+                    let str = (typeof sum === "object") ? "0.00" : (sum + "");
+                    if (str === "") str = "0.00";
 
-                str = str.replace(/,/g, "");
-                str = parseFloat(str).toFixed(2);
+                    str = str.replace(/,/g, "");
+//                    console.log("Sum out", str);
+                    str = parseFloat(str).toFixed(2);
 
-                return str;
+                    return str;
+                }
             },
 
-            moneysToFloat(moneyString) {
-                // remove the commas and parse to float
-                return parseFloat(moneyString.replace(/[, ]/g, ""));
+            moneysToFloat(moneys){
+                // remove commas from moneystring
+                return parseFloat(moneys.replace(/[, ]/g, ""));
+            },
+
+//            bigMoneyCompare(money1, money2){
+//                if (isNaN(money1)) {
+//                    return true;
+//                }
+//                if (isNaN(money2)) {
+//                    return false;
+//                }
+////                console.log("1");
+////                console.log("Conv1", money1);
+////                console.log("Conv2", money2);
+//                const convertedMoney1 = parseFloat(money1.replace(/[, ]/g, ""));
+//                const convertedMoney2 = parseFloat(money2.replace(/[, ]/g, ""));
+////                console.log("2");
+////                console.log("Conv1", convertedMoney1);
+////                console.log("Conv2", convertedMoney1);
+//                return convertedMoney1 < convertedMoney2;
+//            },
+
+            attemptClass(attempts){
+                if (attempts > 5) return "attempts-danger";
+                else if (attempts > 0) return "attempts-warning";
+                else return "attempts-ok";
             }
         },
         computed: {
-            firstDayOfTheMonth() {
+            selectAll: {
+                get: function () {
+                    return this.type.wallets ? this.selected.length == this.type.wallets.length : false;
+                }
+                ,
+                set: function (value) {
+                    let selected = [];
+
+                    if (value) {
+                        this.type.wallets.forEach(function (wallet) {
+                            selected.push(wallet);
+                        });
+                    }
+
+                    this.selected = selected;
+                }
+            }
+            ,
+            firstDayOfTheMonth()
+            {
                 const today = new Date();
                 let mm = today.getMonth() + 1; //January is 0!
                 const yyyy = today.getFullYear();
@@ -330,9 +407,11 @@
                 }
 
                 return "01." + mm + "." + yyyy;
-            },
+            }
+            ,
         }
-    };
+    }
+    ;
 </script>
 
 <style scoped>
@@ -349,4 +428,17 @@
     .tr-remove-padding {
         padding: 0;
     }
+
+    .attempts-ok {
+        color: green;
+    }
+
+    .attempts-warning {
+        color: #ff9937;
+    }
+
+    .attempts-danger {
+        color: red;
+    }
+
 </style>

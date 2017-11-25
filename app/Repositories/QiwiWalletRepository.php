@@ -126,12 +126,14 @@ class QiwiWalletRepository implements Contract {
         try {
             $balance = QiwiGeneralHelper::getBalance2($login);
             Log::info("Balance on update: $balance");
-            if ($balance != null) $wallet->updateBalance($balance);
+//            if ($balance === null) $balance = -1;
+            $wallet->updateBalance($balance);
             if ($postAction) $wallet->postUpdateRoutine();
             $wallet->resetFailedAttempts();
 
             return response()->json(['balance' => $balance], 200);
         } catch (\Exception $exception) {
+            $wallet->updateBalance(-1);
             $wallet->addFailedAttempt();
 
             return response()->json([], 400);
@@ -141,13 +143,12 @@ class QiwiWalletRepository implements Contract {
 
     public function updateIncome($login, $postAction = true) {
         $job = new UpdateIncomeJob($login);
-        dispatch($job);
-        //        $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
-        //        $wallet = QiwiWallet::findByLogin($login);
-        //        $wallet->updateIncome($monthIncome);
-        //        if ($postAction) $wallet->postUpdateRoutine();
-
-        return response()->json([], 200);
+        try {
+            dispatch($job);
+            return response()->json([], 200);
+        } catch (\Exception $exception) {
+            return response()->json([], 400);
+        }
     }
 
     /**

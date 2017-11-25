@@ -31,12 +31,16 @@ class UpdateIncomeJob implements ShouldQueue {
      * @return void
      */
     public function handle() {
-        $monthIncome = QiwiGeneralHelper::getMonthIncome($this->login);
+        try {
+            $monthIncome = QiwiGeneralHelper::getMonthIncome($this->login);
 
-        $wallet = QiwiWallet::findByLogin($this->login);
-        $wallet->updateIncome($monthIncome);
-        Log::info("Update income job");
-        dump($wallet);
+            $wallet = QiwiWallet::findByLogin($this->login);
+            $wallet->updateIncome($monthIncome);
+            Log::info("Update income job");
+            dump($wallet);
+        }catch (\Exception $exception){
+            $this->failed();
+        }
     }
 
     public function failed() {

@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "bootstrap-toggle": "^2.2.2",
-    "bootstrap-vue": "^1.0.0-beta.9",
+    "bootstrap-vue": "1.*",
     "jquery.maskedinput": "^1.4.1",
     "moment": "^2.18.1",
     "promise.prototype.finally": "^3.1.0",

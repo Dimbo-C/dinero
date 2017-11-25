@@ -38,16 +38,14 @@ class Qiwi {
     }
 
     public function getPersonState() {
-        //        echo "Before request " . date("H:i:s") . " <br>";
-        //                $this->login();
-
+//                        $this->login();
         $response = $this->client->post('https://qiwi.com/person/state.action', [
                 'Host' => 'qiwi.com',
                 'Origin' => 'https://qiwi.com',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Referer' => 'https://qiwi.com/main.action',
-        ], ['timeout' => 2]);
-        //        echo "After request " . date("H:i:s") . " <br>";
+        ], ['timeout' => 5]);
+
         return json_decode($response->getBody()->getContents());
     }
 

@@ -36,6 +36,15 @@
             </div>
 
             <br>
+            <div class="form-group">
+                <button class="btn btn-default"
+                        :disabled="!selected.length"
+                        @click="updateWallets">
+                    Обновить выбранные кошельки
+                </button>
+            </div>
+
+            <br>
             <div class="m-b-lg">
                 <router-link to="/finance/qiwi/add-wallet" class="btn btn-success">
                     <i class="fa fa-plus-square fa-btn"></i>Добавить кошелёк
@@ -110,7 +119,7 @@
                 walletsTypes: null,
                 selected: [],
                 updatingWalletsRoutine: true,
-                updateDelay: 5,
+                updateDelay: 100,
             };
         },
 
@@ -127,6 +136,11 @@
                 let typeId = selected[0].type_id;
                 let walletsWithoutThisType = this.selected.filter((wallet) => wallet.type_id !== typeId);
                 this.selected = walletsWithoutThisType.concat(selected);
+            },
+
+            updateWallets(){
+                this.$emit('update', this.selected.map((wallet) => wallet.login));
+                this.selected = [];
             },
 
             fetchWallets() {
