@@ -119,7 +119,7 @@
                 walletsTypes: null,
                 selected: [],
                 updatingWalletsRoutine: true,
-                updateDelay: 100,
+                updateDelay: 10,
             };
         },
 

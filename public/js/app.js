@@ -27331,7 +27331,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             walletsTypes: null,
             selected: [],
             updatingWalletsRoutine: true,
-            updateDelay: 100
+            updateDelay: 10
         };
     },
 
@@ -27569,12 +27569,14 @@ exports.push([module.i, "\n.withdrawing-active[data-v-48a4f94d] {\n    backgroun
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table__ = __webpack_require__(78);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__mixins_table__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_array__ = __webpack_require__(509);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_array___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_array__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+//
+//
 //
 //
 //
@@ -27858,6 +27860,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         wallet.settings.failed_attempts = 0;
                     }
 
+                    //                        this.$nextTick(() => {
+                    $('[data-toggle="tooltip"][login="' + login + '"]').tooltip().attr("data-original-title", _this5.attemptPopup(wallet.settings.failed_attempts));
+                    //                        });
+
                     _this5.spinners = _this5.spinners.filter(function (elem) {
                         return login !== elem;
                     });
@@ -27952,14 +27958,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
         attemptClass: function attemptClass(attempts) {
             if (attempts > 5) return "attempts-danger";else if (attempts > 0) return "attempts-warning";else return "attempts-ok";
+        },
+        attemptPopup: function attemptPopup(attempts) {
+            return "Неудачных входов: " + attempts;
         }
     },
     computed: {
+        attemptTooltip: function attemptTooltip(attempts) {
+            return "Неудачных входов: " + attempts;
+        },
+
         selectAll: {
             get: function get() {
                 return this.type.wallets ? this.selected.length == this.type.wallets.length : false;
             },
-
             set: function set(value) {
                 var selected = [];
 
@@ -27972,7 +27984,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 this.selected = selected;
             }
         },
-
         firstDayOfTheMonth: function firstDayOfTheMonth() {
             var today = new Date();
             var mm = today.getMonth() + 1; //January is 0!
@@ -27985,6 +27996,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }
     }
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(11)))
 
 /***/ }),
 /* 509 */
@@ -33707,7 +33719,9 @@ var render = function() {
                           attrs: {
                             "data-toggle": "tooltip",
                             "data-placement": "top",
-                            title: "Неудачных входов"
+                            "data-content": "SWAG",
+                            login: w.login,
+                            title: _vm.attemptPopup(w.settings.failed_attempts)
                           }
                         },
                         [

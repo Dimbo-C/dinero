@@ -68,7 +68,9 @@
                             </a>
                             <a data-toggle="tooltip"
                                data-placement="top"
-                               title="Неудачных входов">
+                               data-content="SWAG"
+                               :login="w.login"
+                               :title="attemptPopup(w.settings.failed_attempts)">
                                 <i class="fa fa-square"
                                    :class="attemptClass(w.settings.failed_attempts)"
                                    aria-hidden="true"></i>
@@ -279,6 +281,12 @@
                             wallet.settings.failed_attempts = 0;
                         }
 
+//                        this.$nextTick(() => {
+                        $('[data-toggle="tooltip"][login="' + login + '"]')
+                                .tooltip()
+                                .attr("data-original-title", this.attemptPopup(wallet.settings.failed_attempts));
+//                        });
+
                         this.spinners = this.spinners.filter((elem) => login !== elem);
                     }
                 });
@@ -376,14 +384,22 @@
                 if (attempts > 5) return "attempts-danger";
                 else if (attempts > 0) return "attempts-warning";
                 else return "attempts-ok";
+            },
+
+            attemptPopup(attempts){
+                return "Неудачных входов: " + attempts;
             }
+
+
         },
         computed: {
+            attemptTooltip(attempts){
+                return "Неудачных входов: " + attempts;
+            },
             selectAll: {
                 get: function () {
                     return this.type.wallets ? this.selected.length == this.type.wallets.length : false;
-                }
-                ,
+                },
                 set: function (value) {
                     let selected = [];
 
@@ -395,8 +411,7 @@
 
                     this.selected = selected;
                 }
-            }
-            ,
+            },
             firstDayOfTheMonth()
             {
                 const today = new Date();
@@ -407,11 +422,9 @@
                 }
 
                 return "01." + mm + "." + yyyy;
-            }
-            ,
+            },
         }
     }
-    ;
 </script>
 
 <style scoped>
