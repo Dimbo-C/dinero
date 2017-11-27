@@ -55,20 +55,8 @@ class QiwiGeneralHelper {
      * @return Qiwi
      */
     public static function getQiwiInstance($login, $password = null, $useProxy = null, $proxy = []) {
-
-        //        $wallet = self::getQiwiInstanceWallet($login, $password, $useProxy, $proxy);
-        //        if ($password == null) {
-        //            $wallet = QiwiWallet::where("login", $login)->first();
-        //            $login = $wallet->login;
-        //            $password = $wallet->password;
-        //            $useProxy = $wallet->use_proxy;
-        //            $proxy = Proxy::find($wallet->proxy_id);
-        //        }
         $wallet = self::getQiwiInstanceWallet($login, $password, $useProxy, $proxy);
 
-        //        dd(['wallet' => $wallet]);
-
-        //        dd($wallet);
         if ($wallet['useProxy']) {
             $qiwi = new Qiwi(
                     $wallet['login'], $wallet['password'],
@@ -79,7 +67,6 @@ class QiwiGeneralHelper {
             $qiwi = new Qiwi($wallet['login'], $wallet['password']);
         }
         $qiwi->login();
-        //        Log::info("Login: " . ($qiwi->login() ? "SUCCESS" : "FAILE"));
 
         return $qiwi;
     }
@@ -140,6 +127,7 @@ class QiwiGeneralHelper {
         return $income;
     }
 
+    // detect provider by first numbers
     public static function detectCardProvider($cardNumber) {
         $sixNum = substr(trim($cardNumber), 0, 6);
         $firstNum = substr(trim($cardNumber), 0, 1);

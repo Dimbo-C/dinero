@@ -2,6 +2,7 @@
 
 use App\Helpers\QiwiGeneralHelper;
 use App\Processors\TransactionProcessor;
+use App\QiwiWallet;
 use App\QiwiWalletType;
 use Illuminate\Support\Facades\Route;
 
@@ -14,16 +15,32 @@ Route::get('/aliexpress', 'Admins\OwnAdminsController@all');
 Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
 Route::get("/test", function () {
-    $login = "+380507308340";
-    $query = [
-            'start' => '22.11.2017',
-            'end' => '22.11.2017',
-            'page' => '1',
-            'size' => '20'
-    ];
+    $login = "+79775286985";
 
-    echo "Before action: " . date("H:i:s") . " <br>";
+    //    $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
+    //    Log::info("Update income job started");
+    //    $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
+    //    $qiwi->setNewTimeout(40);
+    //    $monthIncome = $qiwi->getTotals(date("01.m.Y"), date("d.m.Y"))['income'];
+    //
+    //    //            $monthIncome = QiwiGeneralHelper::getMonthIncome($this->login);
+    //
+    //    $wallet = QiwiWallet::findByLogin($login);
+    //    $wallet->updateIncome($monthIncome);
+    //    Log::info("Update income job income is $monthIncome");
+    //    Log::info("Update income job finished");
 
+    //    dd($income);
+
+    //    $query = [
+    //            'start' => '22.11.2017',
+    //            'end' => '22.11.2017',
+    //            'page' => '1',
+    //            'size' => '20'
+    //    ];
+    //
+    //    echo "Before action: " . date("H:i:s") . " <br>";
+    //
     //    $qiwi = QiwiGeneralHelper::getQiwiInstance($login);
     //    $options = [
     //            'page' => $query['page'],
@@ -42,16 +59,18 @@ Route::get("/test", function () {
     //
     //    echo "After action: " . date("H:i:s") . " <br>";
 
-    //    while (true) {
-    //        if (Queue::pop() == null) break;
-    //    };
-    //
-    //    echo "It is over, it is done";
+    while (true) {
+        if (Queue::pop() == null) break;
+    };
 
+    //
+    echo "It is over, it is done";
+    //
+    die();
     //dd(Queue::getName(Queue::getConnectionName()));
-//    $login = "+380960968460";
+    //    $login = "+380960968460";
     //    $login = "+380507308340";
-//    $password = "Crixalis2204";
+    //    $password = "Crixalis2204";
     $qiwi = \App\Helpers\QiwiGeneralHelper::getQiwiInstance($login);
     //    $qiwi->login();
     echo "Inside action: " . date("H:i:s") . " <br>";

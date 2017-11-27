@@ -14,6 +14,8 @@ class Qiwi {
     public $loggedIn;
     protected $cookieJar;
     protected $client;
+    protected $timeout = 5;
+    protected $proxyString;
 
     public function __construct($login, $password, $proxy = null, $proxyAuth = null) {
         $this->login = $login;
@@ -26,25 +28,38 @@ class Qiwi {
                         'Domain' => 'qiwi.com',
                 ]
         ]);
-        $proxyString = $proxyAuth != null
+        $this->proxyString = $proxyAuth != null
                 ? "http://$proxyAuth@$proxy"
                 : $proxy;
 
         $this->client = new Client([
                 'cookies' => $this->cookieJar,
-                'proxy' => $proxyString,
-                'timeout' => 5
+                'proxy' => $this->proxyString,
+                'timeout' => $this->timeout
         ]);
+
     }
 
+    public function setNewTimeout($seconds) {
+        $this->timeout = $seconds;
+        $this->client = new Client([
+                'cookies' => $this->cookieJar,
+                'proxy' => $this->proxyString,
+                'timeout' => $this->timeout
+        ]);
+
+        $this->login();
+    }
+
+
     public function getPersonState() {
-//                        $this->login();
+        //                        $this->login();
         $response = $this->client->post('https://qiwi.com/person/state.action', [
                 'Host' => 'qiwi.com',
                 'Origin' => 'https://qiwi.com',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Referer' => 'https://qiwi.com/main.action',
-        ], ['timeout' => 5]);
+        ]);
 
         return json_decode($response->getBody()->getContents());
     }

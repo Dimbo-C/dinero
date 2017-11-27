@@ -15,7 +15,8 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
                 ["Russ 2", "+79096127856", "F3Eu7F2iaK", 1],
                 ["Russ 3", "+79619377629", "gIDMS1Aa08", 1],
                 ["Russ 4", "+79619386097", "PY1x7aPPnL", 1],
-                ["Russ 5", "+79789520267", "Qwerty1", 1],
+//                ["Russ 5", "+79789520267", "Qwerty1", 1],
+                ["Russ 5", "+79775286985", "gdbb356TGHdfgerfg", 1],
         ];
         $proxies = [
                 ["", "", "", ""],
@@ -25,7 +26,7 @@ class QiwiWalletsTableSeeder extends \Illuminate\Database\Seeder {
                 ["5.8.61.107", "8239", "user6760", "0ajq7n"],
                 ["5.8.61.109", "8239", "user6760", "0ajq7n"],
                 ["5.8.61.145", "8239", "user6760", "0ajq7n"],
-                ["5.8.61.145", "8239", "user6760", "0ajq7n"],
+                ["5.188.80.182", "8239", "user6760", "0ajq7n"],
         ];
 
         for ($i = 0; $i < count($wallets); $i++) {
