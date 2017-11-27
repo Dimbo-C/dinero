@@ -192,6 +192,8 @@ class QiwiWalletRepository implements Contract {
     }
 
     public function createWallet($data) {
+
+        // TODO: REFACTOR TO MAKE MORE LIKE REST
         if (QiwiWallet::walletExistsByName($data->name)) {
             $tmpWallet = QiwiWallet::findByName($data->name);
             $result['status'] = "failure";
@@ -214,17 +216,29 @@ class QiwiWalletRepository implements Contract {
         $proxyRepository->create($request['proxy']);
         $proxy = $proxyRepository->getLast();
 
-        // try to login to new wallet
-        $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
+        $qiwiControl = QiwiGeneralHelper::getQiwiInstance(
                 $request->login, $request->password,
-                $request->useProxy, $request['proxy']);
+                $request->useProxy, $request['proxy']
+        );
+//        echo "After action: " . date("H:i:s") . " <br>";
 
-        if (!$qiwiControl->login() && ($qiwiControl->loadBalance() == false)) {
+        if ($qiwiControl->getBalance() == false) {
             $result['status'] = "failure";
             $result['message'] = "Кошелек не найден в системе Qiwi";
 
             return $result;
         };
+
+        //            $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
+        //                    $request->login, $request->password,
+        //                    $request->useProxy, $request['proxy']);
+        //
+        //            if (!$qiwiControl->login() && ($qiwiControl->loadBalance() == false)) {
+        //                $result['status'] = "failure";
+        //                $result['message'] = "Кошелек не найден в системе Qiwi";
+        //
+        //                return $result;
+        //            };
 
         // fetch balance from qiwi with library
         $request->typeId = (new QiwiWalletType())->findByType($request->type)->id;

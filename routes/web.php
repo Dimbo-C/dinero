@@ -14,8 +14,99 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::get('/aliexpress', 'Admins\OwnAdminsController@all');
 Route::get('/gross-indicators', 'Admins\GrossIndicatorsController@all');
 
+Route::get("/clear", function () {
+    while (true) {
+        if (Queue::pop() == null) break;
+    };
+    echo "It is over, it is done";
+
+});
+
 Route::get("/test", function () {
-    $login = "+79775286985";
+    $login = "+79096127856";
+    $name = "Russ 2";
+    $password = "F3Eu7F2iaK";
+    $useProxy = 1;
+    $proxy = [
+            "host" => "5.8.61.107",
+            "port" => "8239",
+            "login" => "user6760",
+            "password" => "0ajq7n"
+    ];
+
+    //    if (QiwiWallet::walletExistsByName($data->name)) {
+    //        $tmpWallet = QiwiWallet::findByName($data->name);
+    //        $result['status'] = "failure";
+    //        $result['message'] = "Кошелек с таким именем уже есть в системе. Привязан к номеру " . $tmpWallet->login;
+    //
+    //        return $result;
+    //    }
+    //    if (QiwiWallet::walletExists($data->login)) {
+    //        $tmpWallet = QiwiWallet::findByLogin($data->login);
+    //        $result['status'] = "failure";
+    //        $result['message'] = "Этот номер уже внесен в систему. Имеет имя " . $tmpWallet->name;
+    //
+    //        return $result;
+    //    }
+
+    //    $request = $data;
+
+    // create new proxy
+    //    $proxyRepository = new ProxyRepository();
+    //    $proxyRepository->create($request['proxy']);
+    //    $proxy = $proxyRepository->getLast();
+
+    echo "Before action: " . date("H:i:s") . " <br>";
+    //     try to login to new wallet
+    //    $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
+    //            $login, $password,
+    //            $useProxy, $proxy);
+//    $qiwiControl = QiwiGeneralHelper::getQiwiInstance(
+//            $login, $password,
+//            $useProxy, $proxy
+//    );
+//    echo "After action: " . date("H:i:s") . " <br>";
+//
+//    //        die();
+//    if ($qiwiControl->getBalance() == false) {
+//        echo "FALSEEEE";
+//        $result['status'] = "failure";
+//        $result['message'] = "Кошелек не найден в системе Qiwi";
+//
+//        return $result;
+//    } else {
+//        echo "TRUEEEEE";
+//    };
+
+    die();
+
+    // fetch balance from qiwi with library
+    $request->typeId = (new QiwiWalletType())->findByType($request->type)->id;
+    //                $request->balance = $qiwiControl->loadBalance()['RUB'];
+    $request->balance = 0;
+
+    // get income data from qiwi (lib returns empty array for now, so it is a dummy)
+    //        $request->monthIncome = $request->balance;
+    $request->monthIncome = 0;
+
+    // add new wallet to DB with proxy or not
+
+    $wallet = (new Qiwiwallet())::insertWallet($data, $proxy->id);
+
+    // create a general settings and security settings in DB
+    $settings = new QiwiWalletSettings([
+            'wallet_id' => $wallet->id,
+            "autoWithdrawal_type_id" => 1
+    ]);
+
+    $securitySettings = new QiwiWalletSecuritySettings(['wallet_id' => $wallet->id]);
+    $wallet->settings()->save($settings);
+    $wallet->securitySettings()->save($securitySettings);
+
+    $result['code'] = "200";
+    $result['status'] = "success";
+    $result['message'] = "Кошелек успешно добавлен.";
+
 
     //    $monthIncome = QiwiGeneralHelper::getMonthIncome($login);
     //    Log::info("Update income job started");
@@ -58,13 +149,6 @@ Route::get("/test", function () {
     //    dd($transactionProcessor->getTransactions());
     //
     //    echo "After action: " . date("H:i:s") . " <br>";
-
-    while (true) {
-        if (Queue::pop() == null) break;
-    };
-
-    //
-    echo "It is over, it is done";
     //
     die();
     //dd(Queue::getName(Queue::getConnectionName()));

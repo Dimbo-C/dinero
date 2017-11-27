@@ -204,11 +204,11 @@ class QIWIControl {
      * @return bool
      */
     function login() {
-        $this->updateLoginStatus();
-        if ($this->logged_in) {
-            $this->trace("[QIWI] Already logged in. Skip logging in procedure.");
-            return true;
-        }
+        //        $this->updateLoginStatus();
+        //        if ($this->logged_in) {
+        //            $this->trace("[QIWI] Already logged in. Skip logging in procedure.");
+        //            return true;
+        //        }
 
         $this->getUrl(QIWI_URL_MAIN);
         $this->getUrl("https://sso.qiwi.com/app/proxy?v=1", QIWI_URL_MAIN);
@@ -1486,11 +1486,11 @@ class QIWIControl {
         Log::info("");
 
         if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
-//            if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
+            //            if (!($this->validateProviderFields($amount, $currencyId, "account_$currencyId", $paymentMethod, $comment, $fields, $provider_id))) {
             $this->trace("[PAY] Failed to validate field.");
             $this->lastErrorStr = "[PAY] Failed to validate field.";
             return false;
-//            }
+            //            }
         }
 
         //        dump(['fields' => $fields]);
