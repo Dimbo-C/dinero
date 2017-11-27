@@ -75,6 +75,7 @@ trait QiwiReports {
      * @return array
      */
     public function getTotals($start, $end) {
+
         $query = [
                 'daterange' => 'true',
                 'start' => $start,
@@ -108,6 +109,8 @@ trait QiwiReports {
     protected function fetchHistoryPage($query) {
         $key = "history-page-{$this->login}-{$query['start']}-{$query['finish']}";
 
+        // set big ass timeout for loading big html pages such as history
+        $this->setNewTimeout(120);
         return \Cache::remember($key, env("HISTORY_CACHE_STORAGE_TIME", 1), function () use ($query) {
             return $this->client->get(
                     'https://qiwi.com/report/list.action',

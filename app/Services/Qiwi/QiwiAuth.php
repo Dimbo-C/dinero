@@ -63,7 +63,7 @@ trait QiwiAuth {
                 'Referer' => 'https://sso.qiwi.com/app/proxy?v=1',
         ];
 
-        $numOfAttempts = 2;
+        $numOfAttempts = 1;
         $attempts = 0;
 
         do {

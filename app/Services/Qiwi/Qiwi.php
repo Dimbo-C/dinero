@@ -48,7 +48,7 @@ class Qiwi {
                 'timeout' => $this->timeout
         ]);
 
-        $this->login();
+//        $this->login();
     }
 
 

@@ -34,9 +34,7 @@ class UpdateIncomeJob implements ShouldQueue {
     public function handle() {
         Log::info("Update income job started");
         try {
-
             $qiwi = QiwiGeneralHelper::getQiwiInstance($this->login);
-            $qiwi->setNewTimeout(40);
             $monthIncome = $qiwi->getTotals(date("01.m.Y"), date("d.m.Y"))['income'];
 
             //            $monthIncome = QiwiGeneralHelper::getMonthIncome($this->login);
@@ -45,13 +43,9 @@ class UpdateIncomeJob implements ShouldQueue {
             $wallet->updateIncome($monthIncome);
             Log::info("Update income job income is $monthIncome");
             Log::info("Update income job finished");
-            dump($wallet);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            //            $this->failed();
-            //            echo "<pre>";
-            //            print_r($exception);
-            //            echo "</pre>";
+            $this->failed();
         }
     }
 
