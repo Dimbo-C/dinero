@@ -1,0 +1,25 @@
+.withdrawing-active {
+    background-color: #fff;
+    color: green;
+}
+
+.table-header-block {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.tr-remove-padding {
+    padding: 0;
+}
+
+.attempts-ok {
+    color: green;
+}
+
+.attempts-warning {
+    color: #ff9937;
+}
+
+.attempts-danger {
+    color: red;
+}

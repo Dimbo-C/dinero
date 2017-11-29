@@ -1,4 +1,8 @@
+import InputBlock from "./input/InputBlock.vue";
+
 export default {
+
+    components: {InputBlock},
     /*
      * The component's data.
      */
@@ -14,6 +18,42 @@ export default {
                 text: "",
             },
             autoWithdrawalWallets: [],
+
+            // TODO: Put this big ass string array somewhere else
+            strings: {
+                autoWithdrawalTimeout: {
+                    label: "Вызывать автовывод каждые X минут",
+                    description: "Работает только когда кошелек настроен на автовывод.\n" +
+                    "Как только с момента последнего автовывода прошло указанное количество минут,\n" +
+                    "вызывается автовывод, если режим автовывода указан <b>Каждые Х минут</b>."
+                },
+                autoWithdrawalWallets: {
+                    label: "Кошельки для автовывода",
+                    description: "Укажите множество кошельков через пробел, ';' или ','\n" +
+                    "на которые будет совершен автовывод.\n" +
+                    "Если один из них достигнет максимального баланса\n" +
+                    "- остаток денег будет переведен на следующий кошелек.",
+                    placeholder: "Например: +79123456789"
+                },
+                cardNumber: {
+                    label: "Карта для автовывода",
+                    placeholder: "XXXX XXXX XXXX XXXX"
+                },
+                proxyServer: {
+                    label: "Прокси сервер",
+                    placeholder: "host:port"
+                },
+                proxyAuth: {
+                    label: "Авторизация прокси",
+                    placeholder: "login:password"
+                },
+                recheckTimeout: {
+                    label: "Частота проверки баланса, мин.",
+                    description: "Укажите через какое количество минут система должна автоматически\n" +
+                    "обновлять баланс кошелька. Чтобы отключить функцию введите 0",
+                }
+            },
+
             form: new Form({
                 useProxy: false,
                 name: "",
@@ -199,23 +239,10 @@ export default {
         },
 
         showAlert(className, text) {
-            //                        Bus.$emit('showNotification', "success", "Изменения успешно сохранены");
             this.alert.show = true;
             this.alert.className = className;
             this.alert.text = text;
         },
-
-//            triggerAutoWithdraw(){
-//                axios.post(`/api/qiwi-wallets/${this.$route.params.wallet}/auto-withdraw`, this.form)
-//                        .then(response => {
-//                            console.log(response.data);
-//                            Bus.$emit('showNotification', "success", response.data.message);
-//                        })
-//                        .catch(error => {
-//                            console.log(error.response);
-//                            Bus.$emit('showNotification', "danger", error.response.data.message);
-//                        });
-//            },
 
         scrollToTop() {
             $("html, body").animate({

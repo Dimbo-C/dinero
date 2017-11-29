@@ -86,19 +86,20 @@
 </template>
 
 <script>
-    import QiwiTypePanel from './qiwi/QiwiTypePanel.vue';
+    import QiwiTypePanel from './qiwi/type/QiwiTypePanel.vue';
     import 'babel-polyfill';
 
     export default {
         components: {QiwiTypePanel},
         mounted() {
-            console.log(window.Dinero);
+//            console.log(window.Dinero);
             Vue.ls.set('actions', this.actions);
             this.fetchWallets();
             this.runningLine();
         },
 
         beforeDestroy() {
+            // stop the running line
             this.updatingWalletsRoutine = false;
         },
 
@@ -138,7 +139,7 @@
                 this.selected = walletsWithoutThisType.concat(selected);
             },
 
-            updateWallets(){
+            updateWallets() {
                 this.$emit('update', this.selected.map((wallet) => wallet.login));
                 this.selected = [];
             },
@@ -146,24 +147,23 @@
             fetchWallets() {
                 this.$Progress.start();
                 axios.get('/api/qiwi-wallets')
-                        .then((response) => {
-                            console.log(response);
-                            this.walletsTypes = response.data;
-                            this.walletsIsLoaded = true;
+                    .then((response) => {
+//                            console.log(response);
+                        this.walletsTypes = response.data;
+                        this.walletsIsLoaded = true;
 
-                            Bus.$emit('initTooltip');
-                            this.$Progress.finish();
-                        })
+                        this.$Progress.finish();
+                    });
+                Bus.$emit('initTooltip');
             },
 
+            // make line on top appear every X seconds and update all wallets from the database
             async runningLine() {
                 while (true) {
                     await this.sleep(this.updateDelay * 1000);
                     if (!this.updatingWalletsRoutine) break;
 
                     this.fetchWallets();
-
-                    console.log("Updated!");
                 }
             },
 
@@ -175,20 +175,20 @@
                 // convert array of wallets entities to array ids
                 let ids = wallets.map((wallet) => wallet.id);
                 axios.post('/api/qiwi-wallets/move', {wallets: ids, to: toId})
-                        .then(() => {
-                            let moveTo = this.walletsTypes.find(type => type.id === toId);
+                    .then(() => {
+                        let moveTo = this.walletsTypes.find(type => type.id === toId);
 
-                            let moveFrom = this.walletsTypes.find(type => type.id === fromId);
+                        let moveFrom = this.walletsTypes.find(type => type.id === fromId);
 
-                            moveFrom.wallets = moveFrom.wallets.filter((w) => {
-                                return !wallets.find(item => item.id === w.id);
-                            });
-
-                            wallets.forEach((w) => {
-                                w.is_active = 1;
-                                moveTo.wallets.push(w)
-                            });
+                        moveFrom.wallets = moveFrom.wallets.filter((w) => {
+                            return !wallets.find(item => item.id === w.id);
                         });
+
+                        wallets.forEach((w) => {
+                            w.is_active = 1;
+                            moveTo.wallets.push(w)
+                        });
+                    });
             },
 
             executeMassAction() {
