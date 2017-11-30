@@ -34,7 +34,6 @@
                             </div>
                         </div>
 
-
                         <div class="panel-body">
                             <div class="form-horizontal">
                                 <div v-if="alert.show"
@@ -57,16 +56,21 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-offset-4 col-sm-8">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" v-model="form.useProxy">
-                                                Использовать прокси
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                <checkbox-block
+                                        label="Использовать прокси"
+                                        v-model="form.useProxy">
+                                </checkbox-block>
+
+                                <!--<div class="form-group">-->
+                                <!--<div class="col-sm-offset-4 col-sm-8">-->
+                                <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                <!--<input type="checkbox" v-model="form.useProxy">-->
+                                <!--Использовать прокси-->
+                                <!--</label>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
 
                                 <input-block
                                         v-if="form.useProxy"
@@ -96,6 +100,7 @@
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-4 col-sm-8">

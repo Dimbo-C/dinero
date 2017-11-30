@@ -20,10 +20,7 @@ class UserRepository implements Contract {
      * {@inheritdoc}
      */
     public function find($id) {
-        //        $user = User::where('id', $id)->with('roles', 'head')->first();
         $user = User::where('id', $id)->with('roles', 'head')->first();
-//        dd($user);
-
 
         return $user ?: null;
     }

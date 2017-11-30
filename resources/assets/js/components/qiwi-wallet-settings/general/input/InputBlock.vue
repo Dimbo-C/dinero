@@ -6,7 +6,7 @@
                    :type="type"
                    :placeholder="placeholderText"
                    v-bind:value="value"
-                   v-on:input="updateValue($event.target.value)">
+                   v-on:input="$emit('input',$event.target.value)">
             <span v-if="description"
                   v-html="description"
                   class="help-block">
@@ -17,7 +17,6 @@
 
 <script>
     export default {
-        name: "input-block",
         props: {
             type: {
                 default: "text"
@@ -28,11 +27,6 @@
             'label': String,
             'placeholderText': String,
             'description': String
-        },
-        methods: {
-            updateValue(val) {
-                this.$emit("input", val)
-            }
         },
     }
 </script>

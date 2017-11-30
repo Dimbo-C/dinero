@@ -1,11 +1,9 @@
 import InputBlock from "./input/InputBlock.vue";
+import CheckboxBlock from "./input/CheckboxBlock.vue";
 
 export default {
+    components: {InputBlock, CheckboxBlock},
 
-    components: {InputBlock},
-    /*
-     * The component's data.
-     */
     data() {
         return {
             tab: "security",

@@ -9,12 +9,12 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
         $this->call(QiwiWalletTypesTableSeeder::class);
         $this->call(AutowithdrawTypesTableSeeder::class);
         $this->call(QiwiWalletsTableSeeder::class);
-        $this->call(ModelHasRolesTableSeeder::class);
+//        $this->call(ModelHasRolesTableSeeder::class);
         //        $this->call(QiwiWalletSettingsSeeder::class);
     }
 }

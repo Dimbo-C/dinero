@@ -4,6 +4,7 @@ use App\Helpers\QiwiGeneralHelper;
 use App\Processors\TransactionProcessor;
 use App\QiwiWallet;
 use App\QiwiWalletType;
+use App\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WelcomeController@show');
@@ -34,6 +35,16 @@ Route::get("/test", function () {
             "password" => "0ajq7n"
     ];
 
+//        \Spatie\Permission\Models\Permission::create(["name"=>"assign roles"]);
+
+    $user = \App\User::all()->first();
+//    $user->givePermissionTo("assign roles");
+
+
+    dd(User::role('superadmin')->get());
+
+    //    $user=
+
     //    if (QiwiWallet::walletExistsByName($data->name)) {
     //        $tmpWallet = QiwiWallet::findByName($data->name);
     //        $result['status'] = "failure";
@@ -61,22 +72,22 @@ Route::get("/test", function () {
     //    $qiwiControl = QiwiGeneralHelper::getQiwiControlObject(
     //            $login, $password,
     //            $useProxy, $proxy);
-//    $qiwiControl = QiwiGeneralHelper::getQiwiInstance(
-//            $login, $password,
-//            $useProxy, $proxy
-//    );
-//    echo "After action: " . date("H:i:s") . " <br>";
-//
-//    //        die();
-//    if ($qiwiControl->getBalance() == false) {
-//        echo "FALSEEEE";
-//        $result['status'] = "failure";
-//        $result['message'] = "Кошелек не найден в системе Qiwi";
-//
-//        return $result;
-//    } else {
-//        echo "TRUEEEEE";
-//    };
+    //    $qiwiControl = QiwiGeneralHelper::getQiwiInstance(
+    //            $login, $password,
+    //            $useProxy, $proxy
+    //    );
+    //    echo "After action: " . date("H:i:s") . " <br>";
+    //
+    //    //        die();
+    //    if ($qiwiControl->getBalance() == false) {
+    //        echo "FALSEEEE";
+    //        $result['status'] = "failure";
+    //        $result['message'] = "Кошелек не найден в системе Qiwi";
+    //
+    //        return $result;
+    //    } else {
+    //        echo "TRUEEEEE";
+    //    };
 
     die();
 

@@ -38,6 +38,7 @@ class User extends Authenticatable
 {
     use HasRoles, Notifiable;
 
+
     /**
      * The attributes that are mass assignable.
      *

@@ -59,7 +59,7 @@ use Illuminate\Support\Facades\Log;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\QiwiWalletSettings whereFailedAttempts($value)
  */
 class QiwiWalletSettings extends Model {
-    protected $fillable = array('wallet_id');
+    protected $fillable = ['wallet_id'];
     protected $table = "qiwi_wallet_settings";
     protected $primaryKey = "wallet_id";
     public $incrementing = false;
