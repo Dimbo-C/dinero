@@ -48,6 +48,12 @@
                                         placeholderText='Новый кошелек_1'>
                                 </input-block>
 
+                                <input-block
+                                        label='Пароль от кошелька'
+                                        v-model="form.password"
+                                        placeholderText='Пароль'>
+                                </input-block>
+
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Комментарий к кошельку</label>
                                     <div class="col-sm-8">

@@ -55,6 +55,7 @@ export default {
             form: new Form({
                 useProxy: false,
                 name: "",
+                password: "",
                 comments: "",
                 walletActive: false,
                 walletType: "",
@@ -123,6 +124,7 @@ export default {
             this.form.proxy.login = data.length ? data[0] : '';
             this.form.proxy.password = data[1] ? data[1] : '';
         },
+
     },
 
     /**
@@ -189,6 +191,7 @@ export default {
                 ? "" : settings.proxy.login + "" + ":" + settings.proxy.password;
 
             form.name = settings.name;
+            form.password = settings.password;
             form.comments = settings.comments;
             form.useProxy = settings.use_proxy;
             form.walletActive = settings.is_active;

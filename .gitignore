@@ -8,6 +8,6 @@ public/cookie_data
 cookie_data
 
 package-lock.json
-.idea
+.idea/
 _ide_helper.php
 .phpstorm.meta.php
